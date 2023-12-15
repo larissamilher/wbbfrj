@@ -22,13 +22,13 @@
                                         {{$atleta->nome}}
                                     </td>
                                     <td>
-                                      {{ date("d/m/Y", strtotime( $atleta->nome))}}
+                                      {{ $atleta->celuar}}
                                     </td>
                                     <td>
-                                      {{ date("d/m/Y", strtotime( $atleta->celular))}}
+                                      {{ $atleta->email}}
                                     </td>
                                     <td> 
-                                      {{ date("d/m/Y", strtotime( $atleta->cpf))}}
+                                      {{ $atleta->cpf}}
                                     </td>
                                 </tr>
                             @endforeach
