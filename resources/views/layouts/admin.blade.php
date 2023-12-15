@@ -94,8 +94,20 @@
            
             <li class="nav-item sidebar-user-actions">
               <div class="sidebar-user-menu">
-                <a href="#" class="nav-link"><i class="mdi mdi-logout menu-icon"></i>
-                  <span class="menu-title">Sair</span></a>
+                <form action="{{ route('logout') }}" method="post" id="logout-form">
+                  @csrf
+                  {{-- <button type="submit" class="btn btn-danger btn-fw">
+                    Sair
+                  </button> --}}
+               
+                  <a href="#" id="logoutLink" class="nav-link">
+                    <i class="mdi mdi-logout menu-icon"></i>
+                    <span class="menu-title">Sair</span>
+                  </a>
+
+                </form>
+
+               
               </div>
             </li>
           </ul>
@@ -142,5 +154,15 @@
     <!-- Custom js for this page -->
     <script src="{{ asset('admin/js/dashboard.js') }}"></script>
     <!-- End custom js for this page -->
+
+    <script>
+      $(document).ready(function() {
+          // Associar ação ao clique no link
+          $('#logoutLink').on('click', function(event) {
+             $("#logout-form").submit();
+          });
+      });
+  </script>
+    
   </body>
 </html>
