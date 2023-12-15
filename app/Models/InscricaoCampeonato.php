@@ -31,7 +31,6 @@ class InscricaoCampeonato extends Model
         'cep',
         'estado',
         'cidade',
-        'bairro',
         'endereco',
     ];
 

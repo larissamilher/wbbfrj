@@ -31,7 +31,6 @@ return new class extends Migration
             $table->string('cep')->nullable();
             $table->string('estado')->nullable();
             $table->string('cidade')->nullable();
-            $table->string('bairro')->nullable();
             $table->string('endereco')->nullable();
 
             $table->timestamps();
