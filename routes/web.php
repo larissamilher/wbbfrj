@@ -32,7 +32,10 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
 
     Route::get('/dashboard', function () {return view('admin.dashboard');})->name('admin.dashboard');
     
-    Route::get('/atletas', [AtletasController::class, 'index'])->name('admin.atletas');
+
+    Route::prefix('atletas')->group(function () {
+        Route::get('/', [AtletasController::class, 'index'])->name('admin.atletas');
+    });
 
     Route::prefix('campeonatos')->group(function () {
         Route::get('/', [CampeonatosController::class, 'index'])->name('admin.campeonatos');
