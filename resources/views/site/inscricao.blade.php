@@ -1,4 +1,4 @@
-@extends('layout.site')
+@extends('layouts.site')
 
 @section('content')
     
@@ -21,14 +21,26 @@
                         <!--End Section Tittle  -->
                         <form id="inscricao-form" action="#" method="POST">
                             <div class="row">
-                                <div class="col-lg-12 col-md-12">
+                                <div class="col-lg-6 col-md-6">
                                     <div class="form-box user-icon mb-30">
-                                        <select>
+                                        <select id="campeonato">
                                             <option value="">Selecione o Campeonato</option>
-                                            <option value="">Copa Quatis</option>
+                                            @foreach($campeonatos as $campeonato)
+                                                <option value="{{$campeonato->id}}">{{$campeonato->nome}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-box user-icon mb-30">
+                                        <select id="categorias">
+                                            <option value="">Selecione a Categoria</option>
+                                           
+                                        </select>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
@@ -61,4 +73,44 @@
             </div>
         </div>
     </section>
+
+
+    <script>
+
+    $(document).ready(function() {
+
+        $('#campeonato').on('change', function() {
+            var campeonatoSelecionado = $(this).val();
+
+            if(campeonatoSelecionado){
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "/campeonatos/inscricao/get-categorias-campeonato/"+ campeonatoSelecionado,
+                    type: 'GET',    
+                    success: function (response) {
+                       
+                        if (response.success) {   
+                            $('#categorias').empty();
+                            
+                            $('#categorias').niceSelect('destroy');
+
+                            $('#categorias').append('<option value="">Selecione a categoria</option>');
+                            
+                            $.each(response.dados, function(index, categoria) {
+                                $('#categorias').append('<option value="' + categoria.categoria.id + '">' + categoria.categoria.nome + '</option>');
+                            });
+
+                            $('#categorias').niceSelect();
+                        }  
+                        
+                    }
+                });
+            }
+         
+        });
+    });
+
+    </script>
 @endsection

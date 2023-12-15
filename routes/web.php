@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\Site\InscricaoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,10 +81,11 @@ Route::prefix('campeonatos')->group(function () {
         return view('site.backstage-anual');
     })->name('backstage-anual');
     
-    Route::get('/inscricao', function () {
-        return view('site.inscricao');
-    })->name('inscricao');
-    
+    Route::prefix('inscricao')->group(function () {
+        Route::get('/', [InscricaoController::class, 'index'])->name('inscricao');
+        Route::get('/get-categorias-campeonato/{campeonatoId}', [InscricaoController::class, 'getCategoriasCampeonato']);
+    });
+
     Route::prefix('resultados')->group(function () {
         Route::get('/2023', function () {
             return view('site.resultado-2023');
