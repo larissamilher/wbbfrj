@@ -31,7 +31,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
+        return view('admin.dashboard');
     })->name('dashboard');
 });
 
