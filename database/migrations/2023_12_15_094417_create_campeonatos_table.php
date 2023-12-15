@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('data_campeonato');
             $table->float('valor');
 
+            $table->text('local')->nullable();
             $table->text('descricao')->nullable();
 
             $table->timestamps();
