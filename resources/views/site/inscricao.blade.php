@@ -134,7 +134,7 @@
                             <div class="row">
                                 <div class="col-lg-12">                                   
                                     <div class="submit-info">
-                                        <button class="btn" type="submit">Próxima Etapa</button>
+                                        <button class="btn" type="submit" style="width: 50%; margin-left: 25%;">Próxima Etapa</button>
                                     </div>
                                 </div>
                             </div>
