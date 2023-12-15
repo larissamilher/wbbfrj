@@ -19,14 +19,17 @@ use App\Http\Controllers\Admin\CategoriasController;
 |
 */
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// });
+Route::get('/', function () {
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        // 'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
+
+Auth::routes(['register' => false]);
+
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->prefix('admin')->group(function () {
 
@@ -119,3 +122,14 @@ Route::prefix('educacao')->group(function () {
 Route::get('/contato', function () {
     return view('site.contato');
 })->name('contato');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

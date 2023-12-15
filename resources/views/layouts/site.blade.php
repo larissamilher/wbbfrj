@@ -102,6 +102,7 @@
                                                 </ul>
                                             </li>
                                             <li><a href="{{ route('contato') }}">Contato</a></li>
+                                            <li><a href="{{ route('login') }}">Acessar</a></li>
                                         </ul>
 
                                     </nav>
