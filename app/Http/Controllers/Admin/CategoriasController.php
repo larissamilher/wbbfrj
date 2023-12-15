@@ -8,12 +8,6 @@ use Illuminate\Http\Request;
 class CategoriasController extends Controller
 {
     public function index(){
-        
-        $campeonatos = Campeonato::where('data_inicio_inscricao', '<=', now())
-            ->where('data_final_inscricao', '>=', now())
-            ->get();
-
-        return view('site.inscricao', compact([ 'campeonatos' ]));
-        
+        return view('admin.categorias');
     }
 }

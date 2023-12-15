@@ -397,10 +397,10 @@
 						label: 'Supply',
 						data: [250, 100, 310, 75, 290, 100, 500, 260],
 						backgroundColor: [
-							'#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a',
+							'#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313',
 						],
 						borderColor: [
-							'#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a',
+							'#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313',
 						],
 						borderWidth: 1,
 						fill: false
@@ -506,10 +506,10 @@
 						label: 'Supply',
 						data: [250, 100, 310, 75, 290, 100, 500, 260],
 						backgroundColor: [
-							'#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a',
+							'#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313',
 						],
 						borderColor: [
-							'#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a',
+							'#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313',
 						],
 						borderWidth: 1,
 						fill: false
@@ -615,10 +615,10 @@
 						label: 'يتبرع',
 						data: [250, 100, 310, 75, 290, 100, 500, 260],
 						backgroundColor: [
-							'#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a',
+							'#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313',
 						],
 						borderColor: [
-							'#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a',
+							'#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313',
 						],
 						borderWidth: 1,
 						fill: false
@@ -723,10 +723,10 @@
 						label: 'يتبرع',
 						data: [250, 100, 310, 75, 290, 100, 500, 260],
 						backgroundColor: [
-							'#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a',
+							'#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313',
 						],
 						borderColor: [
-							'#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a',
+							'#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313', '#ff1313',
 						],
 						borderWidth: 1,
 						fill: false

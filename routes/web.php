@@ -32,9 +32,13 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
 
     Route::get('/dashboard', function () {return view('admin.dashboard');})->name('admin.dashboard');
     Route::get('/categorias', [CategoriasController::class, 'index'])->name('admin.categorias');
-    Route::get('/campeonatos', [CampeonatosController::class, 'index'])->name('admin.campeonatos');
+    
     Route::get('/atletas', [AtletasController::class, 'index'])->name('admin.atletas');
 
+    Route::prefix('campeonatos')->group(function () {
+        Route::get('/', [CampeonatosController::class, 'index'])->name('admin.campeonatos');
+        Route::get('/novo', [CampeonatosController::class, 'create'])->name('admin.campeonato.novo');
+    });
 });
 
 Route::get('/', function () {
