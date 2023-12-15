@@ -31,13 +31,17 @@ use App\Http\Controllers\Admin\CategoriasController;
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->prefix('admin')->group(function () {
 
     Route::get('/dashboard', function () {return view('admin.dashboard');})->name('admin.dashboard');
-    Route::get('/categorias', [CategoriasController::class, 'index'])->name('admin.categorias');
     
     Route::get('/atletas', [AtletasController::class, 'index'])->name('admin.atletas');
 
     Route::prefix('campeonatos')->group(function () {
         Route::get('/', [CampeonatosController::class, 'index'])->name('admin.campeonatos');
         Route::get('/novo', [CampeonatosController::class, 'create'])->name('admin.campeonato.novo');
+    });
+
+    Route::prefix('categorias')->group(function () {
+        Route::get('/', [CategoriasController::class, 'index'])->name('admin.categorias');
+        Route::get('/novo', [CategoriasController::class, 'create'])->name('admin.categoria.novo');
     });
 });
 
