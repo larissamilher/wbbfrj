@@ -2741,21 +2741,21 @@ hr{
 .contact-form-main .form-wrapper, .inscricao-form-main .form-wrapper{
     background:#f5f5f5
 }
-.contact-form-main #contact-form, .inscricao-form-main #inscricao-form{
+.contact-form-main #contact-form, .inscricao-form-main .inscricao-form{
     padding:61px 51px 79px 69px;
     position:relative
 }
 @media (max-width: 575px){
-    .contact-form-main #contact-form, .inscricao-form-main #inscricao-form{
+    .contact-form-main #contact-form, .inscricao-form-main .inscricao-form{
         padding:13px 25px 76px 25px
     }
 }
 @media only screen and (min-width: 576px) and (max-width: 767px){
-    .contact-form-main #contact-form, .inscricao-form-main #inscricao-form{
+    .contact-form-main #contact-form, .inscricao-form-main .inscricao-form{
         padding:13px 25px 76px 25px
     }
 }
-.contact-form-main #contact-form input, .inscricao-form-main #inscricao-form input{
+.contact-form-main #contact-form input, .inscricao-form-main .inscricao-form input{
     background:none;
     height:60px;
     width:100%;
@@ -2769,23 +2769,23 @@ hr{
     border-bottom:2px solid #e9f0f4;
     font-size:16px
 }
-.contact-form-main #contact-form input::-moz-placeholder, .inscricao-form-main #inscricao-form input::-moz-placeholder{
+.contact-form-main #contact-form input::-moz-placeholder, .inscricao-form-main .inscricao-form input::-moz-placeholder{
     color:#112957;
     font-size:16px;
     font-weight:300;
     transition:.4s
 }
-.contact-form-main #contact-form input:focus::-webkit-input-placeholder, .inscricao-form-main #inscricao-form input:focus::-webkit-input-placeholder{
+.contact-form-main #contact-form input:focus::-webkit-input-placeholder, .inscricao-form-main .inscricao-form input:focus::-webkit-input-placeholder{
     opacity:0;
     -webkit-transition:.4s;
     -o-transition:.4s;
     transition:.4s
 }
-.contact-form-main #contact-form input .list, .inscricao-form-main #inscricao-form input .list{
+.contact-form-main #contact-form input .list, .inscricao-form-main .inscricao-form input .list{
     width:100%;
     border-radius:0
 }
-.contact-form-main #contact-form .nice-select, .inscricao-form-main #inscricao-form .nice-select{
+.contact-form-main #contact-form .nice-select, .inscricao-form-main .inscricao-form .nice-select{
     background:none;
     height:60px;
     width:100%;
@@ -2798,26 +2798,26 @@ hr{
     border-radius:0px;
     border-bottom:2px solid #e9f0f4
 }
-.contact-form-main #contact-form .nice-select::after , .inscricao-form-main #inscricao-form .nice-select::after{
+.contact-form-main #contact-form .nice-select::after , .inscricao-form-main .inscricao-form .nice-select::after{
     border-bottom:2px solid #a3a3a3;
     border-right:2px solid #a3a3a3;
     height:7px;
     right:41px;
     width:7px
 }
-.contact-form-main #contact-form .nice-select.open .list, .inscricao-form-main #inscricao-form .nice-select.open .list{
+.contact-form-main #contact-form .nice-select.open .list, .inscricao-form-main .inscricao-form .nice-select.open .list{
     width:100%;
     border-radius:0
 }
-.contact-form-main #contact-form .nice-select .option, .inscricao-form-main #inscricao-form .nice-select .option{
+.contact-form-main #contact-form .nice-select .option, .inscricao-form-main .inscricao-form .nice-select .option{
     color:#a3a3a3
 }
-.contact-form-main #contact-form .nice-select .current, .inscricao-form-main #inscricao-form .nice-select .current{
+.contact-form-main #contact-form .nice-select .current, .inscricao-form-main .inscricao-form .nice-select .current{
     color:#918f8f;
     font-size:16px;
     font-weight:300
 }
-.contact-form-main #contact-form textarea, .inscricao-form-main #inscricao-form textarea{
+.contact-form-main #contact-form textarea, .inscricao-form-main .inscricao-form textarea{
     color:#112957;
     background:none;
     font-weight:500;
@@ -2831,21 +2831,21 @@ hr{
     border-bottom:2px solid #e9f0f4
 }
 @media only screen and (min-width: 768px) and (max-width: 991px){
-    .contact-form-main #contact-form textarea, .inscricao-form-main #inscricao-form textarea{
+    .contact-form-main #contact-form textarea, .inscricao-form-main .inscricao-form textarea{
         padding:30px 42px
     }
 }
 @media only screen and (min-width: 576px) and (max-width: 767px){
-    .contact-form-main #contact-form textarea,.inscricao-form-main #inscricao-form textarea{
+    .contact-form-main #contact-form textarea,.inscricao-form-main .inscricao-form textarea{
         padding:30px 24px
     }
 }
 @media (max-width: 575px){
-    .contact-form-main #contact-form textarea, .inscricao-form-main #inscricao-form textarea{
+    .contact-form-main #contact-form textarea, .inscricao-form-main .inscricao-form textarea{
         padding:30px 25px
     }
 }
-.contact-form-main #contact-form textarea::placeholder, .inscricao-form-main #inscricao-form textarea::placeholder{
+.contact-form-main #contact-form textarea::placeholder, .inscricao-form-main .inscricao-form textarea::placeholder{
     color:#112957;
     font-size:16px;
     font-weight:300;
@@ -5846,4 +5846,8 @@ b,sup,sub,u,del{
  
 .section-tittle{
     padding-top: 3%;
+}
+
+.resumo-compra h1{
+    font-size: 50px;
 }

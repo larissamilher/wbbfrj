@@ -16,6 +16,7 @@ class InscricaoController extends Controller
             ->get();
 
         return view('site.inscricao', compact([ 'campeonatos' ]));
+        
     }
 
     public function getCategoriasCampeonato($campeonatoId)

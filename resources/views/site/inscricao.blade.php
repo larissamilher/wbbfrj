@@ -9,17 +9,16 @@
                     <div class="form-wrapper">
                         <!--Section Tittle  -->
                         <div class="form-tittle">
-                            <div class="row ">
+                            <div class="row "  style=" margin-top: 5%; ">
                                 <div class="col-lg-11 col-md-10 col-sm-10">
                                     <div class="section-tittle">
-                                        <span>INSCRIÇÃO</span>
-                                        <h3>Preencha a ficha de inscrição!</h3>
+                                        <span>INSCRIÇÃO - DADOS DO ATLETA</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!--End Section Tittle  -->
-                        <form id="inscricao-form" action="#" method="POST">
+                        <form id="inscricao-form" class="inscricao-form" action="#" method="POST"style=" padding-top: 0;">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box user-icon mb-30">
@@ -39,8 +38,8 @@
                                         </select>
                                     </div>
                                 </div>
-
                             </div>
+
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box user-icon mb-30">
@@ -117,7 +116,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-3 col-md-3">
+                                <div class="col-lg-6 col-md-6">
                                     <div class="form-box email-icon mb-30">
                                         <select id="cidades" name="cidades">
                                             <option value="">Selecione a Cidade</option>
@@ -130,9 +129,10 @@
                                         <input type="text" name="endereco" id="endereco" placeholder="Endereço">
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="col-lg-12">
-                                   
+                            <div class="row">
+                                <div class="col-lg-12">                                   
                                     <div class="submit-info">
                                         <button class="btn" type="submit">Próxima Etapa</button>
                                     </div>
@@ -151,6 +151,7 @@
         $('#cpf').mask('999.999.999-99');
         $('#rg').mask('00.000.000-0');
         $('#cep').mask('00000-000');
+        $('#celular').mask('(00) 00000-0000');
     });
 
     $(document).ready(function() {
