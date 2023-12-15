@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('admin/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
  
     <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
-    <link rel="shortcut icon" href="{{ asset('admin/images/favicon.png') }}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}">
   </head>
   <body>
     <div class="container-scroller">
@@ -28,13 +28,13 @@
             <ul class="navbar-nav navbar-nav-right">
            
             <li class="nav-item nav-profile dropdown">
-              <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+              {{-- <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"> --}}
                
                 <div class="nav-profile-text">
-                  <p class="mb-1 text-black">Henry Klein</p>
+                  <p class="mb-1 text-black"> {{ auth()->user()->name }}</p>
                 </div>
-              </a>
-              <div class="dropdown-menu navbar-dropdown dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="profileDropdown" data-x-placement="bottom-end">
+              {{-- </a> --}}
+              {{-- <div class="dropdown-menu navbar-dropdown dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="profileDropdown" data-x-placement="bottom-end">
                 <div class="p-3 text-center bg-primary">
                   <img class="img-avatar img-avatar48 img-avatar-thumb" src="{{ asset('admin/images/faces/face28.png') }}" alt="">
                 </div>
@@ -50,7 +50,7 @@
                     <i class="mdi mdi-logout ms-1"></i>
                   </a>
                 </div>
-              </div>
+              </div> --}}
             </li>          
             
           </ul>
@@ -66,29 +66,36 @@
           <ul class="nav">
             {{-- <li class="nav-item nav-category">Main</li> --}}
             <li class="nav-item">
-              <a class="nav-link" href="index.html">
+              <a class="nav-link" href="{{ route('admin.dashboard') }}">
                 <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
                 <span class="menu-title">Dashboard</span>
               </a>
             </li>
            
             <li class="nav-item">
-              <a class="nav-link" href="pages/icons/mdi.html">
+              <a class="nav-link" href="{{ route('admin.categorias') }}">
                 <span class="icon-bg"><i class="mdi mdi-contacts menu-icon"></i></span>
                 <span class="menu-title">Categorias</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/forms/basic_elements.html">
+              <a class="nav-link" href="{{ route('admin.campeonatos') }}">
                 <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
                 <span class="menu-title">Campeonatos</span>
               </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.atletas') }}">
+                  <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
+                  <span class="menu-title">Atletas</span>
+                </a>
+              </li>
            
             <li class="nav-item sidebar-user-actions">
               <div class="sidebar-user-menu">
                 <a href="#" class="nav-link"><i class="mdi mdi-logout menu-icon"></i>
-                  <span class="menu-title">Log Out</span></a>
+                  <span class="menu-title">Sair</span></a>
               </div>
             </li>
           </ul>

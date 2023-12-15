@@ -4,7 +4,10 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Site\InscricaoController;
-
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AtletasController;
+use App\Http\Controllers\Admin\CampeonatosController;
+use App\Http\Controllers\Admin\CategoriasController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,14 +28,13 @@ use App\Http\Controllers\Site\InscricaoController;
 //     ]);
 // });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->prefix('admin')->group(function () {
+
+    Route::get('/dashboard', function () {return view('admin.dashboard');})->name('admin.dashboard');
+    Route::get('/categorias', [CategoriasController::class, 'index'])->name('admin.categorias');
+    Route::get('/campeonatos', [CampeonatosController::class, 'index'])->name('admin.campeonatos');
+    Route::get('/atletas', [AtletasController::class, 'index'])->name('admin.atletas');
+
 });
 
 Route::get('/', function () {

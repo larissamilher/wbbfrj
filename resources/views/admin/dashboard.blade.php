@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="content-wrapper">
-        <div class="d-xl-flex justify-content-between align-items-start">
+        {{-- <div class="d-xl-flex justify-content-between align-items-start">
         <h2 class="text-dark font-weight-bold mb-2"> Overview dashboard </h2>
         <div class="d-sm-flex justify-content-xl-between align-items-center mb-2">
             <div class="btn-group bg-white p-3" role="group" aria-label="Basic example">
@@ -195,7 +195,7 @@
             </div>
             </div>
         </div>
-        </div>
+        </div> --}}
     </div>
 
 @endsection
