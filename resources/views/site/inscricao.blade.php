@@ -148,10 +148,9 @@
     <script>
 
     $(document).ready(function($) {
-
         $('#cpf').mask('999.999.999-99');
         $('#rg').mask('00.000.000-0');
-
+        $('#cep').mask('00000-000');
     });
 
     $(document).ready(function() {
