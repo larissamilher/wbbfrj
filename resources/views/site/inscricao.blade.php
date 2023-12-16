@@ -126,9 +126,21 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-12 col-md-12">
+                                <div class="col-lg-4 col-md-4">
                                     <div class="form-box email-icon mb-30">
-                                        <input type="text" name="endereco" id="endereco" placeholder="Endereço">
+                                        <input type="text" name="bairro" id="bairro" placeholder="Bairro">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-2 col-md-2">
+                                    <div class="form-box email-icon mb-30">
+                                        <input type="text" name="numero" id="numero" placeholder="Número">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-box email-icon mb-30">
+                                        <input type="text" name="logradouro" id="logradouro" placeholder="Logradouro">
                                     </div>
                                 </div>
                             </div>
