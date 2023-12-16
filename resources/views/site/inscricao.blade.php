@@ -45,32 +45,32 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box user-icon mb-30">
-                                        <input type="text" name="nome" id="nome" placeholder="Nome">
+                                        <input type="text" name="nome" id="nome" placeholder="Nome" class="required">
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-box email-icon mb-30">
-                                        <input type="text" name="cpf" id="cpf" placeholder="CPF">
+                                        <input type="text" name="cpf" id="cpf" placeholder="CPF" class="required">
                                     </div>
                                 </div>   
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-box email-icon mb-30">
-                                        <input type="text" name="rg" id="rg" placeholder="RG">
+                                        <input type="text" name="rg" id="rg" placeholder="RG" class="required">
                                     </div>
                                 </div>       
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-box email-icon mb-30">
-                                        <input type="text" name="celular" id="celular" placeholder="Celular">
+                                        <input type="text" name="celular" id="celular" placeholder="Celular" class="required">
                                     </div>
                                 </div>      
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-box subject-icon mb-30">
-                                        <input type="date" name="data_nascimento" id="data_nascimento" placeholder="Data de Nascimento">
+                                        <input type="date" name="data_nascimento" id="data_nascimento" placeholder="Data de Nascimento" class="required">
                                     </div>
                                 </div>                             
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box subject-icon mb-30">
-                                        <input type="Email" name="email" id="email" placeholder="Email">
+                                        <input type="Email" name="email" id="email" placeholder="Email" class="required">
                                     </div>
                                 </div>
 
@@ -78,13 +78,13 @@
 
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-box email-icon mb-30">
-                                        <input type="text" name="cep" id="cep" placeholder="CEP">
+                                        <input type="text" name="cep" id="cep" placeholder="CEP" class="required">
                                     </div>
                                 </div> 
 
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-box email-icon mb-30">
-                                        <select id="estado" name="estado">
+                                        <select id="estado" name="estado" class="required">
                                             <option value="">Selecione o Estado</option>
                                             <option value="AC">Acre</option>
                                             <option value="AL">Alagoas</option>
@@ -120,7 +120,7 @@
 
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box email-icon mb-30">
-                                        <select id="cidades" name="cidades">
+                                        <select id="cidades" name="cidades" class="required">
                                             <option value="">Selecione a Cidade</option>
                                         </select>
                                     </div>
@@ -128,19 +128,19 @@
 
                                 <div class="col-lg-4 col-md-4">
                                     <div class="form-box email-icon mb-30">
-                                        <input type="text" name="bairro" id="bairro" placeholder="Bairro">
+                                        <input type="text" name="bairro" id="bairro" placeholder="Bairro" class="required">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-2 col-md-2">
                                     <div class="form-box email-icon mb-30">
-                                        <input type="text" name="numero" id="numero" placeholder="Número">
+                                        <input type="text" name="numero" id="numero" placeholder="Número" class="required">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box email-icon mb-30">
-                                        <input type="text" name="logradouro" id="logradouro" placeholder="Logradouro">
+                                        <input type="text" name="logradouro" id="logradouro" placeholder="Logradouro" class="required">
                                     </div>
                                 </div>
                             </div>
@@ -290,6 +290,21 @@
             return regex.test(email);
         }
 
+        $("#inscricao-form").submit(function (event) {
+            event.preventDefault();
+
+            error = false;
+
+            $(".required").each(function () {
+                if ($(this).val() === "") 
+                    error = true                
+            });
+
+            if(error)
+                alert('Preencha os dados obrigatórios!')
+            else
+                $("#inscricao-form").submit();
+        });
     });
 
     </script>
