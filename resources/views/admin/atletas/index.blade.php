@@ -22,7 +22,7 @@
                                         {{$atleta->nome}}
                                     </td>
                                     <td>
-                                      {{ $atleta->celuar}}
+                                      {{ $atleta->celular}}
                                     </td>
                                     <td>
                                       {{ $atleta->email}}
