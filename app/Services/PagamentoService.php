@@ -41,32 +41,27 @@ class PagamentoService
             ));
         }
 
-        // // iniciando pedido
-        // $pedidoVenda = new InscricaoCampeonato();
-        // $pedidoVenda->id_cliente = $titular->id;
-        // $pedidoVenda->nm_referencia = 'Tentativa de compra por ' . $titular->nome;
-        // $pedidoVenda->paciente_nome = $paciente_nome;
-        // $pedidoVenda->paciente_data_nascimento = $paciente_data_nascimento;
-        // $pedidoVenda->paciente_cpf = $paciente_cpf;
-        // $pedidoVenda->paciente_rg = $paciente_rg;
-        // $pedidoVenda->paciente_nome_da_mae = $paciente_nome_da_mae;
-        // $pedidoVenda->paciente_telefone = $paciente_telefone;
-
-        // $pedidoVenda->paciente_cep = $paciente_cep;
-        // $pedidoVenda->paciente_estado = $paciente_estado;
-        // $pedidoVenda->paciente_cidade = $paciente_cidade;
-        // $pedidoVenda->paciente_bairro = $paciente_bairro;
-        // $pedidoVenda->paciente_rua = $paciente_rua;
-        // $pedidoVenda->paciente_numero = $paciente_numero;
-        // $pedidoVenda->paciente_complemento = $paciente_complemento;
-
-        // $pedidoVenda->parcelas = 12;
-
-        // $pedidoVenda->id_status_pedido_venda = 1; // Aguardando Pagamento
-        // $pedidoVenda->status = 'Aguardando Pagamento';
+        $inscricao = [
+            'campeonanometo_id' => $user['campeonato'],
+            'categoria_id' => $user['categorias'],
+            'cupom_id' => null,
+            'status' => 'Aguardando Pagamento',
+            'nome' => $user['nome'],
+            'cpf' => $user['cpf'],
+            'rg' => $user['rg'],
+            'data_nascimento' => $user['data_nascimento'],
+            'celular' => $user['celular'],
+            'email' => $user['email'],
+            'status_pagamento' => null,
+            'cep' => $user['cep'],
+            'estado' => $user['estado'],
+            'cidade' => $user['cidade'],
+            'logradouro' => $user['logradouro'],
+            'bairro' => $user['bairro'],
+            'numero' => $user['numero']
+        ];
+       
         $total = number_format($campeonato->valor, 2, '.', '');
-        // $pedidoVenda->total = $total;
-        // $pedidoVenda->save();
 
         if ($total > 0) {
             $parts = explode('/', $post['validade_cartao']);
@@ -97,7 +92,6 @@ class PagamentoService
             }
 
             dd($bandeira, $numeroCartao, $amount );
-
 
             $data = [
                 'items' => [
