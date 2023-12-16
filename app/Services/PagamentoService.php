@@ -109,31 +109,31 @@ class PagamentoService
                 ],
                 'shipping' => [
                     'address' => [
-                        'postalCode' => '06410030',
-                        'street' => 'Rua Leonardo Arruda',
-                        'number' => '12',
-                        'district' => 'Jardim dos Camargos',
-                        'city' => 'Barueri',
-                        'state' => 'SP',
+                        'postalCode' => $user['cep'],
+                        'street' =>  $user['logradouro'],
+                        'number' => $user['numero'],
+                        'district' => $user['bairro'],
+                        'city' => $user['cidade'],
+                        'state' => $user['estado'],
                         'country' => 'BRA',
                     ],
                     'type' => 2,
                     'cost' => 30.4,
                 ],
                 'sender' => [
-                    'email' => 'sender@gmail.com',
-                    'name' => 'Isaque de Souza Barbosa',
+                    'email' => $user['email'],
+                    'name' => $user['nome'],
                     'documents' => [
                         [
-                            'number' => '01234567890',
+                            'number' => $user['cpf'],
                             'type' => 'CPF'
                         ]
                     ],
                     'phone' => [
-                        'number' => '985445522',
-                        'areaCode' => '11',
+                        'number' => substr($user['celular'], 2),
+                        'areaCode' => substr($user['celular'], 0, 2),
                     ],
-                    'bornDate' => '1988-03-21',
+                    'bornDate' =>  $user['data_nascimento'],
                 ]
             ];
 
