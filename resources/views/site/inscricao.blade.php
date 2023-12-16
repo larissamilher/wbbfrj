@@ -120,7 +120,7 @@
 
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box email-icon mb-30">
-                                        <select id="cidades" name="cidades" class="required">
+                                        <select id="cidade" name="cidade" class="required">
                                             <option value="">Selecione a Cidade</option>
                                         </select>
                                     </div>
@@ -208,15 +208,15 @@
                 type: 'GET',    
                 success: function (response) {
                     
-                    $('#cidades').empty();                        
-                    $('#cidades').niceSelect('destroy');
-                    $('#cidades').append('<option value="">Selecione a Cidade</option>');
+                    $('#cidade').empty();                        
+                    $('#cidade').niceSelect('destroy');
+                    $('#cidade').append('<option value="">Selecione a Cidade</option>');
                     
                     $.each(response, function(index, cidade) {
-                        $('#cidades').append('<option value="' + cidade.nome + '">' + cidade.nome  + '</option>');
+                        $('#cidade').append('<option value="' + cidade.nome + '">' + cidade.nome  + '</option>');
                     });
 
-                    $('#cidades').niceSelect();                    
+                    $('#cidade').niceSelect();                    
                 }
             });
         });
@@ -290,21 +290,21 @@
             return regex.test(email);
         }
 
-        $("#inscricao-form").submit(function (event) {
-            event.preventDefault();
+        // $("#inscricao-form").submit(function (event) {
+        //     event.preventDefault();
 
-            error = false;
+        //     error = false;
 
-            $(".required").each(function () {
-                if ($(this).val() === "") 
-                    error = true                
-            });
+        //     $(".required").each(function () {
+        //         if ($(this).val() === "") 
+        //             error = true                
+        //     });
 
-            if(error)
-                alert('Preencha os dados obrigatórios!')
-            else
-                $("#inscricao-form").submit();
-        });
+        //     if(error)
+        //         alert('Preencha os dados obrigatórios!')
+        //     else
+        //         $("#inscricao-form").submit();
+        // });
     });
 
     </script>

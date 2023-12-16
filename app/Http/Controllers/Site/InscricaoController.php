@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Campeonato;
 use App\Models\CategoriaCampeonato;
 use App\Services\PagamentoService;
+use App\Models\Atleta;
 
 class InscricaoController extends Controller
 {
@@ -48,19 +49,110 @@ class InscricaoController extends Controller
 
     public function primeiraEtapaInscricao(Request $request)
     {
-        $campeonato = Campeonato::find($request->input('campeonato'));
+        try {
 
-        session()->put('ficheAtleta', $request->input());
+            $campeonato = Campeonato::find($request->input('campeonato'));
+
+            $atleta = $request->input();
+
+            $atleta['cpf'] = str_replace(['.', '-'], '', $atleta['cpf'] );
+            $atleta['rg'] = str_replace(['.', '-'], '', $atleta['rg'] );
+            $atleta['celular'] = str_replace(['(',')', '-', ' '], '', $atleta['celular'] );
+            $atleta['cep'] = str_replace(['(',')', '-', ' '], '', $atleta['cep'] );
+
+            session()->put('atleta', $request->input());
+
+            unset($atleta['_token']);        
+
+            $atletaSave = Atleta::firstOrCreate(['cpf' =>  $atleta['cpf']], $atleta);
+
+            if(!$atletaSave)
+                throw('Ocorreu um erro para salvar os dados do atleta!');
+
+        } catch (\Exception $e) {
+            $errorMessage = $e;
+            $response = (object)['errorMessage' => $errorMessage];
+        }
 
         return view('site.pagamento', compact([ 'campeonato' ]));
     }
 
     public function etapaPagamento(Request $request)
     {
-        $paymentConfirm = (new PagamentoService)->paymentConfirm($request->input());
+        try {
+            $dadosPagamento = $request->input();
 
-        // session()->put('ficheAtleta', $request->input());
+            $validade = explode('/', $request->get('validade_cartao'));
 
-        // return view('site.pagamento', compact([ 'campeonato' ]));
+            $atleta = session()->get('atleta');
+            $cpf = str_replace(['.', '-'], '', $atleta['cpf'] );
+
+            $campeonato = Campeonato::find($atleta['campeonato']);
+
+            $dados = [
+                'customer' => env('customer'),
+                'billingType' => 'CREDIT_CARD',
+                'value' => number_format( $campeonato->valor, 2, '.', '.'),
+                'dueDate' => date('Y-m-d'),
+                'installmentCount' => 1,
+                'totalValue' => number_format( $campeonato->valor, 2, '.', '.'),
+                'remoteIp' =>$request->ip(),
+                'creditCard' => [
+                    "holderName" => $request->get('nome_cartao'),
+                    "number" => $request->get('numero_cartao'),
+                    "expiryMonth" => $validade[0],
+                    "expiryYear" => "20" . $validade[1],
+                    "ccv" => $request->get('cvv'),
+                ],
+                'creditCardHolderInfo' => [
+                    "name" => $atleta['nome'],
+                    "email" => $atleta['email'],
+                    "postalCode" => $atleta['cep'],
+                    "addressNumber" => $atleta['cidade'] . '/'.  $atleta['estado']. ', '.  $atleta['bairro'] .' '.  $atleta['numero'] .' '.  $atleta['logradouro'] ,
+                    "phone" => $atleta['celular'],
+                    "cpfCnpj" => $cpf,
+                ],
+            ];
+
+            $response = PagamentoService::sendPaymentRequest($dados);
+
+        } catch (\Exception $e) {
+            $errorMessage = $e;
+            $response = (object)['errorMessage' => $errorMessage];
+        }
+
     }
+
+    private function prepareRequestData($dadosPagamento, $atleta)
+    {
+        $validade = explode('/', $request->get('validade'));
+
+        $dados = [
+            'customer' => env('customer'),
+            'billingType' => 'CREDIT_CARD',
+            'value' => $request->get('valor'),
+            'dueDate' => date('Y-m-d'),
+            'installmentCount' => $request->get('parcelas'),
+            'totalValue' =>  $request->get('valor'),
+            'remoteIp' =>$request->ip(),
+            'creditCard' => [
+                "holderName" => $request->get('nome'),
+                "number" => $request->get('numero'),
+                "expiryMonth" => $validade[0],
+                "expiryYear" => "20" . $validade[1],
+                "ccv" => $request->get('cod_seguranca'),
+            ],
+            'creditCardHolderInfo' => [
+                "name" => $request->get('nome'),
+                "email" => $request->get('email'),
+                "postalCode" => $request->get('cep'),
+                "addressNumber" => $request->get('endereco'),
+                "phone" => $request->get('telefone'),
+                "cpfCnpj" => $request->get('cpf'),
+            ],
+        ];
+
+        return $dados;
+    }
+
 }

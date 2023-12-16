@@ -15135,3 +15135,18 @@ dl {
   text-decoration: none;
   color: #fff;
 }
+
+.msg{
+  font-size: 18px;
+  padding: 2%;
+  border-radius: 5px;
+}
+.msg-sucesso{
+  background-color: #84df6e69;
+  color: #405c37;
+}
+
+.msg-error{
+  background-color: #df6e7869;
+  color: #5c3737;
+}

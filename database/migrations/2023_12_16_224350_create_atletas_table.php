@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inscricoes_campeonato', function (Blueprint $table) {
+        Schema::create('atletas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('campeonato_id')->unsigned();
-            $table->integer('categoria_id')->unsigned();
-            $table->integer('cupom_id')->unsigned()->nullable();
-
-            $table->string('status');
 
             $table->string('nome');
             $table->string('cpf');
@@ -25,9 +20,6 @@ return new class extends Migration
             $table->date('data_nascimento')->nullable();
             $table->string('celular')->nullable();
             $table->string('email')->nullable();
-
-            $table->string('status_pagamento')->nullable();
-
             $table->string('cep')->nullable();
             $table->string('estado')->nullable();
             $table->string('cidade')->nullable();
@@ -36,11 +28,7 @@ return new class extends Migration
             $table->string('numero')->nullable();
 
             $table->timestamps();
-            $table->softDeletes();  
-
-            $table->foreign('campeonato_id')->references('id')->on('campeonatos')->onDelete('no action')->onUpdate('no action');
-            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('no action')->onUpdate('no action');
-            $table->foreign('cupom_id')->references('id')->on('cupons')->onDelete('no action')->onUpdate('no action');
+            $table->softDeletes();          
         });
     }
 
@@ -49,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inscricoes_campeonato');
+        Schema::dropIfExists('atletas');
     }
 };

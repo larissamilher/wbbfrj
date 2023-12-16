@@ -10,8 +10,14 @@
                     <div class="row">
                         <div class="col-xl-7 col-lg-9 col-md-8 col-sm-9">
                             <div class="hero__caption">
-                                <span data-animation="fadeInLeft" data-delay="0.1s">WBBF - WORLD BODYBUILDING FEDERATION </span>
-                                <h1 data-animation="fadeInLeft" data-delay="0.4s">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h1>
+                                {{-- <span data-animation="fadeInLeft" data-delay="0.1s">
+                                    Desafio Supremo: Federação WBBF RJ de Fisiculturismo
+                                </span> --}}
+                                <h1 data-animation="fadeInLeft" data-delay="0.4s">
+                                    Conquiste a glória! Inscreva-se agora e faça parte da elite do fisiculturismo.
+                                </h1>
+
+                                <a href="{{route('inscricao')}}" class="btn">Inscreva-se Agora</a>
                             </div>
                         </div>
                     </div>
@@ -23,8 +29,12 @@
                     <div class="row">
                         <div class="col-xl-7 col-lg-9 col-md-8 col-sm-9">
                             <div class="hero__caption">
-                                <span data-animation="fadeInLeft" data-delay="0.1s">WBBF - WORLD BODYBUILDING FEDERATION  </span>
-                                <h1 data-animation="fadeInLeft" data-delay="0.4s">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h1>
+                                {{-- <span data-animation="fadeInLeft" data-delay="0.1s">WBBF - WORLD BODYBUILDING FEDERATION  </span> --}}
+                                <h1 data-animation="fadeInLeft" data-delay="0.4s">
+                                    Conquiste a glória! Inscreva-se agora e faça parte da elite do fisiculturismo.
+                                </h1>
+                                <a href="{{route('inscricao')}}" class="btn">Inscreva-se Agora</a>
+
                             </div>
                         </div>
                     </div>
@@ -52,7 +62,7 @@
                         <!-- Section Tittle -->
                         <div class="section-tittle section-tittle3 mb-35">
                             <span>SOBRE</span>
-                            <h2>WBBF - WORLD BODYBUILDING FEDERATION </h2>
+                            <h2>WBBF RJ - WORLD BODYBUILDING FEDERATION </h2>
                         </div>
                         <p class="pera-top">
                             Vestibulum sed dui pharetra, viverra diam vel, blandit velit. 
@@ -72,7 +82,7 @@
                             Vestibulum sed dui pharetra, viverra diam vel, blandit velit. 
                             Aliquam vulputate mauris ac lectus sodales rutrum. 
                         </p>
-                        <a href="sobre.html" class="btn">LER MAIS</a>
+                        <a href="{{route('quem-somos')}}" class="btn">LER MAIS</a>
                     </div>
                 </div>
             </div>
@@ -256,7 +266,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-6"></div>
 
                 <div class="col-lg-4 col-md-6 col-sm-6">
-                    <a href="categorias.html" class="btn wantToWork-btn f-right" style="width: 100%;">VER TODAS CATEGORIAS</a>
+                    <a href="{{route('categorias')}}" class="btn wantToWork-btn f-right" style="width: 100%;">VER TODAS CATEGORIAS</a>
                 </div>
 
                 <div class="col-lg-4 col-md-6 col-sm-6"></div>                    
@@ -279,7 +289,7 @@
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-2 col-md-3">
-                    <a href="curso-arbitros.html" class="btn wantToWork-btn f-right" style="width: 100%;">Saiba mais</a>
+                    <a href="{{route('curso-arbitros')}}" class="btn wantToWork-btn f-right" style="width: 100%;">Saiba mais</a>
                 </div>
             </div>
         </div>
