@@ -19,8 +19,8 @@
                             </div>
                         </div>
                         <!--End Section Tittle  -->
-                        <form id="inscricao-form" class="inscricao-form" action="#" method="POST" style=" padding-top: 0;">
-
+                        <form id="inscricao-form" class="inscricao-form" action="{{ route('inscricao.pagamento') }}"  method="POST" style=" padding-top: 0;">
+                            @csrf
                             <div class="row" style="    text-align: center;">
                                 
                                 <div class="col-lg-6 col-md-6">

@@ -18,7 +18,9 @@
                             </div>
                         </div>
                         <!--End Section Tittle  -->
-                        <form id="inscricao-form" class="inscricao-form" action="#" method="POST"style=" padding-top: 0;">
+                        <form id="inscricao-form" class="inscricao-form" action="{{ route('inscricao.store.ficha') }}" method="POST"style=" padding-top: 0;">
+                            @csrf
+
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box user-icon mb-30">

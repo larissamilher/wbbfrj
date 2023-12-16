@@ -170,6 +170,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
+        laravel\pagseguro\Platform\Laravel5\ServiceProvider::class
     ])->toArray(),
 
     /*
@@ -184,7 +185,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'Example' => App\Facades\Example::class,
+        'PagSeguro' => laravel\pagseguro\Platform\Laravel5\PagSeguro::class
     ])->toArray(),
 
 ];

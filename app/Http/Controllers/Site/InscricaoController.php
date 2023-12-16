@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Campeonato;
 use App\Models\CategoriaCampeonato;
+use App\Services\PagamentoService;
 
 class InscricaoController extends Controller
 {
@@ -15,8 +16,7 @@ class InscricaoController extends Controller
             ->where('data_final_inscricao', '>=', now())
             ->get();
 
-        return view('site.inscricao', compact([ 'campeonatos' ]));
-        
+        return view('site.inscricao', compact([ 'campeonatos' ]));        
     }
 
     public function getCategoriasCampeonato($campeonatoId)
@@ -44,5 +44,23 @@ class InscricaoController extends Controller
         return $response;
 
 
+    }
+
+    public function primeiraEtapaInscricao(Request $request)
+    {
+        $campeonato = Campeonato::find($request->input('campeonato'));
+
+        session()->put('ficheAtleta', $request->input());
+
+        return view('site.pagamento', compact([ 'campeonato' ]));
+    }
+
+    public function etapaPagamento(Request $request)
+    {
+        $paymentConfirm = (new PagamentoService)->paymentConfirm($request->input());
+
+        // session()->put('ficheAtleta', $request->input());
+
+        // return view('site.pagamento', compact([ 'campeonato' ]));
     }
 }

@@ -104,6 +104,9 @@ Route::prefix('campeonatos')->group(function () {
     Route::prefix('inscricao')->group(function () {
         Route::get('/', [InscricaoController::class, 'index'])->name('inscricao');
         Route::get('/get-categorias-campeonato/{campeonatoId}', [InscricaoController::class, 'getCategoriasCampeonato']);
+        Route::post('/ficha', [InscricaoController::class, 'primeiraEtapaInscricao'])->name('inscricao.store.ficha');
+        Route::post('/pagamento', [InscricaoController::class, 'etapaPagamento'])->name('inscricao.pagamento');
+
     });
 
     Route::prefix('resultados')->group(function () {
