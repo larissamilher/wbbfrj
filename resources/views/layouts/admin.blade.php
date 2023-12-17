@@ -13,6 +13,11 @@
  
     <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
   </head>
   <body>
     <div class="container-scroller">
@@ -162,6 +167,8 @@
     <script src="{{ asset('admin/js/dashboard.js') }}"></script>
     <!-- End custom js for this page -->
 
+    
+
     <script>
       $(document).ready(function() {
           // Associar ação ao clique no link
@@ -170,6 +177,7 @@
           });
       });
   </script>
+    
     
   </body>
 </html>

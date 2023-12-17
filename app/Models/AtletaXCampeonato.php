@@ -9,6 +9,7 @@ use DB;
 use Reliese\Database\Eloquent\Model as Eloquent;
 use App\Models\Campeonato;
 use App\Models\Categoria;
+use App\Models\Atleta;
 
 class AtletaXCampeonato extends Model
 {
@@ -45,5 +46,10 @@ class AtletaXCampeonato extends Model
     public function categoria()
     {
         return $this->belongsTo(Categoria::class);
+    }
+
+    public function atleta()
+    {
+        return $this->belongsTo(Atleta::class);
     }
 }
