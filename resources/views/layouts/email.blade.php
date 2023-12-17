@@ -17,8 +17,8 @@
                                             <tr style="padding:0;text-align:left;vertical-align:top">
                                                 <td style="margin:0;border-collapse:collapse;color:#757272;font-family:Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.3;padding:0;text-align:left;vertical-align:top;word-wrap:break-word">
                                                     <center style="background-color: rgb(244, 244, 244);padding-top: 20px;padding-bottom: 20px;margin-bottom: 20px;">
-                                                        <img alt="will bank"
-                                                            src="{{ asset('img/logo/wbbf-circulo.png') }}"
+                                                        <img alt="WBBF"
+                                                            src="https://www.wbbfrj.com/img/logo/wbbf-circulo.png"
                                                             style="display:block;max-width: 100px;" class="CToWUd a6T" data-bit="iit"
                                                             tabindex="0">                                                       
                                                     </center>

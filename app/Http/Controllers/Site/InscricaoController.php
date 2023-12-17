@@ -229,5 +229,6 @@ class InscricaoController extends Controller
 
         $e = Mail::to($dadosEmail['email'])->send(new ConfirmacaoInscricao($dadosEmail));
 
+        dd($e);
     }
 }
