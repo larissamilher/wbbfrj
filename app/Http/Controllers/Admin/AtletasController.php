@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\InscricaoCampeonato;
+use App\Models\Atleta;
 
 class AtletasController extends Controller
 {
     public function index(){
 
-        $atletas = InscricaoCampeonato::all();
+        $atletas = Atleta::all();
 
         return view('admin.atletas.index', compact('atletas'));
     }
