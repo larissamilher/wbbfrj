@@ -14,6 +14,7 @@ return array(
     'App\\Actions\\Jetstream\\DeleteUser' => $baseDir . '/app/Actions/Jetstream/DeleteUser.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Exports\\ListagemExport' => $baseDir . '/app/Exports/ListagemExport.php',
     'App\\Http\\Controllers\\Admin\\AdminController' => $baseDir . '/app/Http/Controllers/Admin/AdminController.php',
     'App\\Http\\Controllers\\Admin\\AtletasController' => $baseDir . '/app/Http/Controllers/Admin/AtletasController.php',
     'App\\Http\\Controllers\\Admin\\CampeonatosController' => $baseDir . '/app/Http/Controllers/Admin/CampeonatosController.php',

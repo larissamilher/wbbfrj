@@ -31,6 +31,6 @@ class ConfirmacaoInscricao extends Mailable
     {
         return $this->view('emails.confirmacao-inscricao', [
             'dadosEmail' => $this->dadosEmail
-        ]);
+        ])->subject('Confirmação de Inscrição'); ;
     }
 }

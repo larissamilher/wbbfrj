@@ -654,6 +654,7 @@ class ComposerStaticInit3b010e20a4964b0742da61bea99be95c
         'App\\Actions\\Jetstream\\DeleteUser' => __DIR__ . '/../..' . '/app/Actions/Jetstream/DeleteUser.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Exports\\ListagemExport' => __DIR__ . '/../..' . '/app/Exports/ListagemExport.php',
         'App\\Http\\Controllers\\Admin\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AdminController.php',
         'App\\Http\\Controllers\\Admin\\AtletasController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AtletasController.php',
         'App\\Http\\Controllers\\Admin\\CampeonatosController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/CampeonatosController.php',
