@@ -4,7 +4,6 @@
     
     <section class="inscricao-form-main">
         <div class="container">
-            {{-- {{dd($retorno)}} --}}
             <div class="row justify-content-end">
                 <div class="col-xl-12 col-lg-12">
                     <div class="form-wrapper">
@@ -61,15 +60,10 @@
                                     </div>
                                 </div>     
                                 
-                                
                                 @if(isset($retorno))
-
                                     @if(!$retorno['success'])
                                         <input type="hidden" id="erroPagamento" value="{{$retorno['message']}}">
-
-
                                     @endif
-
                                 @endif
                             </div>
 

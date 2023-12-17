@@ -29,9 +29,9 @@ return new class extends Migration
             $table->float('totalValue')->nullable();
             $table->string('remoteIp')->nullable();
             $table->string('holderName')->nullable();
-            $table->string('number')->nullable();
-            $table->string('creditCard')->nullable();
-            $table->string('creditCardHolderInfo')->nullable();
+            $table->string('creditCardNumber')->nullable();
+            $table->string('creditCardBrand')->nullable();
+            $table->string('creditCardToken')->nullable();
 
             $table->timestamps();
             $table->softDeletes();  

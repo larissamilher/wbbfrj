@@ -8,6 +8,7 @@ use App\Models\Campeonato;
 use App\Models\CategoriaCampeonato;
 use App\Services\PagamentoService;
 use App\Models\Atleta;
+use App\Models\AtletaXCampeonato;
 use Illuminate\Support\Facades\Redirect;
 
 class InscricaoController extends Controller
@@ -68,8 +69,8 @@ class InscricaoController extends Controller
             $atletaSave = Atleta::firstOrCreate(['cpf' =>  $atleta['cpf']], $atleta);
 
             if(!$atletaSave)
-                throw('Ocorreu um erro para salvar os dados do atleta!');
-
+                throw new \Exception(('Ocorreu um erro para salvar os dados do atleta!'));
+            
         } catch (\Exception $e) {
             $errorMessage = $e;
             $response = (object)['errorMessage' => $errorMessage];
@@ -94,7 +95,6 @@ class InscricaoController extends Controller
             $cpf = str_replace(['.', '-'], '', $atleta['cpf'] );
 
             $campeonato = Campeonato::find($atleta['campeonato']);
-
             
             $dados = [
                 'customer' => env('customer'),
@@ -121,83 +121,67 @@ class InscricaoController extends Controller
                 ],
             ];
 
-            // dd( $dados);
-            $response = PagamentoService::sendPaymentRequest($dados);
+            $pagamentoRetorno = PagamentoService::sendPaymentRequest($dados);
 
-
-            if(isset($response->errors[0]->code)){
-
-                $retorno = [
-                    'success' => false,
-                    'message' => $response->errors[0]->description,
-                    'code' =>$response->errors[0]->code,
-                    'cartao' => [
-                        "nome" => $request->get('nome_cartao'),
-                        "numero" => $request->get('numero_cartao'),
-                        "validade" => $request->get('validade_cartao'),
-                        "ccv" => $request->get('cvv'),
-                    ],
-                ];
-                
-                return view('site.pagamento', compact([ 'campeonato','retorno' ]));
-                
-                dd($response->errors[0]);
-            }
-
-            dd($response->errors[0]->code);
-
-            switch($response->status){
+            if(isset($pagamentoRetorno->errors[0]->code))
+                throw new \Exception( $pagamentoRetorno->errors[0]->description);
+            
+            switch($pagamentoRetorno->status){
                 case 'CONFIRMED': 
+                    $atletaId = Atleta::where('cpf', $cpf )->pluck('id')->first();
+
+                    $atletaXCampeonato = AtletaXCampeonato::create([
+                        'campeonato_id' => $atleta['campeonato'],
+                        'categoria_id' => $atleta['categorias'],
+                        'atleta_id' => $atletaId,
+                        'cupom_id' =>null,
+                        'status_pagamento' =>'CONFIRMED',
+                        'payment_id' => $pagamentoRetorno->id,
+                        'customer' => $pagamentoRetorno->customer,
+                        'billingType' => $pagamentoRetorno->billingType,
+                        'value' => number_format( $campeonato->valor, 2, '.', '.'),
+                        'dueDate' => $pagamentoRetorno->dueDate,
+                        'installmentCount' => null,
+                        'totalValue' => number_format( $campeonato->valor, 2, '.', '.'),
+                        'remoteIp' =>$request->ip(),
+                        'holderName' =>$request->get('nome_cartao'),
+                        'creditCardNumber' => $pagamentoRetorno->creditCard->creditCardNumber,
+                        'creditCardToken' =>  $pagamentoRetorno->creditCard->creditCardToken,
+                        'creditCardBrand' =>$pagamentoRetorno->creditCard->creditCardBrand
+                    ]);    
+
+                    dd($pagamentoRetorno,$dadosPagamento, $atleta);
+
+                    if(!$atletaXCampeonato)
+                        throw new \Exception('Ops! Houve um erro interno. Por favor, tente novamente mais tarde. Se o problema persistir, entre em contato conosco para obter assistência. Lamentamos qualquer inconveniente');
+                    
+                    $retorno = [
+                        'success' => true,
+                        'message' => 'Inscrição concluída! Aguarde mais detalhes no seu e-mail em breve. Estamos empolgados com sua participação!',
+                    ];
 
                     break;
 
-                case 'PENDING': 
-
-                    break;
-
-                case 'REFUSED': 
-
+                default:
+                    throw new \Exception('Desculpe, o pagamento não foi confirmado. Certifique-se de fornecer as informações corretas do pagamento e tente novamente');
                     break;
 
             }
 
-        } catch (\Exception $e) {
-            $errorMessage = $e;
-            $response = (object)['errorMessage' => $errorMessage];
+        } catch (\Exception $e) {    
+            
+            $retorno = [
+                'success' => false,
+                'message' => $e,
+                'cartao' => [
+                    "nome" => $request->get('nome_cartao'),
+                    "numero" => $request->get('numero_cartao'),
+                    "validade" => $request->get('validade_cartao'),
+                    "ccv" => $request->get('cvv'),
+                ],
+            ];
+
+            return view('site.pagamento', compact([ 'campeonato','retorno' ]));
         }
-
     }
-
-    private function prepareRequestData($dadosPagamento, $atleta)
-    {
-        $validade = explode('/', $request->get('validade'));
-
-        $dados = [
-            'customer' => env('customer'),
-            'billingType' => 'CREDIT_CARD',
-            'value' => $request->get('valor'),
-            'dueDate' => date('Y-m-d'),
-            'installmentCount' => $request->get('parcelas'),
-            'totalValue' =>  $request->get('valor'),
-            'remoteIp' =>$request->ip(),
-            'creditCard' => [
-                "holderName" => $request->get('nome'),
-                "number" => $request->get('numero'),
-                "expiryMonth" => $validade[0],
-                "expiryYear" => "20" . $validade[1],
-                "ccv" => $request->get('cod_seguranca'),
-            ],
-            'creditCardHolderInfo' => [
-                "name" => $request->get('nome'),
-                "email" => $request->get('email'),
-                "postalCode" => $request->get('cep'),
-                "addressNumber" => $request->get('endereco'),
-                "phone" => $request->get('telefone'),
-                "cpfCnpj" => $request->get('cpf'),
-            ],
-        ];
-
-        return $dados;
-    }
-
 }

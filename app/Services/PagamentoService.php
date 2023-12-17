@@ -24,21 +24,7 @@ class PagamentoService
 
             // $response = json_decode($response->getBody()->getContents());
 
-            
-            $json = '{
-                "errors": [
-                    {
-                        "code": "invalid_creditCard",
-                        "description": "Transação não autorizada. Verifique os dados do cartão de crédito e tente novamente."
-                    }
-                ]
-            }';
-            
-
-            $response = json_decode($json);
-
-            // dd($response);
-            // $response = session()->get('pagamento');
+            $response = session()->get('pagamento');
 
         } catch (\GuzzleHttp\Exception\ClientException $e) {
             $response = $e->getResponse();

@@ -17,7 +17,7 @@ class AtletaXCampeonato extends Model
     protected $table = 'atleta_x_campeonato';
  
     protected $fillable = [
-        'campeonanometo_id',
+        'campeonato_id',
         'categoria_id',
         'atleta_id',
         'cupom_id',
@@ -32,8 +32,9 @@ class AtletaXCampeonato extends Model
         'remoteIp',
         'holderName',
         'number',
-        'creditCard',
-        'creditCardHolderInfo'
+        'creditCardNumber',
+        'creditCardBrand',
+        'creditCardToken'
     ];
 
     public function campeonato()
