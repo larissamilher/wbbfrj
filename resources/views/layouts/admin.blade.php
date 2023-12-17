@@ -86,11 +86,18 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.atletas') }}">
-                  <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
-                  <span class="menu-title">Atletas</span>
-                </a>
-              </li>
+              <a class="nav-link" href="{{ route('admin.atletas') }}">
+                <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
+                <span class="menu-title">Atletas</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('admin.inscricoes') }}">
+                <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
+                <span class="menu-title">Inscrições</span>
+              </a>
+            </li>
            
             <li class="nav-item sidebar-user-actions">
               <div class="sidebar-user-menu">

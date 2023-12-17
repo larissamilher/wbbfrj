@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AtletasController;
 use App\Http\Controllers\Admin\CampeonatosController;
 use App\Http\Controllers\Admin\CategoriasController;
+use App\Http\Controllers\Admin\InscricoesController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +41,12 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     Route::prefix('atletas')->group(function () {
         Route::get('/', [AtletasController::class, 'index'])->name('admin.atletas');
     });
+
+    Route::prefix('inscricoes')->group(function () {
+        Route::get('/', [InscricoesController::class, 'index'])->name('admin.inscricoes');
+    });
+
+    
 
     Route::prefix('campeonatos')->group(function () {
         Route::get('/', [CampeonatosController::class, 'index'])->name('admin.campeonatos');
