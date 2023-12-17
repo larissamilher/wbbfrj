@@ -10,6 +10,8 @@ use App\Services\PagamentoService;
 use App\Models\Atleta;
 use App\Models\AtletaXCampeonato;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ConfirmacaoInscricao;
 
 class InscricaoController extends Controller
 {
@@ -45,8 +47,6 @@ class InscricaoController extends Controller
         }
 
         return $response;
-
-
     }
 
     public function primeiraEtapaInscricao(Request $request)
@@ -202,25 +202,16 @@ class InscricaoController extends Controller
         }
     }
 
-    public function teste(){
-        $clienteAsaasId = PagamentoService::getCliente('14667679791');
+    public function teste()
+    {
+        $dadosEmail =[
+            'nome' => 'Larissa Milher',
+            'email' => 'larissamilher@gmail.com'
+        ];
 
-        if(!$clienteAsaasId){
+        // return view('emails.confirmacao-inscricao', compact('dadosEmail'));
 
-            $dadosCliente = [
-                'name' => 'JOAO',
-                'cpfCnpj' =>'71123989087',
-                'email' =>'JOAO@GMAIL.COM',
-                'mobilePhone' =>'24999623286',
-                'address' =>'RUA CINCO',
-                'addressNumber' =>'43',
-                'province' =>'COLINAS',
-                'postalCode' =>'27570000'
-            ];
+        $e = Mail::to($dadosEmail['email'])->send(new ConfirmacaoInscricao($dadosEmail));
 
-            $clienteAsaas = PagamentoService::createCliente($dadosCliente);
-        }
-
-        dd($clienteAsaas, $clienteAsaas->id);
     }
 }
