@@ -101,8 +101,8 @@
                                                                                                                         Precisando de ajuda, entre em contato 
                                                                                                                         <strong>
                                                                                                                             <u>
-                                                                                                                                <a href="mailto:wbbfrj@gmail.com.br" target="_blank">
-                                                                                                                                    wbbfrj@gmail.com.br
+                                                                                                                                <a href="mailto:contato@wbbfrj.com" target="_blank">
+                                                                                                                                    contato@wbbfrj.com
                                                                                                                                 </a>
                                                                                                                             </u>
                                                                                                                         </strong>
