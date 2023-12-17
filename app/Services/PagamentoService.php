@@ -82,4 +82,44 @@ class PagamentoService
         return $errorMessage;
     }
 
+    public static function getCliente($cpf)
+    {
+        $client =  new \GuzzleHttp\Client();
+
+        $response = $client->request('GET', env('URL_ASAAS') . '/customers?cpfCnpj='.$cpf, [
+            'headers' => [
+                'accept' => 'application/json',
+                'access_token' => env('ASAAS')
+            ],
+        ]);
+
+        $response = json_decode($response->getBody()->getContents());
+
+        if(isset($response->data[0]->id))
+            return $response->data[0]->id;
+
+        return null;
+
+    }
+
+    public static function createCliente($requestData)
+    {
+
+        $client =  new \GuzzleHttp\Client();
+
+        $response = $client->request('POST', env('URL_ASAAS') . '/customers', [
+            'body' => json_encode($requestData),
+            'headers' => [
+                'accept' => 'application/json',
+                'access_token' => env('ASAAS'),
+                'content-type' => 'application/json',
+            ],
+        ]);
+
+        $response = json_decode($response->getBody()->getContents());
+
+        return $response;
+
+    }
+
 }

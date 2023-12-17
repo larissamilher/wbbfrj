@@ -95,9 +95,34 @@ class InscricaoController extends Controller
             $cpf = str_replace(['.', '-'], '', $atleta['cpf'] );
 
             $campeonato = Campeonato::find($atleta['campeonato']);
+
+            //BUSCA CLIENTE 
+            $clienteAsaasId = PagamentoService::getCliente($dados);
+            
+            // CASO NÃO EXITA CADASTRA
+            if(!$clienteAsaasId){
+
+                $dadosCliente = [
+                    'name' => $atleta['nome'],
+                    'cpfCnpj' =>$cpf,
+                    'email' =>$atleta['email'],
+                    'mobilePhone' =>$atleta['celular'],
+                    'address' =>$atleta['logradouro'],
+                    'addressNumber' =>$atleta['numero'],
+                    'province' =>$atleta['bairro'],
+                    'postalCode' =>$atleta['cep']
+                ];
+    
+                $clienteAsaas = PagamentoService::createCliente($dadosCliente);
+
+                if(!isset($clienteAsaas->id))
+                    throw new \Exception('Ops! Houve um erro interno. Por favor, tente novamente mais tarde. Se o problema persistir, entre em contato conosco para obter assistência. Lamentamos qualquer inconveniente.');
+               
+                $clienteAsaasId = $clienteAsaas->id;
+            }
             
             $dados = [
-                'customer' => env('customer'),
+                'customer' => $clienteAsaasId,
                 'billingType' => 'CREDIT_CARD',
                 'value' => number_format( $campeonato->valor, 2, '.', '.'),
                 'dueDate' => date('Y-m-d'),
@@ -175,5 +200,27 @@ class InscricaoController extends Controller
             ];
             return view('site.pagamento', compact([ 'campeonato','retorno' ]));
         }
+    }
+
+    public function teste(){
+        $clienteAsaasId = PagamentoService::getCliente('14667679791');
+
+        if(!$clienteAsaasId){
+
+            $dadosCliente = [
+                'name' => 'JOAO',
+                'cpfCnpj' =>'71123989087',
+                'email' =>'JOAO@GMAIL.COM',
+                'mobilePhone' =>'24999623286',
+                'address' =>'RUA CINCO',
+                'addressNumber' =>'43',
+                'province' =>'COLINAS',
+                'postalCode' =>'27570000'
+            ];
+
+            $clienteAsaas = PagamentoService::createCliente($dadosCliente);
+        }
+
+        dd($clienteAsaas, $clienteAsaas->id);
     }
 }
