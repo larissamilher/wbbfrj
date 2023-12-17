@@ -2,8 +2,9 @@
 
 @section('content')
     
-<section class="inscricao-form-main">
+    <section class="inscricao-form-main">
         <div class="container">
+            {{-- {{dd($retorno)}} --}}
             <div class="row justify-content-end">
                 <div class="col-xl-12 col-lg-12">
                     <div class="form-wrapper">
@@ -39,26 +40,37 @@
                                 
                                         <div class="col-lg-12 col-md-12">
                                             <div class="form-box email-icon mb-30">
-                                                <input type="text" name="nome_cartao" id="nome_cartao" placeholder="Nome no cartão">
+                                                <input type="text" name="nome_cartao" id="nome_cartao" placeholder="Nome no cartão" value="{{isset($retorno['cartao']['nome']) ?$retorno['cartao']['nome'] : '' }}">
                                             </div>
                                         </div>   
                                         <div class="col-lg-12 col-md-12">
                                             <div class="form-box email-icon mb-30">
-                                                <input type="text" name="numero_cartao" id="numero_cartao" placeholder="Número do Cartão">
+                                                <input type="text" name="numero_cartao" id="numero_cartao" placeholder="Número do Cartão" value="{{isset($retorno['cartao']['numero']) ?$retorno['cartao']['numero'] : '' }}">
                                             </div>
                                         </div>  
                                         <div class="col-lg-12 col-md-12">
                                             <div class="form-box email-icon mb-30">
-                                                <input type="text" name="validade_cartao" id="validade_cartao" placeholder="Data de validade">
+                                                <input type="text" name="validade_cartao" id="validade_cartao" placeholder="Data de validade" value="{{isset($retorno['cartao']['validade']) ?$retorno['cartao']['validade'] : '' }}">
                                             </div>
                                         </div>  
                                         <div class="col-lg-12 col-md-12">
                                             <div class="form-box email-icon mb-30">
-                                                <input type="text" name="cvv" id="cvv" placeholder="Código de segurança">
+                                                <input type="text" name="cvv" id="cvv" placeholder="Código de segurança" value="{{isset($retorno['cartao']['ccv']) ?$retorno['cartao']['ccv'] : '' }}">
                                             </div>
                                         </div>    
                                     </div>
-                                </div>       
+                                </div>     
+                                
+                                
+                                @if(isset($retorno))
+
+                                    @if(!$retorno['success'])
+                                        <input type="hidden" id="erroPagamento" value="{{$retorno['message']}}">
+
+
+                                    @endif
+
+                                @endif
                             </div>
 
                             <div class="row">
@@ -79,16 +91,25 @@
 
     <script>
 
-    $(document).ready(function($) {
-        $('#validade_cartao').mask('99/9999');
-        $('#cvv').mask('999');
-        $('#numero_cartao').mask('9999-9999-9999-9999');
-    });
+        $(document).ready(function($) {
 
-    $(document).ready(function() {
+            if ($('#erroPagamento').length) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text:  $('#erroPagamento').val()
+                });             
+            }
 
-     
-    });
+            $('#validade_cartao').mask('99/9999');
+            $('#cvv').mask('999');
+            $('#numero_cartao').mask('9999-9999-9999-9999');
+        });
+
+        $(document).ready(function() {
+
+        
+        });
 
     </script>
 @endsection

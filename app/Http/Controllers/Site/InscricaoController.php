@@ -8,6 +8,7 @@ use App\Models\Campeonato;
 use App\Models\CategoriaCampeonato;
 use App\Services\PagamentoService;
 use App\Models\Atleta;
+use Illuminate\Support\Facades\Redirect;
 
 class InscricaoController extends Controller
 {
@@ -79,6 +80,11 @@ class InscricaoController extends Controller
 
     public function etapaPagamento(Request $request)
     {
+        $retorno = [
+            'success' => true,
+            'message' => ''
+        ];
+
         try {
             $dadosPagamento = $request->input();
 
@@ -89,6 +95,7 @@ class InscricaoController extends Controller
 
             $campeonato = Campeonato::find($atleta['campeonato']);
 
+            
             $dados = [
                 'customer' => env('customer'),
                 'billingType' => 'CREDIT_CARD',
@@ -114,7 +121,45 @@ class InscricaoController extends Controller
                 ],
             ];
 
+            // dd( $dados);
             $response = PagamentoService::sendPaymentRequest($dados);
+
+
+            if(isset($response->errors[0]->code)){
+
+                $retorno = [
+                    'success' => false,
+                    'message' => $response->errors[0]->description,
+                    'code' =>$response->errors[0]->code,
+                    'cartao' => [
+                        "nome" => $request->get('nome_cartao'),
+                        "numero" => $request->get('numero_cartao'),
+                        "validade" => $request->get('validade_cartao'),
+                        "ccv" => $request->get('cvv'),
+                    ],
+                ];
+                
+                return view('site.pagamento', compact([ 'campeonato','retorno' ]));
+                
+                dd($response->errors[0]);
+            }
+
+            dd($response->errors[0]->code);
+
+            switch($response->status){
+                case 'CONFIRMED': 
+
+                    break;
+
+                case 'PENDING': 
+
+                    break;
+
+                case 'REFUSED': 
+
+                    break;
+
+            }
 
         } catch (\Exception $e) {
             $errorMessage = $e;

@@ -13,19 +13,33 @@ class PagamentoService
         try {
             $client =  new \GuzzleHttp\Client();
 
-            $response = $client->request('POST', config('enums.asaas.api_url') . '/payments', [
-                'body' => json_encode($requestData),
-                'headers' => [
-                    'accept' => 'application/json',
-                    'access_token' => env('ASAAS'),
-                    'content-type' => 'application/json',
-                ],
-            ]);
+            // $response = $client->request('POST', config('enums.asaas.api_url') . '/payments', [
+            //     'body' => json_encode($requestData),
+            //     'headers' => [
+            //         'accept' => 'application/json',
+            //         'access_token' => env('ASAAS'),
+            //         'content-type' => 'application/json',
+            //     ],
+            // ]);
 
-            $response = json_decode($response->getBody()->getContents());
+            // $response = json_decode($response->getBody()->getContents());
 
-            dd( $response );
             
+            $json = '{
+                "errors": [
+                    {
+                        "code": "invalid_creditCard",
+                        "description": "Transação não autorizada. Verifique os dados do cartão de crédito e tente novamente."
+                    }
+                ]
+            }';
+            
+
+            $response = json_decode($json);
+
+            // dd($response);
+            // $response = session()->get('pagamento');
+
         } catch (\GuzzleHttp\Exception\ClientException $e) {
             $response = $e->getResponse();
             $errorBody = json_decode($response->getBody());
