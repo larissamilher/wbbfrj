@@ -13,7 +13,7 @@ class PagamentoService
         try {
             $client =  new \GuzzleHttp\Client();
 
-            // $response = $client->request('POST', config('enums.asaas.api_url') . '/payments', [
+            // $response = $client->request('POST', env('URL_ASAAS') . '/payments', [
             //     'body' => json_encode($requestData),
             //     'headers' => [
             //         'accept' => 'application/json',

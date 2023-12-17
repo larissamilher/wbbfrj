@@ -150,26 +150,19 @@ class InscricaoController extends Controller
                         'creditCardBrand' =>$pagamentoRetorno->creditCard->creditCardBrand
                     ]);    
 
-                    dd($pagamentoRetorno,$dadosPagamento, $atleta);
-
                     if(!$atletaXCampeonato)
                         throw new \Exception('Ops! Houve um erro interno. Por favor, tente novamente mais tarde. Se o problema persistir, entre em contato conosco para obter assistência. Lamentamos qualquer inconveniente');
                     
-                    $retorno = [
-                        'success' => true,
-                        'message' => 'Inscrição concluída! Aguarde mais detalhes no seu e-mail em breve. Estamos empolgados com sua participação!',
-                    ];
+                    return view('site.inscricao-sucesso');
 
                     break;
 
                 default:
                     throw new \Exception('Desculpe, o pagamento não foi confirmado. Certifique-se de fornecer as informações corretas do pagamento e tente novamente');
                     break;
-
             }
 
-        } catch (\Exception $e) {    
-            
+        } catch (\Exception $e) {                
             $retorno = [
                 'success' => false,
                 'message' => $e,
@@ -180,7 +173,6 @@ class InscricaoController extends Controller
                     "ccv" => $request->get('cvv'),
                 ],
             ];
-
             return view('site.pagamento', compact([ 'campeonato','retorno' ]));
         }
     }
