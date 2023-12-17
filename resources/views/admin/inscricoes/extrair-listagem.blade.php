@@ -6,18 +6,18 @@
                 <div class="card-body" style="overflow-x: auto;">
                     <h4 class="card-title">Extrair Lista do evento</h4>
                     
-                    <form class="forms-sample">
-              
+                    <form class="forms-sample" method="POST" action="{{ route('admin.inscricoes.extrair-listagem-acao') }}">
+                        @csrf
                         <div class="form-group">
                           <label for="nome">Evento</label>
-                          <select  class="form-control"id="campeonato">
+                          <select  class="form-control"name="campeonato">
                             @foreach($campeonatos as $campeonato)
                                 <option value="{{$campeonato->id}}"> {{$campeonato->nome}}</option>
                             @endforeach
                           </select>
                         </div>
                             
-                        <button type="button" class="btn btn-success btn-fw" id="btnExtrair">EXTRAIR</button>
+                        <button type="submit" class="btn btn-success btn-fw" id="btnExtrair">EXTRAIR</button>
 
                     </form>
                    
@@ -26,25 +26,4 @@
         </div>
     </div>
 
-    <script>
-        $(document).ready(function() {
-            $('#btnExtrair').on('click',function() {
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    url: "extrair-listagem-acao/"+ $("#campeonato").val(),
-                    type: 'GET',    
-                    success: function (response) {
-                       
-                        if (response.success) {   
-                           
-                        }  
-                        
-                    }
-                });
-            });
-        });
-
-    </script>
 @endsection

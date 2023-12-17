@@ -145,6 +145,10 @@
                                 </div>
                             </div>
 
+                            @if(isset($errorMessage))
+                                <input type="hidden" id="errorMessage" value="{{$errorMessage}}">
+                            @endif
+
                             <div class="row">
                                 <div class="col-lg-12">                                   
                                     <div class="submit-info">
@@ -166,6 +170,14 @@
         $('#rg').mask('00.000.000-0');
         $('#cep').mask('00000-000');
         $('#celular').mask('(00) 00000-0000');
+
+        if ($('#errorMessage').length) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text:  $('#errorMessage').val()
+            });             
+        }
     });
 
     $(document).ready(function() {

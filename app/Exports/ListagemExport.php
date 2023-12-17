@@ -24,6 +24,7 @@ class ListagemExport implements FromCollection
     
         $dados[] =[
             'nome' => 'Nome',
+            'cpf' => 'CPF',
             'email' => 'Email', 
             'categoria' => 'Categoria', 
             'celular' => 'Celular'
@@ -32,9 +33,10 @@ class ListagemExport implements FromCollection
         foreach($inscricoes as $inscricao){
             $dados [] = [
                 'nome' => $inscricao->atleta->nome,
+                'cpf' => $inscricao->atleta->cpf,
                 'email' => $inscricao->atleta->email,
-                'categoria' => '',
-                'celular' => '',        
+                'categoria' => $inscricao->categoria->nome,
+                'celular' =>  $inscricao->atleta->celular,        
             ];
         }
 
@@ -43,6 +45,7 @@ class ListagemExport implements FromCollection
         $data = $dados->map(function ($inscricao) {
             return [
                 'Nome' => $inscricao['nome'],
+                'CPF' => $inscricao['cpf'],
                 'Email' => $inscricao['email'],
                 'Caegoria' => $inscricao['categoria'],
                 'Celular' => $inscricao['celular'],

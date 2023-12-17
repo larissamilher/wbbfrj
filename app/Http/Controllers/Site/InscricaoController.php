@@ -12,6 +12,8 @@ use App\Models\AtletaXCampeonato;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ConfirmacaoInscricao;
+use Illuminate\Support\Facades\Log;
+
 
 class InscricaoController extends Controller
 {
@@ -62,6 +64,13 @@ class InscricaoController extends Controller
             $atleta['celular'] = str_replace(['(',')', '-', ' '], '', $atleta['celular'] );
             $atleta['cep'] = str_replace(['(',')', '-', ' '], '', $atleta['cep'] );
 
+            $atletaCampeonato = AtletaXcampeonato::join('atletas', 'atletas.id', 'atleta_x_campeonato.atleta_id')
+                ->where('atletas.cpf' , $atleta['cpf'] )
+                ->where('atleta_x_campeonato.categoria_id' , $atleta['categorias'] )->first();
+
+            if($atletaCampeonato) 
+                throw new \Exception('O(a) atleta com o CPF ' . $atleta['cpf'] . ' já está inscrito(a) no campeonato e categoria selecionados.');
+
             session()->put('atleta', $request->input());
 
             unset($atleta['_token']);        
@@ -72,8 +81,15 @@ class InscricaoController extends Controller
                 throw new \Exception(('Ocorreu um erro para salvar os dados do atleta!'));
             
         } catch (\Exception $e) {
-            $errorMessage = $e;
-            $response = (object)['errorMessage' => $errorMessage];
+
+            $errorMessage = $e->getMessage();
+         
+            $campeonatos = Campeonato::where('data_inicio_inscricao', '<=', now())
+            ->where('data_final_inscricao', '>=', now())
+            ->get();
+
+            return view('site.inscricao', compact([ 'campeonatos', 'errorMessage' ]));        
+        
         }
 
         return view('site.pagamento', compact([ 'campeonato' ]));
@@ -190,7 +206,7 @@ class InscricaoController extends Controller
         } catch (\Exception $e) {                
             $retorno = [
                 'success' => false,
-                'message' => $e,
+                'message' =>  $e->getMessage(),
                 'cartao' => [
                     "nome" => $request->get('nome_cartao'),
                     "numero" => $request->get('numero_cartao'),

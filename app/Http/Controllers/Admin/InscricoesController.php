@@ -24,16 +24,14 @@ class InscricoesController extends Controller
         return view('admin.inscricoes.extrair-listagem', compact("campeonatos"));
     }
 
-    public function extrairListagem($campeonatoId)
+    public function extrairListagem(Request $request)
     {
+        $campeonatoId = $request->input('campeonato');
+
         $nomeCampeonato = Campeonato::find($campeonatoId);
 
         $export = new ListagemExport($campeonatoId);
 
-        $filePath = Excel::store($export, 'exports/' . $nomeCampeonato->nome . '.xlsx', 'local');
-
-        // Implemente a lógica para redirecionar ou fazer o download do arquivo, conforme necessário
-        return response()->download(storage_path('app/' . $filePath))->deleteFileAfterSend();
-
+        return Excel::download(new ListagemExport($campeonatoId), $nomeCampeonato->nome . '.xlsx');
     }
 }
