@@ -97,8 +97,8 @@ class InscricaoController extends Controller
             $campeonato = Campeonato::find($atleta['campeonato']);
 
             //BUSCA CLIENTE 
-            $clienteAsaasId = PagamentoService::getCliente($dados);
-            
+            $clienteAsaasId = PagamentoService::getCliente($cpf);
+
             // CASO NÃO EXITA CADASTRA
             if(!$clienteAsaasId){
 
