@@ -18,21 +18,30 @@
                         <thead>
                             <tr>
                                 <th> Nome </th>
-                                <th> Gênero </th>
-                                <th> Ativa </th>
+                                <th> CPF </th>
+                                <th> Email </th>
+                                <th> Evento </th>
+                                <th> Categoria </th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($inscricoes as $inscricao)
                                 <tr>
                                     <td class="py-1">
-                                       
+                                       {{$inscricao->atleta->nome}}
                                     </td>
                                     <td>
-                                      
+                                        {{$inscricao->atleta->cpf}}
                                     </td>
                                     <td>
-                                     
+                                        {{$inscricao->atleta->email}}
+                                    </td>
+
+                                    <td>
+                                     {{$inscricao->campeonato->nome}}
+                                    </td>
+                                    <td>
+                                     {{$inscricao->categoria->nome}}
                                     </td>
                                 </tr>
                             @endforeach

@@ -11,8 +11,9 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class InscricoesController extends Controller
 {
-    public function index(){
-        $inscricoes = AtletaXCampeonato::all();
+    public function index()
+    {
+        $inscricoes = AtletaXCampeonato::with(['campeonato', 'categoria', 'atleta'])->get(); 
 
         return view('admin.inscricoes.index', compact("inscricoes"));
     }
