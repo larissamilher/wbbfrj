@@ -28,7 +28,7 @@
                                         {{$campeonato->nome}}
                                     </td>
                                     <td>
-                                      {{ date("d/m/Y", strtotime( $campeonato->data_inicial_inscricao))}}
+                                      {{ date("d/m/Y", strtotime( $campeonato->data_inicio_inscricao))}}
                                     </td>
                                     <td>
                                       {{ date("d/m/Y", strtotime( $campeonato->data_final_inscricao))}}
