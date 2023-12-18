@@ -18,6 +18,7 @@ class AtletaXCampeonato extends Model
     protected $table = 'atleta_x_campeonato';
  
     protected $fillable = [
+        'codigo',
         'campeonato_id',
         'categoria_id',
         'atleta_id',
@@ -35,7 +36,7 @@ class AtletaXCampeonato extends Model
         'number',
         'creditCardNumber',
         'creditCardBrand',
-        'creditCardToken'
+        'creditCardToken',
     ];
 
     public function campeonato()

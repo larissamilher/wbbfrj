@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Campeonato;
 use App\Models\CategoriaCampeonato;
 use App\Services\PagamentoService;
+use App\Services\GeradorCodigoService;
 use App\Models\Atleta;
 use App\Models\AtletaXCampeonato;
 use Illuminate\Support\Facades\Redirect;
@@ -72,8 +73,8 @@ class InscricaoController extends Controller
                 throw new \Exception('O(a) atleta com o CPF ' . $atleta['cpf'] . ' já está inscrito(a) no campeonato e categoria selecionados.');
 
             session()->put('atleta', $request->input());
-
-            unset($atleta['_token']);        
+        
+            unset($atleta['_token']);   
 
             $atletaSave = Atleta::firstOrCreate(['cpf' =>  $atleta['cpf']], $atleta);
 
@@ -173,8 +174,10 @@ class InscricaoController extends Controller
             switch($pagamentoRetorno->status){
                 case 'CONFIRMED': 
                     $atletaId = Atleta::where('cpf', $cpf )->pluck('id')->first();
+                    $codigo = GeradorCodigoService::geraCodigo();
 
                     $atletaXCampeonato = AtletaXCampeonato::create([
+                        'codigo' => $codigo,
                         'campeonato_id' => $atleta['campeonato'],
                         'categoria_id' => $atleta['categorias'],
                         'atleta_id' => $atletaId,
@@ -197,6 +200,10 @@ class InscricaoController extends Controller
                     if(!$atletaXCampeonato)
                         throw new \Exception('Ops! Houve um erro interno. Por favor, tente novamente mais tarde. Se o problema persistir, entre em contato conosco para obter assistência. Lamentamos qualquer inconveniente');
                     
+                    $atleta['codigo'] =  $codigo;
+                    
+                    Mail::to($atleta['email'])->send(new ConfirmacaoInscricao($atleta));
+
                     return view('site.inscricao-sucesso');
 
                     break;

@@ -22,11 +22,14 @@ class UsuariosController extends Controller
         return view('admin.usuarios.novo');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $usuarios = User::all(); 
+        // $user = new User();
+        // $user->name     = $request->input('name');
+        // $user->email    = $request->input('email');
+        // $user->password = bcrypt($request->input('password'));
 
-        return view('admin.usuarios.index', compact("usuarios"));
+        // return view('admin.usuarios.index', compact("usuarios"));
     }
     
 }

@@ -4,7 +4,6 @@ namespace App\Services;
 
 use GuzzleHttp\Client;
 use App\Models\Campeonato;
-use App\Models\InscricaoCampeonato;
 
 class PagamentoService
 {
