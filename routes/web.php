@@ -4,12 +4,14 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Site\InscricaoController;
+use App\Http\Controllers\Site\SiteController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AtletasController;
 use App\Http\Controllers\Admin\CampeonatosController;
 use App\Http\Controllers\Admin\CategoriasController;
 use App\Http\Controllers\Admin\InscricoesController;
 use App\Http\Controllers\Admin\UsuariosController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -152,6 +154,7 @@ Route::get('/contato', function () {
 })->name('contato');
 
 Route::post('/getcep', [InscricaoController::class, 'getcep'])->name('getcep');
+Route::post('/formulario-contato', [SiteController::class, 'contato'])->name('formulario-contato');
 
 
 Auth::routes();

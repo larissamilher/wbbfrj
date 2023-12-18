@@ -17,8 +17,18 @@
                                 </div>
                             </div>
                         </div>
-                        <!--End Section Tittle  -->
-                        <form id="contact-form" action="#" method="POST">
+                        @if(session('success'))
+                            <script>
+                                Swal.fire({
+                                    title: "Bom trabalho!",
+                                    text: "{{ session('success') }}",
+                                    icon: "success"
+                                });
+                            </script>
+                        @endif
+
+                        <form id="contact-form"  action="{{ route('formulario-contato') }}" method="POST" method="POST">
+                            @csrf
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box user-icon mb-30">
@@ -32,11 +42,11 @@
                                 </div>                                   
                                 <div class="col-lg-12 col-md-12">
                                     <div class="form-box subject-icon mb-30">
-                                        <input type="Email" name="subject" placeholder="Email">
+                                        <input type="Email" name="email" placeholder="Email">
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <div class="form-box message-icon mb-65">
+                                    <div class="form-box message-icon mb-65" style="margin-bottom: 35px;">
                                         <textarea name="message" id="message" placeholder="Mensagem"></textarea>
                                     </div>
                                     <div class="submit-info">
