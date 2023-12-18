@@ -185,7 +185,7 @@ input:focus::-moz-placeholder{
     transition:.4s
 }
 .capitalize{
-    text-transform:capitalize
+    /* text-transform:capitalize */
 }
 h1 a,h2 a,h3 a,h4 a,h5 a,h6 a{
     color:inherit
@@ -384,7 +384,7 @@ hr{
     padding:10px 20px;
     border:0;
     color:#fff;
-    text-transform:capitalize;
+    /* text-transform:capitalize; */
     cursor:pointer;
     font-size:16px;
     border-radius:0px
@@ -402,7 +402,7 @@ hr{
     color:#464d65;
     background:none;
     border-radius:5px;
-    text-transform:capitalize;
+    /* text-transform:capitalize; */
     padding:19px 47px;
     -moz-user-select:none;
     cursor:pointer;
@@ -2040,7 +2040,7 @@ hr{
     -moz-transition:.3s;
     -o-transition:.3s;
     transition:.3s;
-    text-transform:capitalize;
+    /* text-transform:capitalize; */
     position:relative;
     font-family:"Teko",sans-serif
 }
@@ -2074,7 +2074,7 @@ hr{
 .header-area .main-header .main-menu ul ul.submenu>li>a{
     padding:6px 10px !important;
     font-size:16px;
-    text-transform:capitalize;
+    /* text-transform:capitalize; */
     margin:0
 }
 .header-area .main-header .main-menu ul ul.submenu>li>a:hover{
@@ -2430,7 +2430,7 @@ hr{
     color:#fff;
     font-size:50px;
     font-weight:800;
-    text-transform:capitalize;
+    /* text-transform:capitalize; */
     line-height:1
 }
 @media only screen and (min-width: 576px) and (max-width: 767px){
@@ -2755,8 +2755,8 @@ hr{
         padding:13px 25px 76px 25px
     }
 }
-.contact-form-main #contact-form input, .inscricao-form-main .inscricao-form input{
-    background:none;
+.contact-form-main #contact-form input, .inscricao-form-main .inscricao-form input,  .inscricao-form-main .inscricao-form select{
+    background:#e7e7e7;
     height:60px;
     width:100%;
     padding:10px 25px;
@@ -2764,7 +2764,7 @@ hr{
     border:0;
     color:#112957;
     font-weight:500;
-    text-transform:capitalize;
+    /* text-transform:capitalize; */
     border-radius:0px;
     border-bottom:2px solid #e9f0f4;
     font-size:16px
@@ -2786,14 +2786,14 @@ hr{
     border-radius:0
 }
 .contact-form-main #contact-form .nice-select, .inscricao-form-main .inscricao-form .nice-select{
-    background:none;
+    background:#e7e7e7;
     height:60px;
     width:100%;
     border:0;
     color:#112957;
     font-weight:300;
     font-size:16px;
-    text-transform:capitalize;
+    /* text-transform:capitalize; */
     padding-top:10px;
     border-radius:0px;
     border-bottom:2px solid #e9f0f4
@@ -2810,7 +2810,7 @@ hr{
     border-radius:0
 }
 .contact-form-main #contact-form .nice-select .option, .inscricao-form-main .inscricao-form .nice-select .option{
-    color:#a3a3a3
+    color:#112957;
 }
 .contact-form-main #contact-form .nice-select .current, .inscricao-form-main .inscricao-form .nice-select .current{
     color:#918f8f;
@@ -2822,7 +2822,7 @@ hr{
     background:none;
     font-weight:500;
     letter-spacing:2px;
-    text-transform:capitalize;
+    /* text-transform:capitalize; */
     height:130px;
     width:100%;
     padding:30px 21px;
@@ -3003,7 +3003,7 @@ hr{
 }
 .date-tabs .properties__button .nav-tabs .nav-item{
     display:block;
-    text-transform:capitalize;
+    /* text-transform:capitalize; */
     font-weight:500
 }
 .date-tabs .properties__button .nav-tabs .nav-link{
@@ -3172,7 +3172,7 @@ hr{
 .testimonial-area .rattiong-caption span span{
     color:#767676;
     font-size:16px;
-    text-transform:capitalize;
+    /* text-transform:capitalize; */
     padding-left:15px
 }
 .h1-testimonial-active button.slick-arrow{
@@ -3367,7 +3367,7 @@ hr{
 .footer-area .footer-top .single-footer-caption .footer-tittle ul li{
     color:#c4c4c4;
     margin-bottom:15px;
-    text-transform:capitalize
+    /* text-transform:capitalize */
 }
 .footer-area .footer-top .single-footer-caption .footer-tittle ul li a{
     color:#c4c4c4;
@@ -4702,7 +4702,7 @@ hr{
     font-weight:900;
     margin-bottom:0;
     font-family:"Teko",sans-serif;
-    text-transform:capitalize
+    /* text-transform:capitalize */
 }
 @media (max-width: 767px){
     .bradcam_area h3{
@@ -4741,7 +4741,7 @@ hr{
 }
 .popup_box .boxed-btn3{
     width:100%;
-    text-transform:capitalize
+    /* text-transform:capitalize */
 }
 .popup_box .nice-select{
     -webkit-tap-highlight-color:transparent;
@@ -5863,4 +5863,9 @@ b,sup,sub,u,del{
 
 .swal2-popup{
     border-radius: 6px;
+}
+
+
+.inscricao-form label{
+    font-size:18px
 }

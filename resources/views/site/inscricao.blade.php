@@ -24,7 +24,8 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box user-icon mb-30">
-                                        <select id="campeonato" name="campeonato">
+                                        <label for="campeonato">Campeonato</label>
+                                        <select id="campeonato" name="campeonato" class="form-control required">
                                             <option value="">Selecione o Campeonato</option>
                                             @foreach($campeonatos as $campeonato)
                                                 <option value="{{$campeonato->id}}">{{$campeonato->nome}}</option>
@@ -35,7 +36,8 @@
 
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box user-icon mb-30">
-                                        <select id="categorias" name="categorias">
+                                        <label for="categorias">Categoria</label>
+                                        <select id="categorias" name="categorias" class="form-control required">
                                             <option value="">Selecione a Categoria</option>                                           
                                         </select>
                                     </div>
@@ -45,32 +47,38 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box user-icon mb-30">
-                                        <input type="text" name="nome" id="nome" placeholder="Nome" class="required">
+                                        <label for="nome">Nome</label>
+                                        <input type="text" name="nome" id="nome" placeholder="" class="form-control required">
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-box email-icon mb-30">
-                                        <input type="text" name="cpf" id="cpf" placeholder="CPF" class="required">
+                                        <label for="cpf">CPF</label>
+                                        <input type="text" name="cpf" id="cpf" placeholder="" class="form-control required">
                                     </div>
                                 </div>   
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-box email-icon mb-30">
-                                        <input type="text" name="rg" id="rg" placeholder="RG" class="required">
+                                        <label for="rg">RG</label>
+                                        <input type="text" name="rg" id="rg" placeholder="" class="form-control required">
                                     </div>
                                 </div>       
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-box email-icon mb-30">
-                                        <input type="text" name="celular" id="celular" placeholder="Celular" class="required">
+                                        <label for="celular">Celular</label>
+                                        <input type="text" name="celular" id="celular" placeholder="" class="form-control required">
                                     </div>
                                 </div>      
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-box subject-icon mb-30">
-                                        <input type="date" name="data_nascimento" id="data_nascimento" placeholder="Data de Nascimento" class="required">
+                                        <label for="data_nascimento">Data de Nascimento</label>
+                                        <input type="date" name="data_nascimento" id="data_nascimento" placeholder="" class="form-control required">
                                     </div>
                                 </div>                             
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box subject-icon mb-30">
-                                        <input type="Email" name="email" id="email" placeholder="Email" class="required">
+                                        <label for="email">Email</label>
+                                        <input type="Email" name="email" id="email" placeholder="" class="form-control required">
                                     </div>
                                 </div>
 
@@ -78,69 +86,44 @@
 
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-box email-icon mb-30">
-                                        <input type="text" name="cep" id="cep" placeholder="CEP" class="required">
+                                        <label for="cep">CEP</label>
+                                        <input type="text" name="cep" id="cep" placeholder="" class="form-control required">
                                     </div>
                                 </div> 
 
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-box email-icon mb-30">
-                                        <select id="estado" name="estado" class="required">
-                                            <option value="">Selecione o Estado</option>
-                                            <option value="AC">Acre</option>
-                                            <option value="AL">Alagoas</option>
-                                            <option value="AP">Amapá</option>
-                                            <option value="AM">Amazonas</option>
-                                            <option value="BA">Bahia</option>
-                                            <option value="CE">Ceará</option>
-                                            <option value="DF">Distrito Federal</option>
-                                            <option value="ES">Espírito Santo</option>
-                                            <option value="GO">Goiás</option>
-                                            <option value="MA">Maranhão</option>
-                                            <option value="MT">Mato Grosso</option>
-                                            <option value="MS">Mato Grosso do Sul</option>
-                                            <option value="MG">Minas Gerais</option>
-                                            <option value="PA">Pará</option>
-                                            <option value="PB">Paraíba</option>
-                                            <option value="PR">Paraná</option>
-                                            <option value="PE">Pernambuco</option>
-                                            <option value="PI">Piauí</option>
-                                            <option value="RJ">Rio de Janeiro</option>
-                                            <option value="RN">Rio Grande do Norte</option>
-                                            <option value="RS">Rio Grande do Sul</option>
-                                            <option value="RO">Rondônia</option>
-                                            <option value="RR">Roraima</option>
-                                            <option value="SC">Santa Catarina</option>
-                                            <option value="SP">São Paulo</option>
-                                            <option value="SE">Sergipe</option>
-                                            <option value="TO">Tocantins</option>
-                                            <option value="EX">Estrangeiro</option>
-                                        </select>
+                                        <label for="estado">Estado</label>
+                                        <input type="text" name="estado" id="estado" placeholder="" class="form-control required"  maxlength="2">
+
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box email-icon mb-30">
-                                        <select id="cidade" name="cidade" class="required">
-                                            <option value="">Selecione a Cidade</option>
-                                        </select>
+                                        <label for="cidade">Cidade</label>
+                                        <input type="text" name="cidade" id="cidade" placeholder="" class="form-control required">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4 col-md-4">
                                     <div class="form-box email-icon mb-30">
-                                        <input type="text" name="bairro" id="bairro" placeholder="Bairro" class="required">
+                                        <label for="bairro">Bairro</label>
+                                        <input type="text" name="bairro" id="bairro" placeholder="" class="form-control required">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-2 col-md-2">
                                     <div class="form-box email-icon mb-30">
-                                        <input type="text" name="numero" id="numero" placeholder="Número" class="required">
+                                        <label for="numero">Número</label>
+                                        <input type="text" name="numero" id="numero" placeholder="" class="form-control required">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box email-icon mb-30">
-                                        <input type="text" name="logradouro" id="logradouro" placeholder="Logradouro" class="required">
+                                        <label for="logradouro">Logradouro</label>
+                                        <input type="text" name="logradouro" id="logradouro" placeholder="" class="form-control required">
                                     </div>
                                 </div>
                             </div>
@@ -221,24 +204,24 @@
          
         });
 
-        $('#estado').on('change',function() {
-            $.ajax({
-                url: "https://servicodados.ibge.gov.br/api/v1/localidades/estados/"+ $('#estado').val()+ '/municipios',
-                type: 'GET',    
-                success: function (response) {
+        // $('#estado').on('change',function() {
+        //     $.ajax({
+        //         url: "https://servicodados.ibge.gov.br/api/v1/localidades/estados/"+ $('#estado').val()+ '/municipios',
+        //         type: 'GET',    
+        //         success: function (response) {
                     
-                    $('#cidade').empty();                        
-                    $('#cidade').niceSelect('destroy');
-                    $('#cidade').append('<option value="">Selecione a Cidade</option>');
+        //             $('#cidade').empty();                        
+        //             $('#cidade').niceSelect('destroy');
+        //             $('#cidade').append('<option value="">Selecione a Cidade</option>');
                     
-                    $.each(response, function(index, cidade) {
-                        $('#cidade').append('<option value="' + cidade.nome + '">' + cidade.nome  + '</option>');
-                    });
+        //             $.each(response, function(index, cidade) {
+        //                 $('#cidade').append('<option value="' + cidade.nome + '">' + cidade.nome  + '</option>');
+        //             });
 
-                    $('#cidade').niceSelect();                    
-                }
-            });
-        });
+        //             $('#cidade').niceSelect();                    
+        //         }
+        //     });
+        // });
 
 
         $('#email').on('change',function() {
@@ -324,6 +307,40 @@
         //     else
         //         $("#inscricao-form").submit();
         // });
+    });
+
+    $(document).on('blur', '#inscricao-form input[name="cep"]', function () {
+        var cep = $(this).val().replace(/\D/g, '');
+
+        if (cep.length == 8) {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "/getcep",
+                dataType: 'json',
+                type: 'POST',
+                data: {
+                    'cep': cep
+                },
+                beforeSend: function () {
+                    $('.loader').fadeIn();
+                },
+                success: function (result) {
+                    // console.log(result);
+                    if (result && !result.erro) {
+                        $('#inscricao-form input[name="logradouro"]').val(result.logradouro);
+                        $('#inscricao-form input[name="bairro"]').val(result.bairro);
+                        $('#inscricao-form input[name="cidade"]').val(result.localidade);
+                        $('#inscricao-form input[name="estado"]').val(result.uf);
+                    } else {
+                        toastr.error("CEP não encontrado, tente novamente.");
+                        $('#inscricao-form input[name="logradouro"], #inscricao-form input[name="bairro"], #inscricao-form input[name="cidade"], #inscricao-form input[name="estado"]').val('');
+                    }
+                    $('.loader').fadeOut();
+                }
+            });
+        }
     });
 
     </script>

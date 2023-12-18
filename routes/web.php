@@ -150,8 +150,9 @@ Route::prefix('educacao')->group(function () {
 Route::get('/contato', function () {
     return view('site.contato');
 })->name('contato');
+
+Route::post('/getcep', [InscricaoController::class, 'getcep'])->name('getcep');
+
+
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();

@@ -221,6 +221,26 @@ class InscricaoController extends Controller
         }
     }
 
+    public function getCep() {
+        $cep = $_POST['cep'];
+        $url = 'https://viacep.com.br/ws/'.$cep.'/json/';
+    
+        try {
+            $resultado = file_get_contents($url);
+
+            if ($resultado === false) 
+                throw new Exception("&resultado=0&resultado_txt=erro+ao+buscar+cep");
+            
+            print_r($resultado);
+
+        } catch (Exception $e) {
+            $erro = "&resultado=0&resultado_txt=" . urlencode('Erro ao buscar CEP: ' . $e->getMessage());
+            print_r($erro);
+        }
+
+        exit;
+    }
+
     public function teste()
     {
         $dadosEmail =[
