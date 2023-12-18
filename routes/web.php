@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\AtletasController;
 use App\Http\Controllers\Admin\CampeonatosController;
 use App\Http\Controllers\Admin\CategoriasController;
 use App\Http\Controllers\Admin\InscricoesController;
-
+use App\Http\Controllers\Admin\UsuariosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,6 +61,13 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::get('/novo', [CategoriasController::class, 'create'])->name('admin.categoria.novo');
         Route::post('/store', [CategoriasController::class, 'store'])->name('admin.categoria.store');
     });
+
+    Route::prefix('usuarios')->group(function () {
+        Route::get('/', [UsuariosController::class, 'index'])->name('admin.usuarios');
+        Route::get('/novo', [UsuariosController::class, 'create'])->name('admin.usuario.novo');
+        Route::post('/store', [UsuariosController::class, 'store'])->name('admin.usuario.store');
+    });
+
 });
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->group(function () {
