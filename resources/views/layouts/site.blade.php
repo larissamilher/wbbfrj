@@ -106,7 +106,7 @@
                                                 </ul>
                                             </li>
                                             <li><a href="{{ route('contato') }}">Contato</a></li>
-                                            <li><a href="{{ route('login') }}">Acessar</a></li>
+                                            {{-- <li><a href="{{ route('login') }}">Acessar</a></li> --}}
                                         </ul>
 
                                     </nav>
@@ -144,10 +144,10 @@
                                 <div class="footer-tittle">
                                     <h4>WBBF</h4>
                                     <ul>
-                                        <li><a href="quem-somos.html">Quem Somos</a></li>
-                                        <li><a href="#">Contato</a></li>
-                                        <li><a href="#"> Curso Formação de Árbitros </a></li>
-                                        <li><a href="#"> Categorias </a></li>
+                                        <li><a href="{{ route('quem-somos') }}">Quem Somos</a></li>
+                                        <li><a href="{{ route('contato') }}">Contato</a></li>
+                                        <li><a href="{{ route('curso-arbitros') }}"> Curso Formação de Árbitros </a></li>
+                                        <li><a href="{{ route('categorias') }}"> Categorias </a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -156,13 +156,14 @@
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                             <div class="single-footer-caption mb-50">
                                 <div class="footer-tittle">
-                                    <h4>RESOURCES</h4>
+                                    <h4>SERVIÇOS</h4>
                                     <ul>
-                                        <li><a href="#">Home Insurance</a></li>
-                                        <li><a href="#">Travel Insurance</a></li>
+                                        <li><a href="{{ route('curso-arbitros') }}">Destaque-se no fisiculturismo! Inscreva-se no curso de arbitragem e torne-se um especialista.
+                                        </a></li>
+                                        {{-- <li><a href="#">Travel Insurance</a></li>
                                         <li><a href="#"> Car Insurance</a></li>
                                         <li><a href="#"> Business Insurance</a></li>
-                                        <li><a href="#"> Heal Insurance</a></li>
+                                        <li><a href="#"> Heal Insurance</a></li> --}}
                                     </ul>
                                 </div>
                             </div>
@@ -171,11 +172,11 @@
                             <div class="single-footer-caption mb-50">
                                 <!-- logo -->
                                 <div class="footer-logo">
-                                    <a href="index.html"><img src="{{ asset('img/logo/wbbf.png') }}" alt=""></a>
+                                    <a href="{{ route('home') }}"><img src="{{ asset('img/logo/wbbf.png') }}" alt=""></a>
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
-                                        <p class="info1">GThe trade war currently ensuing between te US anfd several natxions around thdhe globe, most fiercely with.</p>
+                                        <p class="info1">WBBF RIO DE JANEIRO.</p>
                                     </div>
                                 </div>
                                 <!-- Footer Social -->

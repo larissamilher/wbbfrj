@@ -167,11 +167,11 @@
                             <img src="{{ asset('img/gallery/team1.png') }}" alt="">
                             <div class="team-caption">
                                 <h3>
-                                    <a href="#">CLASSIC PHYSIQUE</a>
+                                    <a href="{{ route('classic-physique') }}">CLASSIC PHYSIQUE</a>
                                 </h3>
                                 <!-- Blog Social -->
                                 <div class="team-social">
-                                    <li><a href="#">VER MAIS</a></li>
+                                    <li><a href="{{ route('classic-physique') }}">VER MAIS</a></li>
                                 </div>
                             </div>
                         </div>
@@ -183,11 +183,11 @@
                             <img src="{{ asset('img/gallery/team2.png') }}" alt="">
                             <div class="team-caption">
                                 <h3>
-                                    <a href="#">212 OLYMPIA </a>
+                                    <a href="{{ route('classic-physique') }}">212 OLYMPIA </a>
                                 </h3>
                                 <!-- Blog Social -->
                                 <div class="team-social">
-                                    <li><a href="#">VER MAIS</a></li>
+                                    <li><a href="{{ route('classic-physique') }}">VER MAIS</a></li>
                                 </div>
                             </div>
                         </div>
@@ -199,11 +199,11 @@
                             <img src="{{ asset('img/gallery/team3.png') }}" alt="">
                             <div class="team-caption">
                                 <h3>
-                                    <a href="#">MEN'S PHYSIQUE </a>
+                                    <a href="{{ route('classic-physique') }}">MEN'S PHYSIQUE </a>
                                 </h3>
                                 <!-- Blog Social -->
                                 <div class="team-social">
-                                    <li><a href="#">VER MAIS</a></li>
+                                    <li><a href="{{ route('classic-physique') }}">VER MAIS</a></li>
                                 </div>
                             </div>
                         </div>
@@ -218,11 +218,11 @@
                             <img src="{{ asset('img/gallery/fisioculturista-mulher1.jpg') }}" alt="">
                             <div class="team-caption">
                                 <h3>
-                                    <a href="#">FITNESS OLYMPIA</a>
+                                    <a href="{{ route('classic-physique') }}">FITNESS OLYMPIA</a>
                                 </h3>
                                 <!-- Blog Social -->
                                 <div class="team-social">
-                                    <li><a href="#">VER MAIS</a></li>
+                                    <li><a href="{{ route('classic-physique') }}">VER MAIS</a></li>
                                 </div>
                             </div>
                         </div>
@@ -234,11 +234,11 @@
                             <img src="{{ asset('img/gallery/mulher3.jpg') }}" alt="">
                             <div class="team-caption">
                                 <h3>
-                                    <a href="#">FIGURE OLYMPIA </a>
+                                    <a href="{{ route('classic-physique') }}">FIGURE OLYMPIA </a>
                                 </h3>
                                 <!-- Blog Social -->
                                 <div class="team-social">
-                                    <li><a href="#">VER MAIS</a></li>
+                                    <li><a href="{{ route('classic-physique') }}">VER MAIS</a></li>
                                 </div>
                             </div>
                         </div>
@@ -250,11 +250,11 @@
                             <img src="{{ asset('img/gallery/mulher5.jpg') }}" alt="">
                             <div class="team-caption">
                                 <h3>
-                                    <a href="#">BIKINI OLYMPIA</a>
+                                    <a href="{{ route('classic-physique') }}">BIKINI OLYMPIA</a>
                                 </h3>
                                 <!-- Blog Social -->
                                 <div class="team-social">
-                                    <li><a href="#">VER MAIS</a></li>
+                                    <li><a href="{{ route('classic-physique') }}">VER MAIS</a></li>
                                 </div>
                             </div>
                         </div>
@@ -322,7 +322,7 @@
                             </div>
                             <div class="blog-cap">
                                 <span>Campeonato XPTO</span>
-                                <h3><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </a></h3>
+                                <h3><a href="{{ route('campeonatos') }}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </a></h3>
                             </div>
                         </div>
                     </div>
@@ -340,7 +340,7 @@
                             </div>
                             <div class="blog-cap">
                                 <span>Campeonato XPTO</span>
-                                <h3><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </a></h3>
+                                <h3><a href="{{ route('campeonatos') }}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </a></h3>
                             </div>
                         </div>
                     </div>
