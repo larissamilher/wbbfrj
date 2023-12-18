@@ -13,18 +13,16 @@ class PagamentoService
         try {
             $client =  new \GuzzleHttp\Client();
 
-            // $response = $client->request('POST', env('URL_ASAAS') . '/payments', [
-            //     'body' => json_encode($requestData),
-            //     'headers' => [
-            //         'accept' => 'application/json',
-            //         'access_token' => env('ASAAS'),
-            //         'content-type' => 'application/json',
-            //     ],
-            // ]);
+            $response = $client->request('POST', env('URL_ASAAS') . '/payments', [
+                'body' => json_encode($requestData),
+                'headers' => [
+                    'accept' => 'application/json',
+                    'access_token' => env('ASAAS'),
+                    'content-type' => 'application/json',
+                ],
+            ]);
 
-            // $response = json_decode($response->getBody()->getContents());
-
-            $response = session()->get('pagamento');
+            $response = json_decode($response->getBody()->getContents());
 
         } catch (\GuzzleHttp\Exception\ClientException $e) {
             $response = $e->getResponse();

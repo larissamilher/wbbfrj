@@ -167,6 +167,9 @@ class InscricaoController extends Controller
             if(isset($pagamentoRetorno->errors[0]->code))
                 throw new \Exception( $pagamentoRetorno->errors[0]->description);
             
+            if(isset($pagamentoRetorno->status))
+                throw new \Exception('Ops! Houve um erro interno. Por favor, tente novamente mais tarde. Se o problema persistir, entre em contato conosco para obter assistência. Lamentamos qualquer inconveniente.');
+            
             switch($pagamentoRetorno->status){
                 case 'CONFIRMED': 
                     $atletaId = Atleta::where('cpf', $cpf )->pluck('id')->first();
