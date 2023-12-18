@@ -47,13 +47,13 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::get('/extrair-listagem', [InscricoesController::class, 'extrairListagemTela'])->name('admin.inscricoes.extrair-listagem');
         Route::post('/extrair-listagem-acao', [InscricoesController::class, 'extrairListagem'])->name('admin.inscricoes.extrair-listagem-acao');
 
-    });
-
-    
+    });    
 
     Route::prefix('campeonatos')->group(function () {
         Route::get('/', [CampeonatosController::class, 'index'])->name('admin.campeonatos');
         Route::get('/novo', [CampeonatosController::class, 'create'])->name('admin.campeonato.novo');
+        Route::post('/store', [CampeonatosController::class, 'store'])->name('admin.campeonato.store');
+
     });
 
     Route::prefix('categorias')->group(function () {

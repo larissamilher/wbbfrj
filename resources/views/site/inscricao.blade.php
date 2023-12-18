@@ -163,6 +163,13 @@
         </div>
     </section>
 
+    <style>
+        ul.list {
+            max-height: 300px; 
+            overflow-y: auto;
+        }
+
+    </style>
     <script>
 
     $(document).ready(function($) {
