@@ -14,6 +14,11 @@
                 <div class="card-body" style="overflow-x: auto;">
                     <h4 class="card-title">Inscrições</h4>
                     </p>
+                    @if (session('response'))
+                    <p class="msg {{ session('response.class') }}">
+                        {{ session('response.message') }}
+                    </p>
+                    @endif
                     <table class="table table-striped">
                         <thead>
                             <tr>

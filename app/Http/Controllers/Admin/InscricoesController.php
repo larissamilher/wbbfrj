@@ -70,13 +70,35 @@ class InscricoesController extends Controller
         $inscricao = AtletaXCampeonato::with(['campeonato', 'categoria', 'atleta'])->find($id); 
         return view('admin.inscricoes.add-peso', compact("inscricao"));
     }
-
+    
     public function addPesoStore(Request $request)
     {
-        $inscricao = AtletaXCampeonato::with(['campeonato', 'categoria', 'atleta'])->find($id); 
-        return view('admin.inscricoes.add-peso', compact("inscricao"));
-    }
+        $response = [
+            'success' => true,
+            'message' => '',
+            'class' => '',
+        ];
 
+        try {
+
+            $inscricao = AtletaXCampeonato::find($request->input("inscricao_id")); 
+
+            $inscricao->peso = $request->input("peso");
+            $inscricao->save();       
+
+            $response['message'] = 'Peso salvo com sucesso!';
+            $response['class']= 'msg-sucesso';
+        }
+        catch (Exception $e) {
+            Log::error($e);
+            $response =  [
+                'success' => false,
+                'message' => 'Ops! Parece que houve. Por favor, tente novamente mais tarde.',
+                'class' => 'msg-error',
+            ];
+        }
     
+        return redirect()->route('admin.inscricoes')->with('response', $response);
+    }    
 
 }
