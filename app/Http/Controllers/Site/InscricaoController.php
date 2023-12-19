@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Campeonato;
 use App\Models\CategoriaCampeonato;
+use App\Models\Categoria;
 use App\Services\PagamentoService;
 use App\Services\GeradorCodigoService;
 use App\Models\Atleta;
@@ -111,6 +112,8 @@ class InscricaoController extends Controller
             $atleta = session()->get('atleta');
             $cpf = str_replace(['.', '-'], '', $atleta['cpf'] );
 
+            $atleta['categoria'] = Categoria::find($atleta['categorias']);
+
             $campeonato = Campeonato::find($atleta['campeonato']);
 
             //BUSCA CLIENTE 
@@ -200,6 +203,8 @@ class InscricaoController extends Controller
                     if(!$atletaXCampeonato)
                         throw new \Exception('Ops! Houve um erro interno. Por favor, tente novamente mais tarde. Se o problema persistir, entre em contato conosco para obter assistência. Lamentamos qualquer inconveniente');
                     
+                    $atleta['categoria'] = Categoria::find($atleta['categorias']);
+
                     $atleta['codigo'] =  $codigo;
                     
                     Mail::to($atleta['email'])->send(new ConfirmacaoInscricao($atleta));
