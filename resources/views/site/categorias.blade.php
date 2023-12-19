@@ -24,8 +24,8 @@
                             <div class="gallery-img small-img" style="background-image: url({{ asset('img/gallery/team1.png') }});"></div>
                             <div class="overlay">
                                 <div class="overlay-content">
-                                    <a href="{{ route('classic-physique') }}"><i class="ti-plus"></i></a>
-                                    <h3>CLASSIC PHYSIQUE</h3>
+                                    <a href="{{ route('categoria.bodybuilder') }}"><i class="ti-plus"></i></a>
+                                    <h3>BODY BUILDER</h3>
                                 </div>
                             </div>
                         </div>
@@ -35,8 +35,8 @@
                             <div class="gallery-img small-img" style="background-image: url({{ asset('img/gallery/team2.png') }});"></div>
                             <div class="overlay">
                                 <div class="overlay-content">
-                                    <a href="{{ route('classic-physique') }}"><i class="ti-plus"></i></a>
-                                    <h3>212 OLYMPIA</h3>
+                                    <a href="{{ route('categoria.classic') }}"><i class="ti-plus"></i></a>
+                                    <h3>CLASSIC</h3>
                                 </div>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                             <div class="gallery-img small-img" style="background-image: url({{ asset('img/gallery/team3.png') }});"></div>
                             <div class="overlay">
                                 <div class="overlay-content">
-                                    <a href="{{ route('classic-physique') }}"><i class="ti-plus"></i></a>
+                                    <a href="{{ route('categoria.mens_physique') }}"><i class="ti-plus"></i></a>
                                     <h3>MEN'S PHYSIQUE</h3>
                                 </div>
                             </div>
@@ -57,8 +57,8 @@
                             <div class="gallery-img small-img" style="background-image: url({{ asset('img/gallery/team1.png') }});"></div>
                             <div class="overlay">
                                 <div class="overlay-content">
-                                    <a href="{{ route('classic-physique') }}"><i class="ti-plus"></i></a>
-                                    <h3>CLASSIC PHYSIQUE</h3>
+                                    <a href="{{ route('categoria.summer_shape') }}"><i class="ti-plus"></i></a>
+                                    <h3>SUMMER SHAPE</h3>
                                 </div>
                             </div>
                         </div>
@@ -68,8 +68,8 @@
                             <div class="gallery-img small-img" style="background-image: url({{ asset('img/gallery/team2.png') }});"></div>
                             <div class="overlay">
                                 <div class="overlay-content">
-                                    <a href="{{ route('classic-physique') }}"><i class="ti-plus"></i></a>
-                                    <h3>212 OLYMPIA</h3>
+                                    <a href="{{ route('categoria.super_body') }}"><i class="ti-plus"></i></a>
+                                    <h3>SUPER BODY</h3>
                                 </div>
                             </div>
                         </div>
@@ -79,8 +79,8 @@
                             <div class="gallery-img small-img" style="background-image: url({{ asset('img/gallery/team3.png') }});"></div>
                             <div class="overlay">
                                 <div class="overlay-content">
-                                    <a href="{{ route('classic-physique') }}"><i class="ti-plus"></i></a>
-                                    <h3>MEN'S PHYSIQUE</h3>
+                                    <a href="{{ route('categoria.up_shape') }}"><i class="ti-plus"></i></a>
+                                    <h3>UP SHAPE</h3>
                                 </div>
                             </div>
                         </div>
@@ -111,8 +111,8 @@
                             <div class="gallery-img small-img" style="background-image: url({{ asset('img/gallery/fisioculturista-mulher1.jpg') }});"></div>
                             <div class="overlay">
                                 <div class="overlay-content">
-                                    <a href=""><i class="ti-plus"></i></a>
-                                    <h3>FITNESS OLYMPIA</h3>
+                                    <a href="{{ route('categoria.bikini') }}"><i class="ti-plus"></i></a>
+                                    <h3>BIKINI</h3>
                                 </div>
                             </div>
                         </div>
@@ -122,8 +122,8 @@
                             <div class="gallery-img small-img" style="background-image: url({{ asset('img/gallery/mulher3.jpg') }});"></div>
                             <div class="overlay">
                                 <div class="overlay-content">
-                                    <a href="{{ route('classic-physique') }}"><i class="ti-plus"></i></a>
-                                    <h3>FIGURE OLYMPIA</h3>
+                                    <a href="{{ route('categoria.super_model') }}"><i class="ti-plus"></i></a>
+                                    <h3>SUPER MODEL</h3>
                                 </div>
                             </div>
                         </div>
@@ -133,41 +133,8 @@
                             <div class="gallery-img small-img" style="background-image: url({{ asset('img/gallery/mulher5.jpg') }});"></div>
                             <div class="overlay">
                                 <div class="overlay-content">
-                                    <a href="{{ route('classic-physique') }}"><i class="ti-plus"></i></a>
-                                    <h3>BIKINI OLYMPIA</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4">
-                        <div class="box snake mb-30">
-                            <div class="gallery-img small-img" style="background-image: url({{ asset('img/gallery/fisioculturista-mulher1.jpg') }});"></div>
-                            <div class="overlay">
-                                <div class="overlay-content">
-                                    <a href="{{ route('classic-physique') }}"><i class="ti-plus"></i></a>
-                                    <h3>FITNESS OLYMPIA</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4">
-                        <div class="box snake mb-30">
-                            <div class="gallery-img small-img" style="background-image: url({{ asset('img/gallery/mulher3.jpg') }});"></div>
-                            <div class="overlay">
-                                <div class="overlay-content">
-                                    <a href="{{ route('classic-physique') }}"><i class="ti-plus"></i></a>
-                                    <h3>FIGURE OLYMPIA</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4">
-                        <div class="box snake mb-30">
-                            <div class="gallery-img small-img" style="background-image: url({{ asset('img/gallery/mulher5.jpg') }});"></div>
-                            <div class="overlay">
-                                <div class="overlay-content">
-                                    <a href="{{ route('classic-physique') }}"><i class="ti-plus"></i></a>
-                                    <h3>BIKINI OLYMPIA</h3>
+                                    <a href="{{ route('categoria.wellness') }}"><i class="ti-plus"></i></a>
+                                    <h3>WELLNESS</h3>
                                 </div>
                             </div>
                         </div>

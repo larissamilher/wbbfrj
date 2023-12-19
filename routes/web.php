@@ -86,9 +86,16 @@ Route::prefix('categorias')->group(function () {
         return view('site.categorias');
     })->name('categorias');
 
-    Route::get('/classic-physique', function () {
-        return view('site.classic-physique');
-    })->name('classic-physique');
+    Route::get('/bikini', function () { return view('site.categoria.bikini'); })->name('categoria.bikini');
+    Route::get('/super-model', function () { return view('site.categoria.super_model'); })->name('categoria.super_model');
+    Route::get('/wellness', function () { return view('site.categoria.wellness'); })->name('categoria.wellness');
+    Route::get('/bodybuilder', function () { return view('site.categoria.bodybuilder'); })->name('categoria.bodybuilder');
+    Route::get('/classic', function () { return view('site.categoria.classic'); })->name('categoria.classic');
+    Route::get('/mens-physique', function () { return view('site.categoria.mens_physique'); })->name('categoria.mens_physique');
+    Route::get('/summer-shape', function () { return view('site.categoria.summer_shape'); })->name('categoria.summer_shape');
+    Route::get('/super-body', function () { return view('site.categoria.super_body'); })->name('categoria.super_body');
+    Route::get('/up-shape', function () { return view('site.categoria.up_shape'); })->name('categoria.up_shape');
+    
 });
 
 Route::prefix('quem-somos')->group(function () {
