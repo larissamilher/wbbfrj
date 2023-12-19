@@ -15,8 +15,12 @@ class InscricoesController extends Controller
 {
     public function index()
     {
-        $inscricoes = AtletaXCampeonato::with(['campeonato', 'categoria', 'atleta'])->get(); 
-
+        $inscricoes = AtletaXCampeonato::with(['campeonato', 'categoria', 'atleta'])
+        ->join('atletas', 'atletas.id', '=', 'atleta_x_campeonato.atleta_id')
+        ->orderBy('atletas.nome') 
+        ->select("atleta_x_campeonato.*")
+        ->get();
+    
         return view('admin.inscricoes.index', compact("inscricoes"));
     }
 
