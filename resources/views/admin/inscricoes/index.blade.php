@@ -41,6 +41,13 @@
                                      {{$inscricao->categoria->nome}}
                                     </td>
                                     <td class="t-action">
+
+                                        <a href="{{ route( 'admin.inscricoes.gerar-pdf', $inscricao->id ) }}"  class="btn-acao btn-edit" title="Gerar PDF" >
+                                            <span class="icon-bg">
+                                                <i class="mdi mdi-file-pdf"></i>
+                                            </span>                                   
+                                        </a>    
+
                                         <a href="{{ route( 'admin.inscricoes.detalhes', $inscricao->id ) }}" class="btn-acao btn-edit" title="Ver Detalhes">
                                             <span class="icon-bg">
                                                 <i class="mdi mdi-eye"></i>
