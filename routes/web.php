@@ -36,9 +36,10 @@ Auth::routes(['register' => false]);
 
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->prefix('admin')->group(function () {
-
-    Route::get('/dashboard', function () {return view('admin.dashboard');})->name('admin.dashboard');
     
+    Route::prefix('dashboard')->group(function () {
+        Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+    });
 
     Route::prefix('atletas')->group(function () {
         Route::get('/', [AtletasController::class, 'index'])->name('admin.atletas');
@@ -72,9 +73,6 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
 
 });
 
-Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->group(function () {
-    Route::get('/dashboard', function () {return view('admin.dashboard');})->name('admin.dashboard');   
-});
 
 Route::get('/', function () {
     return view('site.index');
