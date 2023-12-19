@@ -20,7 +20,6 @@ class SiteController extends Controller
     {       
         Mail::to('contato@wbbfrj.com')->send(new Contato($request->input()));
 
-
         return redirect()->back()->with('success', 'Mensagem enviada com sucesso!');
 
     }
