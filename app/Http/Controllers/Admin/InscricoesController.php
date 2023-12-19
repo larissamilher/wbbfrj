@@ -35,4 +35,13 @@ class InscricoesController extends Controller
 
         return Excel::download(new ListagemExport($campeonatoId), $nomeCampeonato->nome . '.xlsx');
     }
+
+    public function detalhes($id){
+
+        $inscricao = AtletaXCampeonato::with(['campeonato', 'categoria', 'atleta'])->find($id); 
+
+        // dd($inscricao);
+
+        return view('admin.inscricoes.detalhes', compact("inscricao"));
+    }
 }

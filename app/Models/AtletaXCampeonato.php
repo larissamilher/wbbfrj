@@ -22,6 +22,7 @@ class AtletaXCampeonato extends Model
         'campeonato_id',
         'categoria_id',
         'atleta_id',
+        'peso',
         'cupom_id',
         'status_pagamento',
         'payment_id',

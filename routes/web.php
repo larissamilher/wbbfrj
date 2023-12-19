@@ -49,6 +49,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::get('/', [InscricoesController::class, 'index'])->name('admin.inscricoes');
         Route::get('/extrair-listagem', [InscricoesController::class, 'extrairListagemTela'])->name('admin.inscricoes.extrair-listagem');
         Route::post('/extrair-listagem-acao', [InscricoesController::class, 'extrairListagem'])->name('admin.inscricoes.extrair-listagem-acao');
+        Route::get('/detalhes/{id}', [InscricoesController::class, 'detalhes'])->name('admin.inscricoes.detalhes');
 
     });    
 
