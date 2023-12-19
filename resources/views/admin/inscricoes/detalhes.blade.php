@@ -5,13 +5,12 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body" style="overflow-x: auto;">
-                    <h4 class="card-title">Detalhes da Inscrição</h4>
-                    </p>
+                    
                     <form class="forms-sample" action="{{ route('admin.categoria.store') }}"  method="POST" >
                         @csrf
           
                         <div class="row">
-                            <h3 for="nome" style="margin: 2% 0;">Dados do Atleta</h3>
+                            <h3 for="nome" style="margin: 2% 0;">Detalhes do Atleta</h3>
                         </div>
 
                         <div class="row">
@@ -57,7 +56,7 @@
                         </div>
 
                         <div class="row">
-                            <h3 for="nome" style="margin: 2% 0;">Dados da Inscrição para o campeonato</h3>
+                            <h3 for="nome" style="margin: 2% 0;">Detalhes da Inscrição</h3>
                         </div>
 
                         <div class="row">
@@ -76,8 +75,6 @@
                                   </div>
                             </div>
                         </div>
-
-                       
                         
                         <div class="row">
                             <div class="col-lg-6">
@@ -101,7 +98,6 @@
                                     <label for="data_inicio_inscricoes">Status do Pagamento</label>
                                     <input type="text" class="form-control" disabled value="{{$inscricao->status_pagamento}}">
                                   </div>
-                    
                             </div>
                        
                             <div class="col-lg-6">
@@ -112,23 +108,19 @@
                             </div>
                         </div>
                         
-                        
-                       
-                      
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                             </div>
                             <div class="col-lg-6">
+                                <button type="button" class="btn btn-success btn-fw" style="width: 100%;">
+                                    <a href="{{ route( 'admin.inscricoes.gerar-pdf', $inscricao->id ) }}" style="">
+                                        GERAR PDF                                       
+                                    </a>    
+                                </button>
+                            </div>
+                            <div class="col-lg-3">
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-lg-6">
-                            </div>
-                            <div class="col-lg-6">
-                            </div>
-                        </div>
-
                       </form>
                 </div>
             </div>

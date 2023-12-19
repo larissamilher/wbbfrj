@@ -8,6 +8,8 @@ use App\Models\AtletaXCampeonato;
 use App\Models\Campeonato;
 use App\Exports\ListagemExport;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
+use Illuminate\Support\Facades\View;
 
 class InscricoesController extends Controller
 {
@@ -36,12 +38,25 @@ class InscricoesController extends Controller
         return Excel::download(new ListagemExport($campeonatoId), $nomeCampeonato->nome . '.xlsx');
     }
 
-    public function detalhes($id){
+    public function detalhes($id)
+    {
+        $inscricao = AtletaXCampeonato::with(['campeonato', 'categoria', 'atleta'])->find($id); 
+        return view('admin.inscricoes.detalhes', compact("inscricao"));
+    }
+
+    public function gerarPdf($id){
 
         $inscricao = AtletaXCampeonato::with(['campeonato', 'categoria', 'atleta'])->find($id); 
 
-        // dd($inscricao);
+        // return view('admin.inscricoes.detalhes-pdf', compact("inscricao"));
 
-        return view('admin.inscricoes.detalhes', compact("inscricao"));
+        $pdfView = View::make('admin.inscricoes.detalhes-pdf',  ['inscricao' => $inscricao])->render();
+
+        $pdf = PDF::loadHTML($pdfView);
+
+        return $pdf->download($inscricao->codigo.'.pdf');
+
     }
+
+
 }
