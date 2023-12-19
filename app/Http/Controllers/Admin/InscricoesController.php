@@ -48,13 +48,16 @@ class InscricoesController extends Controller
 
         $inscricao = AtletaXCampeonato::with(['campeonato', 'categoria', 'atleta'])->find($id); 
 
-        // return view('admin.inscricoes.detalhes-pdf', compact("inscricao"));
-
         $pdfView = View::make('admin.inscricoes.detalhes-pdf',  ['inscricao' => $inscricao])->render();
 
         $pdf = PDF::loadHTML($pdfView);
 
-        return $pdf->download($inscricao->codigo.'.pdf');
+        $nome = $inscricao->codigo;
+
+        if(empty($nome))
+            $nome = 'ficha-inscricao';
+
+        return $pdf->download($nome.'.pdf');
 
     }
 
