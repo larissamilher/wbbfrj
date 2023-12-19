@@ -31,8 +31,6 @@ class CategoriasController extends Controller
             'class' => '',
         ];
 
-        $categorias = Categoria::all();
-
         try {
 
             $categoria = Categoria::find($id);
@@ -40,7 +38,6 @@ class CategoriasController extends Controller
             if ($categoria) 
                 $categoria->delete();
             
-
             $response['message'] = 'Categoria deletada com sucesso!';
             $response['class']= 'msg-sucesso';
         }

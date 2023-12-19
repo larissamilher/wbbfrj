@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Campeonato;
-
+use Carbon\Carbon;
 class CampeonatosController extends Controller
 {
     public function index(){
@@ -19,11 +19,46 @@ class CampeonatosController extends Controller
         return view('admin.campeonatos.novo');
     }
 
+    public function edit($id){
+        $campeonato = Campeonato::find($id);
+        return view('admin.campeonatos.novo', compact('campeonato'));
+    }
+
+    public function delete($id){
+
+        $response = [
+            'success' => true,
+            'message' => '',
+            'class' => '',
+        ];
+
+        try {
+
+            $campeonato = Campeonato::find($id);
+
+            if ($campeonato) 
+                $campeonato->delete();            
+
+            $response['message'] = 'Campeonato deletado com sucesso!';
+            $response['class']= 'msg-sucesso';
+        }
+        catch (Exception $e) {
+            Log::error($e);
+            $response =  [
+                'success' => false,
+                'message' => 'Ops! Parece que houve. Por favor, tente novamente mais tarde.',
+                'class' => 'msg-error',
+            ];
+        }
+    
+        return redirect()->route('admin.campeonatos')->with('response', $response);
+    }
+
     public function store(Request $request){
 
         $response = [
             'success' => true,
-            'message' => 'Campeonato criado com sucesso!',
+            'message' => '',
             'class' => 'msg-sucesso',
         ];
 
@@ -33,10 +68,17 @@ class CampeonatosController extends Controller
             unset($dados['_token']);
 
             $dados['valor'] = str_replace(',', '.', $dados['valor']);
-            Campeonato::create($dados);
+
+            $dados['data_inicio_inscricao'] = Carbon::createFromFormat('d/m/Y', $request->input('data_inicio_inscricao'))->format('Y-m-d');
+            $dados['data_final_inscricao'] = Carbon::createFromFormat('d/m/Y', $request->input('data_final_inscricao'))->format('Y-m-d');
+            $dados['data_campeonato'] = Carbon::createFromFormat('d/m/Y', $request->input('data_campeonato'))->format('Y-m-d');
+
+            if (!empty($dados['id'])) 
+                $categoria = Campeonato::updateOrCreate(['id' => $dados['id']], $dados);
+            else 
+                Campeonato::create($dados);
                     
-            $mensagem = 'Campeonato criado com sucesso!';
-            $class= 'msg-sucesso';
+            $response['message'] = 'Campeonato salvo com sucesso!';
         }
         catch (Exception $e) {
             Log::error($e);

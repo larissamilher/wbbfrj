@@ -66,27 +66,4 @@
         </div>
     </div>
 
-    <style>
-        .btn-acao{
-            color: #fff;
-            font-size: 16px;
-            border-radius: 4px;
-            padding: 4%;
-        }
-
-        .t-action a,.t-action a:hover {
-            color: #fff; 
-            text-decoration: none; 
-        }
-
-        .btn-edit{
-            background-color: #0066b3;
-            border-color: #0066b3;
-            margin-right: 3%;
-        }
-        .btn-delete{
-            background-color: #ff1313;
-            border-color: #ff1313;
-        }
-    </style>
 @endsection
