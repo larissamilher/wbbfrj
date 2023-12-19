@@ -71,4 +71,33 @@ class UsuariosController extends Controller
         return view('admin.usuarios.novo', compact('response'));
     }
     
+    public function delete($id){
+
+        $response = [
+            'success' => true,
+            'message' => '',
+            'class' => '',
+        ];
+
+        try {
+
+            $user = User::find($id);
+
+            if ($user) 
+                $user->delete();
+            
+            $response['message'] = 'Usuário deletado com sucesso!';
+            $response['class']= 'msg-sucesso';
+        }
+        catch (Exception $e) {
+            Log::error($e);
+            $response =  [
+                'success' => false,
+                'message' => 'Ops! Parece que houve. Por favor, tente novamente mais tarde.',
+                'class' => 'msg-error',
+            ];
+        }
+    
+        return redirect()->route('admin.usuarios')->with('response', $response);
+    }
 }

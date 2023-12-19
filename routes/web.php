@@ -75,6 +75,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::get('/', [UsuariosController::class, 'index'])->name('admin.usuarios');
         Route::get('/novo', [UsuariosController::class, 'create'])->name('admin.usuario.novo');
         Route::post('/store', [UsuariosController::class, 'store'])->name('admin.usuario.store');
+        Route::get('/delete/{id}', [UsuariosController::class, 'delete'])->name('admin.usuario.delete');
     });
 
 });
