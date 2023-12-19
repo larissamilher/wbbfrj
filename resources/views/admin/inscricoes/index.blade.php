@@ -53,7 +53,7 @@
                                                 <i class="mdi mdi-eye"></i>
                                             </span>                                            
                                         </a>
-                                        <a href="{{ route( 'admin.campeonato.edit', $inscricao->id ) }}" class="btn-acao btn-edit" title="Adicionar Peso Atleta">
+                                        <a href="{{ route( 'admin.inscricoes.add-peso', $inscricao->id ) }}" class="btn-acao btn-edit" title="Adicionar Peso Atleta">
                                             <span class="icon-bg">
                                                 <i class="mdi mdi-weight"></i>
                                             </span>                                            

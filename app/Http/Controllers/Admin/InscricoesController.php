@@ -65,5 +65,18 @@ class InscricoesController extends Controller
 
     }
 
+    public function addPeso($id)
+    {
+        $inscricao = AtletaXCampeonato::with(['campeonato', 'categoria', 'atleta'])->find($id); 
+        return view('admin.inscricoes.add-peso', compact("inscricao"));
+    }
+
+    public function addPesoStore(Request $request)
+    {
+        $inscricao = AtletaXCampeonato::with(['campeonato', 'categoria', 'atleta'])->find($id); 
+        return view('admin.inscricoes.add-peso', compact("inscricao"));
+    }
+
+    
 
 }

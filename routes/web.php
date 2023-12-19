@@ -51,6 +51,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::post('/extrair-listagem-acao', [InscricoesController::class, 'extrairListagem'])->name('admin.inscricoes.extrair-listagem-acao');
         Route::get('/detalhes/{id}', [InscricoesController::class, 'detalhes'])->name('admin.inscricoes.detalhes');
         Route::get('/gerar-pdf/{id}', [InscricoesController::class, 'gerarPdf'])->name('admin.inscricoes.gerar-pdf');
+        Route::get('/add-peso/{id}', [InscricoesController::class, 'addPeso'])->name('admin.inscricoes.add-peso');
+        Route::post('/add-peso', [InscricoesController::class, 'addPesoStore'])->name('admin.inscricoes.add-peso-store');
 
     });    
 
