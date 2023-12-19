@@ -62,6 +62,9 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     Route::prefix('categorias')->group(function () {
         Route::get('/', [CategoriasController::class, 'index'])->name('admin.categorias');
         Route::get('/novo', [CategoriasController::class, 'create'])->name('admin.categoria.novo');
+        Route::get('/edit/{id}', [CategoriasController::class, 'edit'])->name('admin.categoria.edit');
+        Route::get('/delete/{id}', [CategoriasController::class, 'delete'])->name('admin.categoria.delete');
+
         Route::post('/store', [CategoriasController::class, 'store'])->name('admin.categoria.store');
     });
 

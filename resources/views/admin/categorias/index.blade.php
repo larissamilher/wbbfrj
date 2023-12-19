@@ -10,12 +10,19 @@
                 <div class="card-body" style="overflow-x: auto;">
                     <h4 class="card-title">Campeonatos</h4>
                     </p>
+                    @if (session('response'))
+                    <p class="msg {{ session('response.class') }}">
+                        {{ session('response.message') }}
+                    </p>
+                    @endif
+
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th> Nome </th>
                                 <th> Gênero </th>
                                 <th> Ativa </th>
+                                <th> Ação </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,6 +45,18 @@
                                           Não 
                                       @endif
                                     </td>
+                                    <td class="t-action">
+                                        <a href="{{ route( 'admin.categoria.edit', $categoria->id ) }}" class="btn-acao btn-edit" style="">
+                                            <span class="icon-bg">
+                                                <i class="mdi mdi-lead-pencil"></i>
+                                            </span>                                            
+                                        </a>
+                                        <a href="{{ route( 'admin.categoria.delete', $categoria->id ) }}" onclick="return confirm('Tem certeza que deseja excluir?')" class="btn-acao btn-delete">
+                                            <span class="icon-bg">
+                                                <i class="mdi mdi-delete"></i>
+                                            </span>     
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -46,4 +65,28 @@
             </div>
         </div>
     </div>
+
+    <style>
+        .btn-acao{
+            color: #fff;
+            font-size: 16px;
+            border-radius: 4px;
+            padding: 4%;
+        }
+
+        .t-action a,.t-action a:hover {
+            color: #fff; 
+            text-decoration: none; 
+        }
+
+        .btn-edit{
+            background-color: #0066b3;
+            border-color: #0066b3;
+            margin-right: 3%;
+        }
+        .btn-delete{
+            background-color: #ff1313;
+            border-color: #ff1313;
+        }
+    </style>
 @endsection
