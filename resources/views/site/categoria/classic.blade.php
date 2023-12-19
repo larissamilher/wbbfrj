@@ -13,8 +13,8 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: center;">
-                    <img src="{{ asset('img/categorias/classic.jpeg') }}" alt="" style="max-width: 550px;">                  
+                <div class="col-lg-12 col-md-12 col-sm-12 categorias" style="text-align: center;">
+                    <img src="{{ asset('img/categorias/classic.jpeg') }}" alt="">                  
                 </div>     
             </div>
         </div>
