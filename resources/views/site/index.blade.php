@@ -90,7 +90,7 @@
     </section>
     <!-- sobre-2 Area End -->
     <!--? APOIADORES Area Start -->
-    <section class="services-area pt-100 pb-150 section-bg" data-background="{{ asset('img/gallery/section_bg01.png') }}">
+    {{-- <section class="services-area pt-100 pb-150 section-bg" data-background="{{ asset('img/gallery/section_bg01.png') }}">
         <!--? Want To work -->
         <section class="wantToWork-area w-padding">
             <div class="container">
@@ -141,7 +141,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- APOIADORES Area End -->
     
     {{-- <!--? Want To work -->
