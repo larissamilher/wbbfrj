@@ -136,7 +136,7 @@ class InscricaoController extends Controller
                 $clienteAsaas = PagamentoService::createCliente($dadosCliente);
 
                 if(!isset($clienteAsaas->id))
-                    throw new \Exception('Ops! Houve um erro interno. Por favor, tente novamente mais tarde. Se o problema persistir, entre em contato conosco para obter assistência. Lamentamos qualquer inconveniente.');
+                    throw new \Exception('Ops! Houve um erro interno. Por favor, tente novamente mais tarde. Lamentamos qualquer inconveniente.');
                
                 $clienteAsaasId = $clienteAsaas->id;
             }
