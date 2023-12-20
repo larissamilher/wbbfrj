@@ -317,11 +317,11 @@
                                 <!-- Blog date -->
                                 <div class="blog-date text-center">
                                     <span>24</span>
-                                    <p>Nov</p>
+                                    <p>Março</p>
                                 </div>
                             </div>
                             <div class="blog-cap">
-                                <span>Campeonato XPTO</span>
+                                <span>Campeonato Estrantes Premium - Resende Rj</span>
                                 <h3><a href="{{ route('campeonatos') }}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </a></h3>
                             </div>
                         </div>
