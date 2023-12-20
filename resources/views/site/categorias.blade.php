@@ -8,7 +8,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="section-tittle">
                             <span>Categorias</span>
-                            <h2 style="text-align: center;">masculino</h2>
+                            <h2 style="text-align: center;">Masculina</h2>
                         </div>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                 <div class="row align-items-end justify-content-between">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="section-tittle">
-                            <h2 style="text-align: center;">feminina</h2>
+                            <h2 style="text-align: center;">Feminina</h2>
                         </div>
                     </div>
                 </div>
