@@ -15172,3 +15172,7 @@ dl {
     background-color: #ff1313;
     border-color: #ff1313;
 }
+
+select{
+  height: 49px;
+}
