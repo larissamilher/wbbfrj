@@ -62,13 +62,6 @@
 
                         <tr class="bg-white">
                             <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-900">
-                                <strong>CPF: </strong>
-                                {{$inscricao->atleta->cpf}}
-                            </td>                   
-                        </tr>
-
-                        <tr class="bg-white">
-                            <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-900">
                                <strong>Data de Nascimento: </strong>
                                {{ date("d/m/Y", strtotime( $inscricao->atleta->data_nascimento))}}
                             </td>                    
