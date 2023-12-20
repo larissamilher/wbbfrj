@@ -77,6 +77,9 @@
                                                     <option value="4" data-valor=" 4 * {{ number_format(($campeonato->valor / 4) * (1 + 0.0249 * 4) + 0.49, 2, '.', '.') }}">
                                                         4 x R${{ number_format(($campeonato->valor / 4) * (1 + 0.0249 * 4) + 0.49, 2, ',', '.') }} *com juros
                                                     </option>
+                                                    <option value="5" data-valor=" 5 * {{ number_format(($campeonato->valor / 5) * (1 + 0.0249 * 5) + 0.49, 2, '.', '.') }}">
+                                                        5 x R${{ number_format(($campeonato->valor / 5) * (1 + 0.0249 * 5) + 0.49, 2, ',', '.') }} *com juros
+                                                    </option>
                                                 </select>
                                             </div>
                                         </div>    
