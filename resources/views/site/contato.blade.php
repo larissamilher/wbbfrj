@@ -60,4 +60,13 @@
             </div>
         </div>
     </section>
+
+    <style>
+         @media screen and (max-device-width: 800px) {
+            .container{
+                margin-top: 15%;
+
+            }
+        }
+    </style>
 @endsection
