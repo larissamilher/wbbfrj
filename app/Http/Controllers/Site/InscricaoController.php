@@ -218,7 +218,9 @@ class InscricaoController extends Controller
                     break;
             }
 
-        } catch (\Exception $e) {                
+        } catch (\Exception $e) {    
+            Log::error($e);
+
             $retorno = [
                 'success' => false,
                 'message' =>  $e->getMessage(),
