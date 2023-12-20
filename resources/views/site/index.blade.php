@@ -321,8 +321,8 @@
                                 </div>
                             </div>
                             <div class="blog-cap">
-                                <span>Campeonato Estrantes Premium - Resende Rj</span>
-                                <h3><a href="{{ route('campeonatos') }}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </a></h3>
+                                {{-- <span>Campeonato Estrantes Premium - Resende Rj</span> --}}
+                                <h3><a href="{{ route('campeonatos') }}">Campeonato Estrantes Premium - Resende Rj </a></h3>
                             </div>
                         </div>
                     </div>
@@ -334,13 +334,13 @@
                                 <img src="{{ asset('img/gallery/blog2.png') }}" alt="">
                                 <!-- Blog date -->
                                 <div class="blog-date text-center">
-                                    <span>24</span>
-                                    <p>Nov</p>
+                                    <span>28</span>
+                                    <p>Abril</p>
                                 </div>
                             </div>
                             <div class="blog-cap">
-                                <span>Campeonato XPTO</span>
-                                <h3><a href="{{ route('campeonatos') }}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </a></h3>
+                                {{-- <span>Campeonato XPTO</span> --}}
+                                <h3><a href="{{ route('campeonatos') }}">Campeonato Estadual - <br> Quatis Rj </a></h3>
                             </div>
                         </div>
                     </div>
