@@ -107,6 +107,8 @@ class InscricaoController extends Controller
         try {
             $dadosPagamento = $request->input();
 
+            dd($dadosPagamento,  $request->get('parcelamento'));
+
             $validade = explode('/', $request->get('validade_cartao'));
 
             $atleta = session()->get('atleta');
@@ -148,7 +150,7 @@ class InscricaoController extends Controller
                 'billingType' => 'CREDIT_CARD',
                 'value' => number_format( $campeonato->valor, 2, '.', '.'),
                 'dueDate' => date('Y-m-d'),
-                'installmentCount' => 1,
+                'installmentCount' => $request->get('parcelamento'),
                 'totalValue' => number_format( $campeonato->valor, 2, '.', '.'),
                 'remoteIp' =>$request->ip(),
                 'creditCard' => [
