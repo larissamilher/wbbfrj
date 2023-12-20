@@ -16,6 +16,16 @@ use Illuminate\Support\Facades\Log;
 
 class SiteController extends Controller
 {
+    public function index()
+    {      
+        $campeonato = Campeonato::where('data_inicio_inscricao', '<=', now())
+        ->where('data_final_inscricao', '>=', now())
+        ->orderByRaw('ABS(TIMESTAMPDIFF(SECOND, data_campeonato, NOW()))')
+        ->first();
+
+        return view('site.index', compact([ 'campeonato' ]));        
+    }
+
     public function contato(Request $request)
     {       
         Mail::to('contato@wbbfrj.com')->send(new Contato($request->input()));

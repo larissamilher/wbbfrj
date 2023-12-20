@@ -418,10 +418,84 @@
     </section>
     <!-- Contact form End -->
 
+
+    @if($campeonato)
+        <div id="pop-up-campeonato" class="modal">
+            <div class="modal-content">
+                <section style="text-align: center">
+                    <span class="close" data-modal-close="#pop-up-campeonato">&times;</span>
+                        
+                        
+                    <h1>DESAFIE SEUS LIMITES NO <br> <strong> {{strtoupper($campeonato->nome)}}</strong>!</h1>
+
+                    <p>
+                        Convidamos você a participar do nosso Campeonato, 
+                        uma oportunidade única para mostrar sua força, dedicação e paixão pelo esporte.
+                    </p>
+                    
+                    <br>
+
+                    <h1>INSCRIÇÕES ABERTAS!</h1>
+
+                    <div class="submit-info click-aqui">
+                        <a href="{{route('inscricao')}}" class="btn">Clique aqui e inscreva-se</a>
+                    </div>
+
+                    <br><br>
+
+                    <p>
+                        Venha fazer parte deste evento épico. 
+                        <br>Mostre ao mundo sua determinação e conquiste o palco do fisiculturismo!
+                        <br> Não perca essa chance de brilhar. 
+                        <br> Reserve seu lugar hoje mesmo e junte-se a nós para um dia de pura energia e motivação!
+                    </p>
+
+                    <p>
+                        <strong> Seu desafio começa aqui. Até lá!</strong>
+                        <br> Equipe WBBF Rio de Janeiro
+                    </p>
+                </section>
+
+            </div>
+        </div>
+    @endif;
+
+    <script>
+        $(document).ready(function () {
+            $('#pop-up-campeonato').modal({
+                fadeDuration: 250
+            });
+        });
+    </script>
+
     <style>
+        .modal-content {
+            width: 50%;
+            margin: auto;
+            margin-top: 10%; /* ajuste conforme necessário */
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border-radius: 4px;
+        }
+
         .header-transparent{
             background-color: none !important;
         }
+        @keyframes blinkAndGrowShrink {
+            0%, 50% {
+                color: #ff1313;
+                transform: scale(1);
+            }
+            25%, 75% {
+                color: #000;
+                transform: scale(1.2);
+            }
+        }
 
+        .click-aqui {
+            animation: blinkAndGrowShrink 2s infinite;
+            /* Adicione outras propriedades CSS conforme necessário */
+        }
     </style>
 @endsection

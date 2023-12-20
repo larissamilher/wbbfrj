@@ -82,10 +82,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
 
 });
 
-
-Route::get('/', function () {
-    return view('site.index');
-})->name('home');
+Route::get('/', [SiteController::class, 'index'])->name('home');
 
 Route::prefix('categorias')->group(function () {
     
