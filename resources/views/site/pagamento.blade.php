@@ -65,16 +65,18 @@
                                             <div class="form-box email-icon mb-30">
                                                 <label for="parcelamento">Plano de parcelamento  <span>*</span> </label>
                                                 <select name="parcelamento" id="parcelamento">
-                                                    <option value="1" selected data-valor="{{  number_format( $campeonato->valor, 2, ',', '.')}}"> 1 x R${{  number_format( $campeonato->valor, 2, ',', '.')}} *sem juros</option>
-                                                    <option value="2" data-valor="
-                                                    2 * {{ number_format((($campeonato->valor / 2) * (1 + 0.0249 * 2) + 0.49), 2, '.', '.') }}
-                                                    "> 2 x R${{ number_format((($campeonato->valor / 2) * (1 + 0.0249 * 2) + 0.49), 2, ',', '.') }} *com juros</option>
-                                                    <option value="3" data-valor="
-                                                    3 * {{ number_format(($campeonato->valor / 3) * (1 + 0.0249 * 3) + 0.49, 2, '.', '.') }}
-                                                    "> 3 x R${{ number_format(($campeonato->valor / 3) * (1 + 0.0249 * 3) + 0.49, 2, ',', '.') }} *com juros</option>
-                                                    <option value="4" data-valor="
-                                                    4 * {{ number_format(($campeonato->valor / 4) * (1 + 0.0249 * 4) + 0.49, 2, '.', '.') }} 
-                                                    "> 4 x R${{ number_format(($campeonato->valor / 4) * (1 + 0.0249 * 4) + 0.49, 2, ',', '.') }} *com juros</option>
+                                                    <option value="1" selected data-valor="{{  number_format( $campeonato->valor, 2, ',', '.')}}"> 
+                                                        1 x R${{  number_format( $campeonato->valor, 2, ',', '.')}} *sem juros
+                                                    </option>
+                                                    <option value="2" data-valor="2 * {{ number_format((($campeonato->valor / 2) * (1 + 0.0249 * 2) + 0.49), 2, '.', '.') }}"> 
+                                                        2 x R${{ number_format((($campeonato->valor / 2) * (1 + 0.0249 * 2) + 0.49), 2, ',', '.') }} *com juros
+                                                    </option>
+                                                    <option value="3" data-valor="3 * {{ number_format(($campeonato->valor / 3) * (1 + 0.0249 * 3) + 0.49, 2, '.', '.') }}">
+                                                        3 x R${{ number_format(($campeonato->valor / 3) * (1 + 0.0249 * 3) + 0.49, 2, ',', '.') }} *com juros
+                                                    </option>
+                                                    <option value="4" data-valor=" 4 * {{ number_format(($campeonato->valor / 4) * (1 + 0.0249 * 4) + 0.49, 2, '.', '.') }}">
+                                                        4 x R${{ number_format(($campeonato->valor / 4) * (1 + 0.0249 * 4) + 0.49, 2, ',', '.') }} *com juros
+                                                    </option>
                                                 </select>
                                             </div>
                                         </div>    
@@ -131,7 +133,7 @@
                 resultado = resultado.toFixed(2).replace('.', ',');
 
                 $("#label-valor-compra").html('R$ ' + resultado);
-                
+
             });        
         });
 
