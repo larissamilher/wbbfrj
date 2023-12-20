@@ -181,8 +181,8 @@
                                 </div>
                                 <!-- Footer Social -->
                                 <div class="footer-social ">
-                                    <a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                    {{-- <a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a> --}}
+                                    <a href="https://www.instagram.com/wbbfrjoficial/"><i class="fab fa-instagram"></i></a>
                                 </div>
                             </div>
                         </div>
