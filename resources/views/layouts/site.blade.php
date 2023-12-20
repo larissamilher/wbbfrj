@@ -77,30 +77,30 @@
                                         <ul id="navigation">
                                             <li><a href="{{ route('home') }}">Início</a></li>
                                             <li><a href="{{ route('categorias') }}">Categorias</a></li>
-                                            <li>
+                                            {{-- <li>
                                                 <a href="{{ route('quem-somos') }}">Quem Somos</a>
                                                 <ul class="submenu">
                                                     <li><a href="{{ route('comissao') }}">Comissão Diretiva</a></li>
                                                 </ul>
-                                            </li>
-                                            <li><a href="{{ route('filiacao') }}">Filiação</a></li>
+                                            </li> --}}
+                                            {{-- <li><a href="{{ route('filiacao') }}">Filiação</a></li> --}}
                                             <li>
                                                 <a href="{{ route('campeonatos') }}">Campeonatos</a>
                                                 <ul class="submenu">
                                                     <li><a href="{{ route('calendario') }}">Calendário</a></li>
-                                                    <li><a href="{{ route('como-competir') }}">Como competir na WBBF</a></li>
-                                                    <li><a href="{{ route('backstage-anual') }}">Backstage Anual</a></li>
+                                                    {{-- <li><a href="{{ route('como-competir') }}">Como competir na WBBF</a></li> --}}
+                                                    {{-- <li><a href="{{ route('backstage-anual') }}">Backstage Anual</a></li> --}}
                                                     <li><a href="{{ route('inscricao') }}">Inscrições</a></li>
-                                                    <li>
+                                                    {{-- <li>
                                                         <a href="#">Resultados</a>
                                                         <ul class="submenu">
                                                             <li><a href="{{ route('resultado-2023') }}">2023</a></li>
                                                         </ul>
-                                                    </li>
+                                                    </li> --}}
                                                 </ul>
                                             </li>
                                             <li>
-                                                <a href="{{ route('educacao') }}">Educação</a>
+                                                <a href="#">Educação</a>
                                                 <ul class="submenu">
                                                     <li><a href="{{ route('curso-arbitros') }}">Curso Formação de Árbitros</a></li>
                                                 </ul>

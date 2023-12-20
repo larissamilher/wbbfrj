@@ -75,14 +75,15 @@
                             Aliquam vulputate mauris ac lectus sodales rutrum. 
                             Vestibulum sed dui pharetra, viverra diam vel, blandit velit. 
                             Aliquam vulputate mauris ac lectus sodales rutrum. 
+                            Vestibulum sed dui pharetra, viverra diam vel, blandit velit. 
+                            Aliquam vulputate mauris ac lectus sodales rutrum. 
+                            Vestibulum sed dui pharetra, viverra diam vel, blandit velit. 
+                            Aliquam vulputate mauris ac lectus sodales rutrum. 
                         </p>
                         <p class="mb-65 pera-bottom">
-                            Vestibulum sed dui pharetra, viverra diam vel, blandit velit. 
-                            Aliquam vulputate mauris ac lectus sodales rutrum. 
-                            Vestibulum sed dui pharetra, viverra diam vel, blandit velit. 
-                            Aliquam vulputate mauris ac lectus sodales rutrum. 
+                            
                         </p>
-                        <a href="{{route('quem-somos')}}" class="btn">LER MAIS</a>
+                        {{-- <a href="{{route('quem-somos')}}" class="btn">LER MAIS</a> --}}
                     </div>
                 </div>
             </div>
