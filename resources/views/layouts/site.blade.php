@@ -144,7 +144,7 @@
                                 <div class="footer-tittle">
                                     <h4>WBBF</h4>
                                     <ul>
-                                        <li><a href="{{ route('quem-somos') }}">Quem Somos</a></li>
+                                        {{-- <li><a href="{{ route('quem-somos') }}">Quem Somos</a></li> --}}
                                         <li><a href="{{ route('contato') }}">Contato</a></li>
                                         <li><a href="{{ route('curso-arbitros') }}"> Curso Formação de Árbitros </a></li>
                                         <li><a href="{{ route('categorias') }}"> Categorias </a></li>
