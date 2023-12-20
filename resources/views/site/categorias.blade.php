@@ -21,7 +21,7 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-4">
                         <div class="box snake mb-30">
-                            <div class="gallery-img small-img" style="background-image: url({{ asset('img/gallery/team1.png') }});"></div>
+                            <div class="gallery-img small-img" style="background-image: url({{ asset('img/gallery/homem1.jpg') }});"></div>
                             <div class="overlay">
                                 <div class="overlay-content">
                                     <a href="{{ route('categoria.bodybuilder') }}"><i class="ti-plus"></i></a>
@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4">
                         <div class="box snake mb-30">
-                            <div class="gallery-img small-img" style="background-image: url({{ asset('img/gallery/team3.png') }});"></div>
+                            <div class="gallery-img small-img" style="background-image: url({{ asset('img/gallery/homem2.jpg') }});"></div>
                             <div class="overlay">
                                 <div class="overlay-content">
                                     <a href="{{ route('categoria.mens_physique') }}"><i class="ti-plus"></i></a>
@@ -65,18 +65,7 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4">
                         <div class="box snake mb-30">
-                            <div class="gallery-img small-img" style="background-image: url({{ asset('img/gallery/team2.png') }});"></div>
-                            <div class="overlay">
-                                <div class="overlay-content">
-                                    <a href="{{ route('categoria.super_body') }}"><i class="ti-plus"></i></a>
-                                    <h3>SUPER BODY</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4">
-                        <div class="box snake mb-30">
-                            <div class="gallery-img small-img" style="background-image: url({{ asset('img/gallery/team3.png') }});"></div>
+                            <div class="gallery-img small-img" style="background-image: url({{ asset('img/gallery/homem3.jpg') }});"></div>
                             <div class="overlay">
                                 <div class="overlay-content">
                                     <a href="{{ route('categoria.up_shape') }}"><i class="ti-plus"></i></a>
@@ -85,6 +74,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="box snake mb-30">
+                            <div class="gallery-img small-img" style="background-image: url({{ asset('img/gallery/about2.png') }});"></div>
+                            <div class="overlay">
+                                <div class="overlay-content">
+                                    <a href="{{ route('categoria.super_body') }}"><i class="ti-plus"></i></a>
+                                    <h3>SUPER BODY</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
                 </div>
             </div>
         </div>
