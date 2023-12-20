@@ -8,7 +8,7 @@ use App\Models\Campeonato;
 use App\Models\AtletaXCampeonato;
 use App\Models\Categoria;
 use App\Models\Atleta;
-
+use PhpOffice\PhpSpreadsheet\Exception;
 
 class AdminController extends Controller
 {

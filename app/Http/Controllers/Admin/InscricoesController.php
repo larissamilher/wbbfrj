@@ -10,6 +10,7 @@ use App\Exports\ListagemExport;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 use Illuminate\Support\Facades\View;
+use PhpOffice\PhpSpreadsheet\Exception;
 
 class InscricoesController extends Controller
 {

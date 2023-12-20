@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CriacaoUsuarioAdmin;
 use Illuminate\Support\Facades\Log;
+use PhpOffice\PhpSpreadsheet\Exception;
 
 class UsuariosController extends Controller
 {

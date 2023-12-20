@@ -5883,3 +5883,7 @@ textarea{
         max-width: 100%;
     }
 }
+
+label span{
+    color: #ff1313;
+}

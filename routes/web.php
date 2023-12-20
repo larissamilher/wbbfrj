@@ -142,6 +142,9 @@ Route::prefix('campeonatos')->group(function () {
         Route::match(['get', 'post'],'/ficha', [InscricaoController::class, 'primeiraEtapaInscricao'])->name('inscricao.store.ficha');
         Route::post('/pagamento', [InscricaoController::class, 'etapaPagamento'])->name('inscricao.pagamento');
 
+        Route::get('/get-dados-cpf/{cpf}', [InscricaoController::class, 'getrDadosCpf'])->name('get-dados-cpf');
+
+
         Route::get('/teste', [InscricaoController::class, 'teste'])->name('teste');
 
     });

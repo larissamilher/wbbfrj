@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ConfirmacaoInscricao;
 use Illuminate\Support\Facades\Log;
-
+use PhpOffice\PhpSpreadsheet\Exception;
 
 class InscricaoController extends Controller
 {
@@ -246,11 +246,42 @@ class InscricaoController extends Controller
             print_r($resultado);
 
         } catch (Exception $e) {
+            Log::error($e);
             $erro = "&resultado=0&resultado_txt=" . urlencode('Erro ao buscar CEP: ' . $e->getMessage());
             print_r($erro);
         }
 
         exit;
+    }
+
+    public function getrDadosCpf($cpf)
+    {
+        $response = [
+            'success' => true,
+            'message' => 'Dados buscados com sucesso'
+        ];
+
+        try{
+            $atleta = Atleta::where('cpf' , str_replace(['.', '-'], '', $cpf))->first();
+    
+            if($atleta){
+                $atleta->rg = implode('.', [substr($atleta->rg, 0, 2), substr($atleta->rg, 2, 3), substr($atleta->rg, 5, 3)]) . '-' . substr($atleta->rg, 8, 1);
+                $atleta->celular = '(' . substr($atleta->celular, 0, 2) . ')' . substr($atleta->celular, 2, 5) . '-' . substr($atleta->celular, 7, 4);
+                $atleta->cep = substr($atleta->cep, 0, 5) . '-' . substr($atleta->cep, 5, 3);
+
+                $response['dados'] = $atleta;
+            }else
+                throw new Exception("cpf não cadastrado");
+
+        }catch (Exception $e) {
+            Log::error($e);
+            return [
+                'success' => false,
+                'message' => 'Ops! Parece que houve um problema ao buscar os horários. Por favor, tente novamente mais tarde.'
+            ];
+        }
+
+        return $response;
     }
 
     public function teste()

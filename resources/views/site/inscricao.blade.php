@@ -24,8 +24,8 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box user-icon mb-30">
-                                        <label for="campeonato">Campeonato</label>
-                                        <select id="campeonato" name="campeonato" class="form-control required">
+                                        <label for="campeonato">Campeonato <span>*</span> </label>
+                                        <select id="campeonato" name="campeonato" class="form-control required-select">
                                             <option value="">Selecione o Campeonato</option>
                                             @foreach($campeonatos as $campeonato)
                                                 <option value="{{$campeonato->id}}">{{$campeonato->nome}}</option>
@@ -36,8 +36,8 @@
 
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box user-icon mb-30">
-                                        <label for="categorias">Categoria</label>
-                                        <select id="categorias" name="categorias" class="form-control required">
+                                        <label for="categorias">Categoria <span>*</span> </label>
+                                        <select id="categorias" name="categorias" class="form-control required-select">
                                             <option value="">Selecione a Categoria</option>                                           
                                         </select>
                                     </div>
@@ -47,37 +47,37 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box user-icon mb-30">
-                                        <label for="nome">Nome</label>
+                                        <label for="nome">Nome <span>*</span> </label>
                                         <input type="text" name="nome" id="nome" placeholder="" class="form-control required">
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-box email-icon mb-30">
-                                        <label for="cpf">CPF</label>
+                                        <label for="cpf">CPF <span>*</span> </label>
                                         <input type="text" name="cpf" id="cpf" placeholder="" class="form-control required">
                                     </div>
                                 </div>   
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-box email-icon mb-30">
-                                        <label for="rg">RG</label>
+                                        <label for="rg">RG <span>*</span> </label>
                                         <input type="text" name="rg" id="rg" placeholder="" class="form-control required">
                                     </div>
                                 </div>       
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-box email-icon mb-30">
-                                        <label for="celular">Celular</label>
+                                        <label for="celular">Celular <span>*</span> </label>
                                         <input type="text" name="celular" id="celular" placeholder="" class="form-control required">
                                     </div>
                                 </div>      
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-box subject-icon mb-30">
-                                        <label for="data_nascimento">Data de Nascimento</label>
+                                        <label for="data_nascimento">Data de Nascimento <span>*</span></label>
                                         <input type="date" name="data_nascimento" id="data_nascimento" placeholder="" class="form-control required">
                                     </div>
                                 </div>                             
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box subject-icon mb-30">
-                                        <label for="email">Email</label>
+                                        <label for="email">Email <span>*</span> </label>
                                         <input type="Email" name="email" id="email" placeholder="" class="form-control required">
                                     </div>
                                 </div>
@@ -86,14 +86,14 @@
 
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-box email-icon mb-30">
-                                        <label for="cep">CEP</label>
+                                        <label for="cep">CEP <span>*</span> </label>
                                         <input type="text" name="cep" id="cep" placeholder="" class="form-control required">
                                     </div>
                                 </div> 
 
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-box email-icon mb-30">
-                                        <label for="estado">Estado</label>
+                                        <label for="estado">Estado <span>*</span> </label>
                                         <input type="text" name="estado" id="estado" placeholder="" class="form-control required"  maxlength="2">
 
                                     </div>
@@ -101,28 +101,28 @@
 
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box email-icon mb-30">
-                                        <label for="cidade">Cidade</label>
+                                        <label for="cidade">Cidade <span>*</span> </label>
                                         <input type="text" name="cidade" id="cidade" placeholder="" class="form-control required">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4 col-md-4">
                                     <div class="form-box email-icon mb-30">
-                                        <label for="bairro">Bairro</label>
+                                        <label for="bairro">Bairro <span>*</span> </label>
                                         <input type="text" name="bairro" id="bairro" placeholder="" class="form-control required">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-2 col-md-2">
                                     <div class="form-box email-icon mb-30">
-                                        <label for="numero">Número</label>
+                                        <label for="numero">Número <span>*</span> </label>
                                         <input type="text" name="numero" id="numero" placeholder="" class="form-control required">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box email-icon mb-30">
-                                        <label for="logradouro">Logradouro</label>
+                                        <label for="logradouro">Logradouro <span>*</span> </label>
                                         <input type="text" name="logradouro" id="logradouro" placeholder="" class="form-control required">
                                     </div>
                                 </div>
@@ -131,6 +131,8 @@
                             @if(isset($errorMessage))
                                 <input type="hidden" id="errorMessage" value="{{$errorMessage}}">
                             @endif
+
+                            <span>* Campos obrigatórios</span>
 
                             <div class="row">
                                 <div class="col-lg-12">                                   
@@ -204,47 +206,39 @@
          
         });
 
-        // $('#estado').on('change',function() {
-        //     $.ajax({
-        //         url: "https://servicodados.ibge.gov.br/api/v1/localidades/estados/"+ $('#estado').val()+ '/municipios',
-        //         type: 'GET',    
-        //         success: function (response) {
-                    
-        //             $('#cidade').empty();                        
-        //             $('#cidade').niceSelect('destroy');
-        //             $('#cidade').append('<option value="">Selecione a Cidade</option>');
-                    
-        //             $.each(response, function(index, cidade) {
-        //                 $('#cidade').append('<option value="' + cidade.nome + '">' + cidade.nome  + '</option>');
-        //             });
-
-        //             $('#cidade').niceSelect();                    
-        //         }
-        //     });
-        // });
-
-
         $('#email').on('change',function() {
             var email = $('#email').val();
             if (!validarEmail(email)) {
-                $('#email').val('')
-                alert('E-mail inválido!');
+                $('#email').val('');
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: 'Insira um E-mail válido!'
+                });
             }
         });
 
         $('#rg').on('change',function() {
             var rg = $('#rg').val();
             if (!validarRg(rg)) {
-                alert('RG inválido!');
-                $('#rg').val('')
+                $('#rg').val('');
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: 'Insira um RG válido!'
+                });
             }             
         });
 
         $('#cpf').on('change',function() {
             var cpf = $('#cpf').val().replace(/\D/g, ''); 
             if (!validarCPF(cpf)) {
-                alert('CPF inválido!');
                 $('#cpf').val('');
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: 'Insira um CPF válido!'
+                });
             } 
         });
 
@@ -292,21 +286,83 @@
             return regex.test(email);
         }
 
-        // $("#inscricao-form").submit(function (event) {
-        //     event.preventDefault();
+        $("#inscricao-form").submit(function (event) {
+            event.preventDefault();
 
-        //     error = false;
+            var error = false;
+            var camposVazios = [];
 
-        //     $(".required").each(function () {
-        //         if ($(this).val() === "") 
-        //             error = true                
-        //     });
+            if ($("#campeonato").val() == '') {
+                error = true;
+                camposVazios.push('Campeonato');
+            }
 
-        //     if(error)
-        //         alert('Preencha os dados obrigatórios!')
-        //     else
-        //         $("#inscricao-form").submit();
-        // });
+            if ($("#categorias").val() == '') {
+                error = true;
+                camposVazios.push('Categoria');
+            }
+
+            $(".required").each(function () {
+                if ($(this).val() === "") {
+                    error = true;
+                    if ($(this).attr('name') == 'data_nascimento')
+                        camposVazios.push('Data de Nascimento');
+                    else
+                        camposVazios.push($(this).attr('name'));
+                }
+            });
+
+            if (error) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: 'Preencha os campos obrigatórios:' + camposVazios.join(', ')
+                });
+            } else {
+                document.getElementById("inscricao-form").submit();
+            }
+        });
+
+        $('#cpf').on('change', function() {
+            var cpf = $(this).val();
+
+            if(cpf){
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "/campeonatos/inscricao/get-dados-cpf/"+ cpf.replace(/[.-]/g, ""),
+                    type: 'GET',    
+                    success: function (retorno) {                       
+                        if (retorno.success) {   
+                            $('#nome').val(retorno.dados.nome);
+                            $('#rg').val(retorno.dados.rg);
+                            $('#celular').val(retorno.dados.celular);
+                            $('#data_nascimento').val(retorno.dados.data_nascimento);
+                            $('#email').val(retorno.dados.email);
+                            $('#cep').val(retorno.dados.cep);
+                            $('#estado').val(retorno.dados.estado);
+                            $('#cidade').val(retorno.dados.cidade);
+                            $('#logradouro').val(retorno.dados.logradouro);
+                            $('#bairro').val(retorno.dados.bairro);
+                            $('#numero').val(retorno.dados.numero);
+                        }else{
+                            $('#nome').val('');
+                            $('#rg').val('');
+                            $('#celular').val('');
+                            $('#data_nascimento').val('');
+                            $('#email').val('');
+                            $('#cep').val('');
+                            $('#estado').val('');
+                            $('#cidade').val('');
+                            $('#logradouro').val('');
+                            $('#bairro').val('');
+                            $('#numero').val('');
+                        }                          
+                    }
+                });
+            }         
+        });
     });
 
     $(document).on('blur', '#inscricao-form input[name="cep"]', function () {
