@@ -422,9 +422,7 @@
     @if($campeonato)
         <div id="pop-up-campeonato" class="modal">
             <div class="modal-content">
-                <section style="text-align: center">
-                    <span class="close" data-modal-close="#pop-up-campeonato">&times;</span>
-                        
+                <section style="text-align: center">                       
                         
                     <h1>DESAFIE SEUS LIMITES NO <br> <strong> {{strtoupper($campeonato->nome)}}</strong>!</h1>
 
@@ -478,7 +476,7 @@
             background-color: #fff;
             border-radius: 4px;
         }
-
+        
         .header-transparent{
             background-color: none !important;
         }
@@ -497,5 +495,13 @@
             animation: blinkAndGrowShrink 2s infinite;
             /* Adicione outras propriedades CSS conforme necessário */
         }
+
+        @media screen and (max-device-width: 800px) {
+            .modal-content{
+                width: 95%;
+            }
+        }
+ 
+    
     </style>
 @endsection
