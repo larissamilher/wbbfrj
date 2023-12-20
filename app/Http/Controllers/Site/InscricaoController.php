@@ -135,8 +135,10 @@ class InscricaoController extends Controller
     
                 $clienteAsaas = PagamentoService::createCliente($dadosCliente);
 
-                if(!isset($clienteAsaas->id))
+                if(!isset($clienteAsaas->id)){
+                    Log::error($clienteAsaas);
                     throw new \Exception('Ops! Houve um erro interno. Por favor, tente novamente mais tarde. Lamentamos qualquer inconveniente.');
+                }
                
                 $clienteAsaasId = $clienteAsaas->id;
             }
@@ -171,8 +173,10 @@ class InscricaoController extends Controller
             if(isset($pagamentoRetorno->errors[0]->code))
                 throw new \Exception( $pagamentoRetorno->errors[0]->description);
             
-            if(!isset($pagamentoRetorno->status))
+            if(!isset($pagamentoRetorno->status)){
+                Log::error($pagamentoRetorno);
                 throw new \Exception('Ops! Houve um erro interno. Por favor, tente novamente mais tarde. Se o problema persistir, entre em contato conosco para obter assistência. Lamentamos qualquer inconveniente.');
+            }
             
             switch($pagamentoRetorno->status){
                 case 'CONFIRMED': 
@@ -195,9 +199,9 @@ class InscricaoController extends Controller
                         'totalValue' => number_format( $campeonato->valor, 2, '.', '.'),
                         'remoteIp' =>$request->ip(),
                         'holderName' =>$request->get('nome_cartao'),
-                        'creditCardNumber' => $pagamentoRetorno->creditCard->creditCardNumber,
-                        'creditCardToken' =>  $pagamentoRetorno->creditCard->creditCardToken,
-                        'creditCardBrand' =>$pagamentoRetorno->creditCard->creditCardBrand
+                        'creditCardNumber' => isset($pagamentoRetorno->creditCard->creditCardNumber) ? $pagamentoRetorno->creditCard->creditCardNumber : '',
+                        'creditCardToken' =>  isset($pagamentoRetorno->creditCard->creditCardToken) ? $pagamentoRetorno->creditCard->creditCardToken : '',
+                        'creditCardBrand' => isset($pagamentoRetorno->creditCard->creditCardBrand) ? $pagamentoRetorno->creditCard->creditCardBrand : ''
                     ]);    
 
                     if(!$atletaXCampeonato)
