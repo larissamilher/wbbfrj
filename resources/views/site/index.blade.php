@@ -65,20 +65,18 @@
                             <h2>WBBF RJ - WORLD BODYBUILDING FEDERATION </h2>
                         </div>
                         <p class="pera-top">
-                            Vestibulum sed dui pharetra, viverra diam vel, blandit velit. 
-                            Aliquam vulputate mauris ac lectus sodales rutrum. 
-                            Vestibulum sed dui pharetra, viverra diam vel, blandit velit. 
-                            Aliquam vulputate mauris ac lectus sodales rutrum. 
-                            Vestibulum sed dui pharetra, viverra diam vel, blandit velit. 
-                            Aliquam vulputate mauris ac lectus sodales rutrum. 
-                            Vestibulum sed dui pharetra, viverra diam vel, blandit velit. 
-                            Aliquam vulputate mauris ac lectus sodales rutrum. 
-                            Vestibulum sed dui pharetra, viverra diam vel, blandit velit. 
-                            Aliquam vulputate mauris ac lectus sodales rutrum. 
-                            Vestibulum sed dui pharetra, viverra diam vel, blandit velit. 
-                            Aliquam vulputate mauris ac lectus sodales rutrum. 
-                            Vestibulum sed dui pharetra, viverra diam vel, blandit velit. 
-                            Aliquam vulputate mauris ac lectus sodales rutrum. 
+                            A World Bodybuilding and Fitness Federation (WBBF) é uma federação internacional dedicada 
+                            à promoção e organização de competições de fisiculturismo e fitness em escala global. 
+                            Fundada com o objetivo de unir atletas de todo o mundo e fornecer uma plataforma para
+                            exibição de suas habilidades físicas, a WBBF busca promover os princípios do fisiculturismo,
+                            incluindo a estética, a simetria muscular, a definição e a apresentação atlética.
+                        </p>
+                        <p class="pera-top">
+                            A WBBF realiza eventos competitivos em várias categorias, abrangendo desde fisiculturismo 
+                            clássico até modalidades mais contemporâneas de fitness. Além disso, a federação se esforça 
+                            para promover um estilo de vida saudável e incentivar a participação de atletas de 
+                            diferentes partes do mundo, promovendo assim a diversidade e a excelência no campo do 
+                            fisiculturismo e fitness.
                         </p>
                         <p class="mb-65 pera-bottom">
                             
