@@ -158,7 +158,7 @@
                                 <div class="footer-tittle">
                                     <h4>SERVIÇOS</h4>
                                     <ul>
-                                        <li><a href="{{ route('curso-arbitros') }}">Destaque-se no fisiculturismo! Inscreva-se no curso de arbitragem e torne-se um especialista.
+                                        <li><a href="{{ route('curso-arbitros') }}">Destaque-se no fisiculturismo! Inscreva-se no nosso workshop e torne-se um especialista.
                                         </a></li>
                                         {{-- <li><a href="#">Travel Insurance</a></li>
                                         <li><a href="#"> Car Insurance</a></li>
