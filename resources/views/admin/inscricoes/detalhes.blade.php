@@ -86,7 +86,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="data_inicio_inscricoes">Categoria</label>
+                                    <label for="data_inicio_inscricoes">SubCategoria</label>
                                     <input type="text" class="form-control" disabled value="{{$inscricao->categoria->nome}}">
                                   </div>
                             </div>

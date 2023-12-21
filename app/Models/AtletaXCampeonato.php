@@ -47,7 +47,7 @@ class AtletaXCampeonato extends Model
 
     public function categoria()
     {
-        return $this->belongsTo(Categoria::class);
+        return $this->belongsTo(SubCategoria::class, 'sub_categoria_id', 'id');
     }
 
     public function atleta()

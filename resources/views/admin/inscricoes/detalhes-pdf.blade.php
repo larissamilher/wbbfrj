@@ -97,7 +97,7 @@
 
                         <tr class="bg-white">
                             <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-900">
-                                <strong>Categoria: </strong>
+                                <strong>SubCategoria: </strong>
                                 {{$inscricao->categoria->nome}}
                             </td>                    
                         </tr>

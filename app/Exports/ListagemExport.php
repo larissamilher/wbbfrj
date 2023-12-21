@@ -26,7 +26,7 @@ class ListagemExport implements FromCollection
             'nome' => 'Nome',
             'cpf' => 'CPF',
             'email' => 'Email', 
-            'categoria' => 'Categoria', 
+            'categoria' => 'SubCategoria', 
             'celular' => 'Celular'
         ];
         
