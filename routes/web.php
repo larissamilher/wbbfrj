@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\CampeonatosController;
 use App\Http\Controllers\Admin\CategoriasController;
 use App\Http\Controllers\Admin\InscricoesController;
 use App\Http\Controllers\Admin\UsuariosController;
-
+use App\Http\Controllers\Admin\SubCategoriasController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -71,6 +71,14 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::get('/edit/{id}', [CategoriasController::class, 'edit'])->name('admin.categoria.edit');
         Route::get('/delete/{id}', [CategoriasController::class, 'delete'])->name('admin.categoria.delete');
         Route::post('/store', [CategoriasController::class, 'store'])->name('admin.categoria.store');
+    });
+
+    Route::prefix('subcategories')->group(function () {
+        Route::get('/', [SubCategoriasController::class, 'index'])->name('admin.subcategorias');
+        Route::get('/novo', [SubCategoriasController::class, 'create'])->name('admin.subcategoria.novo');
+        Route::get('/edit/{id}', [SubCategoriasController::class, 'edit'])->name('admin.subcategoria.edit');
+        Route::get('/delete/{id}', [SubCategoriasController::class, 'delete'])->name('admin.subcategoria.delete');
+        Route::post('/store', [SubCategoriasController::class, 'store'])->name('admin.subcategoria.store');
     });
 
     Route::prefix('usuarios')->group(function () {

@@ -84,6 +84,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{{ route('admin.subcategorias') }}">
+                <span class="icon-bg"><i class="mdi mdi-contacts menu-icon"></i></span>
+                <span class="menu-title">SubCategorias</span>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{{ route('admin.campeonatos') }}">
                 <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
                 <span class="menu-title">Campeonatos</span>
