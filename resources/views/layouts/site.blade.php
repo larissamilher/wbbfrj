@@ -102,7 +102,7 @@
                                             <li>
                                                 <a href="#">Educação</a>
                                                 <ul class="submenu">
-                                                    <li><a href="{{ route('curso-arbitros') }}">Curso Formação de Árbitros</a></li>
+                                                    <li><a href="{{ route('curso-arbitros') }}">WORKSHOP AO FISICULTURISMOs</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="{{ route('contato') }}">Contato</a></li>
@@ -146,7 +146,7 @@
                                     <ul>
                                         {{-- <li><a href="{{ route('quem-somos') }}">Quem Somos</a></li> --}}
                                         <li><a href="{{ route('contato') }}">Contato</a></li>
-                                        <li><a href="{{ route('curso-arbitros') }}"> Curso Formação de Árbitros </a></li>
+                                        <li><a href="{{ route('curso-arbitros') }}"> WORKSHOP AO FISICULTURISMO</a></li>
                                         <li><a href="{{ route('categorias') }}"> Categorias </a></li>
                                     </ul>
                                 </div>
