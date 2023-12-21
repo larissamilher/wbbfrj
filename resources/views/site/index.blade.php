@@ -283,7 +283,7 @@
                     <div class="wantToWork-caption">
                         <h2>
                             Destaque-se no fisiculturismo! 
-                            Inscreva-se no curso de arbitragem e torne-se um especialista.
+                            Inscreva-se no nosso workshop  e torne-se um especialista.
                         </h2>
                     </div>
                 </div>
