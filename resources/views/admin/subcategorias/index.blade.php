@@ -8,7 +8,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body" style="overflow-x: auto;">
-                    <h4 class="card-title">Campeonatos</h4>
+                    <h4 class="card-title">SubCategorias</h4>
                     </p>
                     @if (session('response'))
                     <p class="msg {{ session('response.class') }}">
