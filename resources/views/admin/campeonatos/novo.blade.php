@@ -67,18 +67,23 @@
                               </div>
                             </div>
 
-                            <div class="col-lg-3">
-                               
-
+                            <div class="col-lg-3">     
                               <div class="form-group">
-                                <label for="valor">valor</label>
+                                <label for="valor">Valor</label>
                                 <input type="text" class="form-control" id="valor" name="valor" placeholder="R$ 00,00"
                                     value="{{ isset($campeonato->valor) ? str_replace('.', ',', $campeonato->valor) : '' }}">
                               </div>
-
                             </div>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">     
+                                <div class="form-group">
+                                  <label for="valor_dobra">Valor Dobra</label>
+                                  <input type="text" class="form-control" id="valor_dobra" name="valor_dobra" placeholder="R$ 00,00"
+                                      value="{{ isset($campeonato->valor_dobra) ? str_replace('.', ',', $campeonato->valor_dobra) : '' }}">
+                                </div>
+                              </div>
+
+                            <div class="col-lg-3">
                               <div class="form-group">
                                 <label for="local">Local</label>
                                 <input type="text" class="form-control" id="local" name="local" placeholder=" "

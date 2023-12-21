@@ -20,6 +20,7 @@ class Campeonato extends Model
         'data_final_inscricao',
         'data_campeonato',
         'valor',
+        'valor_dobra',
         'local',
         'descricao'
     ];
