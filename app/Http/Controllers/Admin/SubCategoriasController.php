@@ -23,8 +23,9 @@ class SubCategoriasController extends Controller
     }
 
     public function edit($id){
+        $categorias = Categoria::all();
         $subcategoria = SubCategoria::find($id);
-        return view('admin.subcategorias.novo', compact('subcategoria'));
+        return view('admin.subcategorias.novo', compact('subcategoria','categorias'));
     }
 
     public function delete($id){
