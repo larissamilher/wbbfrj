@@ -12,7 +12,7 @@ use PhpOffice\PhpSpreadsheet\Exception;
 class SubCategoriasController extends Controller
 {
     public function index(){
-        $subcategorias = SubCategoria::all();
+        $subcategorias = SubCategoria::orderBy('nome')->get();
 
         return view('admin.subcategorias.index', compact("subcategorias"));
     }

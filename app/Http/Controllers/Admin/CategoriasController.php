@@ -10,7 +10,7 @@ use PhpOffice\PhpSpreadsheet\Exception;
 class CategoriasController extends Controller
 {
     public function index(){
-        $categorias = Categoria::all();
+        $categorias = Categoria::orderBy('nome')->get();
 
         return view('admin.categorias.index', compact("categorias"));
     }

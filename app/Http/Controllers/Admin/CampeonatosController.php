@@ -12,7 +12,7 @@ class CampeonatosController extends Controller
 {
     public function index(){
 
-        $campeonatos = Campeonato::all();
+        $campeonatos = Campeonato::orderBy('nome')->get();
 
         return view('admin.campeonatos.index', compact('campeonatos'));
     }
