@@ -51,23 +51,25 @@
                                         </select>
                                     </div>
                                 </div>
-
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="form-box user-icon mb-30">
-                                        <label for="nome">Nome <span>*</span> </label>
-                                        <input type="text" name="nome" id="nome" placeholder="" class="form-control required">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                               
+                                
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box email-icon mb-30">
                                         <label for="cpf">CPF <span>*</span> </label>
                                         <input type="text" name="cpf" id="cpf" placeholder="" class="form-control required">
                                     </div>
                                 </div>   
+                               
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-box user-icon mb-30">
+                                        <label for="nome">Nome <span>*</span> </label>
+                                        <input type="text" name="nome" id="nome" placeholder="" class="form-control required">
+                                    </div>
+                                </div>                               
+                               
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box email-icon mb-30">
                                         <label for="rg">RG <span>*</span> </label>

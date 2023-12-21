@@ -95,13 +95,20 @@ class InscricaoController extends Controller
             $atleta['celular'] = str_replace(['(',')', '-', ' '], '', $atleta['celular'] );
             $atleta['cep'] = str_replace(['(',')', '-', ' '], '', $atleta['cep'] );
 
-            $atletaCampeonato = AtletaXcampeonato::join('atletas', 'atletas.id', 'atleta_x_campeonato.atleta_id')
+            $atletaCampeonatoSubCategoria = AtletaXcampeonato::join('atletas', 'atletas.id', 'atleta_x_campeonato.atleta_id')
                 ->where('atletas.cpf' , $atleta['cpf'] )
                 ->where('atleta_x_campeonato.sub_categoria_id' , $atleta['sub_categoria_id'] )->first();
 
-            if($atletaCampeonato) 
+            if($atletaCampeonatoSubCategoria) 
                 throw new \Exception('O(a) atleta com o CPF ' . $atleta['cpf'] . ' já está inscrito(a) no campeonato e na subcategoria escolhidos.');
 
+            $atletaCampeonato = AtletaXcampeonato::join('atletas', 'atletas.id', 'atleta_x_campeonato.atleta_id')
+                ->where('atletas.cpf' , $atleta['cpf'] )
+                ->where('atleta_x_campeonato.campeonato_id' , $atleta['campeonato'] )->first();
+
+            if($atletaCampeonato)
+                $campeonato->valor = $campeonato->valor_dobra;
+            
             session()->put('atleta', $request->input());
         
             unset($atleta['_token']);   
@@ -170,6 +177,13 @@ class InscricaoController extends Controller
                 $clienteAsaasId = $clienteAsaas->id;
             }
             
+            $atletaCampeonato = AtletaXcampeonato::join('atletas', 'atletas.id', 'atleta_x_campeonato.atleta_id')
+            ->where('atletas.cpf' , $cpf )
+            ->where('atleta_x_campeonato.campeonato_id' , $atleta['campeonato'] )->first();
+
+            if($atletaCampeonato)
+                $campeonato->valor = $campeonato->valor_dobra;
+
             $dados = [
                 'customer' => $clienteAsaasId,
                 'billingType' => 'CREDIT_CARD',
