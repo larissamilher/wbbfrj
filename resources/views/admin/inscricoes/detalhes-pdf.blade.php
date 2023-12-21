@@ -115,6 +115,12 @@
                                 {{ $inscricao->peso}}
                             </td>                     
                         </tr>
+                        <tr class="bg-white">
+                            <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-900">
+                                <strong>Número do Atleta: </strong>
+                                {{ $inscricao->numero_atleta}}
+                            </td>                     
+                        </tr>
                     </tbody>
                 </table>
                 <hr>

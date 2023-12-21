@@ -22,20 +22,24 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label for="nome">Adicionar Peso</label>
+                                    <label for="nome">Peso</label>
                                     <input type="hidden" class="form-control" name="inscricao_id" value="{{$inscricao->id}}">
-                                    <input type="text" class="form-control" name="peso">
+                                    <input type="" class="form-control" name="peso" value="{{$inscricao->peso}}">
                                 </div>    
                             </div>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="nome">Número do Atleta</label>
+                                    <input type="text" class="form-control" name="numero_atleta" value="{{$inscricao->numero_atleta}}">                                </div>    
+                            </div>
+
+                            <div class="col-lg-4">
                                 <label for="nome"></label>
                                 <button type="submit" class="btn btn-success btn-fw" style="width: 100%;height: 50px;">
-                                    <a href="{{ route( 'admin.inscricoes.gerar-pdf', $inscricao->id ) }}" style="">
-                                        ADICIONAR PESO                            
-                                    </a>    
+                                    SALVAR
                                 </button>
                             </div>
                         </div>                       

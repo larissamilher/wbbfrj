@@ -100,10 +100,17 @@
                                   </div>
                             </div>
                        
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <div class="form-group">
                                     <label for="data_inicio_inscricoes">Peso Atleta</label>
                                     <input type="text" class="form-control" disabled value="{{ $inscricao->peso}}">
+                                  </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="numero_atleta">Número do Atleta</label>
+                                    <input type="text" class="form-control" disabled value="{{ $inscricao->numero_atleta}}">
                                   </div>
                             </div>
                         </div>
