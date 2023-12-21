@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use DateTime;
 use DB;
 use Reliese\Database\Eloquent\Model as Eloquent;
+use App\Models\Categoria;
 
 class SubCategoria extends Model
 {
@@ -20,4 +21,8 @@ class SubCategoria extends Model
          'ativa'
      ];
     
+     public function categoria()
+     {
+         return $this->belongsTo(Categoria::class);
+     }
 }

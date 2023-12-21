@@ -20,7 +20,7 @@
                         <thead>
                             <tr>
                                 <th> Nome </th>
-                                <th> Gênero </th>
+                                <th> Categoria </th>
                                 <th> Ativa </th>
                                 <th> Ação </th>
                             </tr>
@@ -32,11 +32,7 @@
                                         {{$subcategoria->nome}}
                                     </td>
                                     <td>
-                                      @if($subcategoria->genero == 'm') 
-                                          Masculina 
-                                      @else 
-                                          Feminina 
-                                      @endif
+                                      {{$subcategoria->categoria->nome}}
                                     </td>
                                     <td>
                                       @if($subcategoria->ativa) 
