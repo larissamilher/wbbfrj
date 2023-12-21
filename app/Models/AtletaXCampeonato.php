@@ -20,7 +20,7 @@ class AtletaXCampeonato extends Model
     protected $fillable = [
         'codigo',
         'campeonato_id',
-        'categoria_id',
+        'sub_categoria_id',
         'atleta_id',
         'peso',
         'cupom_id',

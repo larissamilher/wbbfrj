@@ -141,6 +141,7 @@ Route::prefix('campeonatos')->group(function () {
 
         Route::get('/get-dados-cpf/{cpf}', [InscricaoController::class, 'getrDadosCpf'])->name('get-dados-cpf');
 
+        Route::get('/get-sub-categorias-campeonato/{categoriaId}', [InscricaoController::class, 'getSubCategoriasCampeonato']);
 
         Route::get('/teste', [InscricaoController::class, 'teste'])->name('teste');
 

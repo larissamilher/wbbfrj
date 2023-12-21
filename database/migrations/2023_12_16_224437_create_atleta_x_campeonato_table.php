@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('atleta_x_campeonato', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('campeonato_id')->unsigned();
-            $table->integer('categoria_id')->unsigned();
+            // $table->integer('categoria_id')->unsigned();
             $table->integer('atleta_id')->unsigned();
             $table->integer('cupom_id')->unsigned()->nullable();
            
@@ -37,7 +37,7 @@ return new class extends Migration
             $table->softDeletes();  
 
             $table->foreign('campeonato_id')->references('id')->on('campeonatos')->onDelete('no action')->onUpdate('no action');
-            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('no action')->onUpdate('no action');
+            // $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('no action')->onUpdate('no action');
             $table->foreign('cupom_id')->references('id')->on('cupons')->onDelete('no action')->onUpdate('no action');
             $table->foreign('atleta_id')->references('id')->on('atletas')->onDelete('no action')->onUpdate('no action');
 

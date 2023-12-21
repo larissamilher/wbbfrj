@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Campeonato;
-use App\Models\CategoriaCampeonato;
+use App\Models\SubCategoriaCampeonato;
+use App\Models\SubCategoria;
 use App\Models\Categoria;
 use App\Services\PagamentoService;
 use App\Services\GeradorCodigoService;
@@ -36,8 +37,11 @@ class InscricaoController extends Controller
         ];
 
         try{
-            $categorias = CategoriaCampeonato::with('categoria')
-            ->where('campeonato_id', $campeonatoId)
+
+            $categorias = Categoria::Join('sub_categorias', 'sub_categorias.categoria_id', 'categorias.id')
+            ->Join('sub_categorias_campeonato', 'sub_categorias_campeonato.sub_categoria_id', 'sub_categorias.id')
+            ->where('sub_categorias_campeonato.campeonato_id', $campeonatoId)
+            ->select('categorias.*')
             ->get();
     
             $response['dados'] = $categorias;
@@ -52,6 +56,31 @@ class InscricaoController extends Controller
 
         return $response;
     }
+
+    public function getSubCategoriasCampeonato($categoriaId)
+    {
+        $response = [
+            'success' => true,
+            'message' => 'Dados buscados com sucesso'
+        ];
+
+        try{
+            $subcategorias = SubCategoria::where('categoria_id', $categoriaId)
+            ->get();
+    
+            $response['dados'] = $subcategorias;
+
+        }catch (Exception $e) {
+            Log::error($e);
+            return [
+                'success' => false,
+                'message' => 'Ops! Parece que houve um problema ao buscar os horários. Por favor, tente novamente mais tarde.'
+            ];
+        }
+
+        return $response;
+    }
+
 
     public function primeiraEtapaInscricao(Request $request)
     {
@@ -68,10 +97,10 @@ class InscricaoController extends Controller
 
             $atletaCampeonato = AtletaXcampeonato::join('atletas', 'atletas.id', 'atleta_x_campeonato.atleta_id')
                 ->where('atletas.cpf' , $atleta['cpf'] )
-                ->where('atleta_x_campeonato.categoria_id' , $atleta['categorias'] )->first();
+                ->where('atleta_x_campeonato.sub_categoria_id' , $atleta['sub_categoria_id'] )->first();
 
             if($atletaCampeonato) 
-                throw new \Exception('O(a) atleta com o CPF ' . $atleta['cpf'] . ' já está inscrito(a) no campeonato e categoria selecionados.');
+                throw new \Exception('O(a) atleta com o CPF ' . $atleta['cpf'] . ' já está inscrito(a) no campeonato e na subcategoria escolhidos.');
 
             session()->put('atleta', $request->input());
         
@@ -111,8 +140,6 @@ class InscricaoController extends Controller
 
             $atleta = session()->get('atleta');
             $cpf = str_replace(['.', '-'], '', $atleta['cpf'] );
-
-            $atleta['categoria'] = Categoria::find($atleta['categorias']);
 
             $campeonato = Campeonato::find($atleta['campeonato']);
 
@@ -174,7 +201,7 @@ class InscricaoController extends Controller
                 throw new \Exception( $pagamentoRetorno->errors[0]->description);
             
             if(!isset($pagamentoRetorno->status)){
-                Log::error($pagamentoRetorno);
+                Log::error($pagamentoRetorno->errorMessage);
                 throw new \Exception('Ops! Houve um erro interno. Por favor, tente novamente mais tarde. Se o problema persistir, entre em contato conosco para obter assistência. Lamentamos qualquer inconveniente.');
             }
             
@@ -186,7 +213,7 @@ class InscricaoController extends Controller
                     $atletaXCampeonato = AtletaXCampeonato::create([
                         'codigo' => $codigo,
                         'campeonato_id' => $atleta['campeonato'],
-                        'categoria_id' => $atleta['categorias'],
+                        'sub_categoria_id' => $atleta['sub_categoria_id'],
                         'atleta_id' => $atletaId,
                         'cupom_id' =>null,
                         'status_pagamento' =>'CONFIRMED',
