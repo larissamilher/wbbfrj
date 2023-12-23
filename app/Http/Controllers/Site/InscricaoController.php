@@ -81,7 +81,6 @@ class InscricaoController extends Controller
         return $response;
     }
 
-
     public function primeiraEtapaInscricao(Request $request)
     {
         try {
@@ -97,7 +96,8 @@ class InscricaoController extends Controller
 
             $atletaCampeonatoSubCategoria = AtletaXcampeonato::join('atletas', 'atletas.id', 'atleta_x_campeonato.atleta_id')
                 ->where('atletas.cpf' , $atleta['cpf'] )
-                ->where('atleta_x_campeonato.sub_categoria_id' , $atleta['sub_categoria_id'] )->first();
+                ->where('atleta_x_campeonato.sub_categoria_id' , $atleta['sub_categoria_id'] )
+                ->where('atleta_x_campeonato.status_pagamento' , 'CONFIRMED' )->first();
 
             if($atletaCampeonatoSubCategoria) 
                 throw new \Exception('O(a) atleta com o CPF ' . $atleta['cpf'] . ' já está inscrito(a) no campeonato e na subcategoria escolhidos.');
@@ -220,8 +220,8 @@ class InscricaoController extends Controller
 
             $pagamentoRetorno = PagamentoService::sendPaymentRequest($dados);
 
-            if(isset($pagamentoRetorno->errors[0]->code))
-                throw new \Exception( $pagamentoRetorno->errors[0]->description);
+            if(isset($pagamentoRetorno->errorMessage))
+                throw new \Exception( $pagamentoRetorno->errorMessage);
             
             if(!isset($pagamentoRetorno->status) || !isset($pagamentoRetorno->id)){
                 Log::error($pagamentoRetorno->errorMessage);
