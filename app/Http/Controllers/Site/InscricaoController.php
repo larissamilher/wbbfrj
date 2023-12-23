@@ -260,9 +260,14 @@ class InscricaoController extends Controller
                     
                     $atleta['categoria'] = Categoria::find($atleta['categorias']);
 
+                    $subCategoria = SubCategoria::find($atleta['sub_categoria_id']);
+
                     $atleta['codigo'] =  $codigo;
+                    $atleta['subcategoria'] = $subCategoria->nome;
+
                     
                     if($pagamentoRetorno->status == 'CONFIRMED'){
+
                         Mail::to($atleta['email'])->send(new ConfirmacaoInscricao($atleta));
                         return view('site.inscricao-sucesso');
                     }

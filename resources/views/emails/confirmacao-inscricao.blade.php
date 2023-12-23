@@ -22,6 +22,12 @@
                         <br> <br>
                         
                     </p>
+                    <p>
+                        <strong>Categoria:</strong> {{$dadosEmail['categoria']->nome}}
+                    </p>
+                    <p>
+                        <strong>Subcategoria:</strong> {{$dadosEmail['subcategoria']}}
+                    </p>
                     <img alt="WBBF"
                         src="https://www.wbbfrj.com/img/categorias/{{$dadosEmail['categoria']->slug}}"
                         style="display:block;max-width: 500px;" class="CToWUd a6T" data-bit="iit"
