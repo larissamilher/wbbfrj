@@ -35,7 +35,21 @@
                                     </div>
                                 </div>   
                                 <div class="col-lg-6 col-md-6">
-                                    <div class="row" style="text-align: left;">
+
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12" style=" margin-bottom: 3%;">
+                                            <div class="form-box email-icon mb-30">
+                                                <label for="parcelamento">Plano de parcelamento  <span>*</span> </label>
+                                                <select name="forma_pagamento" id="forma_pagamento">
+                                                    <option value="" selected> Selecione </option>
+                                                    <option value="BOLETO"> Boleto </option>
+                                                    <option value="CREDIT_CARD"> Cartão de Crédito </option>
+                                                    <option value="PIX"> PIX </option>
+                                                </select>                                                
+                                            </div>
+                                        </div>   
+                                    </div>
+                                    <div class="row" style="text-align: left;" id="CREDIT_CARD">
                                 
                                         <div class="col-lg-12 col-md-12">
                                             <div class="form-box email-icon mb-30">
@@ -102,6 +116,12 @@
         </div>
     </section>
 
+    <style>
+        #CREDIT_CARD{
+            display: none;
+        }
+    </style>
+
     <script>
 
         $(document).ready(function($) {
@@ -120,6 +140,15 @@
         });
 
         $(document).ready(function() {
+
+            $('#forma_pagamento').on('change', function() {
+
+                if( $('#forma_pagamento option:selected').val() == 'CREDIT_CARD')
+                    document.getElementById('CREDIT_CARD').style.display = 'block';
+                else
+                    document.getElementById('CREDIT_CARD').style.display = 'none';
+
+            });       
 
             $('#parcelamento').on('change', function() {
 

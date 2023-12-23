@@ -141,8 +141,6 @@ class InscricaoController extends Controller
         ];
 
         try {
-            $dadosPagamento = $request->input();
-
             $validade = explode('/', $request->get('validade_cartao'));
 
             $atleta = session()->get('atleta');
@@ -191,41 +189,48 @@ class InscricaoController extends Controller
             
             $dados = [
                 'customer' => $clienteAsaasId,
-                'billingType' => 'CREDIT_CARD',
+                'billingType' => $request->get('forma_pagamento'),
                 'value' => number_format( $valor, 2, '.', '.'),
                 'dueDate' => date('Y-m-d'),
-                'installmentCount' => $request->get('parcelamento'),
-                'totalValue' => number_format( $valor, 2, '.', '.'),
-                'remoteIp' =>$request->ip(),
-                'creditCard' => [
+                'remoteIp' =>$request->ip()
+            ];
+
+            if( $request->get('forma_pagamento') ==  'CREDIT_CARD'){
+
+                $dados['installmentCount'] =$request->get('parcelamento');
+                $dados['totalValue'] =number_format( $valor, 2, '.', '.');
+
+                $dados['creditCard'] = [
                     "holderName" => $request->get('nome_cartao'),
                     "number" => $request->get('numero_cartao'),
                     "expiryMonth" => $validade[0],
                     "expiryYear" => "20" . $validade[1],
                     "ccv" => $request->get('cvv'),
-                ],
-                'creditCardHolderInfo' => [
+                ];
+
+                $dados['creditCardHolderInfo'] = [
                     "name" => $atleta['nome'],
                     "email" => $atleta['email'],
                     "postalCode" => $atleta['cep'],
                     "addressNumber" => $atleta['cidade'] . '/'.  $atleta['estado']. ', '.  $atleta['bairro'] .' '.  $atleta['numero'] .' '.  $atleta['logradouro'] ,
                     "phone" => $atleta['celular'],
                     "cpfCnpj" => $cpf,
-                ],
-            ];
+                ];
+            }
 
             $pagamentoRetorno = PagamentoService::sendPaymentRequest($dados);
 
             if(isset($pagamentoRetorno->errors[0]->code))
                 throw new \Exception( $pagamentoRetorno->errors[0]->description);
             
-            if(!isset($pagamentoRetorno->status)){
+            if(!isset($pagamentoRetorno->status) || !isset($pagamentoRetorno->id)){
                 Log::error($pagamentoRetorno->errorMessage);
                 throw new \Exception('Ops! Houve um erro interno. Por favor, tente novamente mais tarde. Se o problema persistir, entre em contato conosco para obter assistência. Lamentamos qualquer inconveniente.');
             }
-            
+
             switch($pagamentoRetorno->status){
                 case 'CONFIRMED': 
+                case 'PENDING': 
                     $atletaId = Atleta::where('cpf', $cpf )->pluck('id')->first();
                     $codigo = GeradorCodigoService::geraCodigo();
 
@@ -235,7 +240,7 @@ class InscricaoController extends Controller
                         'sub_categoria_id' => $atleta['sub_categoria_id'],
                         'atleta_id' => $atletaId,
                         'cupom_id' =>null,
-                        'status_pagamento' =>'CONFIRMED',
+                        'status_pagamento' =>$pagamentoRetorno->status,
                         'payment_id' => $pagamentoRetorno->id,
                         'customer' => $pagamentoRetorno->customer,
                         'billingType' => $pagamentoRetorno->billingType,
@@ -257,9 +262,23 @@ class InscricaoController extends Controller
 
                     $atleta['codigo'] =  $codigo;
                     
-                    Mail::to($atleta['email'])->send(new ConfirmacaoInscricao($atleta));
+                    if($pagamentoRetorno->status == 'CONFIRMED'){
+                        Mail::to($atleta['email'])->send(new ConfirmacaoInscricao($atleta));
+                        return view('site.inscricao-sucesso');
+                    }
 
-                    return view('site.inscricao-sucesso');
+                    if($request->get('forma_pagamento') ==  'PIX'){ // capturar QR CODE
+                        $pagamentoRetorno = PagamentoService::obetrQrCodePix($pagamentoRetorno->id);
+                        return view('site.inscricao-pendente-pix' , compact('pagamentoRetorno'));
+                    }
+                    elseif($request->get('forma_pagamento') ==  'BOLETO'){ // capturar LINHA DIGITAL
+                        $pagamentoId =$pagamentoRetorno->id;
+                        $pagamentoRetorno = PagamentoService::obetrLinhaDigitalBoleto($pagamentoRetorno->id);
+                        $pagamentoId =  explode('_', $pagamentoId);
+                        $pagamentoId = $pagamentoId[1];
+                        return view('site.inscricao-pendente-boleto' , compact('pagamentoRetorno', 'pagamentoId'));
+                    }
+
 
                     break;
 

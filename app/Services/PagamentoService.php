@@ -119,4 +119,42 @@ class PagamentoService
 
     }
 
+    public static function obetrQrCodePix($pagamentoId)
+    {
+
+        $client =  new \GuzzleHttp\Client();
+
+        $response = $client->request('GET', env('URL_ASAAS') . '/payments/'.$pagamentoId.'/pixQrCode', [
+            'headers' => [
+                'accept' => 'application/json',
+                'access_token' => env('ASAAS'),
+                'content-type' => 'application/json',
+            ],
+        ]);
+
+        $response = json_decode($response->getBody()->getContents());
+
+        return $response;
+
+    }
+
+    public static function obetrLinhaDigitalBoleto($pagamentoId)
+    {
+
+        $client =  new \GuzzleHttp\Client();
+
+        $response = $client->request('GET', env('URL_ASAAS') . '/payments/'.$pagamentoId .'/identificationField', [
+            'headers' => [
+                'accept' => 'application/json',
+                'access_token' => env('ASAAS'),
+                'content-type' => 'application/json',
+            ],
+        ]);
+
+        $response = json_decode($response->getBody()->getContents());
+
+        return $response;
+
+    }
+
 }
