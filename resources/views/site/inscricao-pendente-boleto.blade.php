@@ -31,7 +31,7 @@
                                             2. Copiar e colar o código de barras em seu APP de pagamentos.<br>  
                                         </p>
 
-                                        <p id="chavePix">{{$pagamentoRetorno->barCode}}</p>
+                                        <h3 id="chavePix">{{$pagamentoRetorno->barCode}}</h3>
 
                                         <button class="btn" type="button" id="copiarCodigo">COPIAR CÓDIGO DE BARRAS</button>
 
@@ -59,6 +59,14 @@
             font-size: 50px;
             font-weight: 300;
             color: #ffc107;
+        }
+
+        button{
+            background-color: #009688 !important;
+        }
+
+        .btn::before{
+            background:#016b60 !important;
         }
     </style>
 

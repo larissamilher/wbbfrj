@@ -28,7 +28,7 @@
                                             2. Copie e cole a Chave Pix em seu APP de pagamentos.<br>  
                                         </p>
 
-                                        <p id="chavePix">{{$pagamentoRetorno->payload}}</p>
+                                        <h3 id="chavePix">{{$pagamentoRetorno->payload}}</h3>
 
                                         <button class="btn" type="button" id="copiarCodigo">COPIAR CHAVE</button>
 
@@ -56,6 +56,13 @@
             font-size: 50px;
             font-weight: 300;
             color: #ffc107;
+        }
+        button{
+            background-color: #009688 !important;
+        }
+
+        .btn::before{
+            background:#016b60 !important;
         }
     </style>
 
