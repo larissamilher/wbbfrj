@@ -6,6 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\AtletaXCampeonato;
 use App\Models\Campeonato;
+use App\Models\Categoria;
+use App\Models\SubCategoria;
+use App\Models\Atleta;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ConfirmacaoInscricao;
+use Illuminate\Support\Facades\Log;
 use App\Exports\ListagemExport;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
@@ -127,11 +133,31 @@ class InscricoesController extends Controller
         try {
             $inscricao = AtletaXCampeonato::find($request->input("inscricao_id")); 
 
+           
             $inscricao->status_pagamento = $request->input("status_pagamento");
             $inscricao->billingType = $request->input("forma_pagamento");
             $inscricao->save();       
 
-            $response['message'] = 'Informações salvas com sucesso!';
+            if( $request->input("status_pagamento") == 'CONFIRMED'){
+                $atleta = Atleta::find($inscricao->atleta_id);
+
+                $subCategoria = SubCategoria::find($inscricao->sub_categoria_id);
+
+                $categoria = Categoria::find($subCategoria->categoria_id);
+
+                $dadosEmail = [
+                    'nome'=>  $atleta->nome,
+                    'codigo' =>$inscricao->codigo,
+                    'categoria' => $categoria,
+                    'subcategoria' => $subCategoria->nome
+                ];
+
+                Mail::to($atleta['email'])->send(new ConfirmacaoInscricao($dadosEmail));   
+                $response['message'] = 'Informações salvas com sucesso! O atleta com a inscrição de código: '.$inscricao->codigo.' receberá um email com as informações da inscrição';
+
+            }else
+                $response['message'] = 'Informações do atleta com inscrição de código: '.$inscricao->codigo. ' salvas com sucesso!';
+
             $response['class']= 'msg-sucesso';
         }
         catch (Exception $e) {
