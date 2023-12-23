@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Campeonato;
 use Carbon\Carbon;
 use PhpOffice\PhpSpreadsheet\Exception;
+use DateTime;
 
 class CampeonatosController extends Controller
 {
@@ -71,9 +72,11 @@ class CampeonatosController extends Controller
 
             $dados['valor'] = str_replace(',', '.', $dados['valor']);
 
-            // $dados['data_inicio_inscricao'] = Carbon::createFromFormat('d/m/Y', $request->input('data_inicio_inscricao'))->format('Y-m-d');
-            // $dados['data_final_inscricao'] = Carbon::createFromFormat('d/m/Y', $request->input('data_final_inscricao'))->format('Y-m-d');
-            // $dados['data_campeonato'] = Carbon::createFromFormat('d/m/Y', $request->input('data_campeonato'))->format('Y-m-d');
+            $data1 = DateTime::createFromFormat('d/m/Y',$request->input('data_inicio_inscricao'));
+
+            $dados['data_inicio_inscricao'] = Carbon::createFromFormat('d/m/Y', $request->input('data_inicio_inscricao'))->format('Y-m-d');
+            $dados['data_final_inscricao'] = Carbon::createFromFormat('d/m/Y', $request->input('data_final_inscricao'))->format('Y-m-d');
+            $dados['data_campeonato'] = Carbon::createFromFormat('d/m/Y', $request->input('data_campeonato'))->format('Y-m-d');
 
             if (!empty($dados['id'])) 
                 $categoria = Campeonato::updateOrCreate(['id' => $dados['id']], $dados);
