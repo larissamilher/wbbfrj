@@ -279,7 +279,6 @@ class InscricaoController extends Controller
                         return view('site.inscricao-pendente-boleto' , compact('pagamentoRetorno', 'pagamentoId'));
                     }
 
-
                     break;
 
                 default:

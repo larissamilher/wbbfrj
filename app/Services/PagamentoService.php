@@ -157,4 +157,23 @@ class PagamentoService
 
     }
 
+    public static function obterSatusPagamento($pagamentoId)
+    {
+
+        $client =  new \GuzzleHttp\Client();
+
+        $response = $client->request('GET', env('URL_ASAAS') . '/payments/'.$pagamentoId .'/status', [
+            'headers' => [
+                'accept' => 'application/json',
+                'access_token' => env('ASAAS'),
+                'content-type' => 'application/json',
+            ],
+        ]);
+
+        $response = json_decode($response->getBody()->getContents());
+
+        return $response;
+
+    }
+
 }
