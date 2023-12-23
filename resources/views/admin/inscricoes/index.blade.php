@@ -8,7 +8,48 @@
                     EXTRAIR LISTAGEM POR EVENTO
                 </a>
             </button>
-        </div>    
+        </div>   
+        
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <form class="forms-sample">
+                        @csrf
+                       
+                        <div class="row">
+                            <div class="col-lg-11">
+                                <div class="form-group">
+                                    <label for="campeonato_id">Filtrar por Campeonato</label>
+                                    <select class="form-control" id="campeonato_id" name="campeonato_id">
+                                        <option value="0"> Todas</option>
+                                        @foreach($campeonatos as $campeonato)
+                                          <option value="{{$campeonato->id}}"> {{ $campeonato->nome}}
+                                          </option>
+                                        @endforeach                                       
+                                    </select>
+                                </div>
+                            </div>
+                        
+                            <div class="col-lg-1">
+                                <div class="form-group">
+                                    <label>&nbsp;</label>
+                                    <div class="input-group" style=" width: 100% !important;    ">
+                                      
+                                        <div class="input-group-append">
+                                            <button class="btn btn-secondary" id="btnFiltro" type="button" style=" width: 100% !important;  HEIGHT: 51PX; z-index:0">
+                                                FILTRAR
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body" style="overflow-x: auto;">
@@ -23,7 +64,7 @@
                         <thead>
                             <tr>
                                 <th> Nome </th>
-                                <th> CPF </th>
+                                <th> Código </th>
                                 <th> Evento </th>
                                 <th> SubCategoria </th>
                                 <th> Ação </th>
@@ -36,7 +77,7 @@
                                        {{$inscricao->atleta->nome}}
                                     </td>
                                     <td>
-                                        {{$inscricao->atleta->cpf}}
+                                        {{$inscricao->codigo}}
                                     </td>
 
                                     <td>
@@ -72,4 +113,17 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+          
+          $('#btnFiltro').on('click', function() {
+              var campeonato_id = $("#campeonato_id").val();
+
+              if(campeonato_id)
+                  window.location.href = "/admin/inscricoes/"+ campeonato_id;
+
+          });
+      });
+    </script>
 @endsection

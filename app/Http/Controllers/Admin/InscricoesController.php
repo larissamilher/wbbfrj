@@ -14,15 +14,21 @@ use PhpOffice\PhpSpreadsheet\Exception;
 
 class InscricoesController extends Controller
 {
-    public function index()
+    public function index($campeonatoId = null)
     {
         $inscricoes = AtletaXCampeonato::with(['campeonato', 'categoria', 'atleta'])
         ->join('atletas', 'atletas.id', '=', 'atleta_x_campeonato.atleta_id')
         ->orderBy('atletas.nome') 
-        ->select("atleta_x_campeonato.*")
-        ->get();
-    
-        return view('admin.inscricoes.index', compact("inscricoes"));
+        ->select("atleta_x_campeonato.*");
+
+        if($campeonatoId)
+            $inscricoes = $inscricoes->where('atleta_x_campeonato.campeonato_id',$campeonatoId);
+
+        $inscricoes = $inscricoes->get();
+
+        $campeonatos = Campeonato::all();
+
+        return view('admin.inscricoes.index', compact("inscricoes",'campeonatos'));
     }
 
     public function extrairListagemTela()
