@@ -143,14 +143,24 @@ class InscricaoController extends Controller
         try {
             $dadosPagamento = $request->input();
 
-            dd($dadosPagamento,  $request->get('parcelamento'));
-
             $validade = explode('/', $request->get('validade_cartao'));
 
             $atleta = session()->get('atleta');
             $cpf = str_replace(['.', '-'], '', $atleta['cpf'] );
 
             $campeonato = Campeonato::find($atleta['campeonato']);
+
+            $valor =  number_format(  $campeonato->valor , 2, '.', '.') ;
+
+            $atletaCampeonato = AtletaXcampeonato::join('atletas', 'atletas.id', 'atleta_x_campeonato.atleta_id')
+            ->where('atletas.cpf' , $cpf )
+            ->where('atleta_x_campeonato.campeonato_id' , $atleta['campeonato'] )->first();
+
+            if($atletaCampeonato)
+                $valor = number_format(  $campeonato->valor_dobra , 2, '.', '.');
+
+            if($request->get('parcelamento') > 1)
+                $valor = number_format(  $valor + ($valor * 0.0249 + 0.49) , 2, '.', '.');
 
             //BUSCA CLIENTE 
             $clienteAsaasId = PagamentoService::getCliente($cpf);
@@ -179,20 +189,13 @@ class InscricaoController extends Controller
                 $clienteAsaasId = $clienteAsaas->id;
             }
             
-            $atletaCampeonato = AtletaXcampeonato::join('atletas', 'atletas.id', 'atleta_x_campeonato.atleta_id')
-            ->where('atletas.cpf' , $cpf )
-            ->where('atleta_x_campeonato.campeonato_id' , $atleta['campeonato'] )->first();
-
-            if($atletaCampeonato)
-                $campeonato->valor = $campeonato->valor_dobra;
-
             $dados = [
                 'customer' => $clienteAsaasId,
                 'billingType' => 'CREDIT_CARD',
-                'value' => number_format( $campeonato->valor, 2, '.', '.'),
+                'value' => number_format( $valor, 2, '.', '.'),
                 'dueDate' => date('Y-m-d'),
                 'installmentCount' => $request->get('parcelamento'),
-                'totalValue' => number_format( $campeonato->valor, 2, '.', '.'),
+                'totalValue' => number_format( $valor, 2, '.', '.'),
                 'remoteIp' =>$request->ip(),
                 'creditCard' => [
                     "holderName" => $request->get('nome_cartao'),
