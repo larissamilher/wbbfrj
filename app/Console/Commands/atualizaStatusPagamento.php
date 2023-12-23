@@ -10,6 +10,7 @@ use App\Models\Categoria;
 use App\Models\SubCategoria;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ConfirmacaoInscricao;
+use Illuminate\Support\Facades\Log;
 
 class atualizaStatusPagamento extends Command
 {
@@ -55,10 +56,7 @@ class atualizaStatusPagamento extends Command
 
                 Mail::to($atleta['email'])->send(new ConfirmacaoInscricao($dadosEmail));        
             }
-
-            echo 'foi';
         }
-        echo 'foi command';
         Log::info("rodou command");
     }
 }
