@@ -158,7 +158,7 @@ class InscricaoController extends Controller
                 $valor = number_format(  $campeonato->valor_dobra , 2, '.', '.');
 
             if($request->get('parcelamento') > 1)
-                $valor = number_format(  $valor + ($valor * 0.0249 + 0.49) , 2, '.', '.');
+                $valor = number_format(  $valor + ($valor * 0.0349 + 0.49) , 2, '.', '.');
 
             //BUSCA CLIENTE 
             $clienteAsaasId = PagamentoService::getCliente($cpf);

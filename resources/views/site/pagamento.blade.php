@@ -83,8 +83,8 @@
                                                         1 x R${{  number_format( $campeonato->valor, 2, ',', '.')}} *sem juros
                                                     </option>
                                                     @for($i = 2; $i <= 6; $i++)
-                                                        <option value="{{ $i }}" data-valor="{{ $i }} * {{ number_format(($campeonato->valor + ($campeonato->valor * 0.0249 + 0.49)) / $i, 2, '.', '.') }}">
-                                                            {{ $i }} x R${{ number_format(($campeonato->valor + ($campeonato->valor * 0.0249 + 0.49)) / $i, 2, '.', '.') }} *com juros
+                                                        <option value="{{ $i }}" data-valor="{{ $i }} * {{ number_format(($campeonato->valor + ($campeonato->valor * 0.0349 + 0.49)) / $i, 2, '.', '.') }}">
+                                                            {{ $i }} x R${{ number_format(($campeonato->valor + ($campeonato->valor * 0.0349 + 0.49)) / $i, 2, '.', '.') }} *com juros
                                                         </option>
                                                     @endfor
                                                 </select>                                                
