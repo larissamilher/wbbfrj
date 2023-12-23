@@ -9,7 +9,7 @@
         <div class="col-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <form class="forms-sample" action="{{ route('admin.subcategoria.store') }}" method="POST">
+                    <form class="forms-sample">
                         @csrf
                        
                         <div class="row">
@@ -17,7 +17,7 @@
                                 <div class="form-group">
                                     <label for="data_inicio_inscricoes">Filtrar por Categoria</label>
                                     <select class="form-control" id="categoria_id" name="categoria_id">
-                                        <option value="0"> Todas
+                                        <option value="0"> Todas</option>
                                         @foreach($categorias as $categoria)
                                           <option value="{{$categoria->id}}" @if (isset($subcategoria->categoria_id) && $subcategoria->categoria_id == $categoria->id) selected @endif> {{ $categoria->nome}}
                                           </option>
@@ -32,7 +32,7 @@
                                     <div class="input-group" style=" width: 100% !important;    ">
                                       
                                         <div class="input-group-append">
-                                            <button class="btn btn-secondary" id="btnFiltro" type="button" style=" width: 100% !important;  HEIGHT: 51PX;">
+                                            <button class="btn btn-secondary" id="btnFiltro" type="button" style=" width: 100% !important;  HEIGHT: 51PX; z-index:0">
                                                 FILTRAR
                                             </button>
                                         </div>
@@ -88,11 +88,15 @@
                                                 <i class="mdi mdi-lead-pencil"></i>
                                             </span>                                            
                                         </a>
-                                        <a href="{{ route( 'admin.subcategoria.edit', $subcategoria->id ) }}" class="btn-acao btn-edit" style="">
+                                      
+
+                                        <button onclick="openModal({{$subcategoria->id}})" class="btn btn-success btn-fw" id="btnFiltro" type="button" style="min-width:0;height: 36px;">
                                             <span class="icon-bg">
                                                 <i class="mdi mdi-plus"></i>
-                                            </span>                                            
-                                        </a>
+                                            </span>      
+                                        </button>
+
+                                    
                                         <a href="{{ route( 'admin.subcategoria.delete', $subcategoria->id ) }}" onclick="return confirm('Tem certeza que deseja excluir?')" class="btn-acao btn-delete">
                                             <span class="icon-bg">
                                                 <i class="mdi mdi-delete"></i>
@@ -106,16 +110,144 @@
                 </div>
             </div>
         </div>
+     
     </div>
 
+   
+    <div id="modalAddSubCategoriaCampeonato">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <form class="forms-sample">
+                @csrf
+               
+                <div class="row">
+                    <div class="col-lg-10">
+                        <div class="form-group">
+                            <input type="hidden" name="subcategoria_id" id="subcategoria_id" value="">
+
+                            <label for="campeonato_id">Selecione o Campeonato</label>
+                            <select class="form-control" id="campeonato_id" name="campeonato_id">
+                                @foreach($campeonatos as $campeonato)
+                                  <option value="{{$campeonato->id}}"> {{ $campeonato->nome}}
+                                  </option>
+                                @endforeach                                       
+                            </select>
+                        </div>
+                    </div>
+                
+                    <div class="col-lg-1">
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <div class="input-group" style=" width: 100% !important;    ">
+                              
+                                <div class="input-group-append">
+                                    <button class="btn btn-success btn-fw" id="btnAddSubCategoriaCampeonato" type="button" style="    min-width: 0;  width: 100% !important;  HEIGHT: 51PX;">
+                                        ADICIONAR
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <style> 
+        #modalAddSubCategoriaCampeonato {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color:rgb(0 0 0 / 72%);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+
     <script>
-         $(document).ready(function() {
+         function openModal($subcategoriaId) {
+            $("#subcategoria_id").val($subcategoriaId);
+            document.getElementById('modalAddSubCategoriaCampeonato').style.display = 'block';
+        }
+
+        // Função para fechar o modal
+        function closeModal() {
+            document.getElementById('modalAddSubCategoriaCampeonato').style.display = 'none';
+        }
+
+        // Fechar o modal clicando fora da área do modal
+        window.onclick = function (event) {
+            var modal = document.getElementById('modalAddSubCategoriaCampeonato');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        $(document).ready(function() {
           
             $('#btnFiltro').on('click', function() {
                 var categoriaSelecionada = $("#categoria_id").val();
 
                 if(categoriaSelecionada)
                     window.location.href = "/admin/subcategories/"+ categoriaSelecionada;
+
+            });
+
+            $('#btnAddSubCategoriaCampeonato').on('click', function() {
+                var campeonatoSelecionado = $("#campeonato_id").val();
+                var subCategoriaSelecionada = $("#subcategoria_id").val();
+
+                if(campeonatoSelecionado){
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: "/admin/subcategories/add-campeonato/"+subCategoriaSelecionada +'/'+ campeonatoSelecionado,
+                        type: 'GET',    
+                        success: function (response) {
+                        
+                            if (response.success) {   
+                              
+                                Swal.fire({
+                                title: "Bom trabalho!",
+                                text: response.message,
+                                icon: "success"
+                                });
+                            } else{
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Oops...",
+                                    text:  response.message,
+                                });      
+                            } 
+                            
+                        }
+                    });
+                }
 
             });
         });

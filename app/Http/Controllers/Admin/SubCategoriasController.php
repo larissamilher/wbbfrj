@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SubCategoria;
 use App\Models\Categoria;
+use App\Models\Campeonato;
+use App\Models\SubCategoriaCampeonato;
 
 use PhpOffice\PhpSpreadsheet\Exception;
+use Illuminate\Support\Facades\Log;
 
 class SubCategoriasController extends Controller
 {
@@ -15,13 +18,14 @@ class SubCategoriasController extends Controller
         $categorias = Categoria::orderBy('nome')->get();
 
         $subcategorias = SubCategoria::with('categoria')->orderBy('nome');
-        
+        $campeonatos = Campeonato::orderBy('nome')->get();
+
         if($categoriaId)
             $subcategorias =$subcategorias->where('categoria_id',$categoriaId);
 
         $subcategorias =$subcategorias->get();
 
-        return view('admin.subcategorias.index', compact("subcategorias",'categorias'));
+        return view('admin.subcategorias.index', compact("subcategorias",'categorias','campeonatos'));
     }
 
     public function create(){
@@ -54,7 +58,7 @@ class SubCategoriasController extends Controller
             $response['class']= 'msg-sucesso';
         }
         catch (Exception $e) {
-            Log::error($e);
+            Log::error($e->getMessage());
             $response =  [
                 'success' => false,
                 'message' => 'Ops! Parece que houve. Por favor, tente novamente mais tarde.',
@@ -99,5 +103,37 @@ class SubCategoriasController extends Controller
     
         return view('admin.subcategorias.novo', compact('response', 'categorias'));
         
+    }
+
+    public function addCampeonato($subCategoriaId, $campeonatoId)
+    {
+        try {
+            $verifica = SubCategoriaCampeonato::where('campeonato_id', $campeonatoId)
+                ->where('sub_categoria_id', $subCategoriaId)->first();
+
+            if ($verifica) {
+                return [
+                    'success' => false,
+                    'message' => 'SubCategoria já inserida ao campeonato selecionado!'
+                ];
+            }
+
+            SubCategoriaCampeonato::create([
+                'campeonato_id' => $campeonatoId,
+                'sub_categoria_id' => $subCategoriaId
+            ]);
+
+            return [
+                'success' => true,
+                'message' => 'Registro salvo com sucesso!'
+            ];
+
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+            return [
+                'success' => false,
+                'message' => $e->getMessage()
+            ];
+        }
     }
 }

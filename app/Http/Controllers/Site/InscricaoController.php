@@ -50,7 +50,7 @@ class InscricaoController extends Controller
             Log::error($e);
             return [
                 'success' => false,
-                'message' => 'Ops! Parece que houve um problema ao buscar os horários. Por favor, tente novamente mais tarde.'
+                'message' => 'Ops! Parece que houve um problema. Por favor, tente novamente mais tarde.'
             ];
         }
 

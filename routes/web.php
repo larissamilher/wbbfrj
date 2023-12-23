@@ -79,6 +79,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::get('/edit/{id}', [SubCategoriasController::class, 'edit'])->name('admin.subcategoria.edit');
         Route::get('/delete/{id}', [SubCategoriasController::class, 'delete'])->name('admin.subcategoria.delete');
         Route::post('/store', [SubCategoriasController::class, 'store'])->name('admin.subcategoria.store');
+        Route::get('/add-campeonato/{subCategoriaId}/{campeonatoId}', [SubCategoriasController::class, 'addCampeonato'])->name('admin.subcategoria.addCampeonato');
+
         Route::get('/{categoriaId?}', [SubCategoriasController::class, 'index'])->name('admin.subcategorias');
     });
 
