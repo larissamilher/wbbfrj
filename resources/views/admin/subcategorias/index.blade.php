@@ -84,7 +84,7 @@
                                     </td>
                                     <td class="t-action">
 
-                                        <a href="{{ route( 'admin.subcategoria.edit', $subcategoria->id ) }}" style="">
+                                        <a href="{{ route( 'admin.subcategoria.edit', $subcategoria->id ) }}" style="" title="EDITAR">
                                             <button class="btn btn-primary btn-fw" type="button" style="min-width:0;height: 36px;">
                                                 <span class="icon-bg">
                                                     <i class="mdi mdi-lead-pencil"></i>
@@ -92,13 +92,13 @@
                                             </button>                                         
                                         </a>                                      
 
-                                        <button onclick="openModal({{$subcategoria->id}})" class="btn btn-success btn-fw" id="btnFiltro" type="button" style="min-width:0;height: 36px;">
+                                        <button onclick="openModal({{$subcategoria->id}})" class="btn btn-success btn-fw" id="btnFiltro" type="button" style="min-width:0;height: 36px;" title="ADD A CAMPEONATO">
                                             <span class="icon-bg">
                                                 <i class="mdi mdi-plus"></i>
                                             </span>      
                                         </button>
                                     
-                                        <a href="{{ route( 'admin.subcategoria.delete', $subcategoria->id ) }}" onclick="return confirm('Tem certeza que deseja excluir?')">
+                                        <a href="{{ route( 'admin.subcategoria.delete', $subcategoria->id ) }}" onclick="return confirm('Tem certeza que deseja excluir?')"  title="DELETAR">
                                             <button class="btn btn-danger btn-fw" type="button" style="min-width:0;height: 36px;">
                                                 <span class="icon-bg">
                                                     <i class="mdi mdi-delete"></i>
