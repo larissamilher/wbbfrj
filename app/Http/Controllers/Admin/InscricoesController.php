@@ -109,4 +109,41 @@ class InscricoesController extends Controller
         return redirect()->route('admin.inscricoes')->with('response', $response);
     }    
 
+    public function edit($id){
+        $inscricao = AtletaXCampeonato::with(['campeonato', 'categoria', 'atleta'])->find($id); 
+
+        return view('admin.inscricoes.edit-pagamento', compact("inscricao"));
+
+    }
+
+    public function addPagamentoStore(Request $request)
+    {
+        $response = [
+            'success' => true,
+            'message' => '',
+            'class' => '',
+        ];
+
+        try {
+            $inscricao = AtletaXCampeonato::find($request->input("inscricao_id")); 
+
+            $inscricao->status_pagamento = $request->input("status_pagamento");
+            $inscricao->billingType = $request->input("forma_pagamento");
+            $inscricao->save();       
+
+            $response['message'] = 'Informações salvas com sucesso!';
+            $response['class']= 'msg-sucesso';
+        }
+        catch (Exception $e) {
+            Log::error($e);
+            $response =  [
+                'success' => false,
+                'message' => 'Ops! Parece que houve. Por favor, tente novamente mais tarde.',
+                'class' => 'msg-error',
+            ];
+        }
+    
+        return redirect()->route('admin.inscricoes')->with('response', $response);
+    }
+    
 }

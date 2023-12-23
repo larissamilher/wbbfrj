@@ -88,7 +88,19 @@
                                     </td>
                                     <td class="t-action">
 
-                                        <a href="{{ route( 'admin.inscricoes.gerar-pdf', $inscricao->id ) }}"  class="btn-acao btn-edit" title="Gerar PDF" >
+                                        <a href="{{ route( 'admin.inscricoes.editar', $inscricao->id ) }}"  class="btn-acao btn-edit" title="Editar Pagamento" style="background-color: #03a9f4">
+                                            <span class="icon-bg">
+                                                <i class="mdi mdi-coin"></i>
+                                            </span>                                   
+                                        </a>   
+
+                                        <a href="{{ route( 'admin.inscricoes.add-peso', $inscricao->id ) }}" class="btn-acao btn-edit" title="Adicionar Peso e Número" style="background-color: #44ce42">
+                                            <span class="icon-bg">
+                                                <i class="mdi mdi-weight"></i>
+                                            </span>                                            
+                                        </a>
+
+                                        <a href="{{ route( 'admin.inscricoes.gerar-pdf', $inscricao->id ) }}"  class="btn-acao btn-edit" title="Gerar PDF" style="background-color: #8e94a9;">
                                             <span class="icon-bg">
                                                 <i class="mdi mdi-file-pdf"></i>
                                             </span>                                   
@@ -99,11 +111,7 @@
                                                 <i class="mdi mdi-eye"></i>
                                             </span>                                            
                                         </a>
-                                        <a href="{{ route( 'admin.inscricoes.add-peso', $inscricao->id ) }}" class="btn-acao btn-edit" title="Adicionar Peso Atleta">
-                                            <span class="icon-bg">
-                                                <i class="mdi mdi-weight"></i>
-                                            </span>                                            
-                                        </a>
+                                      
                                     </td>
                                 </tr>
                             @endforeach
