@@ -85,6 +85,7 @@ class InscricoesController extends Controller
             $inscricao = AtletaXCampeonato::find($request->input("inscricao_id")); 
 
             $inscricao->peso = $request->input("peso");
+            $inscricao->numero_atleta = $request->input("numero_atleta");
             $inscricao->save();       
 
             $response['message'] = 'Peso salvo com sucesso!';

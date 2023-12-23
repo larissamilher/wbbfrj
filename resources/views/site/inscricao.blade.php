@@ -42,22 +42,35 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box user-icon mb-30">
-                                        <label for="nome">Nome <span>*</span> </label>
-                                        <input type="text" name="nome" id="nome" placeholder="" class="form-control required">
+                                        <label for="sub_categoria_id">SubCategoria <span>*</span> </label>
+                                        <select id="sub_categoria_id" name="sub_categoria_id" class="form-control required-select">
+                                            <option value="">Selecione a Sub Categoria</option>                                           
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-md-3">
+                                
+                                <div class="col-lg-6 col-md-6">
                                     <div class="form-box email-icon mb-30">
                                         <label for="cpf">CPF <span>*</span> </label>
                                         <input type="text" name="cpf" id="cpf" placeholder="" class="form-control required">
                                     </div>
                                 </div>   
-                                <div class="col-lg-3 col-md-3">
+                               
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-box user-icon mb-30">
+                                        <label for="nome">Nome <span>*</span> </label>
+                                        <input type="text" name="nome" id="nome" placeholder="" class="form-control required">
+                                    </div>
+                                </div>                               
+                               
+                                <div class="col-lg-6 col-md-6">
                                     <div class="form-box email-icon mb-30">
                                         <label for="rg">RG <span>*</span> </label>
                                         <input type="text" name="rg" id="rg" placeholder="" class="form-control required">
@@ -194,7 +207,7 @@
                             $('#categorias').append('<option value="">Selecione a categoria</option>');
                             
                             $.each(response.dados, function(index, categoria) {
-                                $('#categorias').append('<option value="' + categoria.categoria.id + '">' + categoria.categoria.nome + '</option>');
+                                $('#categorias').append('<option value="' + categoria.id + '">' + categoria.nome + '</option>');
                             });
 
                             $('#categorias').niceSelect();
@@ -203,7 +216,38 @@
                     }
                 });
             }
-         
+
+        });
+        
+        $('#categorias').on('change', function() {
+            var categoriaSelecionada = $(this).val();
+
+            if(categoriaSelecionada){
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "/campeonatos/inscricao/get-sub-categorias-campeonato/"+ categoriaSelecionada,
+                    type: 'GET',    
+                    success: function (response) {
+                    
+                        if (response.success) {   
+                            $('#sub_categoria_id').empty();
+                            
+                            $('#sub_categoria_id').niceSelect('destroy');
+
+                            $('#sub_categoria_id').append('<option value="">Selecione a categoria</option>');
+                            
+                            $.each(response.dados, function(index, subcategoria) {
+                                $('#sub_categoria_id').append('<option value="' + subcategoria.id + '">' + subcategoria.nome + '</option>');
+                            });
+
+                            $('#sub_categoria_id').niceSelect();
+                        }  
+                        
+                    }
+                });
+            }
         });
 
         $('#email').on('change',function() {

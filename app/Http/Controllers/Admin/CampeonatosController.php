@@ -12,7 +12,7 @@ class CampeonatosController extends Controller
 {
     public function index(){
 
-        $campeonatos = Campeonato::all();
+        $campeonatos = Campeonato::orderBy('nome')->get();
 
         return view('admin.campeonatos.index', compact('campeonatos'));
     }
@@ -71,9 +71,9 @@ class CampeonatosController extends Controller
 
             $dados['valor'] = str_replace(',', '.', $dados['valor']);
 
-            $dados['data_inicio_inscricao'] = Carbon::createFromFormat('d/m/Y', $request->input('data_inicio_inscricao'))->format('Y-m-d');
-            $dados['data_final_inscricao'] = Carbon::createFromFormat('d/m/Y', $request->input('data_final_inscricao'))->format('Y-m-d');
-            $dados['data_campeonato'] = Carbon::createFromFormat('d/m/Y', $request->input('data_campeonato'))->format('Y-m-d');
+            // $dados['data_inicio_inscricao'] = Carbon::createFromFormat('d/m/Y', $request->input('data_inicio_inscricao'))->format('Y-m-d');
+            // $dados['data_final_inscricao'] = Carbon::createFromFormat('d/m/Y', $request->input('data_final_inscricao'))->format('Y-m-d');
+            // $dados['data_campeonato'] = Carbon::createFromFormat('d/m/Y', $request->input('data_campeonato'))->format('Y-m-d');
 
             if (!empty($dados['id'])) 
                 $categoria = Campeonato::updateOrCreate(['id' => $dados['id']], $dados);

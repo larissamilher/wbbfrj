@@ -25,7 +25,7 @@
                                 <th> Nome </th>
                                 <th> CPF </th>
                                 <th> Evento </th>
-                                <th> Categoria </th>
+                                <th> SubCategoria </th>
                                 <th> Ação </th>
                             </tr>
                         </thead>

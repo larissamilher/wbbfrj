@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\CampeonatosController;
 use App\Http\Controllers\Admin\CategoriasController;
 use App\Http\Controllers\Admin\InscricoesController;
 use App\Http\Controllers\Admin\UsuariosController;
-
+use App\Http\Controllers\Admin\SubCategoriasController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -71,6 +71,17 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::get('/edit/{id}', [CategoriasController::class, 'edit'])->name('admin.categoria.edit');
         Route::get('/delete/{id}', [CategoriasController::class, 'delete'])->name('admin.categoria.delete');
         Route::post('/store', [CategoriasController::class, 'store'])->name('admin.categoria.store');
+    });
+
+    Route::prefix('subcategories')->group(function () {
+        // Route::get('/{categoriaId?}', [SubCategoriasController::class, 'index'])->name('admin.subcategorias');
+        Route::get('/novo', [SubCategoriasController::class, 'create'])->name('admin.subcategoria.novo');
+        Route::get('/edit/{id}', [SubCategoriasController::class, 'edit'])->name('admin.subcategoria.edit');
+        Route::get('/delete/{id}', [SubCategoriasController::class, 'delete'])->name('admin.subcategoria.delete');
+        Route::post('/store', [SubCategoriasController::class, 'store'])->name('admin.subcategoria.store');
+        Route::get('/add-campeonato/{subCategoriaId}/{campeonatoId}', [SubCategoriasController::class, 'addCampeonato'])->name('admin.subcategoria.addCampeonato');
+
+        Route::get('/{categoriaId?}', [SubCategoriasController::class, 'index'])->name('admin.subcategorias');
     });
 
     Route::prefix('usuarios')->group(function () {
@@ -141,6 +152,7 @@ Route::prefix('campeonatos')->group(function () {
 
         Route::get('/get-dados-cpf/{cpf}', [InscricaoController::class, 'getrDadosCpf'])->name('get-dados-cpf');
 
+        Route::get('/get-sub-categorias-campeonato/{categoriaId}', [InscricaoController::class, 'getSubCategoriasCampeonato']);
 
         Route::get('/teste', [InscricaoController::class, 'teste'])->name('teste');
 

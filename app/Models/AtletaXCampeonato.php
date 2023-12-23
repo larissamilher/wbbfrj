@@ -20,9 +20,10 @@ class AtletaXCampeonato extends Model
     protected $fillable = [
         'codigo',
         'campeonato_id',
-        'categoria_id',
+        'sub_categoria_id',
         'atleta_id',
         'peso',
+        'numero_atleta',
         'cupom_id',
         'status_pagamento',
         'payment_id',
@@ -47,7 +48,7 @@ class AtletaXCampeonato extends Model
 
     public function categoria()
     {
-        return $this->belongsTo(Categoria::class);
+        return $this->belongsTo(SubCategoria::class, 'sub_categoria_id', 'id');
     }
 
     public function atleta()

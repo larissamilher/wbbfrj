@@ -8,17 +8,17 @@ use DateTime;
 use DB;
 use Reliese\Database\Eloquent\Model as Eloquent;
 use App\Models\Campeonato;
-use App\Models\Categoria;
+use App\Models\SubCategoria;
 
-class CategoriaCampeonato extends Model
+class SubCategoriaCampeonato extends Model
 {
     use \Illuminate\Database\Eloquent\SoftDeletes;
    
-    protected $table = 'categorias_campeonato';
+    protected $table = 'sub_categorias_campeonato';
  
     protected $fillable = [
         'campeonato_id',
-        'categoria_id'
+        'sub_categoria_id'
     ];
 
     public function campeonato()
@@ -28,6 +28,6 @@ class CategoriaCampeonato extends Model
 
     public function categoria()
     {
-        return $this->belongsTo(Categoria::class);
+        return $this->belongsTo(SubCategoria::class);
     }
 }

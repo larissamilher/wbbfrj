@@ -78,7 +78,7 @@
                                             </li>
                                             <li><a href="#">Educação</a>
                                                 <ul class="submenu">
-                                                    <li><a href="curso-arbitros.html">Curso Formação de Árbitros</a></li>
+                                                    <li><a href="curso-arbitros.html">WORKSHOP AO FISICULTURISMO</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="contato.html">Contato</a></li>

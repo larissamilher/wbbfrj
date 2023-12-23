@@ -102,7 +102,7 @@
                                             <li>
                                                 <a href="#">Educação</a>
                                                 <ul class="submenu">
-                                                    <li><a href="{{ route('curso-arbitros') }}">Curso Formação de Árbitros</a></li>
+                                                    <li><a href="{{ route('curso-arbitros') }}">WORKSHOP AO FISICULTURISMOs</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="{{ route('contato') }}">Contato</a></li>
@@ -146,7 +146,7 @@
                                     <ul>
                                         {{-- <li><a href="{{ route('quem-somos') }}">Quem Somos</a></li> --}}
                                         <li><a href="{{ route('contato') }}">Contato</a></li>
-                                        <li><a href="{{ route('curso-arbitros') }}"> Curso Formação de Árbitros </a></li>
+                                        <li><a href="{{ route('curso-arbitros') }}"> WORKSHOP AO FISICULTURISMO</a></li>
                                         <li><a href="{{ route('categorias') }}"> Categorias </a></li>
                                     </ul>
                                 </div>
@@ -158,7 +158,7 @@
                                 <div class="footer-tittle">
                                     <h4>SERVIÇOS</h4>
                                     <ul>
-                                        <li><a href="{{ route('curso-arbitros') }}">Destaque-se no fisiculturismo! Inscreva-se no curso de arbitragem e torne-se um especialista.
+                                        <li><a href="{{ route('curso-arbitros') }}">Destaque-se no fisiculturismo! Inscreva-se no nosso workshop e torne-se um especialista.
                                         </a></li>
                                         {{-- <li><a href="#">Travel Insurance</a></li>
                                         <li><a href="#"> Car Insurance</a></li>
