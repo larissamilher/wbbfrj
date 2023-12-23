@@ -40,7 +40,7 @@ class atualizaStatusPagamento extends Command
             $pagamento->save();
 
             if($pagamentoRetorno->status == 'CONFIRMED'){
-                
+
                 $atleta = Atleta::find($pagamento->atleta_id);
                 $subCategoria = SubCategoria::find($pagamento->sub_categoria_id);
 
@@ -53,8 +53,9 @@ class atualizaStatusPagamento extends Command
                     'subcategoria' => $subCategoria->nome
                 ];
 
-                Mail::to($atleta['email'])->send(new ConfirmacaoInscricao($dadosEmail));
+                Mail::to($atleta['email'])->send(new ConfirmacaoInscricao($dadosEmail));        
             }
         }
+        Log::info("rodou command");
     }
 }
