@@ -40,7 +40,7 @@ class atualizaStatusPagamento extends Command
             $pagamento->status_pagamento = $pagamentoRetorno->status;
             $pagamento->save();
 
-            if($pagamentoRetorno->status == 'CONFIRMED'){
+            if($pagamentoRetorno->status == 'CONFIRMED' || $pagamentoRetorno->status == 'RECEIVED'){
 
                 $atleta = Atleta::find($pagamento->atleta_id);
                 $subCategoria = SubCategoria::find($pagamento->sub_categoria_id);
