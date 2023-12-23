@@ -11,10 +11,17 @@ use PhpOffice\PhpSpreadsheet\Exception;
 
 class SubCategoriasController extends Controller
 {
-    public function index(){
-        $subcategorias = SubCategoria::with('categoria')->orderBy('nome')->get();
+    public function index($categoriaId = null){
+        $categorias = Categoria::orderBy('nome')->get();
 
-        return view('admin.subcategorias.index', compact("subcategorias"));
+        $subcategorias = SubCategoria::with('categoria')->orderBy('nome');
+        
+        if($categoriaId)
+            $subcategorias =$subcategorias->where('categoria_id',$categoriaId);
+
+        $subcategorias =$subcategorias->get();
+
+        return view('admin.subcategorias.index', compact("subcategorias",'categorias'));
     }
 
     public function create(){

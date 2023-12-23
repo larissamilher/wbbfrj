@@ -5,6 +5,47 @@
             <button type="button" class="btn btn-danger btn-fw"><a class="nav-link"
                     href="{{ route('admin.subcategoria.novo') }}">ADICONAR SUBCATEGORIA</a></button>
         </div>
+
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <form class="forms-sample" action="{{ route('admin.subcategoria.store') }}" method="POST">
+                        @csrf
+                       
+                        <div class="row">
+                            <div class="col-lg-11">
+                                <div class="form-group">
+                                    <label for="data_inicio_inscricoes">Filtrar por Categoria</label>
+                                    <select class="form-control" id="categoria_id" name="categoria_id">
+                                        <option value="0"> Todas
+                                        @foreach($categorias as $categoria)
+                                          <option value="{{$categoria->id}}" @if (isset($subcategoria->categoria_id) && $subcategoria->categoria_id == $categoria->id) selected @endif> {{ $categoria->nome}}
+                                          </option>
+                                        @endforeach                                       
+                                    </select>
+                                </div>
+                            </div>
+                        
+                            <div class="col-lg-1">
+                                <div class="form-group">
+                                    <label>&nbsp;</label>
+                                    <div class="input-group" style=" width: 100% !important;    ">
+                                      
+                                        <div class="input-group-append">
+                                            <button class="btn btn-secondary" id="btnFiltro" type="button" style=" width: 100% !important;  HEIGHT: 51PX;">
+                                                FILTRAR
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body" style="overflow-x: auto;">
@@ -61,5 +102,18 @@
             </div>
         </div>
     </div>
+
+    <script>
+         $(document).ready(function() {
+          
+            $('#btnFiltro').on('click', function() {
+                var categoriaSelecionada = $("#categoria_id").val();
+
+                if(categoriaSelecionada)
+                    window.location.href = "/admin/subcategories/"+ categoriaSelecionada;
+
+            });
+        });
+    </script>
 
 @endsection
