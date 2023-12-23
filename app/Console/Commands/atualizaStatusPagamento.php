@@ -55,6 +55,8 @@ class atualizaStatusPagamento extends Command
 
                 Mail::to($atleta['email'])->send(new ConfirmacaoInscricao($dadosEmail));        
             }
+
+            echo 'foi';
         }
         Log::info("rodou command");
     }
