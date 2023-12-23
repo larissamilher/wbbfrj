@@ -74,11 +74,13 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     });
 
     Route::prefix('subcategories')->group(function () {
-        Route::get('/{categoriaId?}', [SubCategoriasController::class, 'index'])->name('admin.subcategorias');
+        // Route::get('/{categoriaId?}', [SubCategoriasController::class, 'index'])->name('admin.subcategorias');
         Route::get('/novo', [SubCategoriasController::class, 'create'])->name('admin.subcategoria.novo');
         Route::get('/edit/{id}', [SubCategoriasController::class, 'edit'])->name('admin.subcategoria.edit');
         Route::get('/delete/{id}', [SubCategoriasController::class, 'delete'])->name('admin.subcategoria.delete');
         Route::post('/store', [SubCategoriasController::class, 'store'])->name('admin.subcategoria.store');
+        Route::get('/{categoriaId?}', [SubCategoriasController::class, 'index'])->name('admin.subcategorias');
+
     });
 
     Route::prefix('usuarios')->group(function () {
