@@ -192,7 +192,8 @@ class InscricaoController extends Controller
                 'billingType' => $request->get('forma_pagamento'),
                 'value' => number_format( $valor, 2, '.', '.'),
                 'dueDate' => date('Y-m-d'),
-                'remoteIp' =>$request->ip()
+                'remoteIp' =>$request->ip(),
+                'description' =>$campeonato->nome
             ];
 
             if( $request->get('forma_pagamento') ==  'CREDIT_CARD'){
