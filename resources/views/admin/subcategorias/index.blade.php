@@ -83,24 +83,27 @@
                                       @endif
                                     </td>
                                     <td class="t-action">
-                                        <a href="{{ route( 'admin.subcategoria.edit', $subcategoria->id ) }}" class="btn-acao btn-edit" style="">
-                                            <span class="icon-bg">
-                                                <i class="mdi mdi-lead-pencil"></i>
-                                            </span>                                            
-                                        </a>
-                                      
+
+                                        <a href="{{ route( 'admin.subcategoria.edit', $subcategoria->id ) }}" style="">
+                                            <button class="btn btn-primary btn-fw" type="button" style="min-width:0;height: 36px;">
+                                                <span class="icon-bg">
+                                                    <i class="mdi mdi-lead-pencil"></i>
+                                                </span>   
+                                            </button>                                         
+                                        </a>                                      
 
                                         <button onclick="openModal({{$subcategoria->id}})" class="btn btn-success btn-fw" id="btnFiltro" type="button" style="min-width:0;height: 36px;">
                                             <span class="icon-bg">
                                                 <i class="mdi mdi-plus"></i>
                                             </span>      
                                         </button>
-
                                     
-                                        <a href="{{ route( 'admin.subcategoria.delete', $subcategoria->id ) }}" onclick="return confirm('Tem certeza que deseja excluir?')" class="btn-acao btn-delete">
-                                            <span class="icon-bg">
-                                                <i class="mdi mdi-delete"></i>
-                                            </span>     
+                                        <a href="{{ route( 'admin.subcategoria.delete', $subcategoria->id ) }}" onclick="return confirm('Tem certeza que deseja excluir?')">
+                                            <button class="btn btn-danger btn-fw" type="button" style="min-width:0;height: 36px;">
+                                                <span class="icon-bg">
+                                                    <i class="mdi mdi-delete"></i>
+                                                </span>     
+                                            </button>                                           
                                         </a>
                                     </td>
                                 </tr>
