@@ -88,6 +88,11 @@
                                                 <i class="mdi mdi-lead-pencil"></i>
                                             </span>                                            
                                         </a>
+                                        <a href="{{ route( 'admin.subcategoria.edit', $subcategoria->id ) }}" class="btn-acao btn-edit" style="">
+                                            <span class="icon-bg">
+                                                <i class="mdi mdi-plus"></i>
+                                            </span>                                            
+                                        </a>
                                         <a href="{{ route( 'admin.subcategoria.delete', $subcategoria->id ) }}" onclick="return confirm('Tem certeza que deseja excluir?')" class="btn-acao btn-delete">
                                             <span class="icon-bg">
                                                 <i class="mdi mdi-delete"></i>
