@@ -92,11 +92,11 @@
                                             </button>                                         
                                         </a>                                      
 
-                                        <button onclick="openModal({{$subcategoria->id}})" class="btn btn-success btn-fw" id="btnFiltro" type="button" style="min-width:0;height: 36px;" title="ADD A CAMPEONATO">
+                                        {{-- <button onclick="openModal({{$subcategoria->id}})" class="btn btn-success btn-fw" id="btnFiltro" type="button" style="min-width:0;height: 36px;" title="ADD A CAMPEONATO">
                                             <span class="icon-bg">
                                                 <i class="mdi mdi-plus"></i>
                                             </span>      
-                                        </button>
+                                        </button> --}}
                                     
                                         <a href="{{ route( 'admin.subcategoria.delete', $subcategoria->id ) }}" onclick="return confirm('Tem certeza que deseja excluir?')"  title="DELETAR">
                                             <button class="btn btn-danger btn-fw" type="button" style="min-width:0;height: 36px;">
