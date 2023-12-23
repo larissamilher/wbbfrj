@@ -72,16 +72,21 @@ class CampeonatosController extends Controller
 
             $dados['valor'] = str_replace(',', '.', $dados['valor']);
 
-            $data1 = DateTime::createFromFormat('d/m/Y',$request->input('data_inicio_inscricao'));
 
-           
             if (!empty($dados['id'])) {
-                 $dados['data_inicio_inscricao'] = Carbon::createFromFormat('d/m/Y', $request->input('data_inicio_inscricao'))->format('Y-m-d');
-                $dados['data_final_inscricao'] = Carbon::createFromFormat('d/m/Y', $request->input('data_final_inscricao'))->format('Y-m-d');
-                $dados['data_campeonato'] = Carbon::createFromFormat('d/m/Y', $request->input('data_campeonato'))->format('Y-m-d');
 
+                $campeonato = Campeonato::find($dados['id']);
+                
+                if($request->input('data_inicio_inscricao') == date("d/m/Y", strtotime( $campeonato->data_inicio_inscricao)))
+                    $dados['data_inicio_inscricao'] = Carbon::createFromFormat('d/m/Y', $request->input('data_inicio_inscricao'))->format('Y-m-d');
+
+                if($request->input('data_final_inscricao') == date("d/m/Y", strtotime( $campeonato->data_final_inscricao)))
+                    $dados['data_final_inscricao'] = Carbon::createFromFormat('d/m/Y', $request->input('data_final_inscricao'))->format('Y-m-d');
+
+                if($request->input('data_campeonato') == date("d/m/Y", strtotime( $campeonato->data_campeonato)))
+                    $dados['data_campeonato'] = Carbon::createFromFormat('d/m/Y', $request->input('data_campeonato'))->format('Y-m-d');
+                
                 $categoria = Campeonato::updateOrCreate(['id' => $dados['id']], $dados);
-
             }
             else 
                 Campeonato::create($dados);
