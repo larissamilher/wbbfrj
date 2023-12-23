@@ -58,6 +58,7 @@ class atualizaStatusPagamento extends Command
 
             echo 'foi';
         }
+        echo 'foi command';
         Log::info("rodou command");
     }
 }
