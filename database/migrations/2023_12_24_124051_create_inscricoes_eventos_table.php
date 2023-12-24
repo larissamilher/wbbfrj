@@ -29,11 +29,11 @@ return new class extends Migration
             $table->string('numero')->nullable();
 
             $table->string('status_pagamento')->nullable();
-            $table->string('payment_id');           
-            $table->string('customer');     
-            $table->string('billingType');
-            $table->float('value');
-            $table->date('dueDate');
+            $table->string('payment_id')->nullable();           
+            $table->string('customer')->nullable();     
+            $table->string('billingType')->nullable();
+            $table->float('value')->nullable();
+            $table->date('dueDate')->nullable();
             $table->string('installmentCount')->nullable();
             $table->float('totalValue')->nullable();
             $table->string('remoteIp')->nullable();

@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Site\InscricaoController;
 use App\Http\Controllers\Site\SiteController;
+use App\Http\Controllers\Site\EventoController;
+
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AtletasController;
 use App\Http\Controllers\Admin\CampeonatosController;
@@ -13,6 +15,7 @@ use App\Http\Controllers\Admin\InscricoesController;
 use App\Http\Controllers\Admin\UsuariosController;
 use App\Http\Controllers\Admin\SubCategoriasController;
 use App\Http\Controllers\Admin\EventosController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -190,8 +193,11 @@ Route::prefix('educacao')->group(function () {
         return view('site.curso-arbitros');
     })->name('curso-arbitros');
 
-    Route::get('/eventos-inscricoes', [InscricaoController::class, 'teste'])->name('eventos-inscricoes');
-    
+    Route::get('/eventos-inscricoes', [EventoController::class, 'index'])->name('eventos-inscricoes');
+    Route::match(['get', 'post'],'/ficha', [EventoController::class, 'primeiraEtapaInscricao'])->name('evento.inscricao.store.ficha');
+    Route::get('/get-dados-cpf/{cpf}', [EventoController::class, 'getrDadosCpf'])->name('get-dados-cpf');
+    Route::post('/pagamento', [EventoController::class, 'etapaPagamento'])->name('evento.inscricao.pagamento');
+
 });
 
 Route::get('/contato', function () {
