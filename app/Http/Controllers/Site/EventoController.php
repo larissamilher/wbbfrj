@@ -10,9 +10,10 @@ use App\Services\GeradorCodigoService;
 use App\Models\Evento;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\ConfirmacaoInscricao;
+use App\Mail\ConfirmacaoInscricaoEvento;
 use Illuminate\Support\Facades\Log;
 use PhpOffice\PhpSpreadsheet\Exception;
+use DateTime;
 
 class EventoController extends Controller
 {
@@ -177,29 +178,33 @@ class EventoController extends Controller
                 case 'PENDING': 
                     $codigo = GeradorCodigoService::geraCodigo();
 
-                    $participanteEvento = InscricaoEvento::update($participante->id ,[
-                        'codigo' => $codigo,
-                        'status_pagamento' =>$pagamentoRetorno->status,
-                        'payment_id' => $pagamentoRetorno->id,
-                        'customer' => $pagamentoRetorno->customer,
-                        'billingType' => $pagamentoRetorno->billingType,
-                        'value' => number_format( $evento->valor, 2, '.', '.'),
-                        'dueDate' => $pagamentoRetorno->dueDate,
-                        'installmentCount' => null,
-                        'totalValue' => number_format( $evento->valor, 2, '.', '.'),
-                        'remoteIp' =>$request->ip(),
-                        'holderName' =>$request->get('nome_cartao'),
-                        'creditCardNumber' => isset($pagamentoRetorno->creditCard->creditCardNumber) ? $pagamentoRetorno->creditCard->creditCardNumber : '',
-                        'creditCardToken' =>  isset($pagamentoRetorno->creditCard->creditCardToken) ? $pagamentoRetorno->creditCard->creditCardToken : '',
-                        'creditCardBrand' => isset($pagamentoRetorno->creditCard->creditCardBrand) ? $pagamentoRetorno->creditCard->creditCardBrand : ''
-                    ]);    
+                    $participanteEvento = InscricaoEvento::find($participante->id);
+
+                    if ($participanteEvento) {
+
+                        $participanteEvento->update([
+                            'codigo' => $codigo,
+                            'status_pagamento' =>$pagamentoRetorno->status,
+                            'payment_id' => $pagamentoRetorno->id,
+                            'customer' => $pagamentoRetorno->customer,
+                            'billingType' => $pagamentoRetorno->billingType,
+                            'value' => number_format( $evento->valor, 2, '.', '.'),
+                            'dueDate' => $pagamentoRetorno->dueDate,
+                            'installmentCount' => null,
+                            'totalValue' => number_format( $evento->valor, 2, '.', '.'),
+                            'remoteIp' =>$request->ip(),
+                            'holderName' =>$request->get('nome_cartao'),
+                            'creditCardNumber' => isset($pagamentoRetorno->creditCard->creditCardNumber) ? $pagamentoRetorno->creditCard->creditCardNumber : '',
+                            'creditCardToken' =>  isset($pagamentoRetorno->creditCard->creditCardToken) ? $pagamentoRetorno->creditCard->creditCardToken : '',
+                            'creditCardBrand' => isset($pagamentoRetorno->creditCard->creditCardBrand) ? $pagamentoRetorno->creditCard->creditCardBrand : ''
+                        ]);    
+                    }
 
                     if(!$participanteEvento)
                         throw new \Exception('Ops! Houve um erro interno. Por favor, tente novamente mais tarde. Se o problema persistir, entre em contato conosco para obter assistência. Lamentamos qualquer inconveniente');
                     
                     if($pagamentoRetorno->status == 'CONFIRMED'){
-
-                        Mail::to($participante['email'])->send(new ConfirmacaoInscricao($participanteEvento));
+                        Mail::to($participante['email'])->send(new ConfirmacaoInscricaoEvento($participanteEvento));
                         return view('site.inscricao-sucesso');
                     }
 
@@ -224,7 +229,7 @@ class EventoController extends Controller
 
         } catch (\Exception $e) {    
             Log::error($e);
-dd($e->getMessage());
+
             $retorno = [
                 'success' => false,
                 'message' =>  $e->getMessage(),
@@ -235,7 +240,7 @@ dd($e->getMessage());
                     "ccv" => $request->get('cvv'),
                 ],
             ];
-            return view('site.pagamento', compact([ 'campeonato','retorno' ]));
+            return view('site.eventos.pagamento', compact([ 'campeonato','retorno' ]));
         }
     }
 

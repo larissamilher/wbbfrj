@@ -13,6 +13,7 @@ class InscricaoEvento extends Model
  
     protected $fillable = [
         'evento_id',
+        'codigo',
         'nome',
         'cpf',
         'rg',
