@@ -28,6 +28,12 @@
                     <p>
                         <strong>Subcategoria:</strong> {{$dadosEmail['subcategoria']}}
                     </p>
+                    <p>
+                        Você pode acompnhar a sua inscrição pelo nosso site:
+                        <a href="{{ route('acompanhar-inscricao') }}" style="cursor: pointer"> 
+                            CLIQUE AQUI
+                        </a>
+                    </p>
                     <img alt="WBBF"
                         src="https://www.wbbfrj.com/img/categorias/{{$dadosEmail['categoria']->slug}}"
                         style="display:block;max-width: 500px;" class="CToWUd a6T" data-bit="iit"

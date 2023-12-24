@@ -18,6 +18,13 @@
                                             Inscrição concluída! 
                                             <br>Aguarde mais detalhes no seu e-mail em breve. 
                                            <br> Estamos empolgados com sua participação!
+
+                                           <p>
+                                                Você pode acompnhar a sua inscrição pelo nosso site:
+                                                <a href="{{ route('acompanhar-inscricao') }}" style="cursor: pointer"> 
+                                                    CLIQUE AQUI
+                                                </a>
+                                            </p>
                                         </h3>
                                     </div>
                                 </div>
