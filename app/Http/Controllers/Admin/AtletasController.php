@@ -25,7 +25,10 @@ class AtletasController extends Controller
         $inscricoes = AtletaXCampeonato::with([
             'categoria' => function ($query) {
                 $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
-            }
+            },
+            'campeonato' => function ($query) {
+                $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
+            },
         ])->where("atleta_id", $atleta->id)->orderBy('created_at', 'desc')->get();
 
         return view('admin.atletas.detalhes', compact('atleta','inscricoes'));
