@@ -113,6 +113,13 @@
               </a>
             </li>
 
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('admin.eventos') }}">
+                <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
+                <span class="menu-title">Eventos</span>
+              </a>
+            </li>
+
             @if(auth()->user()->permissao_create_user)
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.usuarios') }}">

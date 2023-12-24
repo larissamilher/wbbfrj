@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\CategoriasController;
 use App\Http\Controllers\Admin\InscricoesController;
 use App\Http\Controllers\Admin\UsuariosController;
 use App\Http\Controllers\Admin\SubCategoriasController;
+use App\Http\Controllers\Admin\EventosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -88,6 +89,15 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::get('/add-campeonato/{subCategoriaId}/{campeonatoId}', [SubCategoriasController::class, 'addCampeonato'])->name('admin.subcategoria.addCampeonato');
 
         Route::get('/{categoriaId?}', [SubCategoriasController::class, 'index'])->name('admin.subcategorias');
+    });
+
+    Route::prefix('eventos')->group(function () {
+        Route::get('/', [EventosController::class, 'index'])->name('admin.eventos');
+        Route::get('/novo', [EventosController::class, 'create'])->name('admin.evento.novo');
+        Route::get('/edit/{id}', [EventosController::class, 'edit'])->name('admin.evento.edit');
+        Route::get('/delete/{id}', [EventosController::class, 'delete'])->name('admin.evento.delete');
+        Route::post('/store', [EventosController::class, 'store'])->name('admin.evento.store');
+
     });
 
     Route::prefix('usuarios')->group(function () {
@@ -179,6 +189,9 @@ Route::prefix('educacao')->group(function () {
     Route::get('/curso-arbitros', function () {
         return view('site.curso-arbitros');
     })->name('curso-arbitros');
+
+    Route::get('/eventos-inscricoes', [InscricaoController::class, 'teste'])->name('eventos-inscricoes');
+    
 });
 
 Route::get('/contato', function () {
