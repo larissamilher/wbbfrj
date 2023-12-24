@@ -103,7 +103,7 @@
                                             <li>
                                                 <a href="#">Educação</a>
                                                 <ul class="submenu">
-                                                    <li><a href="{{ route('curso-arbitros') }}">WORKSHOP AO FISICULTURISMOs</a></li>
+                                                    <li><a href="{{ route('curso-arbitros') }}">WORKSHOP AO FISICULTURISMO</a></li>
                                                     <li><a href="{{ route('eventos-inscricoes') }}">Inscriçõess</a></li>
                                                 </ul>
                                             </li>
