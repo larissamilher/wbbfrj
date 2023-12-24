@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('inscricoes_eventos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('evento_id')->unsigned();
-
+            $table->text('codigo')->nullable();          
             $table->string('nome');
             $table->string('cpf');
             $table->string('rg')->nullable();

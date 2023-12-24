@@ -51,7 +51,7 @@ class EventoController extends Controller
             else    
                 $participante['autorizacao_uso_imagem'] = 0;
             
-            $participanteSave = InscricaoEvento::updateOrCreate(['cpf' =>  $participante['cpf']], $participante);
+            $participanteSave = InscricaoEvento::Create($participante);
 
             session()->put('participante',$participanteSave );
 
@@ -84,13 +84,21 @@ class EventoController extends Controller
             $validade = explode('/', $request->get('validade_cartao'));
 
             $participante = session()->get('participante');
+            $evento = Evento::find($participante->evento_id);
 
-            dd($participante );
-            $cpf = str_replace(['.', '-'], '', $participante['cpf'] );
+            $cpf = str_replace(['.', '-'], '', $participante->cpf );
 
-            $evento = Evento::find($participante['evento_id']);
+            if( $request->get('forma_pagamento') ==  'CREDIT_CARD'){
+                $dateTime = DateTime::createFromFormat('m/Y', $request->get('validade_cartao'));
 
-            $valor =  number_format(  $campeonato->valor , 2, '.', '.') ;
+                if (!$dateTime || $dateTime->format('m/Y') !== $request->get('validade_cartao')) 
+                    throw new \Exception( 'Informe uma data de validade válida');
+    
+                if(strlen( $request->get('cvv')) != 3)
+                    throw new \Exception( 'Código de segurança inválido');
+            }
+
+            $valor =  number_format(  $evento->valor , 2, '.', '.') ;
 
             if($request->get('parcelamento') > 1)
                 $valor = number_format(  $valor + ($valor * 0.0349 + 0.49) , 2, '.', '.');
@@ -102,14 +110,14 @@ class EventoController extends Controller
             if(!$clienteAsaasId){
 
                 $dadosCliente = [
-                    'name' => $participante['nome'],
+                    'name' => $participante->nome,
                     'cpfCnpj' =>$cpf,
-                    'email' =>$participante['email'],
-                    'mobilePhone' =>$participante['celular'],
-                    'address' =>$participante['logradouro'],
-                    'addressNumber' =>$participante['numero'],
-                    'province' =>$participante['bairro'],
-                    'postalCode' =>$participante['cep']
+                    'email' =>$participante->email,
+                    'mobilePhone' =>$participante->celular,
+                    'address' =>$participante->logradouro,
+                    'addressNumber' =>$participante->numero,
+                    'province' =>$participante->bairro,
+                    'postalCode' =>$participante->cep
                 ];
     
                 $clienteAsaas = PagamentoService::createCliente($dadosCliente);
@@ -128,7 +136,7 @@ class EventoController extends Controller
                 'value' => number_format( $valor, 2, '.', '.'),
                 'dueDate' => date('Y-m-d'),
                 'remoteIp' =>$request->ip(),
-                'description' =>$campeonato->nome
+                'description' =>$evento->nome
             ];
 
             if( $request->get('forma_pagamento') ==  'CREDIT_CARD'){
@@ -140,16 +148,16 @@ class EventoController extends Controller
                     "holderName" => $request->get('nome_cartao'),
                     "number" => $request->get('numero_cartao'),
                     "expiryMonth" => $validade[0],
-                    "expiryYear" => "20" . $validade[1],
+                    "expiryYear" => $validade[1],
                     "ccv" => $request->get('cvv'),
                 ];
 
                 $dados['creditCardHolderInfo'] = [
-                    "name" => $participante['nome'],
-                    "email" => $participante['email'],
-                    "postalCode" => $participante['cep'],
-                    "addressNumber" => $participante['cidade'] . '/'.  $participante['estado']. ', '.  $participante['bairro'] .' '.  $participante['numero'] .' '.  $participante['logradouro'] ,
-                    "phone" => $participante['celular'],
+                    "name" => $participante->nome,
+                    "email" => $participante->email,
+                    "postalCode" =>$participante->cep,
+                    "addressNumber" => $participante->cidade . '/'.  $participante->estado. ', '.  $participante->bairro .' '.  $participante->numero .' '.  $participante->logradouro ,
+                    "phone" => $participante->celular,
                     "cpfCnpj" => $cpf,
                 ];
             }
@@ -167,21 +175,18 @@ class EventoController extends Controller
             switch($pagamentoRetorno->status){
                 case 'CONFIRMED': 
                 case 'PENDING': 
-                    $participanteId = Atleta::where('cpf', $cpf )->pluck('id')->first();
                     $codigo = GeradorCodigoService::geraCodigo();
 
-                    $atletaXCampeonato = AtletaXCampeonato::create([
+                    $participanteEvento = InscricaoEvento::update($participante->id ,[
                         'codigo' => $codigo,
-                        'evento_id' => $participante['campeonato'],
-                        'cupom_id' =>null,
                         'status_pagamento' =>$pagamentoRetorno->status,
                         'payment_id' => $pagamentoRetorno->id,
                         'customer' => $pagamentoRetorno->customer,
                         'billingType' => $pagamentoRetorno->billingType,
-                        'value' => number_format( $campeonato->valor, 2, '.', '.'),
+                        'value' => number_format( $evento->valor, 2, '.', '.'),
                         'dueDate' => $pagamentoRetorno->dueDate,
                         'installmentCount' => null,
-                        'totalValue' => number_format( $campeonato->valor, 2, '.', '.'),
+                        'totalValue' => number_format( $evento->valor, 2, '.', '.'),
                         'remoteIp' =>$request->ip(),
                         'holderName' =>$request->get('nome_cartao'),
                         'creditCardNumber' => isset($pagamentoRetorno->creditCard->creditCardNumber) ? $pagamentoRetorno->creditCard->creditCardNumber : '',
@@ -189,20 +194,12 @@ class EventoController extends Controller
                         'creditCardBrand' => isset($pagamentoRetorno->creditCard->creditCardBrand) ? $pagamentoRetorno->creditCard->creditCardBrand : ''
                     ]);    
 
-                    if(!$atletaXCampeonato)
+                    if(!$participanteEvento)
                         throw new \Exception('Ops! Houve um erro interno. Por favor, tente novamente mais tarde. Se o problema persistir, entre em contato conosco para obter assistência. Lamentamos qualquer inconveniente');
-                    
-                    $participante['categoria'] = Categoria::find($participante['categorias']);
-
-                    $subCategoria = SubCategoria::find($atleta['sub_categoria_id']);
-
-                    $participante['codigo'] =  $codigo;
-                    $participante['subcategoria'] = $subCategoria->nome;
-
                     
                     if($pagamentoRetorno->status == 'CONFIRMED'){
 
-                        Mail::to($participante['email'])->send(new ConfirmacaoInscricao($participante));
+                        Mail::to($participante['email'])->send(new ConfirmacaoInscricao($participanteEvento));
                         return view('site.inscricao-sucesso');
                     }
 
@@ -227,7 +224,7 @@ class EventoController extends Controller
 
         } catch (\Exception $e) {    
             Log::error($e);
-
+dd($e->getMessage());
             $retorno = [
                 'success' => false,
                 'message' =>  $e->getMessage(),
