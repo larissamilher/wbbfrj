@@ -25,7 +25,7 @@
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-box user-icon mb-30">
                                     <label for="codigo">Informe o código de inscrição recebido via e-mail</label>
-                                    <input type="text" name="ccodigopf" id="codigo"  class="form-control required">        
+                                    <input type="text" name="codigo" id="codigo"  class="form-control required">        
                                 </div>
                             </div>
         
