@@ -113,7 +113,11 @@ class EventosController extends Controller
 
         $eventos = Evento::orderBy('nome')->get();
 
-        $inscricoes = InscricaoEvento::where('status_pagamento', '!=', '');
+        $inscricoes = InscricaoEvento::with([
+            'evento' => function ($query) {
+                $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
+            },
+        ])->where('status_pagamento', '!=', '');
         
         if($eventoId)
             $inscricoes = $inscricoes->where('evento_id', $eventoId);        
