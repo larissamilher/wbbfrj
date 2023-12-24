@@ -162,6 +162,15 @@ Route::prefix('campeonatos')->group(function () {
 
         Route::get('/teste', [InscricaoController::class, 'teste'])->name('teste');
 
+        Route::get('/acompanhar-inscricao', function () {
+            return view('site.acompanhar-inscricao');
+        })->name('acompanhar-inscricao');
+        
+        Route::get('/get-dados-inscricao/{codigo}', [InscricaoController::class, 'getDadosInscricao'])->name('get-dados-inscricao');
+
+        
+        // Route::get('/acompanhar-inscricao', [InscricaoController::class, 'acompanharInscricao'])->name('acompanhar-inscricao');
+        
     });
 
     Route::prefix('resultados')->group(function () {

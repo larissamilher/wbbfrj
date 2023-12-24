@@ -378,6 +378,51 @@ class InscricaoController extends Controller
         return $response;
     }
 
+    public function getDadosInscricao($codigo)
+    {
+        $response = [
+            'success' => true,
+            'message' => 'Dados buscados com sucesso'
+        ];
+
+        try{        
+            $atletaCampeonato = AtletaXCampeonato::with(['atleta','campeonato', 'categoria.categoria'])->where('codigo' , str_replace('-', '/', $codigo))->first();
+
+            if($atletaCampeonato){
+                $atletaCampeonato->atleta->rg = implode('.', [substr($atletaCampeonato->atleta->rg, 0, 2), substr($atletaCampeonato->atleta->rg, 2, 3), substr($atletaCampeonato->atleta->rg, 5, 3)]) . '-' . substr($atletaCampeonato->atleta->rg, 8, 1);                
+                $atletaCampeonato->atleta->celular = '(' . substr( $atletaCampeonato->atleta->celular, 0, 2) . ')' . substr( $atletaCampeonato->atleta->celular, 2, 5) . '-' . substr( $atletaCampeonato->atleta->celular, 7, 4);
+                $atletaCampeonato->atleta->cep = substr( $atletaCampeonato->atleta->cep, 0, 5) . '-' . substr( $atletaCampeonato->atleta->cep, 5, 3);
+                $atletaCampeonato->atleta->cpf = substr($atletaCampeonato->atleta->cpf , 0, 3) . '.' . substr($atletaCampeonato->atleta->cpf , 3, 3) . '.' . substr($atletaCampeonato->atleta->cpf , 6, 3) . '-' . substr($atletaCampeonato->atleta->cpf , 9, 2);
+
+              
+                switch($atletaCampeonato->status_pagamento){
+                    case 'PENDING':
+                        $atletaCampeonato->status_pagamento = 'PENDENTE';
+                        break;
+                    case 'RECUSED':
+                        $atletaCampeonato->status_pagamento = 'RECUSADO';
+                        break;
+                    case 'CONFIRMED':
+                        $atletaCampeonato->status_pagamento = 'CONFIRMADO';
+                        break;
+                }
+
+                $response['dados'] = $atletaCampeonato;
+            }
+            else
+                throw new Exception("Código não encontrado");
+
+        }catch (Exception $e) {
+            Log::error($e);
+            return [
+                'success' => false,
+                'message' => 'Ops! Parece que houve um problema. Por favor, tente novamente mais tarde.'
+            ];
+        }
+
+        return $response;
+    }
+    
     public function teste()
     {
         $dadosEmail =[

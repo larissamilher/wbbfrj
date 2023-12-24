@@ -91,6 +91,7 @@
                                                     {{-- <li><a href="{{ route('como-competir') }}">Como competir na WBBF</a></li> --}}
                                                     {{-- <li><a href="{{ route('backstage-anual') }}">Backstage Anual</a></li> --}}
                                                     <li><a href="{{ route('inscricao') }}">Inscrições</a></li>
+                                                    <li><a href="{{ route('acompanhar-inscricao') }}">Acompnhar Inscrição</a></li>
                                                     {{-- <li>
                                                         <a href="#">Resultados</a>
                                                         <ul class="submenu">
