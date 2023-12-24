@@ -129,7 +129,7 @@
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-box subject-icon mb-30">
                                     <label for="numero">Número Atleta</label>
-                                    <input type="text" name="numero" id="numero"disabled class="form-control required">
+                                    <input type="text" name="numero_atleta" id="numero_atleta"disabled class="form-control required">
                                 </div>
                             </div>
 
