@@ -63,7 +63,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
 
     Route::prefix('campeonatos')->group(function () {
         Route::get('/', [CampeonatosController::class, 'index'])->name('admin.campeonatos');
-        Route::get('/novo', [CampeonatosController::class, 'create'])->name('admin.campeonato.novo');
+        Route::get('/novo-campeonato', [CampeonatosController::class, 'create'])->name('admin.campeonato.novo');
         Route::get('/edit/{id}', [CampeonatosController::class, 'edit'])->name('admin.campeonato.edit');
         Route::get('/delete/{id}', [CampeonatosController::class, 'delete'])->name('admin.campeonato.delete');
         Route::post('/store', [CampeonatosController::class, 'store'])->name('admin.campeonato.store');
@@ -93,7 +93,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
 
     Route::prefix('eventos')->group(function () {
         Route::get('/', [EventosController::class, 'index'])->name('admin.eventos');
-        Route::get('/novo', [EventosController::class, 'create'])->name('admin.evento.novo');
+        Route::get('/novo-evento', [EventosController::class, 'create'])->name('admin.evento.novo');
         Route::get('/edit/{id}', [EventosController::class, 'edit'])->name('admin.evento.edit');
         Route::get('/delete/{id}', [EventosController::class, 'delete'])->name('admin.evento.delete');
         Route::post('/store', [EventosController::class, 'store'])->name('admin.evento.store');
