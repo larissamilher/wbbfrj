@@ -6,8 +6,6 @@
                 <div class="card-body" style="overflow-x: auto;">
                     <h4 class="card-title">Detalhe atleta</h4>
                     
-                  
-                   
                 </div>
             </div>
         </div>
@@ -47,6 +45,13 @@
                             </div>    
                         </div>
 
+                        <div class="col-lg-3 col-md-3">
+                            <div class="form-group">
+                                <label for="rg">RG</label>
+                                <input type="text" name="rg" id="rg"disabled class="form-control required"  value="{{$atleta->rg}}">
+                            </div>
+                        </div>     
+
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="nome">Data de Nascimento </label>
@@ -54,7 +59,7 @@
                             </div>    
                         </div>
 
-                        <div class="col-lg-6">
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="nome">Email</label>
                                 <input type="text" class="form-control" disabled value="{{$atleta->email}}">
@@ -63,6 +68,59 @@
 
                     </div>
 
+                    <div class="row">
+                           
+                        <div class="col-lg-3 col-md-3">
+                            <div class="form-group">
+                                <label for="cep">CEP</label>
+                                <input type="text" name="cep" id="cep"disabled class="form-control required" value="{{$atleta->cep}}">
+                            </div>
+                        </div> 
+    
+                        <div class="col-lg-3 col-md-3">
+                            <div class="form-group">
+                                <label for="estado">Estado</label>
+                                <input type="text" name="estado" id="estado"disabled class="form-control required"  maxlength="2" value="{{$atleta->estado}}">
+    
+                            </div>
+                        </div>
+    
+                        <div class="col-lg-4 col-md-4">
+                            <div class="form-group">
+                                <label for="cidade">Cidade</label>
+                                <input type="text" name="cidade" id="cidade"disabled class="form-control required" value="{{$atleta->cidade}}">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2">
+                            <div class="form-group">
+                                <label for="numero">Número</label>
+                                <input type="text" name="numero" id="numero"disabled class="form-control required" value="{{$atleta->numero}}">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                      
+    
+                        <div class="col-lg-5 col-md-5">
+                            <div class="form-group">
+                                <label for="bairro">Bairro</label>
+                                <input type="text" name="bairro" id="bairro"disabled class="form-control required" value="{{$atleta->bairro}}">
+                            </div>
+                        </div>
+    
+                      
+    
+                        <div class="col-lg-7 col-md-7">
+                            <div class="form-group">
+                                <label for="logradouro">Logradouro</label>
+                                <input type="text" name="logradouro" id="logradouro"disabled class="form-control required" value="{{$atleta->logradouro}}">
+                            </div>
+                        </div>
+                       
+                        
+                    </div>
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
