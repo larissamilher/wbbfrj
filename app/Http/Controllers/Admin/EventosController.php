@@ -129,7 +129,11 @@ class EventosController extends Controller
 
     public function gerarPdf($id){
 
-        $inscricao = InscricaoEvento::with('evento')->find($id); 
+        $inscricao = InscricaoEvento::with([
+            'evento' => function ($query) {
+                $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
+            },
+        ])->find($id); 
 
         $pdfView = View::make('admin.eventos.detalhes-pdf',  ['inscricao' => $inscricao])->render();
 
