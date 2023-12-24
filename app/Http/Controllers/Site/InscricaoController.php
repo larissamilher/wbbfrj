@@ -386,7 +386,16 @@ class InscricaoController extends Controller
         ];
 
         try{        
-            $atletaCampeonato = AtletaXCampeonato::with(['atleta','campeonato', 'categoria.categoria'])->where('codigo' , str_replace('-', '/', $codigo))->first();
+            $atletaCampeonato = AtletaXCampeonato::with([
+                'atleta',
+                'campeonato' => function ($query) {
+                    $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
+                },
+                'categoria' => function ($query) {
+                    $query->with('categoria');
+                    $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
+                },
+            ])->where('codigo' , str_replace('-', '/', $codigo))->first();
 
             if($atletaCampeonato){
                 $atletaCampeonato->atleta->rg = implode('.', [substr($atletaCampeonato->atleta->rg, 0, 2), substr($atletaCampeonato->atleta->rg, 2, 3), substr($atletaCampeonato->atleta->rg, 5, 3)]) . '-' . substr($atletaCampeonato->atleta->rg, 8, 1);                
