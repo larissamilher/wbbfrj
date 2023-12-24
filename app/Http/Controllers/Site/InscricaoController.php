@@ -409,8 +409,13 @@ class InscricaoController extends Controller
 
                 $response['dados'] = $atletaCampeonato;
             }
-            else
-                throw new Exception("Código não encontrado");
+            else{
+                $response = [
+                    'success' => false,
+                    'message' => 'Código não encontrado'
+                ];
+            }
+
 
         }catch (Exception $e) {
             Log::error($e);

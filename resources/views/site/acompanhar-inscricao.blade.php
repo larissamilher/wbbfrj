@@ -252,21 +252,11 @@
                                 $('#numero_atleta').val(retorno.dados.numero_atleta);
                             }else{
 
+                                Swal.fire(retorno.message);
+
                                 $(".form-desabilitado").css('display','none');
 
 
-                                $('#nome').val('');
-                                $('#rg').val('');
-                                $('#celular').val('');
-                                $('#data_nascimento').val('');
-                                $('#email').val('');
-                                $('#cep').val('');
-                                $('#estado').val('');
-                                $('#cidade').val('');
-                                $('#logradouro').val('');
-                                $('#bairro').val('');
-                                $('#numero').val('');
-                                $('#academia_coach').val('');
                             }                          
                         }
                     });
