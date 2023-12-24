@@ -288,7 +288,7 @@
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-2 col-md-3">
-                    <a href="{{route('curso-arbitros')}}" class="btn wantToWork-btn f-right" style="width: 100%;">Saiba mais</a>
+                    <a href="{{route('eventos-inscricoes')}}" class="btn wantToWork-btn f-right" style="width: 100%;">Inscreva-se</a>
                 </div>
             </div>
         </div>
