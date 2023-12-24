@@ -60,7 +60,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::post('/add-peso', [InscricoesController::class, 'addPesoStore'])->name('admin.inscricoes.add-peso-store');
         Route::post('/add-pagamento', [InscricoesController::class, 'addPagamentoStore'])->name('admin.inscricoes.add-pagamento-store');
 
-        Route::get('/{campeonatoId?}', [InscricoesController::class, 'index'])->name('admin.inscricoes');
+        Route::get('/{campeonatoId?}/{codigoId?}', [InscricoesController::class, 'index'])->name('admin.inscricoes');
 
     });    
 

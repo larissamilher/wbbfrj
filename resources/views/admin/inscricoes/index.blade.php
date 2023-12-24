@@ -14,10 +14,9 @@
             <div class="card">
                 <div class="card-body">
                     <form class="forms-sample">
-                        @csrf
-                       
+                        @csrf                       
                         <div class="row">
-                            <div class="col-lg-11">
+                            <div class="col-lg-5">
                                 <div class="form-group">
                                     <label for="campeonato_id">Filtrar por Campeonato</label>
                                     <select class="form-control" id="campeonato_id" name="campeonato_id">
@@ -30,7 +29,14 @@
                                 </div>
                             </div>
                         
-                            <div class="col-lg-1">
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <label for="campeonato_id">Filtrar por Código Inscrição</label>
+                                    <input type="text" name="codigo" id="codigo"  class="form-control required">        
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>&nbsp;</label>
                                     <div class="input-group" style=" width: 100% !important;    ">
@@ -127,9 +133,10 @@
           
           $('#btnFiltro').on('click', function() {
               var campeonato_id = $("#campeonato_id").val();
+              var codigo = $("#codigo").val();
 
               if(campeonato_id)
-                  window.location.href = "/admin/inscricoes/"+ campeonato_id;
+                  window.location.href = "/admin/inscricoes-campeonatos/"+ campeonato_id + '/' + codigo.replace('/', "-");
 
           });
       });

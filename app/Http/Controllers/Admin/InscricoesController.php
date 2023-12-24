@@ -20,7 +20,7 @@ use PhpOffice\PhpSpreadsheet\Exception;
 
 class InscricoesController extends Controller
 {
-    public function index($campeonatoId = null)
+    public function index($campeonatoId = null, $codigo = null)
     {
         $inscricoes = AtletaXCampeonato::with(['campeonato', 'categoria', 'atleta'])
         ->join('atletas', 'atletas.id', '=', 'atleta_x_campeonato.atleta_id')
@@ -29,6 +29,9 @@ class InscricoesController extends Controller
 
         if($campeonatoId)
             $inscricoes = $inscricoes->where('atleta_x_campeonato.campeonato_id',$campeonatoId);
+
+        if($codigo)
+            $inscricoes = $inscricoes->where('atleta_x_campeonato.codigo', str_replace('-', '/', $codigo));
 
         $inscricoes = $inscricoes->get();
 
