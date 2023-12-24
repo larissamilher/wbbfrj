@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\ConfirmacaoInscricao;
 use Illuminate\Support\Facades\Log;
 use PhpOffice\PhpSpreadsheet\Exception;
+use DateTime;
 
 class InscricaoController extends Controller
 {
@@ -149,12 +150,21 @@ class InscricaoController extends Controller
         ];
 
         try {
-            $validade = explode('/', $request->get('validade_cartao'));
-
             $atleta = session()->get('atleta');
-            $cpf = str_replace(['.', '-'], '', $atleta['cpf'] );
-
             $campeonato = Campeonato::find($atleta['campeonato']);
+
+            if( $request->get('forma_pagamento') ==  'CREDIT_CARD'){
+                $dateTime = DateTime::createFromFormat('m/Y', $request->get('validade_cartao'));
+
+                if (!$dateTime || $dateTime->format('m/Y') !== $request->get('validade_cartao')) 
+                    throw new \Exception( 'Informe uma data de validade válida');
+    
+                if(strlen( $request->get('cvv')) != 3)
+                    throw new \Exception( 'Código de segurança inválido');
+            }
+          
+            $validade = explode('/', $request->get('validade_cartao'));
+            $cpf = str_replace(['.', '-'], '', $atleta['cpf'] );
 
             $valor =  number_format(  $campeonato->valor , 2, '.', '.') ;
 
