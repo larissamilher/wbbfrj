@@ -42,7 +42,7 @@ class InscricaoController extends Controller
             ->Join('sub_categorias_campeonato', 'sub_categorias_campeonato.sub_categoria_id', 'sub_categorias.id')
             ->where('sub_categorias_campeonato.campeonato_id', $campeonatoId)
             ->select('categorias.nome','categorias.id', 'categorias.genero')
-            ->groupBy('categorias.id')
+            ->distinct('categorias.id')
             ->get();
 
     
