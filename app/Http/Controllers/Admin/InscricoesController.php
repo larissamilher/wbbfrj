@@ -31,8 +31,7 @@ class InscricoesController extends Controller
         ])
         ->join('atletas', 'atletas.id', '=', 'atleta_x_campeonato.atleta_id')
         ->orderBy('atletas.nome') 
-        ->select("atleta_x_campeonato.*")
-        ->get();
+        ->select("atleta_x_campeonato.*");
 
         if($campeonatoId)
             $inscricoes = $inscricoes->where('atleta_x_campeonato.campeonato_id',$campeonatoId);
