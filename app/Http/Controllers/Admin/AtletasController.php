@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Atleta;
 use PhpOffice\PhpSpreadsheet\Exception;
+use App\Models\AtletaXCampeonato;
 
 class AtletasController extends Controller
 {
@@ -21,6 +22,8 @@ class AtletasController extends Controller
 
         $atleta = Atleta::find($id);
 
-        return view('admin.atletas.detalhes', compact('atleta'));
+        $inscricoes = AtletaXCampeonato::where("atleta_id", $atleta->id)->orderBy('created_at', 'desc')->get();
+
+        return view('admin.atletas.detalhes', compact('atleta','inscricoes'));
     }
 }
