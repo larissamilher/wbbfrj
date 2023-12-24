@@ -20,7 +20,11 @@ class AtletasController extends Controller
 
     public function detalhes($id){
 
-        $atleta = Atleta::find($id);
+        $atleta = Atleta::with([
+            'categoria' => function ($query) {
+                $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
+            },
+        ])->find($id);
 
         $inscricoes = AtletaXCampeonato::where("atleta_id", $atleta->id)->orderBy('created_at', 'desc')->get();
 
