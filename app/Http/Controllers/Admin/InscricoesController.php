@@ -22,11 +22,17 @@ class InscricoesController extends Controller
 {
     public function index($campeonatoId = null, $codigo = null)
     {
-        $inscricoes = AtletaXCampeonato::with(['campeonato', 'categoria', 'atleta'])
+        $inscricoes = AtletaXCampeonato::with([
+            'campeonato',
+            'categoria' => function ($query) {
+                $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
+            },
+            'atleta'
+        ])
         ->join('atletas', 'atletas.id', '=', 'atleta_x_campeonato.atleta_id')
         ->orderBy('atletas.nome') 
         ->select("atleta_x_campeonato.*")
-        ->withTrashed();
+        ->get();
 
         if($campeonatoId)
             $inscricoes = $inscricoes->where('atleta_x_campeonato.campeonato_id',$campeonatoId);
