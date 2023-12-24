@@ -20,13 +20,13 @@ class AtletasController extends Controller
 
     public function detalhes($id){
 
-        $atleta = Atleta::with([
+        $atleta = Atleta::find($id);
+
+        $inscricoes = AtletaXCampeonato::with([
             'categoria' => function ($query) {
                 $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
-            },
-        ])->find($id);
-
-        $inscricoes = AtletaXCampeonato::where("atleta_id", $atleta->id)->orderBy('created_at', 'desc')->get();
+            }
+        ])->where("atleta_id", $atleta->id)->orderBy('created_at', 'desc')->get();
 
         return view('admin.atletas.detalhes', compact('atleta','inscricoes'));
     }
