@@ -23,7 +23,9 @@ class InscricoesController extends Controller
     public function index($campeonatoId = null, $codigo = null)
     {
         $inscricoes = AtletaXCampeonato::with([
-            'campeonato',
+            'campeonato' => function ($query) {
+                $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
+            },
             'categoria' => function ($query) {
                 $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
             },
