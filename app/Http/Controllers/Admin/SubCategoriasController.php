@@ -17,7 +17,11 @@ class SubCategoriasController extends Controller
     public function index($categoriaId = null){
         $categorias = Categoria::orderBy('nome')->get();
 
-        $subcategorias = SubCategoria::with('categoria')->orderBy('nome');
+        $subcategorias = SubCategoria::with([
+            'categoria' => function ($query) {
+                $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
+            }
+        ])->orderBy('nome');
         $campeonatos = Campeonato::orderBy('nome')->get();
 
         if($categoriaId)
