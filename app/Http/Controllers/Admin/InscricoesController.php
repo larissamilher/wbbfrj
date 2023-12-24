@@ -25,7 +25,8 @@ class InscricoesController extends Controller
         $inscricoes = AtletaXCampeonato::with(['campeonato', 'categoria', 'atleta'])
         ->join('atletas', 'atletas.id', '=', 'atleta_x_campeonato.atleta_id')
         ->orderBy('atletas.nome') 
-        ->select("atleta_x_campeonato.*");
+        ->select("atleta_x_campeonato.*")
+        ->withTrashed();
 
         if($campeonatoId)
             $inscricoes = $inscricoes->where('atleta_x_campeonato.campeonato_id',$campeonatoId);
