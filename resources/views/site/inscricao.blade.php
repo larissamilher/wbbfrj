@@ -415,6 +415,7 @@
                             $('#logradouro').val(retorno.dados.logradouro);
                             $('#bairro').val(retorno.dados.bairro);
                             $('#numero').val(retorno.dados.numero);
+                            $('#academia_coach').val(retorno.dados.academia_coach);
                         }else{
                             $('#nome').val('');
                             $('#rg').val('');
@@ -427,6 +428,7 @@
                             $('#logradouro').val('');
                             $('#bairro').val('');
                             $('#numero').val('');
+                            $('#academia_coach').val('');
                         }                          
                     }
                 });
