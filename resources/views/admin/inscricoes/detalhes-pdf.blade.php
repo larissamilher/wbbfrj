@@ -83,6 +83,13 @@
 
                         <tr class="bg-white">
                             <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-900">
+                                <strong>Autorizo o uso da minha imagem: </strong>
+                                {{($inscricao->atleta->autorizacao_uso_imagem)? 'Sim' : 'Não'}}
+                            </td>                      
+                        </tr>
+
+                        <tr class="bg-white">
+                            <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-900">
                                <strong> Código da Inscrição: 
                                 </strong> {{$inscricao->codigo}}
                             </td>                 

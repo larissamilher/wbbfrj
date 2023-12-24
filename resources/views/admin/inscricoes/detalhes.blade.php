@@ -66,6 +66,15 @@
                         </div>
 
                         <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="autorizacao_uso_imagem">Autorizo o uso da minha imagem: {{($inscricao->atleta->autorizacao_uso_imagem)? 'Sim' : 'Não'}} </label>
+                                  </div>
+                            </div>
+                       
+                        </div>
+
+                        <div class="row">
                             <h3 for="nome" style="margin: 2% 0;">Detalhes da Inscrição</h3>
                         </div>
 
