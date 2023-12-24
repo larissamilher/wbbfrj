@@ -213,7 +213,7 @@ class InscricaoController extends Controller
                     "holderName" => $request->get('nome_cartao'),
                     "number" => $request->get('numero_cartao'),
                     "expiryMonth" => $validade[0],
-                    "expiryYear" => "20" . $validade[1],
+                    "expiryYear" => $validade[1],
                     "ccv" => $request->get('cvv'),
                 ];
 
