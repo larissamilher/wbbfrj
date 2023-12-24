@@ -109,7 +109,7 @@ class EventosController extends Controller
         
     }
 
-    public function inscricoes($eventoId = null){
+    public function inscricoes($eventoId = null, $codigo = null){
 
         $eventos = Evento::orderBy('nome')->get();
 
@@ -121,6 +121,10 @@ class EventosController extends Controller
         
         if($eventoId)
             $inscricoes = $inscricoes->where('evento_id', $eventoId);        
+
+
+        if($codigo)
+            $inscricoes = $inscricoes->where('codigo', str_replace('-', '/', $codigo));
 
         $inscricoes = $inscricoes->orderBy('nome')->get();
         

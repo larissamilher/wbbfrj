@@ -17,7 +17,7 @@
                         @csrf
                        
                         <div class="row">
-                            <div class="col-lg-11">
+                            <div class="col-lg-5">
                                 <div class="form-group">
                                     <label for="evento_id">Filtrar por evento</label>
                                     <select class="form-control" id="evento_id" name="evento_id">
@@ -29,8 +29,15 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <label for="campeonato_id">Filtrar por Código Inscrição</label>
+                                    <input type="text" name="codigo" id="codigo"  class="form-control required">        
+                                </div>
+                            </div>
                         
-                            <div class="col-lg-1">
+                            <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>&nbsp;</label>
                                     <div class="input-group" style=" width: 100% !important;    ">
@@ -118,9 +125,10 @@
           
           $('#btnFiltro').on('click', function() {
               var evento_id = $("#evento_id").val();
-
+              var codigo = $("#codigo").val();
+              
               if(evento_id)
-                  window.location.href = "/admin/eventos/inscricoes-evento/"+ evento_id;
+                  window.location.href = "/admin/eventos/inscricoes-evento/"+ evento_id+ '/' + codigo.replace('/', "-");
 
           });
       });
