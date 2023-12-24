@@ -46,8 +46,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     });
 
     Route::prefix('atletas')->group(function () {
-        Route::get('/', [AtletasController::class, 'index'])->name('admin.atletas');
         Route::get('/detalhes/{id}', [AtletasController::class, 'detalhes'])->name('admin.atleta.detalhes');
+        Route::get('/{cpf?}', [AtletasController::class, 'index'])->name('admin.atletas');
     });
 
     Route::prefix('inscricoes-campeonatos')->group(function () {

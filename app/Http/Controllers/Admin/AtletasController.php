@@ -10,9 +10,14 @@ use App\Models\AtletaXCampeonato;
 
 class AtletasController extends Controller
 {
-    public function index(){
+    public function index($cpf = null){
 
-        $atletas = Atleta::orderBy('nome')->get();
+        $atletas = Atleta::orderBy('nome');
+        
+        if($cpf)
+            $atletas = $atletas->where('cpf', $cpf );
+
+        $atletas = $atletas->get();
 
         return view('admin.atletas.index', compact('atletas'));
     }
