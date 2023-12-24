@@ -17,7 +17,7 @@
                     
                     <video height="550" controls>
                         <source src="{{ asset('video/WORKSHOP.mp4') }}" type="video/mp4">
-                        Seu navegador não suporta a tag de vídeo.
+                            WORKSHOP AO FISICULTURISMO
                     </video>
                 </div>     
             </div>

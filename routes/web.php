@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Site\InscricaoController;
 use App\Http\Controllers\Site\SiteController;
+use App\Http\Controllers\Site\EventoController;
+
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AtletasController;
 use App\Http\Controllers\Admin\CampeonatosController;
@@ -12,6 +14,8 @@ use App\Http\Controllers\Admin\CategoriasController;
 use App\Http\Controllers\Admin\InscricoesController;
 use App\Http\Controllers\Admin\UsuariosController;
 use App\Http\Controllers\Admin\SubCategoriasController;
+use App\Http\Controllers\Admin\EventosController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,7 +66,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
 
     Route::prefix('campeonatos')->group(function () {
         Route::get('/', [CampeonatosController::class, 'index'])->name('admin.campeonatos');
-        Route::get('/novo', [CampeonatosController::class, 'create'])->name('admin.campeonato.novo');
+        Route::get('/novo-campeonato', [CampeonatosController::class, 'create'])->name('admin.campeonato.novo');
         Route::get('/edit/{id}', [CampeonatosController::class, 'edit'])->name('admin.campeonato.edit');
         Route::get('/delete/{id}', [CampeonatosController::class, 'delete'])->name('admin.campeonato.delete');
         Route::post('/store', [CampeonatosController::class, 'store'])->name('admin.campeonato.store');
@@ -88,6 +92,19 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::get('/add-campeonato/{subCategoriaId}/{campeonatoId}', [SubCategoriasController::class, 'addCampeonato'])->name('admin.subcategoria.addCampeonato');
 
         Route::get('/{categoriaId?}', [SubCategoriasController::class, 'index'])->name('admin.subcategorias');
+    });
+
+    Route::prefix('eventos')->group(function () {
+        Route::get('/', [EventosController::class, 'index'])->name('admin.eventos');
+        Route::get('/novo-evento', [EventosController::class, 'create'])->name('admin.evento.novo');
+        Route::get('/edit/{id}', [EventosController::class, 'edit'])->name('admin.evento.edit');
+        Route::get('/delete/{id}', [EventosController::class, 'delete'])->name('admin.evento.delete');
+        Route::post('/store', [EventosController::class, 'store'])->name('admin.evento.store');
+        Route::get('/gerar-pdf/{id}', [EventosController::class, 'gerarPdf'])->name('admin.evento.inscricoes.gerar-pdf');
+
+        Route::get('/inscricoes-evento/{eventoId?}', [EventosController::class, 'inscricoes'])->name('admin.evento.inscricoes');
+
+
     });
 
     Route::prefix('usuarios')->group(function () {
@@ -188,6 +205,12 @@ Route::prefix('educacao')->group(function () {
     Route::get('/curso-arbitros', function () {
         return view('site.curso-arbitros');
     })->name('curso-arbitros');
+
+    Route::get('/eventos-inscricoes', [EventoController::class, 'index'])->name('eventos-inscricoes');
+    Route::match(['get', 'post'],'/ficha', [EventoController::class, 'primeiraEtapaInscricao'])->name('evento.inscricao.store.ficha');
+    Route::get('/get-dados-cpf/{cpf}', [EventoController::class, 'getrDadosCpf'])->name('get-dados-cpf');
+    Route::post('/pagamento', [EventoController::class, 'etapaPagamento'])->name('evento.inscricao.pagamento');
+
 });
 
 Route::get('/contato', function () {

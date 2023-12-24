@@ -91,12 +91,36 @@
                 <span class="icon-bg"><i class="mdi mdi-contacts menu-icon"></i></span>
                 <span class="menu-title">SubCategorias</span>
               </a>
-            </li>
+            </li>        
+
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('admin.campeonatos') }}">
+              <a class="nav-link" data-bs-toggle="collapse" href="#campeonatos" aria-expanded="false" aria-controls="campeonatos">
                 <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
                 <span class="menu-title">Campeonatos</span>
+                <i class="menu-arrow"></i>
               </a>
+              <div class="collapse" id="campeonatos">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.campeonatos') }}">                      
+                      <span class="menu-title">Todos</span>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.campeonato.novo') }}">                      
+                      <span class="menu-title">Novo</span>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.inscricoes') }}">                      
+                      <span class="menu-title">Inscrições</span>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
             </li>
 
             <li class="nav-item">
@@ -106,11 +130,35 @@
               </a>
             </li>
 
+            
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('admin.inscricoes') }}">
+              <a class="nav-link" data-bs-toggle="collapse" href="#eventos" aria-expanded="false" aria-controls="eventos">
                 <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
-                <span class="menu-title">Inscrições</span>
+                <span class="menu-title">Eventos</span>
+                <i class="menu-arrow"></i>
               </a>
+              <div class="collapse" id="eventos">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.eventos') }}">                      
+                      <span class="menu-title">Todos</span>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.evento.novo') }}">                      
+                      <span class="menu-title">Novo</span>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.evento.inscricoes') }}">                      
+                      <span class="menu-title">Inscrições</span>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
             </li>
 
             @if(auth()->user()->permissao_create_user)
