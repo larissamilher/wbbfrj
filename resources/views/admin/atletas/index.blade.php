@@ -13,6 +13,7 @@
                                 <th> Celular </th>
                                 <th> Email </th>
                                 <th> CPF </th>
+                                <th> Ação </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,6 +30,15 @@
                                     </td>
                                     <td> 
                                       {{ $atleta->cpf}}
+                                    </td>
+                                    <td class="t-action">
+
+                                        <a href="{{ route( 'admin.atleta.detalhes', $atleta->id ) }}" class="btn-acao btn-edit" title="Ver Detalhes">
+                                            <span class="icon-bg">
+                                                <i class="mdi mdi-eye"></i>
+                                            </span>                                            
+                                        </a>
+                                      
                                     </td>
                                 </tr>
                             @endforeach

@@ -15,4 +15,12 @@ class AtletasController extends Controller
 
         return view('admin.atletas.index', compact('atletas'));
     }
+
+
+    public function detalhes($id){
+
+        $atleta = Atleta::find($id);
+
+        return view('admin.atletas.detalhes', compact('atleta'));
+    }
 }
