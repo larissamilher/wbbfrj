@@ -152,7 +152,7 @@
                   </li>
 
                   <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.inscricoes') }}">                      
+                    <a class="nav-link" href="{{ route('admin.evento.inscricoes') }}">                      
                       <span class="menu-title">Inscrições</span>
                     </a>
                   </li>

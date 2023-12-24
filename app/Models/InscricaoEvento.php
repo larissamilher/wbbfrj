@@ -42,4 +42,9 @@ class InscricaoEvento extends Model
         'creditCardBrand',
         'creditCardToken',
     ];
+
+    public function evento()
+    {
+        return $this->belongsTo(Evento::class);
+    }
 }

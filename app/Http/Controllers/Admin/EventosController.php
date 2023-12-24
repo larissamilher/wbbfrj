@@ -8,6 +8,9 @@ use App\Models\Evento;
 use Carbon\Carbon;
 use PhpOffice\PhpSpreadsheet\Exception;
 use DateTime;
+use App\Models\InscricaoEvento;
+use PDF;
+use Illuminate\Support\Facades\View;
 
 class EventosController extends Controller
 {
@@ -104,5 +107,36 @@ class EventosController extends Controller
     
         return view('admin.eventos.novo', compact('response'));
         
+    }
+
+    public function inscricoes($eventoId = null){
+
+        $eventos = Evento::orderBy('nome')->get();
+
+        $inscricoes = InscricaoEvento::where('status_pagamento', '!=', '');
+        
+        if($eventoId)
+            $inscricoes = $inscricoes->where('evento_id', $eventoId);        
+
+        $inscricoes = $inscricoes->orderBy('nome')->get();
+        
+        return view('admin.eventos.inscricoes', compact('eventos','inscricoes'));
+    }
+
+    public function gerarPdf($id){
+
+        $inscricao = InscricaoEvento::with('evento')->find($id); 
+
+        $pdfView = View::make('admin.eventos.detalhes-pdf',  ['inscricao' => $inscricao])->render();
+
+        $pdf = PDF::loadHTML($pdfView);
+
+        $nome = $inscricao->codigo;
+
+        if(empty($nome))
+            $nome = 'ficha-inscricao';
+
+        return $pdf->download($nome.'.pdf');
+
     }
 }

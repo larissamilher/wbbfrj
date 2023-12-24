@@ -100,6 +100,10 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::get('/edit/{id}', [EventosController::class, 'edit'])->name('admin.evento.edit');
         Route::get('/delete/{id}', [EventosController::class, 'delete'])->name('admin.evento.delete');
         Route::post('/store', [EventosController::class, 'store'])->name('admin.evento.store');
+        Route::get('/gerar-pdf/{id}', [EventosController::class, 'gerarPdf'])->name('admin.evento.inscricoes.gerar-pdf');
+
+        Route::get('/inscricoes-evento/{eventoId?}', [EventosController::class, 'inscricoes'])->name('admin.evento.inscricoes');
+
 
     });
 
