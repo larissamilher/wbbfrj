@@ -52,13 +52,19 @@
                                     </div>
                                 </div>
                                 
-                                <div class="col-lg-6 col-md-6">
+                                <div class="col-lg-3 col-md-3">
                                     <div class="form-box email-icon mb-30">
                                         <label for="cpf">CPF <span>*</span> </label>
                                         <input type="text" name="cpf" id="cpf" placeholder="" class="form-control required">
                                     </div>
                                 </div>   
                                
+                                <div class="col-lg-3 col-md-3">
+                                    <div class="form-box email-icon mb-30">
+                                        <label for="rg">RG <span>*</span> </label>
+                                        <input type="text" name="rg" id="rg" placeholder="" class="form-control required">
+                                    </div>
+                                </div>     
                             </div>
 
                             <div class="row">
@@ -68,14 +74,15 @@
                                         <label for="nome">Nome <span>*</span> </label>
                                         <input type="text" name="nome" id="nome" placeholder="" class="form-control required">
                                     </div>
-                                </div>                               
-                               
+                                </div>   
+                                
                                 <div class="col-lg-6 col-md-6">
-                                    <div class="form-box email-icon mb-30">
-                                        <label for="rg">RG <span>*</span> </label>
-                                        <input type="text" name="rg" id="rg" placeholder="" class="form-control required">
+                                    <div class="form-box user-icon mb-30">
+                                        <label for="academia_coach">Academia/Coach <span>*</span> </label>
+                                        <input type="text" name="academia_coach" id="academia_coach" placeholder="" class="form-control required">
                                     </div>
-                                </div>       
+                                </div>          
+                                                                 
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-box email-icon mb-30">
                                         <label for="celular">Celular <span>*</span> </label>
@@ -144,6 +151,17 @@
                             @if(isset($errorMessage))
                                 <input type="hidden" id="errorMessage" value="{{$errorMessage}}">
                             @endif
+
+                            <div class="row">
+                                <div class="col-lg-6">                                   
+                                    <div class="form-box email-icon mb-30" style="margin-right: 15px; display: flex; align-items: center;">
+                                        <input type="checkbox" name="autorizacao_uso_imagem" id="autorizacao_uso_imagem" class="form-control required" style="height: 20px;margin-right: 5px;width: 20px;">
+                                        <label for="autorizacao_uso_imagem">Autorizo o uso da minha imagem. <span>*</span> </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
 
                             <span>* Campos obrigatórios</span>
 
@@ -355,6 +373,13 @@
                         camposVazios.push($(this).attr('name'));
                 }
             });
+
+            var checkbox = document.getElementById("autorizacao_uso_imagem");
+
+            if (!checkbox.checked){
+                error = true;
+                camposVazios.push('Autorizo o uso da minha imagem');
+            }
 
             if (error) {
                 Swal.fire({

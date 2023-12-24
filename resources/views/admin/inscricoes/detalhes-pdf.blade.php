@@ -76,6 +76,13 @@
 
                         <tr class="bg-white">
                             <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-900">
+                                <strong>Academia/Coach: </strong>
+                                {{$inscricao->atleta->academia_coach}}
+                            </td>                      
+                        </tr>
+
+                        <tr class="bg-white">
+                            <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-900">
                                <strong> Código da Inscrição: 
                                 </strong> {{$inscricao->codigo}}
                             </td>                 

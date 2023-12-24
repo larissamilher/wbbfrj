@@ -27,7 +27,9 @@ class Atleta extends Model
         'cidade',
         'logradouro',
         'bairro',
-        'numero'
+        'numero',
+        'academia_coach',
+        'autorizacao_uso_imagem',
     ];
 
 }

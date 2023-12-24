@@ -56,6 +56,16 @@
                         </div>
 
                         <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="academia_coach">Academia/Coach </label>
+                                    <input type="text" class="form-control" disabled value="{{$inscricao->atleta->academia_coach}}">
+                                  </div>
+                            </div>
+                       
+                        </div>
+
+                        <div class="row">
                             <h3 for="nome" style="margin: 2% 0;">Detalhes da Inscrição</h3>
                         </div>
 

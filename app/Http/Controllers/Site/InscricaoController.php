@@ -115,7 +115,13 @@ class InscricaoController extends Controller
         
             unset($atleta['_token']);   
 
-            $atletaSave = Atleta::firstOrCreate(['cpf' =>  $atleta['cpf']], $atleta);
+
+            if($atleta['autorizacao_uso_imagem'] == 'on')
+                $atleta['autorizacao_uso_imagem'] = 1;
+            else    
+                $atleta['autorizacao_uso_imagem'] = 0;
+            
+            $atletaSave = Atleta::updateOrCreate(['cpf' =>  $atleta['cpf']], $atleta);
 
             if(!$atletaSave)
                 throw new \Exception(('Ocorreu um erro para salvar os dados do atleta!'));
