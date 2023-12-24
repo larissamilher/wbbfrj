@@ -54,25 +54,25 @@
                                         <div class="col-lg-12 col-md-12">
                                             <div class="form-box email-icon mb-30">
                                                 <label for="nome_cartao">Nome no cartão <span>*</span> </label>
-                                                <input type="text" name="nome_cartao" id="nome_cartao"  value="{{isset($retorno['cartao']['nome']) ?$retorno['cartao']['nome'] : '' }}">
+                                                <input type="text" class="required" name="nome_cartao" id="nome_cartao"  value="{{isset($retorno['cartao']['nome']) ?$retorno['cartao']['nome'] : '' }}">
                                             </div>
                                         </div>   
                                         <div class="col-lg-12 col-md-12">
                                             <div class="form-box email-icon mb-30">
                                                 <label for="numero_cartao">Número do Cartão <span>*</span> </label>
-                                                <input type="text" name="numero_cartao" id="numero_cartao"  value="{{isset($retorno['cartao']['numero']) ?$retorno['cartao']['numero'] : '' }}">
+                                                <input type="text"  class="required" name="numero_cartao" id="numero_cartao"  value="{{isset($retorno['cartao']['numero']) ?$retorno['cartao']['numero'] : '' }}">
                                             </div>
                                         </div>  
                                         <div class="col-lg-12 col-md-12">
                                             <div class="form-box email-icon mb-30">
                                                 <label for="validade_cartao">Data de validade <span>*</span> </label>
-                                                <input type="text" name="validade_cartao" id="validade_cartao" value="{{isset($retorno['cartao']['validade']) ?$retorno['cartao']['validade'] : '' }}">
+                                                <input type="text" class="required"  name="validade_cartao" id="validade_cartao" value="{{isset($retorno['cartao']['validade']) ?$retorno['cartao']['validade'] : '' }}">
                                             </div>
                                         </div>  
                                         <div class="col-lg-12 col-md-12">
                                             <div class="form-box email-icon mb-30">
                                                 <label for="nome_cartao">Código de segurança <span>*</span> </label>
-                                                <input type="text" name="cvv" id="cvv"value="{{isset($retorno['cartao']['ccv']) ?$retorno['cartao']['ccv'] : '' }}">
+                                                <input type="text"  class="required" name="cvv" id="cvv"value="{{isset($retorno['cartao']['ccv']) ?$retorno['cartao']['ccv'] : '' }}">
                                             </div>
                                         </div>    
                                         <div class="col-lg-12 col-md-12" style=" margin-bottom: 3%;">
@@ -140,6 +140,45 @@
         });
 
         $(document).ready(function() {
+
+            $("#inscricao-form").submit(function (event) {
+                event.preventDefault();
+
+                var error = false;
+                var camposVazios = [];
+
+                if ($("#forma_pagamento").val() == '') {
+                    error = true;
+                    camposVazios.push('Plano de parcelamento *');
+                }
+
+                if($("#forma_pagamento").val() == 'CREDIT_CARD'){
+
+                    $(".required").each(function () {
+                        if ($(this).val() === "") {
+                            error = true;
+                            if ($(this).attr('name') == 'nome_cartao')
+                                camposVazios.push('Nome no cartão');
+                            if ($(this).attr('name') == 'numero_cartao')
+                                camposVazios.push('Número do Cartão');
+                            if ($(this).attr('name') == 'validade_cartao')
+                                camposVazios.push('Data de validade ');
+                            if ($(this).attr('name') == 'cvv')
+                                camposVazios.push('Código de segurança');
+                        }
+                    });
+                }
+
+                if (error) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: 'Preencha os campos obrigatórios:' + camposVazios.join(', ')
+                    });
+                } else {
+                    document.getElementById("inscricao-form").submit();
+                }
+            });
 
             $('#forma_pagamento').on('change', function() {
 
