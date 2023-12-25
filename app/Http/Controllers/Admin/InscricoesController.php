@@ -68,13 +68,29 @@ class InscricoesController extends Controller
 
     public function detalhes($id)
     {
-        $inscricao = AtletaXCampeonato::with(['campeonato', 'categoria', 'atleta'])->find($id); 
+        $inscricao = AtletaXCampeonato::with([
+            'campeonato' => function ($query) {
+                $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
+            },
+            'categoria' => function ($query) {
+                $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
+            },
+            'atleta'
+        ])->find($id); 
         return view('admin.inscricoes.detalhes', compact("inscricao"));
     }
 
     public function gerarPdf($id){
 
-        $inscricao = AtletaXCampeonato::with(['campeonato', 'categoria', 'atleta'])->find($id); 
+        $inscricao = AtletaXCampeonato::with([
+            'campeonato' => function ($query) {
+                $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
+            },
+            'categoria' => function ($query) {
+                $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
+            },
+            'atleta'
+        ])->find($id); 
 
         $pdfView = View::make('admin.inscricoes.detalhes-pdf',  ['inscricao' => $inscricao])->render();
 
@@ -91,7 +107,16 @@ class InscricoesController extends Controller
 
     public function addPeso($id)
     {
-        $inscricao = AtletaXCampeonato::with(['campeonato', 'categoria', 'atleta'])->find($id); 
+        $inscricao = AtletaXCampeonato::with([
+            'campeonato' => function ($query) {
+                $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
+            },
+            'categoria' => function ($query) {
+                $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
+            },
+            'atleta'
+        ])->find($id); 
+        
         return view('admin.inscricoes.add-peso', compact("inscricao"));
     }
     
