@@ -5,7 +5,7 @@
             <button type="button" class="btn btn-danger btn-fw">
                 <a class="nav-link"
                     href="{{ route('admin.inscricoes.extrair-listagem') }}">
-                    EXTRAIR LISTAGEM POR EVENTO
+                    EXTRAIR LISTAGEM POR CAMPEONATO
                 </a>
             </button>
         </div>   
