@@ -47,7 +47,20 @@
                                 </div>
                             </div>
 
+
                             <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="nome">Valor</label>
+                                    <input type="text" class="form-control" name="valor" value="">
+                                </div>
+                            </div>
+
+                            <div class="form-check form-check-flat form-check-primary">
+                                <label class="form-check-label">
+                                  <input type="checkbox" class="form-check-input" name="convidado"> Este atleta é um convidado <i class="input-helper"></i></label>
+                              </div>
+
+                            <div class="col-lg-3">
                                 <label for="nome"></label>
                                 <button type="submit" class="btn btn-success btn-fw" style="width: 100%;height: 50px;">
                                     SALVAR

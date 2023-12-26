@@ -66,13 +66,15 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label for="autorizacao_uso_imagem">Autorizo o uso da minha imagem: {{($inscricao->atleta->autorizacao_uso_imagem)? 'Sim' : 'Não'}} </label>
-                                  </div>
-                            </div>
-                       
+
+                            <div class="form-check form-check-flat form-check-primary">
+                                <label class="form-check-label">
+                                  <input type="checkbox" class="form-check-input" name="convidado" {{($inscricao->atleta->autorizacao_uso_imagem)? 'checked' : ''}} disabled > Autorizo o uso da minha imagem <i class="input-helper"></i></label>
+                              </div>
+
                         </div>
+
+                    
 
                         <div class="row">
                             <h3 for="nome" style="margin: 2% 0;">Detalhes da Inscrição</h3>
@@ -132,8 +134,16 @@
                                     <input type="text" class="form-control" disabled value="{{ $inscricao->numero_atleta}}">
                                   </div>
                             </div>
+                            
                         </div>
-                        
+                        <div class="row">
+
+                            <div class="form-check form-check-flat form-check-primary">
+                                <label class="form-check-label">
+                                  <input type="checkbox" class="form-check-input" name="convidado" {{($inscricao->convidado)? 'checked' : ''}} disabled > Atleta convidado <i class="input-helper"></i></label>
+                              </div>
+
+                        </div>
                         <div class="row">
                             <div class="col-lg-3">
                             </div>

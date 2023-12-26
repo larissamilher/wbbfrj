@@ -135,6 +135,15 @@
                                 {{ $inscricao->numero_atleta}}
                             </td>                     
                         </tr>
+
+
+                        <tr class="bg-white">
+                            <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-900">
+                                <strong>Atleta Convidado: </strong>
+                                {{($inscricao->convidado)? 'Sim' : 'Não'}}
+                            </td>                      
+                        </tr>
+
                     </tbody>
                 </table>
                 <hr>
