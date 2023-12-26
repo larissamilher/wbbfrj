@@ -125,6 +125,13 @@
 
                         <tr class="bg-white">
                             <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-900">
+                               <strong>Forma de Pagamento: </strong>
+                               {{$inscricao->billingType}}
+                            </td>                 
+                        </tr>
+
+                        <tr class="bg-white">
+                            <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-900">
                                 <strong>Peso Atleta: </strong>
                                 {{ $inscricao->peso}}
                             </td>                     

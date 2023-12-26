@@ -114,10 +114,17 @@
                         </div>
                         
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <div class="form-group">
                                     <label for="data_inicio_inscricoes">Status do Pagamento</label>
                                     <input type="text" class="form-control" disabled value="{{$inscricao->status_pagamento}}">
+                                  </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="data_inicio_inscricoes">Forma de Pagamento</label>
+                                    <input type="text" class="form-control" disabled value="{{$inscricao->billingType}}">
                                   </div>
                             </div>
                        
