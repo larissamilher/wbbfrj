@@ -115,7 +115,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6 col-md-6">
+                                <div class="col-lg-12 col-md-12">
                                     <div class="form-box email-icon mb-30">
                                         <label for="logradouro">Logradouro <span>*</span> </label>
                                         <input type="text" name="logradouro" id="logradouro" placeholder="" class="form-control required">
