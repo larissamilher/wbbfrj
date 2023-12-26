@@ -62,7 +62,7 @@
                         <!-- Section Tittle -->
                         <div class="section-tittle section-tittle3 mb-35">
                             <span>SOBRE</span>
-                            <h2>WBBF RJ - WORLD BODYBUILDING FEDERATION </h2>
+                            <h2>WBBF RJ - WORLD BODYBUILDING FEDERATION RIO DE JANEIRO</h2>
                         </div>
                         <p class="pera-top">
                             A World Bodybuilding and Fitness Federation (WBBF) é uma federação internacional dedicada 
