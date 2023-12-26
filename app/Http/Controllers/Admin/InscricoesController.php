@@ -195,7 +195,7 @@ class InscricoesController extends Controller
                     'subcategoria' => $subCategoria->nome
                 ];
 
-                // Mail::to($atleta['email'])->send(new ConfirmacaoInscricao($dadosEmail));   
+                Mail::to($atleta['email'])->send(new ConfirmacaoInscricao($dadosEmail));   
                 $response['message'] = 'Informações salvas com sucesso! O atleta com a inscrição de código: '.$inscricao->codigo.' receberá um email com as informações da inscrição';
 
             }else
