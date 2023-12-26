@@ -103,6 +103,9 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::post('/store', [EventosController::class, 'store'])->name('admin.evento.store');
         Route::get('/gerar-pdf/{id}', [EventosController::class, 'gerarPdf'])->name('admin.evento.inscricoes.gerar-pdf');
 
+        Route::get('/extrair-listagem', [EventosController::class, 'extrairListagemTela'])->name('admin.eventos.inscricoes.extrair-listagem');
+        Route::post('/extrair-listagem-acao', [EventosController::class, 'extrairListagem'])->name('admin.eventos.inscricoes.extrair-listagem-acao');
+        
         Route::get('/inscricoes-evento/{eventoId?}/{codigoId?}', [EventosController::class, 'inscricoes'])->name('admin.evento.inscricoes');
 
 

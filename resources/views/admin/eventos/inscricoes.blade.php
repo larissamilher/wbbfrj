@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 @section('content')
     <div class="content-wrapper">   
-        {{-- <div class="col-lg-12 grid-margin stretch-card">
+        <div class="col-lg-12 grid-margin stretch-card">
             <button type="button" class="btn btn-danger btn-fw">
                 <a class="nav-link"
-                    href="{{ route('admin.inscricoes.extrair-listagem') }}">
+                    href="{{ route('admin.eventos.inscricoes.extrair-listagem') }}">
                     EXTRAIR LISTAGEM POR EVENTO
                 </a>
             </button>
-        </div>    --}}
+        </div>   
         
         <div class="col-12 grid-margin stretch-card">
             <div class="card">

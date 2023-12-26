@@ -11,6 +11,8 @@ use DateTime;
 use App\Models\InscricaoEvento;
 use PDF;
 use Illuminate\Support\Facades\View;
+use App\Exports\ListagemExportEvento;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EventosController extends Controller
 {
@@ -150,5 +152,23 @@ class EventosController extends Controller
 
         return $pdf->download($nome.'.pdf');
 
+    }
+
+    public function extrairListagemTela()
+    {
+        $eventos = Evento::all();
+
+        return view('admin.eventos.extrair-listagem', compact("eventos"));
+    }
+
+    public function extrairListagem(Request $request)
+    {
+        $eventoId = $request->input('evento');
+
+        $nomeEvento = Evento::find($eventoId);
+
+        $export = new ListagemExportEvento($eventoId);
+
+        return Excel::download(new ListagemExportEvento($eventoId), $nomeEvento->nome . '.xlsx');
     }
 }
