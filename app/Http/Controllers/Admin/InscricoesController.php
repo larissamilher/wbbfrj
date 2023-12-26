@@ -184,10 +184,9 @@ class InscricoesController extends Controller
             if( $request->input("status_pagamento") == 'CONFIRMED'){
                 $atleta = Atleta::find($inscricao->atleta_id);
 
-                $subCategoria = SubCategoria::find($inscricao->sub_categoria_id);
+                $subCategoria = SubCategoria::withTrashed()->find($inscricao->sub_categoria_id);
 
-                $categoriaExcluida = Categoria::onlyTrashed()->find($subCategoria->categoria_id);
-
+                $categoria = Categoria::withTrashed()->find($subCategoria->categoria_id);
 
                 $dadosEmail = [
                     'nome'=>  $atleta->nome,
