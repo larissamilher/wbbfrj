@@ -27,7 +27,7 @@ class InscricaoController extends Controller
             ->where('data_final_inscricao', '>=', now())
             ->get();
 
-        return view('site.inscricao', compact([ 'campeonatos' ]));        
+        return view('site.campeonatos.inscricao', compact([ 'campeonatos' ]));        
     }
 
     public function getCategoriasCampeonato($campeonatoId)
@@ -137,11 +137,11 @@ class InscricaoController extends Controller
             ->where('data_final_inscricao', '>=', now())
             ->get();
 
-            return view('site.inscricao', compact([ 'campeonatos', 'errorMessage' ]));        
+            return view('site.campeonatos.inscricao', compact([ 'campeonatos', 'errorMessage' ]));        
         
         }
 
-        return view('site.pagamento', compact([ 'campeonato' ]));
+        return view('site.campeonatos.pagamento', compact([ 'campeonato' ]));
     }
 
     public function etapaPagamento(Request $request)
@@ -290,19 +290,19 @@ class InscricaoController extends Controller
                     if($pagamentoRetorno->status == 'CONFIRMED'){
 
                         Mail::to($atleta['email'])->send(new ConfirmacaoInscricao($atleta));
-                        return view('site.inscricao-sucesso');
+                        return view('site.campeonatos.inscricao-sucesso');
                     }
 
                     if($request->get('forma_pagamento') ==  'PIX'){ // capturar QR CODE
                         $pagamentoRetorno = PagamentoService::obetrQrCodePix($pagamentoRetorno->id);
-                        return view('site.inscricao-pendente-pix' , compact('pagamentoRetorno'));
+                        return view('site.campeonatos.inscricao-pendente-pix' , compact('pagamentoRetorno'));
                     }
                     elseif($request->get('forma_pagamento') ==  'BOLETO'){ // capturar LINHA DIGITAL
                         $pagamentoId =$pagamentoRetorno->id;
                         $pagamentoRetorno = PagamentoService::obetrLinhaDigitalBoleto($pagamentoRetorno->id);
                         $pagamentoId =  explode('_', $pagamentoId);
                         $pagamentoId = $pagamentoId[1];
-                        return view('site.inscricao-pendente-boleto' , compact('pagamentoRetorno', 'pagamentoId'));
+                        return view('site.campeonatos.inscricao-pendente-boleto' , compact('pagamentoRetorno', 'pagamentoId'));
                     }
 
                     break;
@@ -325,7 +325,7 @@ class InscricaoController extends Controller
                     "ccv" => $request->get('cvv'),
                 ],
             ];
-            return view('site.pagamento', compact([ 'campeonato','retorno' ]));
+            return view('site.campeonatos.pagamento', compact([ 'campeonato','retorno' ]));
         }
     }
 

@@ -156,19 +156,19 @@ Route::get('/filiacao', function () {
 
 Route::prefix('campeonatos')->group(function () {
     Route::get('/', function () {
-        return view('site.campeonatos');
+        return view('site.campeonatos.index');
     })->name('campeonatos');
     
     Route::get('/calendario', function () {
-        return view('site.calendario');
+        return view('site.campeonatos.calendario');
     })->name('calendario');
     
     Route::get('/como-competir', function () {
-        return view('site.como-competir');
+        return view('site.campeonatos.como-competir');
     })->name('como-competir');
     
     Route::get('/backstage-anual', function () {
-        return view('site.backstage-anual');
+        return view('site.campeonatos.backstage-anual');
     })->name('backstage-anual');
     
     Route::prefix('inscricao')->group(function () {
@@ -184,7 +184,7 @@ Route::prefix('campeonatos')->group(function () {
         Route::get('/teste', [InscricaoController::class, 'teste'])->name('teste');
 
         Route::get('/acompanhar-inscricao', function () {
-            return view('site.acompanhar-inscricao');
+            return view('site.campeonatos.acompanhar-inscricao');
         })->name('acompanhar-inscricao');
         
         Route::get('/get-dados-inscricao/{codigo}', [InscricaoController::class, 'getDadosInscricao'])->name('get-dados-inscricao');
