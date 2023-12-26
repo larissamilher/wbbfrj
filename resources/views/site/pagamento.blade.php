@@ -39,7 +39,7 @@
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12" style=" margin-bottom: 3%;">
                                             <div class="form-box email-icon mb-30">
-                                                <label for="parcelamento">Plano de parcelamento  <span>*</span> </label>
+                                                <label for="parcelamento">Forma de pagamento  <span>*</span> </label>
                                                 <select name="forma_pagamento" id="forma_pagamento">
                                                     <option value="" selected> Selecione </option>
                                                     <option value="BOLETO"> Boleto </option>
