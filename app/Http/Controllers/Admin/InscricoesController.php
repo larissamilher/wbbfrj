@@ -186,7 +186,7 @@ class InscricoesController extends Controller
 
                 $subCategoria = SubCategoria::find($inscricao->sub_categoria_id);
 
-                $categoria = Categoria::find($subCategoria->categoria_id);
+                $categoria = Categoria::withTrashed()->find($subCategoria->categoria_id);
 
                 $dadosEmail = [
                     'nome'=>  $atleta->nome,
