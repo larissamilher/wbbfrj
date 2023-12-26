@@ -32,4 +32,9 @@ class Atleta extends Model
         'autorizacao_uso_imagem',
     ];
 
+
+    public function campeonatos()
+    {
+        return $this->belongsToMany(Campeonato::class, 'atleta_x_campeonato');
+    }
 }

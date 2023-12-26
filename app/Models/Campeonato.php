@@ -25,4 +25,9 @@ class Campeonato extends Model
         'descricao'
     ];
 
+    public function atletas()
+    {
+        return $this->belongsToMany(Atleta::class, 'atleta_x_campeonato');
+    }
+
 }

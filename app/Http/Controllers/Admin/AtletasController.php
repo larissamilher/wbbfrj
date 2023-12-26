@@ -12,7 +12,7 @@ class AtletasController extends Controller
 {
     public function index($cpf = null){
 
-        $atletas = Atleta::orderBy('nome');
+        $atletas = Atleta::with('campeonatos')->orderBy('nome');
         
         if($cpf)
             $atletas = $atletas->where('cpf', $cpf );
