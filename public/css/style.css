@@ -1894,6 +1894,19 @@ hr{
     display:inline-block;
     position:relative
 }
+
+.section-tittle-aux span{
+    font-family:"Teko",sans-serif;
+    font-size:34px;
+    font-weight:300;
+    margin-bottom:22px;
+    margin-top:30%;
+    color:#db1600;
+    text-transform:uppercase;
+    display:inline-block;
+    position:relative
+}
+
 @media (max-width: 575px){
     .section-tittle span{
         font-size:14px
@@ -5875,7 +5888,7 @@ textarea{
 }
 
 .categorias img {
-    max-width: 50%;
+    max-width: 100%;
 }
 
 @media screen and (max-device-width: 800px) {
