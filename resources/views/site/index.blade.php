@@ -87,6 +87,33 @@
             </div>
         </div>
     </section>
+
+      <!-- sobre-2 Area End -->
+    <!--? CALENDARIO Area Start -->
+    <section class="services-area pt-100 pb-150 section-bg" data-background="{{ asset('img/gallery/section_bg01.png') }}">
+        <!--? Want To work -->
+        <section class="wantToWork-area w-padding">
+            <div class="container">
+                <div class="row align-items-end justify-content-between">
+                    <div class="col-lg-6 col-md-10 col-sm-10">
+                        <div class="section-tittle section-tittle2">
+                            <span>CALENDÁRIO</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Want To work End -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 categorias" style="text-align: center;">
+                    <img src="{{ asset('img/calendario.png') }}" alt="">                  
+                </div>     
+            </div>
+        </div>
+    </section>
+    <!-- CALENDARIO Area End -->
+
     <!-- sobre-2 Area End -->
     <!--? APOIADORES Area Start -->
     {{-- <section class="services-area pt-100 pb-150 section-bg" data-background="{{ asset('img/gallery/section_bg01.png') }}">
