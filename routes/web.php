@@ -125,7 +125,7 @@ Route::get('/', [SiteController::class, 'index'])->name('home');
 Route::prefix('categorias')->group(function () {
     
     Route::get('/', function () {
-        return view('site.categorias');
+        return view('site.categoria.index');
     })->name('categorias');
 
     Route::get('/bikini', function () { return view('site.categoria.bikini'); })->name('categoria.bikini');
@@ -207,7 +207,7 @@ Route::prefix('educacao')->group(function () {
     })->name('educacao');
 
     Route::get('/curso-arbitros', function () {
-        return view('site.curso-arbitros');
+        return view('site.eventos.curso-arbitros');
     })->name('curso-arbitros');
 
     Route::get('/eventos-inscricoes', [EventoController::class, 'index'])->name('eventos-inscricoes');
