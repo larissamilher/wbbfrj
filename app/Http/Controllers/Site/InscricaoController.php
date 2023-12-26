@@ -44,6 +44,7 @@ class InscricaoController extends Controller
             ->where('sub_categorias_campeonato.campeonato_id', $campeonatoId)
             ->select('categorias.nome','categorias.id', 'categorias.genero')
             ->distinct('categorias.id')
+            ->orderBy('categorias.nome')
             ->get();
 
     
@@ -69,6 +70,7 @@ class InscricaoController extends Controller
 
         try{
             $subcategorias = SubCategoria::where('categoria_id', $categoriaId)
+            ->orderBy('nome')
             ->get();
     
             $response['dados'] = $subcategorias;
