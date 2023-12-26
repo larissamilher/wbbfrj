@@ -41,7 +41,7 @@
             <div class="card">
                 <div class="card-body" style="overflow-x: auto;">
                     <h4 class="card-title">Atletas</h4>
-                    <span>Atletas destacados em vermelho indicam que nunca participaram de nenhum campeonato.</span>
+                    {{-- <span>Atletas destacados em vermelho indicam que nunca participaram de nenhum campeonato.</span> --}}
                     
                     <table class="table table-striped">
                         <thead>
@@ -55,7 +55,9 @@
                         </thead>
                         <tbody>
                             @foreach ($atletas as $atleta)                         
-                                <tr @if(empty($atleta->campeonatos->isEmpty())) style="background-color: #ff222240 !important" @endif>
+                                <tr 
+                                {{-- @if(empty($atleta->campeonatos->isEmpty())) style="background-color: #ff222240 !important" @endif --}}
+                                >
                                     <td class="py-1">
                                         {{$atleta->nome}}
                                     </td>
