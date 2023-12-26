@@ -88,7 +88,6 @@
         </div>
     </section>
 
-      <!-- sobre-2 Area End -->
     <!--? CALENDARIO Area Start -->
     <section class="services-area pt-100 pb-150 section-bg" data-background="{{ asset('img/gallery/section_bg01.png') }}">
         <!--? Want To work -->
@@ -114,7 +113,6 @@
     </section>
     <!-- CALENDARIO Area End -->
 
-    <!-- sobre-2 Area End -->
     <!--? APOIADORES Area Start -->
     {{-- <section class="services-area pt-100 pb-150 section-bg" data-background="{{ asset('img/gallery/section_bg01.png') }}">
         <!--? Want To work -->
