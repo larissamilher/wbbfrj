@@ -165,7 +165,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.relatorios') }}">
                   <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
-                  <span class="menu-title">Relatório</span>
+                  <span class="menu-title">Relatórios</span>
                 </a>
               </li>
               <li class="nav-item">
