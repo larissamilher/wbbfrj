@@ -42,7 +42,7 @@
                                 {{$retorno['candidaturas']}}
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-900">
-                                <strong>Candidaturas com Pagamento Confirmado </strong>
+                                <strong>Candidaturas Confirmadas </strong>
                             </td>                                    
                         </tr>
 
@@ -51,7 +51,7 @@
                                 {{$retorno['candidaturas-pendentes']}}
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-900">
-                                <strong>Candidaturas com Pagamento Pendente</strong>
+                                <strong>Candidaturas Pendentes</strong>
                             </td>                                    
                         </tr>
 
@@ -60,7 +60,7 @@
                                 {{$retorno['candidaturas-recusadas']}}
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-900">
-                                <strong>Candidaturas com Pagamento Recusado </strong>
+                                <strong>Candidaturas Recusada </strong>
                             </td>                                    
                         </tr>
 
