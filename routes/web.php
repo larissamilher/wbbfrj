@@ -15,7 +15,7 @@ use App\Http\Controllers\Admin\InscricoesController;
 use App\Http\Controllers\Admin\UsuariosController;
 use App\Http\Controllers\Admin\SubCategoriasController;
 use App\Http\Controllers\Admin\EventosController;
-
+use App\Http\Controllers\Admin\RelatoriosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -116,6 +116,10 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::get('/novo', [UsuariosController::class, 'create'])->name('admin.usuario.novo');
         Route::post('/store', [UsuariosController::class, 'store'])->name('admin.usuario.store');
         Route::get('/delete/{id}', [UsuariosController::class, 'delete'])->name('admin.usuario.delete');
+    });
+
+    Route::prefix('relatorios')->group(function () {
+        Route::get('/', [RelatoriosController::class, 'index'])->name('admin.relatorios');
     });
 
 });
