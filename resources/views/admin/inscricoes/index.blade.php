@@ -60,25 +60,25 @@
             <div class="card">
                 <div class="card-body" style="overflow-x: auto;">
                     <h4 class="card-title">Inscrições</h4>
-                    </p>
+                    <span>Inscrições destacadas em verde indicam que que o pagamento foi confirmado</span>
                     @if (session('response'))
                     <p class="msg {{ session('response.class') }}">
                         {{ session('response.message') }}
                     </p>
                     @endif
-                    <table class="table table-striped">
+                    <table class="table table-striped" style="margin-top: 2%;">
                         <thead>
                             <tr>
                                 <th> Nome </th>
                                 <th> Código </th>
                                 <th> Evento </th>
                                 <th> SubCategoria </th>
-                                <th> Ação </th>
+                                <th style="width: 18%;"> Ação </th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($inscricoes as $inscricao)
-                                <tr>
+                                <tr @if($inscricao->status_pagamento == 'CONFIRMED' || $inscricao->status_pagamento == 'RECEIVED') style="background-color: #44ce4236;" @endif>
                                     <td class="py-1">
                                        {{$inscricao->atleta->nome}}
                                     </td>
@@ -87,7 +87,7 @@
                                     </td>
 
                                     <td>
-                                     {{$inscricao->campeonato->nome}}
+                                        {{ strlen($inscricao->campeonato->nome) > 20 ? substr($inscricao->campeonato->nome, 0, 20) . '...' : $inscricao->campeonato->nome }}
                                     </td>
                                     <td>
                                      {{$inscricao->categoria->nome}}
