@@ -90,7 +90,7 @@
                                         {{ strlen($inscricao->campeonato->nome) > 20 ? substr($inscricao->campeonato->nome, 0, 20) . '...' : $inscricao->campeonato->nome }}
                                     </td>
                                     <td>
-                                     {{$inscricao->categoria->nome}}
+                                        {{ strlen($inscricao->categoria->nome) > 20 ? substr($inscricao->categoria->nome, 0, 20) . '...' : $inscricao->categoria->nome }}
                                     </td>
                                     <td class="t-action">
 
