@@ -107,6 +107,8 @@
                         title: "Oops...",
                         text: 'Escolha o tipo de relatório'
                     });  
+                    
+                    return;
                 }else{
                     if($("#tipo").val() == 'campeonato'){
                         if($("#campeonato_id").val() == ''){
@@ -115,6 +117,8 @@
                                 title: "Oops...",
                                 text: 'Selecione o campeonato que deseja exportar o relatório'
                             });
+
+                            return;
                         }
                         
                         id = $("#campeonato_id").val();
@@ -127,6 +131,7 @@
                                 title: "Oops...",
                                 text: 'Selecione o evento que deseja exportar o relatório'
                             });
+                            return;
                         }
                         
                         id = $("#evento_id").val();
