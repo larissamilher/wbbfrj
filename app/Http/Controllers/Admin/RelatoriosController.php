@@ -160,7 +160,7 @@ class RelatoriosController extends Controller
         $pdf = PDF::loadHTML($pdfView);
 
         // return view('admin.relatorios.pdf', compact('retorno'));
-        return $pdf->download('relatório.pdf');
+        return $pdf->download('relatório-'.date('d-m-Y').'.pdf');
 
     }
 }
