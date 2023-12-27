@@ -60,7 +60,7 @@
                                 {{$retorno['candidaturas-recusadas']}}
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-900">
-                                <strong>Candidaturas Recusada </strong>
+                                <strong>Candidaturas Recusadas </strong>
                             </td>                                    
                         </tr>
 
