@@ -80,8 +80,6 @@ class RelatoriosController extends Controller
                 ->whereIn('status_pagamento', ['CONFIRMED', 'RECEIVED'])
                 ->whereNull('convidado')
                 ->sum('VALUE');
-
-            // dd($retorno);
         
         }
         else if($tipo == 'evento'){
@@ -89,16 +87,12 @@ class RelatoriosController extends Controller
         }
 
     
-        // $inscricao = '';
-        // $pdfView = View::make('admin.relatorios.pdf',  ['inscricao' => $inscricao])->render();
+        $pdfView = View::make('admin.relatorios.pdf',  ['retorno' => $retorno])->render();
 
-        // $pdf = PDF::loadHTML($pdfView);
+        $pdf = PDF::loadHTML($pdfView);
 
-        
-        //     $nome = 'ficha-inscricao';
-
-        return view('admin.relatorios.pdf', compact('retorno'));
-        // return $pdf->download($nome.'.pdf');
+        // return view('admin.relatorios.pdf', compact('retorno'));
+        return $pdf->download('relatório.pdf');
 
     }
 }
