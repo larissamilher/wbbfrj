@@ -85,54 +85,54 @@ class RelatoriosController extends Controller
         }
         else if($tipo == 'evento'){
             
-            $retorno['candidaturas'] = InscricaoEvento::where('campeonato_id',$id)
+            $retorno['candidaturas'] = InscricaoEvento::where('evento_id',$id)
                 ->whereIn('status_pagamento', ['CONFIRMED','RECEIVED'])
                 ->count();
 
-            $retorno['pix'] = InscricaoEvento::where('campeonato_id',$id)
+            $retorno['pix'] = InscricaoEvento::where('evento_id',$id)
                 ->whereIn('status_pagamento', ['CONFIRMED','RECEIVED'])
                 ->where('billingType', 'PIX')
                 ->whereNull('convidado')
                 ->count();
 
-            $retorno['boleto'] = InscricaoEvento::where('campeonato_id',$id)
+            $retorno['boleto'] = InscricaoEvento::where('evento_id',$id)
                 ->whereIn('status_pagamento', ['CONFIRMED','RECEIVED'])
                 ->where('billingType', 'BOLETO')
                 ->whereNull('convidado')
                 ->count();
     
-            $retorno['cartao'] = InscricaoEvento::where('campeonato_id',$id)
+            $retorno['cartao'] = InscricaoEvento::where('evento_id',$id)
                 ->whereIn('status_pagamento', ['CONFIRMED','RECEIVED'])
                 ->where('billingType', 'CREDIT_CARD')
                 ->whereNull('convidado')
                 ->count();
             
-            $retorno['convidados'] = InscricaoEvento::where('campeonato_id',$id)
+            $retorno['convidados'] = InscricaoEvento::where('evento_id',$id)
                 ->whereIn('status_pagamento', ['CONFIRMED','RECEIVED'])
                 ->whereNotNull('convidado')
                 ->count();
             
 
-            $retorno['valor-pix'] = InscricaoEvento::where('campeonato_id', $id)
+            $retorno['valor-pix'] = InscricaoEvento::where('evento_id', $id)
                 ->whereIn('status_pagamento', ['CONFIRMED', 'RECEIVED'])
                 ->where('billingType', 'PIX')
                 ->whereNull('convidado')
                 ->sum('VALUE');
 
                 
-            $retorno['valor-boleto'] = InscricaoEvento::where('campeonato_id', $id)
+            $retorno['valor-boleto'] = InscricaoEvento::where('evento_id', $id)
                 ->whereIn('status_pagamento', ['CONFIRMED', 'RECEIVED'])
                 ->where('billingType', 'BOLETO')
                 ->whereNull('convidado')
                 ->sum('VALUE');
 
-            $retorno['valor-cartao'] = InscricaoEvento::where('campeonato_id', $id)
+            $retorno['valor-cartao'] = InscricaoEvento::where('evento_id', $id)
                 ->whereIn('status_pagamento', ['CONFIRMED', 'RECEIVED'])
                 ->where('billingType', 'CREDIT_CARD')
                 ->whereNull('convidado')
                 ->sum('VALUE');
 
-            $retorno['valor-total'] = InscricaoEvento::where('campeonato_id', $id)
+            $retorno['valor-total'] = InscricaoEvento::where('evento_id', $id)
                 ->whereIn('status_pagamento', ['CONFIRMED', 'RECEIVED'])
                 ->whereNull('convidado')
                 ->sum('VALUE');
