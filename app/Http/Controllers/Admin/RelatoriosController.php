@@ -30,6 +30,8 @@ class RelatoriosController extends Controller
                 
         if($tipo == 'campeonato'){
 
+            $retorno['titulo'] = Campeonato::find($id)->pluck('nome')->first();
+
             $retorno['candidaturas'] = AtletaXCampeonato::where('campeonato_id',$id)
                 ->whereIn('status_pagamento', ['CONFIRMED','RECEIVED'])
                 ->count();
@@ -92,6 +94,8 @@ class RelatoriosController extends Controller
         
         }
         else if($tipo == 'evento'){
+
+            $retorno['titulo'] = Evento::find($id)->pluck('nome')->first();
             
             $retorno['candidaturas'] = InscricaoEvento::where('evento_id',$id)
                 ->whereIn('status_pagamento', ['CONFIRMED','RECEIVED'])
@@ -154,7 +158,7 @@ class RelatoriosController extends Controller
                 ->sum('VALUE');
         }
 
-    
+    // dd($retorno);
         $pdfView = View::make('admin.relatorios.pdf',  ['retorno' => $retorno])->render();
 
         $pdf = PDF::loadHTML($pdfView);

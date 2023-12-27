@@ -21,7 +21,7 @@
                         <th scope="col" colspan="2" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             <img alt="WBBF" src="https://www.wbbfrj.com/img/logo/wbbf-circulo.png" style="max-width: 50px; display: block; margin: 0 auto;">
                             <br/>
-                            WBBF RJ - Relatório
+                            WBBF RJ - RELATÓRIO <br> <strong>{{$retorno['titulo']}}</strong> 
                         </th>                        
                     </tr>
                     </thead>
