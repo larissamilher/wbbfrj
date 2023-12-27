@@ -230,6 +230,10 @@
 
                                 $(".form-desabilitado").css('display','block');
 
+                                $('html, body').animate({
+                                    scrollTop: $(".form-desabilitado").offset().top
+                                }, 1000);
+
                                 $('#campeonato').val(retorno.dados.campeonato.nome);
                                 $('#sub_categoria_id').val(retorno.dados.categoria.nome);
                                 $('#categoria').val(retorno.dados.categoria.categoria.nome);
