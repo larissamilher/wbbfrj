@@ -12,7 +12,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="tipo">Filtrar por:</label>
+                                    <label for="tipo">Escolha o tipo de relaório:</label>
                                     <select class="form-control" id="tipo" name="tipo">
                                         <option value=""> Selecione</option>
                                         <option value="campeonato"> Campeonato</option>
@@ -27,7 +27,7 @@
                                 <div class="form-group">
                                     <label for="campeonato_id">Filtrar por Campeonato</label>
                                     <select class="form-control" id="campeonato_id" name="campeonato_id">
-                                        <option value="0"> Todas</option>
+                                        <option value=""> Selecione</option>
                                         @foreach($campeonatos as $campeonato)
                                           <option value="{{$campeonato->id}}"> {{ $campeonato->nome}}
                                           </option>
@@ -40,11 +40,11 @@
                         <div class="row div-evento"  style="display: none">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="campeonato_id">Filtrar por Evento</label>
-                                    <select class="form-control" id="campeonato_id" name="campeonato_id">
-                                        <option value="0"> Todas</option>
-                                        @foreach($campeonatos as $campeonato)
-                                          <option value="{{$campeonato->id}}"> {{ $campeonato->nome}}
+                                    <label for="evento_id">Filtrar por Evento</label>
+                                    <select class="form-control" id="evento_id" name="evento_id">
+                                        <option value=""> Selecione</option>
+                                        @foreach($eventos as $evento)
+                                          <option value="{{$evento->id}}"> {{ $evento->nome}}
                                           </option>
                                         @endforeach                                       
                                     </select>
@@ -52,26 +52,20 @@
                             </div>
                         </div>
 
-                        <div class="row">     
-                            <div class="col-lg-2">
+                        <div class="row">   
+                            <div class="col-lg-4">
+                            </div>  
+                            <div class="col-lg-4">
                                 <div class="form-group">
                                     <label>&nbsp;</label>
-                                    <button class="btn btn-secondary" id="btnFiltro" type="button" style=" width: 100% !important;  HEIGHT: 51PX; z-index:0">
-                                        FILTRAR
+                                    <button class="btn btn-secondary" id="btnRelatorio" type="button" style=" width: 100% !important;  HEIGHT: 51PX; z-index:0; background-color: #44ce42; border-color:#44ce42">
+                                        GERAR RELATÓRIO EM PDF 
                                     </button>
                                 </div>
                             </div>
                         </div>
 
                     </form>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body" style="overflow-x: auto;">
-                    <h4 class="card-title">Inscrições</h4>
                 </div>
             </div>
         </div>
@@ -103,14 +97,45 @@
                 }
             });
           
-          $('#btnFiltro').on('click', function() {
-              var campeonato_id = $("#campeonato_id").val();
-              var codigo = $("#codigo").val();
+            $('#btnRelatorio').on('click', function() {
 
-              if(campeonato_id)
-                  window.location.href = "/admin/inscricoes-campeonatos/"+ campeonato_id + '/' + codigo.replace('/', "-");
+                id = null;
 
-          });
+                if( $("#tipo").val() == ''){
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: 'Escolha o tipo de relatório'
+                    });  
+                }else{
+                    if($("#tipo").val() == 'campeonato'){
+                        if($("#campeonato_id").val() == ''){
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: 'Selecione o campeonato que deseja exportar o relatório'
+                            });
+                        }
+                        
+                        id = $("#campeonato_id").val();
+                    }
+                    if($("#tipo").val() == 'evento'){
+
+                        if($("#evento_id").val() == ''){
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: 'Selecione o evento que deseja exportar o relatório'
+                            });
+                        }
+                        
+                        id = $("#evento_id").val();
+                    }
+
+                    window.location.href = "/admin/relatorios/gerar-pdf/"+  $("#tipo").val() + '/' + id;
+
+                }
+            });
       });
     </script>
 @endsection

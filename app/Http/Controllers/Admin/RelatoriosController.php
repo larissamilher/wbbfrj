@@ -10,6 +10,8 @@ use App\Models\Categoria;
 use App\Models\Atleta;
 use PhpOffice\PhpSpreadsheet\Exception;
 use App\Models\Evento;
+use Illuminate\Support\Facades\View;
+use PDF;
 
 class RelatoriosController extends Controller
 {
@@ -19,5 +21,84 @@ class RelatoriosController extends Controller
         $eventos = Evento::orderBy('nome')->get();
 
         return view('admin.relatorios.index', compact('campeonatos','eventos'));
+    }
+
+    public function gerarPdf($tipo, $id)
+    {
+        $retorno = [];
+                
+        if($tipo == 'campeonato'){
+
+            $retorno['candidaturas'] = AtletaXCampeonato::where('campeonato_id',$id)
+                ->whereIn('status_pagamento', ['CONFIRMED','RECEIVED'])
+                ->count();
+
+            $retorno['pix'] = AtletaXCampeonato::where('campeonato_id',$id)
+                ->whereIn('status_pagamento', ['CONFIRMED','RECEIVED'])
+                ->where('billingType', 'PIX')
+                ->whereNull('convidado')
+                ->count();
+
+            $retorno['boleto'] = AtletaXCampeonato::where('campeonato_id',$id)
+                ->whereIn('status_pagamento', ['CONFIRMED','RECEIVED'])
+                ->where('billingType', 'BOLETO')
+                ->whereNull('convidado')
+                ->count();
+    
+            $retorno['cartao'] = AtletaXCampeonato::where('campeonato_id',$id)
+                ->whereIn('status_pagamento', ['CONFIRMED','RECEIVED'])
+                ->where('billingType', 'CREDIT_CARD')
+                ->whereNull('convidado')
+                ->count();
+            
+            $retorno['convidados'] = AtletaXCampeonato::where('campeonato_id',$id)
+                ->whereIn('status_pagamento', ['CONFIRMED','RECEIVED'])
+                ->whereNotNull('convidado')
+                ->count();
+            
+
+            $retorno['valor-pix'] = AtletaXCampeonato::where('campeonato_id', $id)
+                ->whereIn('status_pagamento', ['CONFIRMED', 'RECEIVED'])
+                ->where('billingType', 'PIX')
+                ->whereNull('convidado')
+                ->sum('VALUE');
+
+                
+            $retorno['valor-boleto'] = AtletaXCampeonato::where('campeonato_id', $id)
+                ->whereIn('status_pagamento', ['CONFIRMED', 'RECEIVED'])
+                ->where('billingType', 'BOLETO')
+                ->whereNull('convidado')
+                ->sum('VALUE');
+
+            $retorno['valor-cartao'] = AtletaXCampeonato::where('campeonato_id', $id)
+                ->whereIn('status_pagamento', ['CONFIRMED', 'RECEIVED'])
+                ->where('billingType', 'CREDIT_CARD')
+                ->whereNull('convidado')
+                ->sum('VALUE');
+
+            $retorno['valor-total'] = AtletaXCampeonato::where('campeonato_id', $id)
+                ->whereIn('status_pagamento', ['CONFIRMED', 'RECEIVED'])
+                ->whereNull('convidado')
+                ->sum('VALUE');
+
+            // dd($retorno);
+        
+        }
+        else if($tipo == 'evento'){
+            
+        }
+
+    
+        // $inscricao = '';
+        // $pdfView = View::make('admin.relatorios.pdf',  ['inscricao' => $inscricao])->render();
+
+        // $pdf = PDF::loadHTML($pdfView);
+
+        
+        //     $nome = 'ficha-inscricao';
+
+        return view('admin.relatorios.pdf', compact('retorno'));
+        // return $pdf->download($nome.'.pdf');
+
     }
 }

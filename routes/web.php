@@ -120,6 +120,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
 
     Route::prefix('relatorios')->group(function () {
         Route::get('/', [RelatoriosController::class, 'index'])->name('admin.relatorios');
+        Route::get('/gerar-pdf/{tipo}/{id}', [RelatoriosController::class, 'gerarPdf'])->name('admin.relatorios.gerar-pdf');
+
     });
 
 });
