@@ -42,7 +42,25 @@
                                 {{$retorno['candidaturas']}}
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-900">
-                                <strong>Candidaturas </strong>
+                                <strong>Candidaturas com Pagamento Confirmado </strong>
+                            </td>                                    
+                        </tr>
+
+                        <tr class="bg-white">
+                            <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-900" style="text-align: center;">
+                                {{$retorno['candidaturas-pendentes']}}
+                            </td>
+                            <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-900">
+                                <strong>Candidaturas com Pagamento Pendente</strong>
+                            </td>                                    
+                        </tr>
+
+                        <tr class="bg-white">
+                            <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-900" style="text-align: center;">
+                                {{$retorno['candidaturas-recusadas']}}
+                            </td>
+                            <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-900">
+                                <strong>Candidaturas com Pagamento Recusado </strong>
                             </td>                                    
                         </tr>
 

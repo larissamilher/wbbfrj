@@ -34,6 +34,14 @@ class RelatoriosController extends Controller
                 ->whereIn('status_pagamento', ['CONFIRMED','RECEIVED'])
                 ->count();
 
+            $retorno['candidaturas-pendentes'] = AtletaXCampeonato::where('campeonato_id',$id)
+                ->whereIn('status_pagamento', ['PENDING'])
+                ->count();
+
+            $retorno['candidaturas-recusadas'] = AtletaXCampeonato::where('campeonato_id',$id)
+                ->whereIn('status_pagamento', ['RECUSED'])
+                ->count();
+
             $retorno['pix'] = AtletaXCampeonato::where('campeonato_id',$id)
                 ->whereIn('status_pagamento', ['CONFIRMED','RECEIVED'])
                 ->where('billingType', 'PIX')
@@ -87,6 +95,14 @@ class RelatoriosController extends Controller
             
             $retorno['candidaturas'] = InscricaoEvento::where('evento_id',$id)
                 ->whereIn('status_pagamento', ['CONFIRMED','RECEIVED'])
+                ->count();
+
+            $retorno['candidaturas-pendentes'] = InscricaoEvento::where('evento_id',$id)
+                ->whereIn('status_pagamento', ['PENDING'])
+                ->count();
+
+            $retorno['candidaturas-recusadas'] = InscricaoEvento::where('evento_id',$id)
+                ->whereIn('status_pagamento', ['RECUSED'])
                 ->count();
 
             $retorno['pix'] = InscricaoEvento::where('evento_id',$id)
