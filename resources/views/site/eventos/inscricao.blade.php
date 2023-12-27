@@ -190,17 +190,17 @@
             }
         });
 
-        $('#rg').on('change',function() {
-            var rg = $('#rg').val();
-            if (!validarRg(rg)) {
-                $('#rg').val('');
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: 'Insira um RG válido!'
-                });
-            }             
-        });
+        // $('#rg').on('change',function() {
+        //     var rg = $('#rg').val();
+        //     if (!validarRg(rg)) {
+        //         $('#rg').val('');
+        //         Swal.fire({
+        //             icon: "error",
+        //             title: "Oops...",
+        //             text: 'Insira um RG válido!'
+        //         });
+        //     }             
+        // });
 
         $('#cpf').on('change',function() {
             var cpf = $('#cpf').val().replace(/\D/g, ''); 
