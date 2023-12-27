@@ -40,13 +40,10 @@
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>&nbsp;</label>
-                                    <div class="input-group" style=" width: 100% !important;    ">
-                                      
-                                        <div class="input-group-append">
-                                            <button class="btn btn-secondary" id="btnFiltro" type="button" style=" width: 100% !important;  HEIGHT: 51PX; z-index:0">
-                                                FILTRAR
-                                            </button>
-                                        </div>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" id="btnFiltro" type="button" style=" width: 100% !important;  HEIGHT: 51PX; z-index:0">
+                                            FILTRAR
+                                        </button>
                                     </div>
                                 </div>
                             </div>
