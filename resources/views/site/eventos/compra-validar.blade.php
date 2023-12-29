@@ -74,7 +74,7 @@
                             @endif
                         @else
                             <h1 style="color: #c50404;FONT-SIZE: 30PX;">
-                                SÓ É PERMITIDO VALIDAR UMA COMPRA/EVENTO NO DIA DO EVENTO.
+                                SÓ É PERMITIDO VALIDAR UMA COMPRA/INGRESSO NO DIA DO EVENTO.
                             </h1>
                         @endif
                     </div>
