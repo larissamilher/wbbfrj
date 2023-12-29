@@ -53,7 +53,7 @@
                 <div class="col-lg-6 col-md-12">
                     <!-- about-img -->
                     <div class="about-img ">
-                        <video controls>
+                        <video controls style="width: 100%;">
                             <source src="{{ asset('video/WORKSHOP.mp4') }}" type="video/mp4">
                                 WORKSHOP AO FISICULTURISMO
                         </video>
@@ -65,20 +65,17 @@
                         <div class="section-tittle section-tittle3 mb-35" style="text-align: center">
                             <span>WORKSHOP AO FISICULTURISMO</span>
                             <h2>Está preparado para virar um especialista em fisiculturismo? </h2>
-                            <h3 >
-                                Garanta sua vaga e entre de vez no esporte!!! 
-                            </h3>
-
-                            
+                           
                         </div>
                         <span class="lotes">
                             1º LOTE <strong style="color: black"> R$ 250,00</strong><br>
                             2º LOTE <strong style="color: black"> R$ 270,00</strong><br>
                             3º LOTE <strong style="color: black"> R$ 320,00</strong><br>
                         </span>
-                       
-                        
-                    
+                        <br>
+                     
+                        <a href="{{route('eventos-inscricoes')}}" class="btn wantToWork-btn f-right btn-inscreva btn-inscreva" style="margin-right: 33%;">Garanta sua vaga!!!</a>
+
                     </div>
                 </div>
             </div>
@@ -569,6 +566,10 @@
         @media screen and (max-device-width: 800px) {
             .modal-content{
                 width: 95%;
+            }
+            .btn-inscreva{
+                margin-right: 0;
+                width: 100%;
             }
         }
 
