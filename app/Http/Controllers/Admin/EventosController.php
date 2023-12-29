@@ -119,7 +119,7 @@ class EventosController extends Controller
             'evento' => function ($query) {
                 $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
             },
-        ])->where('status_pagamento', '!=', '');
+        ]);
         
         if($eventoId)
             $inscricoes = $inscricoes->where('evento_id', $eventoId);        
