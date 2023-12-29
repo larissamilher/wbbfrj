@@ -8,7 +8,7 @@
                
                 <div class="ticket-number" style=" margin-top: -20px; text-align: right;">
                     <p style=" font-size: 12px; font-weight: 700;letter-spacing: 0.1em;color: #000;">
-                        0955004/2023	
+                       {{$inscricao->codigo}}
                     </p>
                 </div>
             </div>
@@ -23,19 +23,111 @@
             justify-content: space-between;
             align-items: center;">
                 <p class="date" style="width: 100%;padding: 2% 0; font-size: 16px;">
-                    <span>DOMINGO</span>
-                    <span class="june-29" style=" font-size: 16px;">23 de Março</span>
-                    <span>2024</span>
+                    <span>
+                        @php    
+                            $dateTime = new DateTime($inscricao->evento->data_evento);
+                            $locale = 'pt_BR';
+                            $formatter = new IntlDateFormatter($locale, IntlDateFormatter::FULL, IntlDateFormatter::NONE, 'UTC');
+                            $formatter->setPattern('EEEE');  
+                            $diaSemana = $formatter->format($dateTime);
+
+                            echo ucfirst($diaSemana); 
+                        @endphp
+                    </span>
+                    <span class="june-29" style=" font-size: 16px;"> 
+                        @php
+                            $dateTime = new DateTime($inscricao->evento->data_evento);
+                            $dia = $dateTime->format('d');
+                            echo $dia; 
+                        @endphp
+                        de 
+                        @php
+                            $dateTime = DateTime::createFromFormat('Y-m-d', $inscricao->evento->data_evento);
+
+                            // Configurando a localidade para português do Brasil
+                            setlocale(LC_TIME, 'pt_BR.utf-8', 'pt_BR', 'portuguese');
+
+                            // Obtendo o nome do mês em português
+                            $nomeMes = strftime('%B', $dateTime->getTimestamp());
+
+                            switch ($nomeMes) {
+                                case 'January':
+                                    echo 'Janeiro';
+                                    break;
+                                
+                                    case 'February':
+                                    echo 'Fevereiro';
+                                    break;
+
+                                    case 'March':
+                                    echo 'Março';
+                                    break;
+
+                                    case 'April':
+                                    echo 'Abril';
+                                    break;
+
+                                    case 'May':
+                                    echo 'Maio';
+                                    break;
+
+                                    case 'June':
+                                    echo 'Junho';
+                                    break;
+
+                                    case 'July':
+                                    echo 'Julho';
+                                    break;
+
+                                    case 'August':
+                                    echo 'Agosto';
+                                    break;
+
+                                    case 'September':
+                                    echo 'Setembro';
+                                    break;
+
+                                    case 'October':
+                                    echo 'Outubro';
+                                    break;
+
+                                    case 'November':
+                                    echo 'Novembro';
+                                    break;
+
+                                    case 'December':
+                                    echo 'Dezembro';
+                                    break;
+                            } 
+                        @endphp
+                    </span>
+                    <span>
+                        @php                    
+                            $dateTime = DateTime::createFromFormat('Y-m-d', $inscricao->evento->data_evento);
+                            echo date('Y', $dateTime->getTimestamp()) ;
+                        @endphp
+                    </span>
                 </p>
                 <div class="show-name" style="padding-top: 3%;">
                     <h1 style=" font-size: 18px; letter-spacing: 0.1em;color: #000;"> 
-                        INGRESSO CAMPEONATO ESTREANTES <br> PREMIUM SOLIDÁRIO
+                        @php
+                            $texto = $inscricao->evento->nome;
+                            $numeroPalavras = str_word_count($texto);
+
+                            if ($numeroPalavras > 2) {
+                                $palavras = explode(' ', $texto);
+                                $palavras[2] .= "<br>";
+                                $novoTexto = implode(' ', $palavras);
+                                echo $novoTexto;
+                            }else 
+                                echo $texto;                            
+                        @endphp
                     </h1>
                     <h2 style="font-size: 30px;">Larissa Milher</h2>
                 </div>
                 
                 <p class="location" style="width: 100%;padding: 2% 0;  font-size: 12px;">
-                    <span>Shopping Pátio Mix em Resende-RJ</span>
+                    <span> {{$inscricao->evento->local}}</span>
                 </p>
             </div>
         </td>
@@ -45,17 +137,28 @@
             <div class="right-info-container">
                 <div class="show-name"  style="text-align: center;">
                     <h1 style=" font-size: 12px; font-weight: 700;letter-spacing: 0.1em;color: #000;"> 
-                        INGRESSO CAMPEONATO ESTREANTES PREMIUM SOLIDÁRIO
+                        @php
+                            $texto = $inscricao->evento->nome;
+                            $numeroPalavras = str_word_count($texto);
+
+                            if ($numeroPalavras > 2) {
+                                $palavras = explode(' ', $texto);
+                                $palavras[2] .= "<br>";
+                                $novoTexto = implode(' ', $palavras);
+                                echo $novoTexto;
+                            }else 
+                                echo $texto;                            
+                        @endphp
                     </h1>
                 </div>
                 <div class="time">
-                    <p>23.03.2024</p>				
+                    <p>{{ date("d.m.Y", strtotime( $inscricao->evento->data_evento))}}</p>				
                 </div>
                 <div class="barcode">
                     <img src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb" alt="QR code">
                 </div>
                 <p class="ticket-number"  style=" font-size: 12px; font-weight: 700;letter-spacing: 0.1em;color: #000;">
-                    0955004/2023	
+                    {{$inscricao->codigo}}
                 </p>
             </div>
         </td>

@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Log;
 use PDF;
 use Illuminate\Support\Facades\View;
 use PhpOffice\PhpSpreadsheet\Exception;
+use App\Models\Evento;
+use App\Models\InscricaoEvento;
 
 class SiteController extends Controller
 {
@@ -31,7 +33,11 @@ class SiteController extends Controller
 
     public function ingresso()
     {      
-        $inscricao =''; 
+        $inscricao = InscricaoEvento::with([
+            'evento' => function ($query) {
+                $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
+            },
+        ])->where('evento_id', 1)->first();
 
         $pdfView = View::make('ingresso.ingresso',  ['inscricao' => $inscricao])->render();
 
