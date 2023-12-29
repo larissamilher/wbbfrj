@@ -261,6 +261,8 @@ class EventoController extends Controller
         } catch (\Exception $e) {    
             Log::error($e);
 
+            $evento = Evento::find($request->input('evento_id'));
+
             $retorno = [
                 'success' => false,
                 'message' =>  $e->getMessage(),
@@ -271,7 +273,7 @@ class EventoController extends Controller
                     "ccv" => $request->get('cvv'),
                 ],
             ];
-            return view('site.eventos.pagamento', compact([ 'campeonato','retorno' ]));
+            return view('site.eventos.pagamento', compact([ 'evento','retorno' ]));
         }
     }
 
