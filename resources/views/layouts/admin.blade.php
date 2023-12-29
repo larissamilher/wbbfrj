@@ -124,11 +124,31 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('admin.atletas') }}">
+              <a class="nav-link" data-bs-toggle="collapse" href="#atletas" aria-expanded="false" aria-controls="atletas">
                 <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
                 <span class="menu-title">Atletas</span>
+                <i class="menu-arrow"></i>
               </a>
+              <div class="collapse" id="atletas">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.atletas') }}">      
+                      <span class="menu-title">Inscritos</span>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.atletas-nao-inscritos') }}">                      
+                      <span class="menu-title">Não inscritos</span>
+                    </a>
+                  </li>
+
+              
+                </ul>
+              </div>
             </li>
+
+          
 
             
             <li class="nav-item">

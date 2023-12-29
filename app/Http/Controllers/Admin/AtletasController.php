@@ -10,10 +10,25 @@ use App\Models\AtletaXCampeonato;
 
 class AtletasController extends Controller
 {
-    public function index($cpf = null){
+    public function comInscricao($cpf = null){
 
-        $atletas = Atleta::with('campeonatos')->orderBy('nome');
-        
+        $atletas = Atleta::with('campeonatos')
+            ->has('campeonatos') 
+            ->orderBy('nome');
+
+        if($cpf)
+            $atletas = $atletas->where('cpf', $cpf );
+
+        $atletas = $atletas->get();
+
+        return view('admin.atletas.index', compact('atletas'));
+    }
+
+    public function semInscricao($cpf = null){
+
+        $atletas = Atleta::doesntHave('campeonatos')
+            ->orderBy('nome');
+
         if($cpf)
             $atletas = $atletas->where('cpf', $cpf );
 
