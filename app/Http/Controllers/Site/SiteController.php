@@ -82,15 +82,22 @@ class SiteController extends Controller
 
     }
 
-    public function validarCompra($codigo)
+    public function validarCompra($codigo = null)
     {
+        if(!$codigo){
+            $semCondigo = true;
+            return view('site.eventos.compra-validar', compact('semCondigo')); 
+
+        }
+        
+        $semCondigo = false;
         $compra = InscricaoEvento::with([
             'evento' => function ($query) {
                 $query->withTrashed();
             },
         ])->where('codigo', str_replace('-', '/',$codigo ))->first();
 
-        return view('site.eventos.compra-validar', compact("compra")); 
+        return view('site.eventos.compra-validar', compact("compra",'semCondigo')); 
     }
 
     
@@ -110,7 +117,7 @@ class SiteController extends Controller
 
             if(!empty($compra->data_usado))
                 throw new \Exception(' Erro: Este ingresso já foi utilizado. Certifique-se de não haver duplicatas.');
-            
+
             $compra->usado = 1;
             $compra->data_usado = date('Y-m-d');
             $compra->save();

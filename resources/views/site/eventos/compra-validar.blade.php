@@ -22,62 +22,87 @@
                     <div class="inscricao-form form-desabilitado">
                         @csrf
 
-                        @if($compra->evento->data_evento === date('Y-m-d'))
-        
-                            @if(empty($compra->data_usado))
-                                <h1 style="color: #0e8900;FONT-SIZE: 30PX;">
-                                    INGRESSO VÁLIDO. PAGAMENTO CONFIRMADO
+                        @if(!$semCondigo)
+                            @if(!$compra)
+                                <h1 style="color: #c50404;FONT-SIZE: 30PX;">
+                                    Erro: Compra não encontrada. Verifique o código digitado.
                                 </h1>
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12">
-                                        <div class="form-box user-icon mb-30">
-                                            <label for="campeonato">Evento</label>
-                                            <input type="hidden" id="compra_id" disabled class="form-control required" value="{{$compra->id}}">
+                            @elseif($compra->evento->data_evento === date('Y-m-d'))
+            
+                                @if(empty($compra->data_usado))
+                                    <h1 style="color: #0e8900;FONT-SIZE: 30PX;">
+                                        INGRESSO VÁLIDO. PAGAMENTO CONFIRMADO
+                                    </h1>
+                                    <div class="row compra">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="form-box user-icon mb-30">
+                                                <label for="campeonato">Evento</label>
+                                                <input type="hidden" id="compra_id" disabled class="form-control required" value="{{$compra->id}}">
 
-                                            <input type="text" disabled class="form-control required" value="{{$compra->evento->nome}}">
-                
+                                                <input type="text" disabled class="form-control required" value="{{$compra->evento->nome}}">
+                    
+                                            </div>
                                         </div>
+                                        
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="form-box email-icon mb-30">
+                                                <label for="cpf">Descrição</label>
+                                                <input type="text" name="cpf" id="cpf"disabled class="form-control required"  value="{{$compra->evento->descricao}}">
+                                            </div>
+                                        </div>     
                                     </div>
-                                    
-                                    <div class="col-lg-12 col-md-12">
-                                        <div class="form-box email-icon mb-30">
-                                            <label for="cpf">Descrição</label>
-                                            <input type="text" name="cpf" id="cpf"disabled class="form-control required"  value="{{$compra->evento->descricao}}">
-                                        </div>
-                                    </div>     
-                                </div>
 
-                                <div class="row">                            
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-box email-icon mb-30">
-                                            <label for="cpf">CPF</label>
-                                            <input type="text" name="cpf" id="cpf"disabled class="form-control required"  value="{{$compra->cpf}}">
-                                        </div>
-                                    </div>   
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-box user-icon mb-30">
-                                            <label for="nome">Nome</label>
-                                            <input type="text" name="nome" id="nome"disabled class="form-control required"  value="{{$compra->nome}}" >
-                                        </div>
-                                    </div>   
-                                </div>
-
-                                <div class="row">   
-                                    <div class="col-lg-3 col-md-3">
+                                    <div class="row">                            
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-box email-icon mb-30">
+                                                <label for="cpf">CPF</label>
+                                                <input type="text" name="cpf" id="cpf"disabled class="form-control required"  value="{{$compra->cpf}}">
+                                            </div>
+                                        </div>   
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-box user-icon mb-30">
+                                                <label for="nome">Nome</label>
+                                                <input type="text" name="nome" id="nome"disabled class="form-control required"  value="{{$compra->nome}}" >
+                                            </div>
+                                        </div>   
                                     </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <button class="btn" type="button" id="bntValidar" style="width: 100%">VALIDAR</button>
-                                    </div>   
-                                </div>
+
+                                    <div class="row">   
+                                        <div class="col-lg-3 col-md-3">
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <button class="btn" type="button" id="bntValidar" style="width: 100%">VALIDAR</button>
+                                        </div>   
+                                    </div>
+                                @else
+                                    <h1 style="color: #c50404;FONT-SIZE: 30PX;">
+                                        Erro: Este ingresso já foi utilizado. <br> Certifique-se de não haver duplicatas.
+                                    </h1>
+                                @endif
                             @else
                                 <h1 style="color: #c50404;FONT-SIZE: 30PX;">
-                                    Erro: Este ingresso já foi utilizado. <br> Certifique-se de não haver duplicatas.
+                                    SÓ É PERMITIDO VALIDAR UMA COMPRA/INGRESSO NO DIA DO EVENTO.
                                 </h1>
                             @endif
                         @else
-                            <h1 style="color: #c50404;FONT-SIZE: 30PX;">
-                                SÓ É PERMITIDO VALIDAR UMA COMPRA/INGRESSO NO DIA DO EVENTO.
-                            </h1>
+                            <form class="inscricao-form" action="{{ route('inscricao.store.ficha') }}" method="POST"style=" padding-top: 0;padding-bottom: 0;">
+                                @csrf
+                
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-box user-icon mb-30">
+                                            <label for="codigo">Informe o código que deseja validar</label>
+                                            <input type="text" name="codigo" id="codigo"  class="form-control required">        
+                                        </div>
+                                    </div>
+                
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="form-box email-icon mb-30" style=" margin-top: 32px;">
+                                            <button class="btn" type="button" style=" height: 60px;" id="btnBuscar">Buscar</button>
+                                        </div>
+                                    </div>     
+                                </div>
+                            </form>
                         @endif
                     </div>
                 </div>
@@ -97,24 +122,24 @@
     }
 </style>
 
-    <style>
-        ul.list {
-            max-height: 300px; 
-            overflow-y: auto;
-        }
-        button{
-            background-color: #009688 !important;
-        }
+<style>
+    ul.list {
+        max-height: 300px; 
+        overflow-y: auto;
+    }
+    button{
+        background-color: #009688 !important;
+    }
 
-        .btn::before{
-            background:#016b60 !important;
-        }
+    .btn::before{
+        background:#016b60 !important;
+    }
 
-       
-        .form-desabilitado input{
-            cursor: not-allowed;
-        }
-    </style>
+    
+    .form-desabilitado .compra input{
+        cursor: not-allowed;
+    }
+</style>
 
     <script>
         $(document).ready(function() {
@@ -147,6 +172,13 @@
                         }
                     });
                 }         
+            });
+
+            $('#btnBuscar').on('click', function() {
+                var codigo = $("#codigo").val();
+
+                if(codigo)
+                    window.location.href =  window.location.origin + '/eventos/validar/' +codigo.replace('/', "-");    
             });
 
         });

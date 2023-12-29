@@ -236,6 +236,6 @@ Route::post('/formulario-contato', [SiteController::class, 'contato'])->name('fo
 Auth::routes();
 
 Route::get('/teste/{id}', [SiteController::class, 'ingresso']);
-Route::get('/eventos/validar/{codigo}', [SiteController::class, 'validarCompra']);
+Route::get('/eventos/validar/{codigo?}', [SiteController::class, 'validarCompra']);
 
 Route::get('/eventos/validar-acao/{id}', [SiteController::class, 'validarCompraAcao']);
