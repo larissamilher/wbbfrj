@@ -17,6 +17,7 @@ use DateTime;
 use PDF;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class EventoController extends Controller
 {
@@ -214,7 +215,15 @@ class EventoController extends Controller
                             },
                         ])->find($participanteEvento->id);
                         
-                        $pdfView = view('ingresso.ingresso', ['inscricao' => $participanteEvento])->render();
+                        $nome = str_replace('/', '-', $participanteEvento->codigo);
+
+                        $conteudo = 'https://wbbfrj.com/eventos/validar/'. $nome;
+                        $qrCode = QrCode::size(300)->generate($conteudo);
+
+                        $qrCodePath = storage_path("app/temp/{$nome}.png");
+                        file_put_contents($qrCodePath, $qrCode);
+        
+                        $pdfView = view('ingresso.ingresso', ['inscricao' => $participanteEvento, 'qrCodePath' => $qrCodePath])->render();
         
                         $pdf = PDF::loadHTML($pdfView);
                         
@@ -225,6 +234,7 @@ class EventoController extends Controller
                         Mail::to($participante['email'])->send(new ConfirmacaoInscricaoEvento($participanteEvento, $pdfPath, $nome));
                         
                         Storage::delete("temp/{$nome}.pdf");
+                        Storage::delete("temp/{$nome}.png");
 
                         return view('site.inscricao-sucesso-evento');
                     }

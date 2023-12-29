@@ -15,6 +15,7 @@ use DateTime;
 use PDF;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class atualizaStatusPagamentoEvento extends Command
 {
@@ -46,23 +47,31 @@ class atualizaStatusPagamentoEvento extends Command
 
             if($pagamentoRetorno->status == 'CONFIRMED' || $pagamentoRetorno->status == 'RECEIVED'){
 
-                 $participanteEvento = InscricaoEvento::with([
+                $nome = str_replace('/', '-', $pagamento->codigo);
+
+                $participanteEvento = InscricaoEvento::with([
                     'evento' => function ($query) {
                         $query->withTrashed();
                     },
                 ])->find($pagamento->id);
                 
-                $pdfView = view('ingresso.ingresso', ['inscricao' => $participanteEvento])->render();
+                $conteudo = 'https://wbbfrj.com/eventos/validar/'. $nome;
+                $qrCode = QrCode::size(300)->generate($conteudo);
+
+                $qrCodePath = storage_path("app/temp/{$nome}.png");
+                file_put_contents($qrCodePath, $qrCode);
+
+                $pdfView = view('ingresso.ingresso', ['inscricao' => $participanteEvento, 'qrCodePath' => $qrCodePath])->render();
 
                 $pdf = PDF::loadHTML($pdfView);
                 
-                $nome = str_replace('/', '-', $participanteEvento->codigo);
                 $pdfPath = storage_path("app/temp/{$nome}.pdf");
                 $pdf->save($pdfPath);              
 
                 Mail::to($pagamento->email)->send(new ConfirmacaoInscricaoEvento($participanteEvento, $pdfPath, $nome));
                 
                 Storage::delete("temp/{$nome}.pdf");
+                Storage::delete("temp/{$nome}.png");
             }
         }
         Log::info("rodou command");

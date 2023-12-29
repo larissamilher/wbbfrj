@@ -36,19 +36,28 @@ class SiteController extends Controller
 
     public function ingresso()
     {      
-        // $participanteEvento = InscricaoEvento::with([
-        //     'evento' => function ($query) {
-        //         $query->withTrashed();
-        //     },
-        // ])->find(1);
+        $inscricao = InscricaoEvento::with([
+            'evento' => function ($query) {
+                $query->withTrashed();
+            },
+        ])->find(1);
         
-        // $pdfView = view('ingresso.ingresso', ['inscricao' => $participanteEvento])->render();
+        $conteudo = 'https://wbbfrj.com/eventos/validar/'. str_replace('/', '-', $inscricao->codigo);
+        $qrCode = QrCode::size(300)->generate($conteudo);
+
+        $nome = str_replace('/', '-', $inscricao->codigo);
+        $qrCodePath = storage_path("app/temp/{$nome}.png");
+        file_put_contents($qrCodePath, $qrCode);
+
+        $pdfView = view('ingresso.ingresso', ['inscricao' => $inscricao, 'qrCodePath' => $qrCodePath])->render();
         
-        // $pdf = PDF::loadHTML($pdfView);
+        $pdf = PDF::loadHTML($pdfView);
         
-        // $nome = str_replace('/', '-', $participanteEvento->codigo);
-        // $pdfPath = storage_path("app/temp/{$nome}.pdf");
-        // $pdf->save($pdfPath);
+      
+        $pdfPath = storage_path("app/temp/{$nome}.pdf");
+        $pdf->save($pdfPath);
+
+        return $pdf->stream($nome . '.pdf');
 
         // $participante = [
         //     'email' => 'larissamilher@gmail.com',
@@ -65,12 +74,10 @@ class SiteController extends Controller
         // return 'E-mail enviado com sucesso!';
 
         // return view('ingresso.ingresso'); 
-        $conteudo = 'teste texto qr codee';
-
-        // Gera o QR code
+        $conteudo = 'https://wbbfrj.com/eventos/validar/'. str_replace('/', '-', $inscricao->codigo);
         $qrCode = QrCode::size(300)->generate($conteudo);
     
-        return view('ingresso.ingresso', compact("qrCode")); 
+        return view('ingresso.ingresso', compact("qrCode","inscricao")); 
        
 
     }
@@ -84,8 +91,6 @@ class SiteController extends Controller
         ])->where('codigo', str_replace('-', '/',$codigo ))->first();
 
         return view('site.eventos.compra-validar', compact("compra")); 
-
-        dd( $participanteEvento);
     }
 
     public function contato(Request $request)

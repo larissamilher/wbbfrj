@@ -1,6 +1,6 @@
 
-{{$qrCode}}
-{{-- 
+
+
  <table style=" padding: 5%; width:80% ">
     <thead>
     <tr>
@@ -157,7 +157,8 @@
                     <p>{{ date("d.m.Y", strtotime( $inscricao->evento->data_evento))}}</p>				
                 </div>
                 <div class="barcode">
-                    <img src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb" alt="QR code">
+                    <img src="{{ $qrCodePath }}" alt="QR Code">
+
                 </div>
                 <p class="ticket-number"  style=" font-size: 12px; font-weight: 700;letter-spacing: 0.1em;color: #000;">
                     {{$inscricao->codigo}}
@@ -388,4 +389,4 @@
         color: gray;
     }
 
-</style> --}}
+</style>
