@@ -131,11 +131,18 @@
                                 <div class="col-lg-6">                                   
                                     <div class="form-box email-icon mb-30" style="margin-right: 15px; display: flex; align-items: center;">
                                         <input type="checkbox" name="autorizacao_uso_imagem" id="autorizacao_uso_imagem" class="form-control required" style="height: 20px;margin-right: 5px;width: 20px;">
-                                        <label for="autorizacao_uso_imagem">Autorizo o uso da minha imagem. <span>*</span> </label>
                                     </div>
+                                    <br>                                </div>
+                                <div>
+                                    <label for=""> 
+                                        Opção Solidária: Ao escolher a opção solidária,
+                                        você concorda em trazer no dia do evento 1 kg de alimento não perecível ou um brinquedo.    
+                                    </label>
+
                                 </div>
                             </div>
                         
+                            
                             <span>* Campos obrigatórios</span>
 
                             <div class="row">
