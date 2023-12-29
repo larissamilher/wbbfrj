@@ -57,7 +57,7 @@ class SiteController extends Controller
         $pdfPath = storage_path("app/temp/{$nome}.pdf");
         $pdf->save($pdfPath);
 
-        // return $pdf->stream($nome . '.pdf');
+        return $pdf->stream($nome . '.pdf');
 
         // $participante = [
         //     'email' => 'larissamilher@gmail.com',
@@ -77,7 +77,7 @@ class SiteController extends Controller
         $conteudo = 'https://wbbfrj.com/eventos/validar/'. str_replace('/', '-', $inscricao->codigo);
         $qrCode = QrCode::size(300)->generate($conteudo);
     
-        return view('ingresso.ingresso', compact("qrCodePath","inscricao")); 
+        return view('ingresso.ingresso', compact("qrCode","inscricao")); 
        
 
     }
