@@ -158,8 +158,20 @@ Route::prefix('quem-somos')->group(function () {
     })->name('comissao');
 });
 
+Route::prefix('filiacao')->group(function () {
+   
+    Route::get('/', function () {
+        return view('site.filiacao.index');
+    })->name('filiacao');
+
+    Route::get('/cadastro', function () {
+        return view('site.filiacao.cadastro');
+    })->name('filiacao.cadastro');
+
+});
+
 Route::get('/filiacao', function () {
-    return view('site.filiacao');
+    return view('site.filiacao.index');
 })->name('filiacao');
 
 Route::prefix('campeonatos')->group(function () {

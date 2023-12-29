@@ -83,7 +83,7 @@
                                                     <li><a href="{{ route('comissao') }}">Comissão Diretiva</a></li>
                                                 </ul>
                                             </li> --}}
-                                            {{-- <li><a href="{{ route('filiacao') }}">Filiação</a></li> --}}
+                                            <li><a href="{{ route('filiacao') }}">Filiação</a></li>
                                             <li>
                                                 <a href="{{ route('campeonatos') }}">Campeonatos</a>
                                                 <ul class="submenu">
