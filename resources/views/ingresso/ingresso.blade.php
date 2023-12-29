@@ -39,12 +39,7 @@
                     <span class="june-29" style=" font-size: 16px;"> 
                         {{ date("d.m.Y", strtotime( $inscricao->evento->data_evento))}}
                     </span>
-                    <span>
-                        @php                    
-                            $dateTime = DateTime::createFromFormat('Y-m-d', $inscricao->evento->data_evento);
-                            echo date('Y', $dateTime->getTimestamp()) ;
-                        @endphp
-                    </span>
+                    
                 </p>
                 <div class="show-name" style="padding-top: 3%;">
                     <h1 style=" font-size: 18px; letter-spacing: 0.1em;color: #000;"> 
