@@ -12,7 +12,7 @@
                             <div class="row "  style=" margin-top: 5%; ">
                                 <div class="col-lg-11 col-md-10 col-sm-10">
                                     <div class="section-tittle">
-                                        <span>INSCRIÇÃO - DADOS PARTICIPANTE</span>
+                                        <span>INFORME SEUS DADOS</span>
                                     </div>
                                 </div>
                             </div>
@@ -28,7 +28,7 @@
                                         <select id="evento_id" name="evento_id" class="form-control required-select">
                                             <option value="">Selecione o evento</option>
                                             @foreach($eventos as $evento)
-                                                <option value="{{$evento->id}}">{{$evento->nome}}</option>
+                                                <option value="{{$evento->id}}">{{$evento->nome}} -  R$ {{  number_format( $evento->valor, 2, ',', '.')}}</option>
                                             @endforeach
                                         </select>
                                     </div>
