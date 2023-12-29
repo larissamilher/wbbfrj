@@ -235,6 +235,4 @@ Route::post('/formulario-contato', [SiteController::class, 'contato'])->name('fo
 
 Auth::routes();
 
-Route::get('/teste', function () {
-    return view('ingresso.ingresso');
-});
+Route::get('/teste', [SiteController::class, 'ingresso']);

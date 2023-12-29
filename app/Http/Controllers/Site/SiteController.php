@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Contato;
 use Illuminate\Support\Facades\Log;
+use PDF;
+use Illuminate\Support\Facades\View;
+use PhpOffice\PhpSpreadsheet\Exception;
 
 class SiteController extends Controller
 {
@@ -24,6 +27,22 @@ class SiteController extends Controller
         ->first();
 
         return view('site.index', compact([ 'campeonato' ]));        
+    }
+
+    public function ingresso()
+    {      
+        $inscricao =''; 
+
+        $pdfView = View::make('ingresso.ingresso',  ['inscricao' => $inscricao])->render();
+
+        $pdf = PDF::loadHTML($pdfView);
+
+       
+            $nome = 'ficha-inscricao';
+
+        return $pdf->download($nome.'.pdf');
+
+        return view('ingresso.ingresso');        
     }
 
     public function contato(Request $request)
