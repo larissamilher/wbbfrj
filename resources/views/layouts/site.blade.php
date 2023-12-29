@@ -101,6 +101,12 @@
                                                 </ul>
                                             </li>
                                             <li>
+                                                <a href="#">Eventos</a>
+                                                <ul class="submenu">
+                                                    <li><a href="{{ route('eventos-inscricoes') }}">COMPRAR</a></li>
+                                                </ul>
+                                            </li>
+                                            <li>
                                                 <a href="#">Educação</a>
                                                 <ul class="submenu">
                                                     <li><a href="{{ route('curso-arbitros') }}">WORKSHOP AO FISICULTURISMO</a></li>

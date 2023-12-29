@@ -47,6 +47,67 @@
         </div> -->
     </div>
     <!-- sobre Area End-->
+    <section class="wantToWork-area w-padding section-bg">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12">
+                    <!-- about-img -->
+                    <div class="about-img ">
+                        <video controls>
+                            <source src="{{ asset('video/WORKSHOP.mp4') }}" type="video/mp4">
+                                WORKSHOP AO FISICULTURISMO
+                        </video>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="about-caption" style="text-align: center;">
+                        <!-- Section Tittle -->
+                        <div class="section-tittle section-tittle3 mb-35" style="text-align: center">
+                            <span>WORKSHOP AO FISICULTURISMO</span>
+                            <h2>Está preparado para virar um especialista em fisiculturismo? </h2>
+                            <h3 >
+                                Garanta sua vaga e entre de vez no esporte!!! 
+                            </h3>
+
+                            
+                        </div>
+                        <span class="lotes">
+                            1º LOTE <strong style="color: black"> R$ 250,00</strong><br>
+                            2º LOTE <strong style="color: black"> R$ 270,00</strong><br>
+                            3º LOTE <strong style="color: black"> R$ 320,00</strong><br>
+                        </span>
+                       
+                        
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     <!--? CALENDARIO Area Start -->
+     <section class="services-area pt-100 pb-150 section-bg" data-background="{{ asset('img/gallery/section_bg01.png') }}">
+        <!--? Want To work -->
+        <section class="wantToWork-area w-padding">
+            <div class="container">
+                <div class="row align-items-end justify-content-between">
+                    <div class="col-lg-6 col-md-10 col-sm-10">
+                        <div class="section-tittle section-tittle2">
+                            <span>CALENDÁRIO</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Want To work End -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 categorias" style="text-align: center;">
+                    <img src="{{ asset('img/calendario.png') }}" alt="">                  
+                </div>     
+            </div>
+        </div>
+    </section>
+    <!-- CALENDARIO Area End -->
     <!--? sobre Area Start -->
     <section class="about-area section-padding30">
         <div class="container">
@@ -88,30 +149,7 @@
         </div>
     </section>
 
-    <!--? CALENDARIO Area Start -->
-    <section class="services-area pt-100 pb-150 section-bg" data-background="{{ asset('img/gallery/section_bg01.png') }}">
-        <!--? Want To work -->
-        <section class="wantToWork-area w-padding">
-            <div class="container">
-                <div class="row align-items-end justify-content-between">
-                    <div class="col-lg-6 col-md-10 col-sm-10">
-                        <div class="section-tittle section-tittle2">
-                            <span>CALENDÁRIO</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Want To work End -->
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 categorias" style="text-align: center;">
-                    <img src="{{ asset('img/calendario.png') }}" alt="">                  
-                </div>     
-            </div>
-        </div>
-    </section>
-    <!-- CALENDARIO Area End -->
+   
 
     <!--? APOIADORES Area Start -->
     {{-- <section class="services-area pt-100 pb-150 section-bg" data-background="{{ asset('img/gallery/section_bg01.png') }}">
@@ -464,15 +502,23 @@
                     </div>
 
                     <br><br>
-
+{{-- 
                     <p>
                         Venha fazer parte deste evento épico. 
                         <br>Mostre ao mundo sua determinação e conquiste o palco do fisiculturismo!
                         <br> Não perca essa chance de brilhar. 
-                        <br> Reserve seu lugar hoje mesmo e junte-se a nós para um dia de pura energia e motivação!
-                    </p>
+                        
+                    </p> --}}
 
                     <p>
+                        Não vai competir, mas quer nos assistir? <br>
+                        <a href="{{route('eventos-inscricoes')}}" style="color:#2c234d;">
+                            <strong style=" FONT-SIZE: 20PX;">CLIQUE AQUI </strong><br>
+                        </a>
+                        para comprar seu ingresso e faça parte da torcida!</p>
+
+                    <p>
+                        Reserve seu lugar hoje mesmo e junte-se a nós para um dia de pura energia e motivação! <br>
                         <strong> Seu desafio começa aqui. Até lá!</strong>
                         <br> Equipe WBBF Rio de Janeiro
                     </p>
@@ -525,7 +571,20 @@
                 width: 95%;
             }
         }
+
+        .lotes{
+            font-family: "Teko",sans-serif;
+            font-size: 44px;
+            font-weight: 300;
+            margin-bottom: 22px;
+            color: #db1600;
+            text-transform: uppercase;
+            display: inline-block;
+            position: relative;
+        }
  
     
     </style>
+
+
 @endsection
