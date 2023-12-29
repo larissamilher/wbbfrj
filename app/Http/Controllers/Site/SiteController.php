@@ -35,24 +35,9 @@ class SiteController extends Controller
 
     public function ingresso()
     {      
-        // $inscricao = InscricaoEvento::with([
-        //     'evento' => function ($query) {
-        //         $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
-        //     },
-        // ])->where('evento_id', 1)->first();
-
-        // $pdfView = View::make('ingresso.ingresso',  ['inscricao' => $inscricao])->render();
-
-        // $pdf = PDF::loadHTML($pdfView);
-
-       
-        //     $nome = 'ficha-inscricao';
-
-        //     return $pdf->stream($nome . '.pdf');
-
         $inscricao = InscricaoEvento::with([
             'evento' => function ($query) {
-                $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
+                $query->withTrashed();
             },
         ])->where('evento_id', 1)->first();
         
@@ -60,7 +45,7 @@ class SiteController extends Controller
         
         $pdf = PDF::loadHTML($pdfView);
         
-        $nome = 'ficha-inscricao';
+        $nome = str_replace('/', '-', $inscricao->codigo);
         $pdfPath = storage_path("app/temp/{$nome}.pdf");
         $pdf->save($pdfPath);
 
@@ -74,12 +59,9 @@ class SiteController extends Controller
         Mail::to($participante['email'])
             ->send(new ConfirmacaoInscricaoEvento($participanteEvento, $pdfPath, $nome));
         
-        // Excluir o arquivo temporário após o envio do e-mail
-        // Storage::delete("temp/{$nome}.pdf");
+        Storage::delete("temp/{$nome}.pdf");
         
         return 'E-mail enviado com sucesso!';
-
-        // return $pdf->download($nome.'.pdf');
 
         return view('ingresso.ingresso');        
     }
