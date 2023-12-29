@@ -16,6 +16,7 @@ class Filiado extends Model
         'atleta_id',
         'status',
         'validade_filiacao',
+        'selfie',
         'status_pagamento',
         'payment_id',
         'customer',

@@ -18,7 +18,7 @@
                             </div>
                         </div>
                         <!--End Section Tittle  -->
-                        <form id="inscricao-form" class="inscricao-form" action="{{ route('inscricao.store.ficha') }}" method="POST"style=" padding-top: 0;">
+                        <form id="inscricao-form" class="inscricao-form" action="{{ route('filiacao.inscricao.store.ficha') }}" method="POST"style=" padding-top: 0;">
                             @csrf
 
                             <div class="row">                                                               
@@ -192,69 +192,6 @@
 
     $(document).ready(function() {
 
-        $('#campeonato').on('change', function() {
-            var campeonatoSelecionado = $(this).val();
-
-            if(campeonatoSelecionado){
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    url: "/campeonatos/inscricao/get-categorias-campeonato/"+ campeonatoSelecionado,
-                    type: 'GET',    
-                    success: function (response) {
-                       
-                        if (response.success) {   
-                            $('#categorias').empty();
-                            
-                            $('#categorias').niceSelect('destroy');
-
-                            $('#categorias').append('<option value="">Selecione a categoria</option>');
-                            
-                            $.each(response.dados, function(index, categoria) {
-                                $('#categorias').append('<option value="' + categoria.id + '">' + categoria.nome + '</option>');
-                            });
-
-                            $('#categorias').niceSelect();
-                        }  
-                        
-                    }
-                });
-            }
-
-        });
-        
-        $('#categorias').on('change', function() {
-            var categoriaSelecionada = $(this).val();
-
-            if(categoriaSelecionada){
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    url: "/campeonatos/inscricao/get-sub-categorias-campeonato/"+ categoriaSelecionada,
-                    type: 'GET',    
-                    success: function (response) {
-                    
-                        if (response.success) {   
-                            $('#sub_categoria_id').empty();
-                            
-                            $('#sub_categoria_id').niceSelect('destroy');
-
-                            $('#sub_categoria_id').append('<option value="">Selecione a categoria</option>');
-                            
-                            $.each(response.dados, function(index, subcategoria) {
-                                $('#sub_categoria_id').append('<option value="' + subcategoria.id + '">' + subcategoria.nome + '</option>');
-                            });
-
-                            $('#sub_categoria_id').niceSelect();
-                        }  
-                        
-                    }
-                });
-            }
-        });
-
         $('#email').on('change',function() {
             var email = $('#email').val();
             if (!validarEmail(email)) {
@@ -266,18 +203,6 @@
                 });
             }
         });
-
-        // $('#rg').on('change',function() {
-        //     var rg = $('#rg').val();
-        //     if (!validarRg(rg)) {
-        //         $('#rg').val('');
-        //         Swal.fire({
-        //             icon: "error",
-        //             title: "Oops...",
-        //             text: 'Insira um RG válido!'
-        //         });
-        //     }             
-        // });
 
         $('#cpf').on('change',function() {
             var cpf = $('#cpf').val().replace(/\D/g, ''); 
@@ -322,12 +247,6 @@
                 return false;
         
             return true;
-        }
-
-        function validarRg(rg) {
-            // Expressão regular para validar RG (exemplo: XX.XXX.XXX-X)
-            var regex = /^[0-9]{2}\.[0-9]{3}\.[0-9]{3}-[0-9A-Za-z]{1}$/;
-            return regex.test(rg);
         }
 
         function validarEmail(email) {
@@ -387,7 +306,7 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    url: "/campeonatos/inscricao/get-dados-cpf/"+ cpf.replace(/[.-]/g, ""),
+                    url: "/filiacao/get-dados-cpf/"+ cpf.replace(/[.-]/g, ""),
                     type: 'GET',    
                     success: function (retorno) {                       
                         if (retorno.success) {   

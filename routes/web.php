@@ -6,7 +6,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\Site\InscricaoController;
 use App\Http\Controllers\Site\SiteController;
 use App\Http\Controllers\Site\EventoController;
-
+use App\Http\Controllers\Site\FiliadosController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AtletasController;
 use App\Http\Controllers\Admin\CampeonatosController;
@@ -168,11 +168,11 @@ Route::prefix('filiacao')->group(function () {
         return view('site.filiacao.cadastro');
     })->name('filiacao.cadastro');
 
-});
+    Route::match(['get', 'post'],'/ficha', [FiliadosController::class, 'primeiraEtapaInscricao'])->name('filiacao.inscricao.store.ficha');
+    Route::get('/get-dados-cpf/{cpf}', [FiliadosController::class, 'getrDadosCpf'])->name('get-dados-cpf');
 
-Route::get('/filiacao', function () {
-    return view('site.filiacao.index');
-})->name('filiacao');
+
+});
 
 Route::prefix('campeonatos')->group(function () {
     Route::get('/', function () {

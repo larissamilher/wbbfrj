@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('status_pagamento')->nullable();
 
             $table->date('validade_filiacao')->nullable();
-
+            $table->longText('selfie')->nullable();
             $table->string('payment_id')->nullable();           
             $table->string('customer')->nullable();     
             $table->string('billingType')->nullable();
