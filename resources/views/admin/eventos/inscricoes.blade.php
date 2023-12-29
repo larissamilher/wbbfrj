@@ -58,7 +58,8 @@
             <div class="card">
                 <div class="card-body" style="overflow-x: auto;">
                     <h4 class="card-title">Inscrições</h4>
-                    <span>Inscrições destacadas em verde indicam que foram confirmadas</span>
+                    <span>Inscrições sem código indicam que não foram concluídas</span> <br>
+                    <span>Inscrições destacadas em verde indicam que o pagamento foi confirmado</span>
                     </p>
                     @if (session('response'))
                     <p class="msg {{ session('response.class') }}">
