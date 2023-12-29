@@ -58,6 +58,7 @@
             <div class="card">
                 <div class="card-body" style="overflow-x: auto;">
                     <h4 class="card-title">Inscrições</h4>
+                    <span>Inscrições destacadas em verde indicam que foram confirmadas</span>
                     </p>
                     @if (session('response'))
                     <p class="msg {{ session('response.class') }}">
@@ -75,7 +76,7 @@
                         </thead>
                         <tbody>
                             @foreach ($inscricoes as $inscricao)
-                                <tr>
+                            <tr @if($inscricao->status_pagamento == 'CONFIRMED' || $inscricao->status_pagamento == 'RECEIVED') style="background-color: #44ce4236;" @endif>
                                     <td class="py-1">
                                        {{$inscricao->nome}}
                                     </td>
