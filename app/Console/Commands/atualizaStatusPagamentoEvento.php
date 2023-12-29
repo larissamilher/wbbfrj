@@ -11,7 +11,10 @@ use App\Models\SubCategoria;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ConfirmacaoInscricaoEvento;
 use Illuminate\Support\Facades\Log;
-
+use DateTime;
+use PDF;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Storage;
 
 class atualizaStatusPagamentoEvento extends Command
 {
@@ -41,8 +44,26 @@ class atualizaStatusPagamentoEvento extends Command
             $pagamento->status_pagamento = $pagamentoRetorno->status;
             $pagamento->save();
 
-            if($pagamentoRetorno->status == 'CONFIRMED' || $pagamentoRetorno->status == 'RECEIVED')
-                Mail::to($pagamento->email)->send(new ConfirmacaoInscricaoEvento($pagamento));
+            if($pagamentoRetorno->status == 'CONFIRMED' || $pagamentoRetorno->status == 'RECEIVED'){
+
+                 $participanteEvento = InscricaoEvento::with([
+                    'evento' => function ($query) {
+                        $query->withTrashed();
+                    },
+                ])->find($pagamento->id);
+                
+                $pdfView = view('ingresso.ingresso', ['inscricao' => $participanteEvento])->render();
+
+                $pdf = PDF::loadHTML($pdfView);
+                
+                $nome = str_replace('/', '-', $participanteEvento->codigo);
+                $pdfPath = storage_path("app/temp/{$nome}.pdf");
+                $pdf->save($pdfPath);              
+
+                Mail::to($pagamento->email)->send(new ConfirmacaoInscricaoEvento($participanteEvento, $pdfPath, $nome));
+                
+                Storage::delete("temp/{$nome}.pdf");
+            }
         }
         Log::info("rodou command");
     }
