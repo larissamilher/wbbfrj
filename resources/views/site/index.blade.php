@@ -521,7 +521,7 @@
                     <p>
                         Não vai competir, mas quer nos assistir? <br>
                         <a href="{{route('eventos-inscricoes')}}" style="color:#2c234d;">
-                            <strong style=" FONT-SIZE: 20PX;">CLIQUE AQUI </strong><br>
+                            <strong style=" FONT-SIZE: 20PX;color:#ff1313;">CLIQUE AQUI </strong><br>
                         </a>
                         para comprar seu ingresso e faça parte da torcida!</p>
 
