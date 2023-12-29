@@ -32,6 +32,8 @@
                                     <div class="col-lg-12 col-md-12">
                                         <div class="form-box user-icon mb-30">
                                             <label for="campeonato">Evento</label>
+                                            <input type="hidden" id="compra_id" disabled class="form-control required" value="{{$compra->id}}">
+
                                             <input type="text" disabled class="form-control required" value="{{$compra->evento->nome}}">
                 
                                         </div>
@@ -64,7 +66,7 @@
                                     <div class="col-lg-3 col-md-3">
                                     </div>
                                     <div class="col-lg-6 col-md-6">
-                                        <button class="btn" type="button" id="copiarCodigo" style="width: 100%">VALIDAR</button>
+                                        <button class="btn" type="button" id="bntValidar" style="width: 100%">VALIDAR</button>
                                     </div>   
                                 </div>
                             @else
@@ -116,53 +118,32 @@
 
     <script>
         $(document).ready(function() {
-            $('#btnBuscar').on('click', function() {
-                var codigo = $("#codigo").val();
+            $('#bntValidar').on('click', function() {
+                var compra_id = $("#compra_id").val();
 
-                if(codigo){
+                if(compra_id){
                     $.ajax({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
-                        url: "/campeonatos/inscricao/get-dados-inscricao/"+ codigo.replace('/', "-"),
+                        url: "/eventos/validar-acao/"+ compra_id,
                         type: 'GET',    
                         success: function (retorno) {                       
                             if (retorno.success) {   
-
-                                $(".form-desabilitado").css('display','block');
-
-                                $('html, body').animate({
-                                    scrollTop: $(".form-desabilitado").offset().top
-                                }, 1000);
-
-                                $('#campeonato').val(retorno.dados.campeonato.nome);
-                                $('#sub_categoria_id').val(retorno.dados.categoria.nome);
-                                $('#categoria').val(retorno.dados.categoria.categoria.nome);
-                                $('#status_pagamento').val(retorno.dados.status_pagamento);
-
-                                $('#nome').val(retorno.dados.atleta.nome);
-                                $('#rg').val(retorno.dados.atleta.rg);
-                                $('#cpf').val(retorno.dados.atleta.cpf);
-                                $('#celular').val(retorno.dados.atleta.celular);
-                                $('#data_nascimento').val(retorno.dados.atleta.data_nascimento);
-                                $('#email').val(retorno.dados.atleta.email);
-                                $('#cep').val(retorno.dados.atleta.cep);
-                                $('#estado').val(retorno.dados.atleta.estado);
-                                $('#cidade').val(retorno.dados.atleta.cidade);
-                                $('#logradouro').val(retorno.dados.atleta.logradouro);
-                                $('#bairro').val(retorno.dados.atleta.bairro);
-                                $('#numero').val(retorno.dados.atleta.numero);
-                                $('#academia_coach').val(retorno.dados.atleta.academia_coach);
-                                $('#peso').val(retorno.dados.peso);
-                                $('#numero_atleta').val(retorno.dados.numero_atleta);
-                            }else{
-
-                                Swal.fire(retorno.message);
-
-                                $(".form-desabilitado").css('display','none');
-
-
-                            }                          
+                                Swal.fire({
+                                    title: "Entrada Liberada!",
+                                    text: "Ingresso Validado!",
+                                    icon: "success"
+                                }).then((result) => {
+                                    if (result.isConfirmed) 
+                                        window.location.href =  window.location.origin;                     
+                                });
+                            }else
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Oops...",
+                                    text: retorno.message
+                                });             
                         }
                     });
                 }         

@@ -93,6 +93,40 @@ class SiteController extends Controller
         return view('site.eventos.compra-validar', compact("compra")); 
     }
 
+    
+    public function validarCompraAcao($id)
+    {
+        $retorno = [
+            'success' => true,
+            'message' => ''
+        ];
+
+        try {
+        
+            $compra = InscricaoEvento::find($id);
+
+            if(!$compra)
+                throw new \Exception('Compra/Ingresso não encontrado!');
+
+            if(!empty($compra->data_usado))
+                throw new \Exception(' Erro: Este ingresso já foi utilizado. Certifique-se de não haver duplicatas.');
+            
+            $compra->usado = 1;
+            $compra->data_usado = date('Y-m-d');
+            $compra->save();
+
+        } catch (\Exception $e) {    
+            Log::error($e);
+
+            $retorno = [
+                'success' => false,
+                'message' =>  $e->getMessage()
+            ];
+        }
+
+        return $retorno;
+    }
+
     public function contato(Request $request)
     {       
         Mail::to('contato@wbbfrj.com')->send(new Contato($request->input()));
