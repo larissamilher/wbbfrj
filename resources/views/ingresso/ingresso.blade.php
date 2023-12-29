@@ -125,7 +125,7 @@
                                 echo $texto;                            
                         @endphp
                     </h1>
-                    <h2 style="font-size: 30px;">Larissa Milher</h2>
+                    <h2 style="font-size: 30px;">{{$inscricao->nome}}</h2>
                 </div>
                 
                 <p class="location" style="width: 100%;padding: 2% 0;  font-size: 12px;">
