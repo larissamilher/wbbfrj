@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\View;
 use PhpOffice\PhpSpreadsheet\Exception;
 use App\Models\Evento;
 use App\Models\InscricaoEvento;
+use App\Mail\ConfirmacaoInscricaoEvento;
+use Illuminate\Support\Facades\Storage;
 
 class SiteController extends Controller
 {
@@ -33,20 +35,49 @@ class SiteController extends Controller
 
     public function ingresso()
     {      
+        // $inscricao = InscricaoEvento::with([
+        //     'evento' => function ($query) {
+        //         $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
+        //     },
+        // ])->where('evento_id', 1)->first();
+
+        // $pdfView = View::make('ingresso.ingresso',  ['inscricao' => $inscricao])->render();
+
+        // $pdf = PDF::loadHTML($pdfView);
+
+       
+        //     $nome = 'ficha-inscricao';
+
+        //     return $pdf->stream($nome . '.pdf');
+
         $inscricao = InscricaoEvento::with([
             'evento' => function ($query) {
                 $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
             },
         ])->where('evento_id', 1)->first();
-
-        $pdfView = View::make('ingresso.ingresso',  ['inscricao' => $inscricao])->render();
-
+        
+        $pdfView = view('ingresso.ingresso', ['inscricao' => $inscricao])->render();
+        
         $pdf = PDF::loadHTML($pdfView);
+        
+        $nome = 'ficha-inscricao';
+        $pdfPath = storage_path("app/temp/{$nome}.pdf");
+        $pdf->save($pdfPath);
 
-       
-            $nome = 'ficha-inscricao';
+        $participante = [
+            'email' => 'larissamilher@gmail.com',
+            'codigo' => '0955004/2023'
+        ];
+        
+        $participanteEvento = InscricaoEvento::find(1);
 
-            return $pdf->stream($nome . '.pdf');
+        Mail::to($participante['email'])
+            ->send(new ConfirmacaoInscricaoEvento($participanteEvento, $pdfPath, $nome));
+        
+        // Excluir o arquivo temporário após o envio do e-mail
+        // Storage::delete("temp/{$nome}.pdf");
+        
+        return 'E-mail enviado com sucesso!';
 
         // return $pdf->download($nome.'.pdf');
 

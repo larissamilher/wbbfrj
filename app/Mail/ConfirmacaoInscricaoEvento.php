@@ -11,15 +11,19 @@ class ConfirmacaoInscricaoEvento extends Mailable
 {
     use Queueable, SerializesModels;
     private $dadosEmail = null;
+    private $pdfPath = null;
+    private $pdfNome = null;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(object $dadosEmail)
+    public function __construct(object $dadosEmail,  $pdfPath, $pdfNome)
     {
         $this->dadosEmail = $dadosEmail;
+        $this->pdfPath = $pdfPath;
+        $this->pdfNome = $pdfNome;
     }
 
     /**
@@ -31,6 +35,9 @@ class ConfirmacaoInscricaoEvento extends Mailable
     {
         return $this->view('emails.confirmacao-inscricao-evento', [
             'dadosEmail' => $this->dadosEmail
+        ])->attach($this->pdfPath, [
+            'as' => $this->pdfNome . '.pdf',
+            'mime' => 'application/pdf',
         ])->subject('Confirmação de Inscrição'); 
     }
 }
