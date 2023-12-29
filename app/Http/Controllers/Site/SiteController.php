@@ -40,7 +40,7 @@ class SiteController extends Controller
             'evento' => function ($query) {
                 $query->withTrashed();
             },
-        ])->find(1);
+        ])->find(4);
         
         $conteudo = 'https://wbbfrj.com/eventos/validar/'. str_replace('/', '-', $inscricao->codigo);
         $qrCode = QrCode::size(300)->generate($conteudo);
