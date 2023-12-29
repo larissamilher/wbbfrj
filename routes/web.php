@@ -237,4 +237,4 @@ Auth::routes();
 
 Route::get('/teste', function () {
     return view('ingresso.ingresso');
-})->name('contato');
+});
