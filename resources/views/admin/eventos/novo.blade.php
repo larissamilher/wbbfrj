@@ -106,9 +106,30 @@
 
     </div>
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <script>
+   
     $(document).ready(function() {
-        $('#valor').mask('999,00');
+
+        $('#valor').on('change',function() {
+
+            var valorInput = document.getElementById('valor').value;
+
+            valorInput = valorInput.replace(',', '.');
+ 
+            var regex = /^[0-9]+(\.[0-9]{1,2})?$/;
+
+            if (!regex.test(valorInput)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: 'Por favor, insira um valor numérico válido.'
+                });
+                $('#valor').val('');
+                return;
+            }
+            return;
+        });
     });
 </script>
