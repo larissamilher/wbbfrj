@@ -34,13 +34,13 @@ class SiteController extends Controller
         return view('site.index', compact([ 'campeonato' ]));        
     }
 
-    public function ingresso()
+    public function ingresso($id)
     {      
         $inscricao = InscricaoEvento::with([
             'evento' => function ($query) {
                 $query->withTrashed();
             },
-        ])->find(5);
+        ])->find($id);
         
         $conteudo = 'https://wbbfrj.com/eventos/validar/'. str_replace('/', '-', $inscricao->codigo);
         $qrCode = QrCode::size(300)->generate($conteudo);
