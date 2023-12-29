@@ -35,17 +35,17 @@ class SiteController extends Controller
 
     public function ingresso()
     {      
-        $inscricao = InscricaoEvento::with([
+        $participanteEvento = InscricaoEvento::with([
             'evento' => function ($query) {
                 $query->withTrashed();
             },
-        ])->where('evento_id', 1)->first();
+        ])->find(1);
         
-        $pdfView = view('ingresso.ingresso', ['inscricao' => $inscricao])->render();
+        $pdfView = view('ingresso.ingresso', ['inscricao' => $participanteEvento])->render();
         
         $pdf = PDF::loadHTML($pdfView);
         
-        $nome = str_replace('/', '-', $inscricao->codigo);
+        $nome = str_replace('/', '-', $participanteEvento->codigo);
         $pdfPath = storage_path("app/temp/{$nome}.pdf");
         $pdf->save($pdfPath);
 
@@ -54,7 +54,7 @@ class SiteController extends Controller
             'codigo' => '0955004/2023'
         ];
         
-        $participanteEvento = InscricaoEvento::find(1);
+        // $participanteEvento = InscricaoEvento::find(1);
 
         Mail::to($participante['email'])
             ->send(new ConfirmacaoInscricaoEvento($participanteEvento, $pdfPath, $nome));

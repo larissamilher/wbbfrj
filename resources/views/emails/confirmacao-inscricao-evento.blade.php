@@ -7,7 +7,7 @@
     </p>
 
     <p style="margin:0;margin-bottom:20px;color:#000;font-family:Arial,sans-serif;font-size:22px;font-weight:normal;line-height:32px;padding:0;text-align:left">
-        <strong>Parabéns </strong> pela sua inscrição no nosso evento! Estamos empolgados por tê-lo(a) conosco.
+        <strong>Parabéns </strong> pela sua compra no nosso evento!
     </p>
 
     <table align="center" style="width:100%">
@@ -15,10 +15,13 @@
             <tr>
                 <td>
                     <p style="margin:0;margin-bottom:0;color:#121212;font-family:Arial,sans-serif;font-size:16px;font-weight:normal;line-height:24px;padding:0;text-align:left">
-                        Seu código de inscrição é: {{$dadosEmail->codigo}}
-
+                        Seu código de compra é: <strong>{{$dadosEmail->codigo}}</strong> 
+                        <br><br>
+                        Anexado a este e-mail está o seu ingresso digital.
+                        Por favor, apresente-o no dia do evento para garantir sua entrada. 
                         <br> <br>
-                                               
+                        Estamos ansiosos para recebê-lo!
+                        <br> <br>                                               
                     </p>
                 </td>
             </tr>
