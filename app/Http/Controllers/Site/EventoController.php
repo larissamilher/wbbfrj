@@ -14,6 +14,9 @@ use App\Mail\ConfirmacaoInscricaoEvento;
 use Illuminate\Support\Facades\Log;
 use PhpOffice\PhpSpreadsheet\Exception;
 use DateTime;
+use PDF;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Storage;
 
 class EventoController extends Controller
 {
@@ -204,8 +207,26 @@ class EventoController extends Controller
                         throw new \Exception('Ops! Houve um erro interno. Por favor, tente novamente mais tarde. Se o problema persistir, entre em contato conosco para obter assistência. Lamentamos qualquer inconveniente');
                     
                     if($pagamentoRetorno->status == 'CONFIRMED'){
-                        Mail::to($participante['email'])->send(new ConfirmacaoInscricaoEvento($participanteEvento));
-                        return view('site.inscricao-sucesso');
+
+                        $participanteEvento = InscricaoEvento::with([
+                            'evento' => function ($query) {
+                                $query->withTrashed();
+                            },
+                        ])->find($participanteEvento->id);
+                        
+                        $pdfView = view('ingresso.ingresso', ['inscricao' => $participanteEvento])->render();
+        
+                        $pdf = PDF::loadHTML($pdfView);
+                        
+                        $nome = str_replace('/', '-', $participanteEvento->codigo);
+                        $pdfPath = storage_path("app/temp/{$nome}.pdf");
+                        $pdf->save($pdfPath);              
+
+                        Mail::to($participante['email'])->send(new ConfirmacaoInscricaoEvento($participanteEvento, $pdfPath, $nome));
+                        
+                        Storage::delete("temp/{$nome}.pdf");
+
+                        return view('site.inscricao-sucesso-evento');
                     }
 
                     if($request->get('forma_pagamento') ==  'PIX'){ // capturar QR CODE
