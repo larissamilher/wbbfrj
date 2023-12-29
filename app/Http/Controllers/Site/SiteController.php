@@ -20,6 +20,7 @@ use App\Models\Evento;
 use App\Models\InscricaoEvento;
 use App\Mail\ConfirmacaoInscricaoEvento;
 use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class SiteController extends Controller
 {
@@ -35,35 +36,56 @@ class SiteController extends Controller
 
     public function ingresso()
     {      
-        $participanteEvento = InscricaoEvento::with([
+        // $participanteEvento = InscricaoEvento::with([
+        //     'evento' => function ($query) {
+        //         $query->withTrashed();
+        //     },
+        // ])->find(1);
+        
+        // $pdfView = view('ingresso.ingresso', ['inscricao' => $participanteEvento])->render();
+        
+        // $pdf = PDF::loadHTML($pdfView);
+        
+        // $nome = str_replace('/', '-', $participanteEvento->codigo);
+        // $pdfPath = storage_path("app/temp/{$nome}.pdf");
+        // $pdf->save($pdfPath);
+
+        // $participante = [
+        //     'email' => 'larissamilher@gmail.com',
+        //     'codigo' => '0955004/2023'
+        // ];
+        
+        // // $participanteEvento = InscricaoEvento::find(1);
+
+        // Mail::to($participante['email'])
+        //     ->send(new ConfirmacaoInscricaoEvento($participanteEvento, $pdfPath, $nome));
+        
+        // Storage::delete("temp/{$nome}.pdf");
+        
+        // return 'E-mail enviado com sucesso!';
+
+        // return view('ingresso.ingresso'); 
+        $conteudo = 'teste texto qr codee';
+
+        // Gera o QR code
+        $qrCode = QrCode::size(300)->generate($conteudo);
+    
+        return view('ingresso.ingresso', compact("qrCode")); 
+       
+
+    }
+
+    public function validarCompra($codigo)
+    {
+        $compra = InscricaoEvento::with([
             'evento' => function ($query) {
                 $query->withTrashed();
             },
-        ])->find(1);
-        
-        $pdfView = view('ingresso.ingresso', ['inscricao' => $participanteEvento])->render();
-        
-        $pdf = PDF::loadHTML($pdfView);
-        
-        $nome = str_replace('/', '-', $participanteEvento->codigo);
-        $pdfPath = storage_path("app/temp/{$nome}.pdf");
-        $pdf->save($pdfPath);
+        ])->where('codigo', str_replace('-', '/',$codigo ))->first();
 
-        $participante = [
-            'email' => 'larissamilher@gmail.com',
-            'codigo' => '0955004/2023'
-        ];
-        
-        // $participanteEvento = InscricaoEvento::find(1);
+        return view('site.eventos.compra-validar', compact("compra")); 
 
-        Mail::to($participante['email'])
-            ->send(new ConfirmacaoInscricaoEvento($participanteEvento, $pdfPath, $nome));
-        
-        Storage::delete("temp/{$nome}.pdf");
-        
-        return 'E-mail enviado com sucesso!';
-
-        return view('ingresso.ingresso');        
+        dd( $participanteEvento);
     }
 
     public function contato(Request $request)

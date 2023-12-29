@@ -1,4 +1,6 @@
 
+{{$qrCode}}
+{{-- 
  <table style=" padding: 5%; width:80% ">
     <thead>
     <tr>
@@ -386,4 +388,4 @@
         color: gray;
     }
 
-</style>
+</style> --}}
