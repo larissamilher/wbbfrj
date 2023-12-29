@@ -1909,7 +1909,7 @@ hr{
 
 @media (max-width: 575px){
     .section-tittle span{
-        font-size:14px
+        font-size:30px
     }
 }
 .section-tittle span::before{

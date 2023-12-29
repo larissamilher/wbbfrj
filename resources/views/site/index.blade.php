@@ -50,6 +50,18 @@
     <section class="wantToWork-area w-padding section-bg">
         <div class="container">
             <div class="row align-items-center">
+                <div class="col-lg-12 col-md-12">
+                    <div class="about-caption" style="text-align: center;">
+                        <!-- Section Tittle -->
+                        <div class="section-tittle section-tittle3 mb-35" style="text-align: center">
+                            <span>WORKSHOP AO FISICULTURISMO</span>
+                           
+                        </div>
+                     
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
                 <div class="col-lg-6 col-md-12">
                     <!-- about-img -->
                     <div class="about-img ">
@@ -63,7 +75,6 @@
                     <div class="about-caption" style="text-align: center;">
                         <!-- Section Tittle -->
                         <div class="section-tittle section-tittle3 mb-35" style="text-align: center">
-                            <span>WORKSHOP AO FISICULTURISMO</span>
                             <h2>Está preparado para virar um especialista em fisiculturismo? </h2>
                            
                         </div>
