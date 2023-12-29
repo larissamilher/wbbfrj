@@ -20,6 +20,12 @@
                         Anexado a este e-mail está o seu ingresso digital.
                         Por favor, apresente-o no dia do evento para garantir sua entrada. 
                         <br> <br>
+
+                        Se optou pela solidariedade, não esqueça de trazer, no dia do evento, 
+                        1 kg de alimento não perecível ou um brinquedo. 
+                        <br>  
+                        Sua generosidade é fundamental para fazer a diferença!
+                        <br><br>
                         Estamos ansiosos para recebê-lo!
                         <br> <br>                                               
                     </p>
