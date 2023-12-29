@@ -1,64 +1,114 @@
-<div class="ticket created-by-anniedotexe" style="overflow: auto;min-height: 300px; align-items: center;">
-	<div class="left">
-		<div class="image">
-			<p class="admit-one">
-				<span>WBBF RJ</span>
-                <span>WBBF RJ</span>
-                <span>WBBF RJ</span>
-			</p>
-			<div class="ticket-number">
-				<p>
-					#0955004/2023	
-				</p>
-			</div>
-		</div>
-		<div class="ticket-info">
-			<p class="date" style="width: 100%;padding: 1.5% 0;">
-				<span>DOMINGO</span>
-				<span class="june-29">23 de Março</span>
-				<span>2024</span>
-			</p>
-			<div class="show-name" style="padding-top: 3%;">
-				<h1>
-                    INGRESSO CAMPEONATO ESTREANTES <br> PREMIUM SOLIDÁRIO
-                </h1>
-				<h2>Larissa Milher</h2>
-			</div>
-			
-			<p class="location" style="width: 100%;padding: 2% 0;">
-                <span>Shopping Pátio Mix em Resende-RJ</span>
-			</p>
-		</div>
-	</div>
-	<div class="right">
-		<p class="admit-one">
-			<span>WBBF RJ</span>
-            <span>WBBF RJ</span>
-            <span>WBBF RJ</span>
-		</p>
-		<div class="right-info-container">
-			<div class="show-name"  style="text-align: center;">
-				<h1> 
-                    INGRESSO CAMPEONATO ESTREANTES PREMIUM SOLIDÁRIO
-                </h1>
-			</div>
-			<div class="time">
-				<p>23.03.2024</p>				
-			</div>
-			<div class="barcode">
-				<img src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb" alt="QR code">
-			</div>
-			<p class="ticket-number">
-				0955004/2023	
-			</p>
-		</div>
-	</div>
-</div>
+
+ <table style=" padding: 5%; width:80% ">
+    <thead>
+    <tr>
+        
+        <td>
+            <div class="image">
+               
+                <div class="ticket-number" style=" margin-top: -20px; text-align: right;">
+                    <p style=" font-size: 12px; font-weight: 700;letter-spacing: 0.1em;color: #000;">
+                        0955004/2023	
+                    </p>
+                </div>
+            </div>
+        </td>
+
+        <td style="width: 350px">
+            <div class="ticket-info" 
+            style="    padding: 10px 10px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            justify-content: space-between;
+            align-items: center;">
+                <p class="date" style="width: 100%;padding: 2% 0; font-size: 16px;">
+                    <span>DOMINGO</span>
+                    <span class="june-29" style=" font-size: 16px;">23 de Março</span>
+                    <span>2024</span>
+                </p>
+                <div class="show-name" style="padding-top: 3%;">
+                    <h1 style=" font-size: 18px; letter-spacing: 0.1em;color: #000;"> 
+                        INGRESSO CAMPEONATO ESTREANTES <br> PREMIUM SOLIDÁRIO
+                    </h1>
+                    <h2 style="font-size: 30px;">Larissa Milher</h2>
+                </div>
+                
+                <p class="location" style="width: 100%;padding: 2% 0;  font-size: 12px;">
+                    <span>Shopping Pátio Mix em Resende-RJ</span>
+                </p>
+            </div>
+        </td>
+
+        <td style="width: 200px;text-align: center;border-left: 1.5px dashed rgba(126, 124, 124, 0.438);">
+            
+            <div class="right-info-container">
+                <div class="show-name"  style="text-align: center;">
+                    <h1 style=" font-size: 12px; font-weight: 700;letter-spacing: 0.1em;color: #000;"> 
+                        INGRESSO CAMPEONATO ESTREANTES PREMIUM SOLIDÁRIO
+                    </h1>
+                </div>
+                <div class="time">
+                    <p>23.03.2024</p>				
+                </div>
+                <div class="barcode">
+                    <img src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb" alt="QR code">
+                </div>
+                <p class="ticket-number"  style=" font-size: 12px; font-weight: 700;letter-spacing: 0.1em;color: #000;">
+                    0955004/2023	
+                </p>
+            </div>
+        </td>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+<style media="print">
+    body,
+    html {
+        font-family: "Staatliches", cursive;
+        color: black;
+        font-size: 14pt;
+        letter-spacing: 0.1em;
+    }
+
+    /* Adicione outros estilos específicos para impressão aqui... */
+</style>
 
 <style>
     @import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
     @import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
     @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400&display=swap');
+
+    @font-face {
+        font-family: 'Staatliches';
+        font-style: normal;
+        font-weight: 400;
+        src: url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+    }
+
+    @font-face {
+        font-family: 'Nanum Pen Script';
+        font-style: normal;
+        font-weight: 400;
+        src: url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+    }
+
+    @font-face {
+        font-family: 'Teko';
+        font-style: normal;
+        font-weight: 400;
+        src: url('https://fonts.googleapis.com/css2?family=Teko:wght@400&display=swap');
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
 
     * {
         margin: 0;
@@ -70,7 +120,7 @@
     html {
         height: 100vh;
         display: grid;
-        font-family: "Staatliches", cursive;
+        font-family: Arial, sans-serif;
         /* background: #ff1313; */
         color: black;
         font-size: 14px;
@@ -89,14 +139,14 @@
     }
 
     .image {
-        height: 250px;
-        width: 250px;
+        height: 180px;
+        width: 180px;
         background-image: url("https://www.wbbfrj.com/img/logo/wbbf-logo.jpg");
         background-size: contain;
     }
 
     .admit-one {
-        position: absolute;
+        /* position: absolute; */
         color: darkgray;
         height: 250px;
         padding: 0 10px;
@@ -106,11 +156,6 @@
         justify-content: space-around;
         writing-mode: vertical-rl;
         transform: rotate(-180deg);
-    }
-
-    .admit-one span:nth-child(2) {
-        color: white;
-        font-weight: 700;
     }
 
     .left .ticket-number {
@@ -161,7 +206,7 @@
     }
 
     .show-name h1 {
-        font-size: 34px;
+        font-size: 24px;
         font-weight: 700;
         letter-spacing: 0.1em;
         color: #000;

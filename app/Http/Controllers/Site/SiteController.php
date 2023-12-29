@@ -40,7 +40,9 @@ class SiteController extends Controller
        
             $nome = 'ficha-inscricao';
 
-        return $pdf->download($nome.'.pdf');
+            return $pdf->stream($nome . '.pdf');
+
+        // return $pdf->download($nome.'.pdf');
 
         return view('ingresso.ingresso');        
     }
