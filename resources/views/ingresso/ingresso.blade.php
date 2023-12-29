@@ -37,71 +37,7 @@
                         @endphp
                     </span>
                     <span class="june-29" style=" font-size: 16px;"> 
-                        @php
-                            $dateTime = new DateTime($inscricao->evento->data_evento);
-                            $dia = $dateTime->format('d');
-                            echo $dia; 
-                        @endphp
-                        de 
-                        @php
-                            $dateTime = DateTime::createFromFormat('Y-m-d', $inscricao->evento->data_evento);
-
-                            // Configurando a localidade para português do Brasil
-                            setlocale(LC_TIME, 'pt_BR.utf-8', 'pt_BR', 'portuguese');
-
-                            // Obtendo o nome do mês em português
-                            $nomeMes = strftime('%B', $dateTime->getTimestamp());
-
-                            switch ($nomeMes) {
-                                case 'January':
-                                    echo 'Janeiro';
-                                    break;
-                                
-                                    case 'February':
-                                    echo 'Fevereiro';
-                                    break;
-
-                                    case 'March':
-                                    echo 'Março';
-                                    break;
-
-                                    case 'April':
-                                    echo 'Abril';
-                                    break;
-
-                                    case 'May':
-                                    echo 'Maio';
-                                    break;
-
-                                    case 'June':
-                                    echo 'Junho';
-                                    break;
-
-                                    case 'July':
-                                    echo 'Julho';
-                                    break;
-
-                                    case 'August':
-                                    echo 'Agosto';
-                                    break;
-
-                                    case 'September':
-                                    echo 'Setembro';
-                                    break;
-
-                                    case 'October':
-                                    echo 'Outubro';
-                                    break;
-
-                                    case 'November':
-                                    echo 'Novembro';
-                                    break;
-
-                                    case 'December':
-                                    echo 'Dezembro';
-                                    break;
-                            } 
-                        @endphp
+                        {{ date("d.m.Y", strtotime( $inscricao->evento->data_evento))}}
                     </span>
                     <span>
                         @php                    
