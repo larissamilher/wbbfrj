@@ -87,7 +87,7 @@
                         <div class="col-xl-6 col-lg-6 col-sm-6 grid-margin stretch-card">
                             <div class="card">
                             <div class="card-body text-center">
-                                <h2 class="mb-2 text-dark font-weight-normal">Inscrições Totais</h2>
+                                <h2 class="mb-2 text-dark font-weight-normal">Compras Totais</h2>
                                 <h3 class="mb-4 font-weight-bold">{{$retorno['inscricoesEventosTotais']}}</h3>
                                 
                             </div>
@@ -96,7 +96,7 @@
                         <div class="col-xl-6 col-lg-6 col-sm-6 grid-margin stretch-card">
                             <div class="card">
                             <div class="card-body text-center">
-                                <h2 class="mb-2 text-dark font-weight-normal">Inscrições Pagas</h2>
+                                <h2 class="mb-2 text-dark font-weight-normal">Compras Pagas</h2>
                                 <h3 class="mb-4 font-weight-bold">{{$retorno['inscricoesEventosPagos']}}</h3>
                             </div>
                             </div>
