@@ -17,7 +17,7 @@ class ConfirmacaoInscricaoFiliacao extends Mailable
      *
      * @return void
      */
-    public function __construct(array $dadosEmail)
+    public function __construct(object $dadosEmail)
     {
         $this->dadosEmail = $dadosEmail;
     }

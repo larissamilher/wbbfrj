@@ -17,6 +17,9 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('app:atualiza-status-pagamento-evento')
             ->everyMinute();
+
+        $schedule->command('app:atualizacao-status-pagamento-filiacao')
+            ->everyMinute();
     }
 
     /**
