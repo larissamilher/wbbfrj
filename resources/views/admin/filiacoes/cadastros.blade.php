@@ -127,7 +127,7 @@
               var codigo = $("#codigo").val();
               
               if(filiacao_id)
-                  window.location.href = "/admin/filiacoes/cadastros/"+ filiacao_id+ '/' + codigo.replace('/', "-");
+                  window.location.href = "/admin/filiacao/cadastros/"+ filiacao_id+ '/' + codigo.replace('/', "-");
 
           });
       });

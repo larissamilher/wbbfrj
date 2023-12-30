@@ -121,7 +121,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::get('/edit/{id}', [FiliacoesController::class, 'edit'])->name('admin.filiacao.edit');
         Route::get('/delete/{id}', [FiliacoesController::class, 'delete'])->name('admin.filiacao.delete');
         Route::post('/store', [FiliacoesController::class, 'store'])->name('admin.filiacao.store');
-        Route::get('/inscricoes/{id?}/{codigoId?}', [FiliacoesController::class, 'cadastros'])->name('admin.filiacao.cadastros');
+        Route::get('/cadastros/{id?}/{codigoId?}', [FiliacoesController::class, 'cadastros'])->name('admin.filiacao.cadastros');
 
     });
 
