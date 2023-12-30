@@ -16,6 +16,8 @@ use App\Http\Controllers\Admin\UsuariosController;
 use App\Http\Controllers\Admin\SubCategoriasController;
 use App\Http\Controllers\Admin\EventosController;
 use App\Http\Controllers\Admin\RelatoriosController;
+
+use App\Http\Controllers\Admin\FiliacoesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -110,6 +112,16 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         
         Route::get('/inscricoes-evento/{eventoId?}/{codigoId?}', [EventosController::class, 'inscricoes'])->name('admin.evento.inscricoes');
 
+
+    });
+
+    Route::prefix('filiacao')->group(function () {
+        Route::get('/', [FiliacoesController::class, 'index'])->name('admin.filiacao');
+        Route::get('/nova', [FiliacoesController::class, 'create'])->name('admin.filiacao.novo');
+        Route::get('/edit/{id}', [FiliacoesController::class, 'edit'])->name('admin.filiacao.edit');
+        Route::get('/delete/{id}', [FiliacoesController::class, 'delete'])->name('admin.filiacao.delete');
+        Route::post('/store', [FiliacoesController::class, 'store'])->name('admin.filiacao.store');
+        Route::get('/inscricoes/{id?}/{codigoId?}', [FiliacoesController::class, 'cadastros'])->name('admin.filiacao.cadastros');
 
     });
 

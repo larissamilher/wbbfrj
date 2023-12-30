@@ -147,9 +147,6 @@
                 </ul>
               </div>
             </li>
-
-          
-
             
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#eventos" aria-expanded="false" aria-controls="eventos">
@@ -174,6 +171,36 @@
                   <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.evento.inscricoes') }}">                      
                       <span class="menu-title">Compras</span>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#filiacao" aria-expanded="false" aria-controls="filiacao">
+                <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
+                <span class="menu-title">Filiação</span>
+                <i class="menu-arrow"></i>
+              </a>
+              <div class="collapse" id="filiacao">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.filiacao') }}">                      
+                      <span class="menu-title">Todas</span>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.filiacao.novo') }}">                      
+                      <span class="menu-title">Nova</span>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.filiacao.cadastros') }}">                      
+                      <span class="menu-title">Filiados</span>
                     </a>
                   </li>
 
