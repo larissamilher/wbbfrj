@@ -147,7 +147,7 @@
                                   <input type="checkbox" class="form-check-input" name="termo_atleta" {{($inscricao->atleta->termos_atleta)? 'checked' : ''}} disabled > Aceito os termos de atleta após ler atentamente. <i class="input-helper"></i></label>
                             </div>
                         </div>
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-lg-3">
                             </div>
                             <div class="col-lg-6">
@@ -159,7 +159,7 @@
                             </div>
                             <div class="col-lg-3">
                             </div>
-                        </div>
+                        </div> --}}
                       </form>
                 </div>
             </div>
