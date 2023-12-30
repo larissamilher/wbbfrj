@@ -212,7 +212,7 @@ class FiliadosController extends Controller
                     if ($participanteEvento) {
 
                         $participanteEvento->update([
-                            'validade' =>$filiacao->validade,
+                            'validade_filiacao' =>$filiacao->validade,
                             'codigo' => $codigo,
                             'status' =>$pagamentoRetorno->status,
                             'status_pagamento' =>$pagamentoRetorno->status,
