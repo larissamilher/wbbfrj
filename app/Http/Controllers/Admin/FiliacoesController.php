@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Filiacao;
+use App\Models\Filiados;
 use Carbon\Carbon;
 use PhpOffice\PhpSpreadsheet\Exception;
 use DateTime;
@@ -24,12 +25,12 @@ class FiliacoesController extends Controller
     }
 
     public function create(){
-        return view('admin.eventos.novo');
+        return view('admin.filiacoes.novo');
     }
 
     public function edit($id){
-        $evento = Evento::find($id);
-        return view('admin.eventos.novo', compact('evento'));
+        $filiacao = Filiacao::find($id);
+        return view('admin.filiacoes.novo', compact('filiacao'));
     }
 
     public function delete($id){
@@ -42,12 +43,12 @@ class FiliacoesController extends Controller
 
         try {
 
-            $evento = Evento::find($id);
+            $filiacao = Filiacao::find($id);
 
-            if ($evento) 
-                $evento->delete();            
+            if ($filiacao) 
+                $filiacao->delete();            
 
-            $response['message'] = 'Evento deletado com sucesso!';
+            $response['message'] = 'Filiação deletada com sucesso!';
             $response['class']= 'msg-sucesso';
         }
         catch (Exception $e) {
@@ -59,7 +60,7 @@ class FiliacoesController extends Controller
             ];
         }
     
-        return redirect()->route('admin.eventos')->with('response', $response);
+        return redirect()->route('admin.filiacao')->with('response', $response);
     }
 
     public function store(Request $request){
@@ -80,7 +81,7 @@ class FiliacoesController extends Controller
 
             if (!empty($dados['id'])) {
 
-                $evento = Evento::find($dados['id']);
+                $evento = Filiacao::find($dados['id']);
                 
                 if($request->input('data_inicio_inscricao') == date("d/m/Y", strtotime( $evento->data_inicio_inscricao)))
                     $dados['data_inicio_inscricao'] = Carbon::createFromFormat('d/m/Y', $request->input('data_inicio_inscricao'))->format('Y-m-d');
@@ -88,15 +89,15 @@ class FiliacoesController extends Controller
                 if($request->input('data_final_inscricao') == date("d/m/Y", strtotime( $evento->data_final_inscricao)))
                     $dados['data_final_inscricao'] = Carbon::createFromFormat('d/m/Y', $request->input('data_final_inscricao'))->format('Y-m-d');
 
-                if($request->input('data_evento') == date("d/m/Y", strtotime( $evento->data_evento)))
-                    $dados['data_evento'] = Carbon::createFromFormat('d/m/Y', $request->input('data_evento'))->format('Y-m-d');
+                if($request->input('validade') == date("d/m/Y", strtotime( $evento->validade)))
+                    $dados['validade'] = Carbon::createFromFormat('d/m/Y', $request->input('validade'))->format('Y-m-d');
                 
-                $categoria = Evento::updateOrCreate(['id' => $dados['id']], $dados);
+                $categoria = Filiacao::updateOrCreate(['id' => $dados['id']], $dados);
             }
             else 
-                Evento::create($dados);
+                Filiacao::create($dados);
                     
-            $response['message'] = 'Evento salvo com sucesso!';
+            $response['message'] = 'Filiação salvo com sucesso!';
         }
         catch (Exception $e) {
             Log::error($e);
@@ -107,22 +108,22 @@ class FiliacoesController extends Controller
             ];
         }
     
-        return view('admin.eventos.novo', compact('response'));
+        return view('admin.filiacoes.novo', compact('response'));
         
     }
 
-    public function cadastros($eventoId = null, $codigo = null){
+    public function cadastros($filiacaoId = null, $codigo = null){
 
-        $eventos = Evento::orderBy('nome')->get();
+        $filiacaos = Filiacao::orderBy('nome')->get();
 
-        $inscricoes = InscricaoEvento::with([
-            'evento' => function ($query) {
+        $inscricoes = Filiados::with([
+            'filiacao' => function ($query) {
                 $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
             },
         ]);
         
-        if($eventoId)
-            $inscricoes = $inscricoes->where('evento_id', $eventoId);        
+        if($filiacaoId)
+            $inscricoes = $inscricoes->where('filiacao_id', $filiacaoId);        
 
 
         if($codigo)
