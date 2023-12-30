@@ -114,33 +114,19 @@
                         </div>
                         
                         <div class="row">
-                            <div class="col-lg-3">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="data_inicio_inscricoes">Status do Pagamento</label>
                                     <input type="text" class="form-control" disabled value="{{$inscricao->status_pagamento}}">
                                   </div>
                             </div>
 
-                            <div class="col-lg-3">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="data_inicio_inscricoes">Forma de Pagamento</label>
                                     <input type="text" class="form-control" disabled value="{{$inscricao->billingType}}">
                                   </div>
                             </div>
-{{-- 
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="data_inicio_inscricoes" style="margin-bottom: 20px;">Foto de Rosto</label>
-                                    <br>
-
-                                    <a href="{{ route( 'admin.filiacao.filiados.download-selfie', $inscricao->id ) }}" class="btn-acao btn-edit" title="Ver Detalhes">
-                                        <span class="icon-bg">
-                                            <i class="mdi mdi-eye"></i>
-                                        </span>                                            
-                                    </a> 
-                                  </div>
-                            </div> --}}
-                       
                         </div>
 
                         <div class="row">
@@ -149,7 +135,6 @@
                                     <label for="data_inicio_inscricoes">Foto do Rosto</label>
                                     <br>    
                                     <a href="{{ route( 'admin.filiacao.filiados.download-selfie', $inscricao->id ) }}"title="Clique para fazer o Download">
-
                                         <img style="width: 200px;border-radius: 5px;box-shadow: rgb(0 0 0 / 30%) 0px 19px 38px, rgb(0 0 0 / 22%) 0px 15px 12px;" src="{{ route('admin.filiacao.filiados.exibir-selfie', ['id' => $inscricao->id]) }}" alt="Imagem">
                                     </a> 
                                  </div>
