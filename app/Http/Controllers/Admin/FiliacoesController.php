@@ -181,4 +181,29 @@ class FiliacoesController extends Controller
         file_put_contents($tempFilePath, $base64Content);    
         return $tempFilePath;
     }
+
+    public function gerarPdf($id){
+
+        $inscricao = Filiado::with([
+            'filiacao' => function ($query) {
+                $query->withTrashed(); 
+            },
+            'atleta'
+        ])->find($id);
+
+        $pdfView = View::make('admin.filiacoes.filiados.detalhes-pdf',  ['inscricao' => $inscricao])->render();
+
+        $pdf = PDF::loadHTML($pdfView);
+
+        $nome = $inscricao->codigo;
+
+        if(empty($nome))
+            $nome = 'ficha-filiado';
+
+        // return view('admin.filiacoes.filiados.detalhes-pdf', compact("inscricao"));
+
+        return $pdf->download($nome.'.pdf');
+
+    }
+
 }

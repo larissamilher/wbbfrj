@@ -125,6 +125,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::get('/detalhes/{id}', [FiliacoesController::class, 'detalhes'])->name('admin.filiacao.filiados.detalhes');
         Route::get('/ver-selfie/{id}', [FiliacoesController::class, 'verSelfie'])->name('admin.filiacao.filiados.exibir-selfie');
         Route::get('/download-selfie/{id}', [FiliacoesController::class, 'downloadSelfie'])->name('admin.filiacao.filiados.download-selfie');
+        Route::get('/gerar-pdf/{id}', [FiliacoesController::class, 'gerarPdf'])->name('admin.filiacao.filiados.gerar-pdf');
 
     });
 

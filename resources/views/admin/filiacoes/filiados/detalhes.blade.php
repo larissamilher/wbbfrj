@@ -147,19 +147,19 @@
                                   <input type="checkbox" class="form-check-input" name="termo_atleta" {{($inscricao->atleta->termos_atleta)? 'checked' : ''}} disabled > Aceito os termos de atleta após ler atentamente. <i class="input-helper"></i></label>
                             </div>
                         </div>
-                        {{-- <div class="row">
+                        <div class="row">
                             <div class="col-lg-3">
                             </div>
                             <div class="col-lg-6">
                                 <button type="button" class="btn btn-success btn-fw" style="width: 100%;">
-                                    <a href="{{ route( 'admin.inscricoes.gerar-pdf', $inscricao->id ) }}" style="">
+                                    <a href="{{ route( 'admin.filiacao.filiados.gerar-pdf', $inscricao->id ) }}" style="">
                                         GERAR PDF                                       
                                     </a>    
                                 </button>
                             </div>
                             <div class="col-lg-3">
                             </div>
-                        </div> --}}
+                        </div>
                       </form>
                 </div>
             </div>
