@@ -103,11 +103,11 @@
                                             </span>                                   
                                         </a>     --}}
 
-                                        {{-- <a href="{{ route( 'admin.filiacao.inscricoes.detalhes', $inscricao->id ) }}" class="btn-acao btn-edit" title="Ver Detalhes">
+                                        <a href="{{ route( 'admin.filiacao.filiados.detalhes', $inscricao->id ) }}" class="btn-acao btn-edit" title="Ver Detalhes">
                                             <span class="icon-bg">
                                                 <i class="mdi mdi-eye"></i>
                                             </span>                                            
-                                        </a> --}}
+                                        </a>
                                       
                                     </td>
                                 </tr>

@@ -18,7 +18,7 @@
                             </div>
                         </div>
                         <!--End Section Tittle  -->
-                        <form id="inscricao-form" class="inscricao-form" action="{{ route('filiacao.inscricao.store.ficha') }}" method="POST"style=" padding-top: 0;">
+                        <form id="inscricao-form" class="inscricao-form" action="{{ route('filiacao.inscricao.store.ficha') }}" method="POST"  enctype="multipart/form-data" style=" padding-top: 0;">
                             @csrf
 
                             <div class="row">      

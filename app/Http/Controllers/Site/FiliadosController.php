@@ -39,6 +39,19 @@ class FiliadosController extends Controller
     {
         try {
 
+            $request->validate([
+                'selfie' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+    
+            $file = $request->file('selfie');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(storage_path('app/temp'), $fileName);
+
+            $fileContent = file_get_contents(storage_path('app/temp') . '/' . $fileName);
+
+            $base64Selfie = base64_encode($fileContent);
+            unlink(storage_path('app/temp') . '/' . $fileName);
+            
             $filiado = $request->input();
            
             $filiado['cpf'] = str_replace(['.', '-'], '', $filiado['cpf'] );
@@ -81,7 +94,8 @@ class FiliadosController extends Controller
             $filiadoSave = Filiado::updateOrCreate(['atleta_id'=> $atleta->id],[
                 'atleta_id'=> $atleta->id,
                 'filiacao_id'=> $filiado['filiacao_id'],
-                'status'=> 'PENDENTE'
+                'status'=> 'PENDENTE',
+                'selfie' => $base64Selfie
             ]);
             session()->put('filiado',$filiadoSave );
 
@@ -332,5 +346,7 @@ class FiliadosController extends Controller
 
         return $response;
     }
+
+    
    
 }

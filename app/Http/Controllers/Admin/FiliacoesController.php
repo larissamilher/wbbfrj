@@ -14,6 +14,7 @@ use PDF;
 use Illuminate\Support\Facades\View;
 use App\Exports\ListagemExportEvento;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Response;
 
 class FiliacoesController extends Controller
 {
@@ -133,42 +134,51 @@ class FiliacoesController extends Controller
         return view('admin.filiacoes.cadastros', compact('filiacoes','inscricoes'));
     }
 
-    public function gerarPdf($id){
-
-        $inscricao = InscricaoEvento::with([
-            'evento' => function ($query) {
-                $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
+    public function detalhes($id)
+    {
+        $inscricao = Filiado::with([
+            'filiacao' => function ($query) {
+                $query->withTrashed(); 
             },
+            'atleta'
         ])->find($id); 
 
-        $pdfView = View::make('admin.eventos.detalhes-pdf',  ['inscricao' => $inscricao])->render();
-
-        $pdf = PDF::loadHTML($pdfView);
-
-        $nome = $inscricao->codigo;
-
-        if(empty($nome))
-            $nome = 'ficha-inscricao';
-
-        return $pdf->download($nome.'.pdf');
-
+        return view('admin.filiacoes.filiados.detalhes', compact("inscricao"));
     }
 
-    public function extrairListagemTela()
-    {
-        $eventos = Evento::all();
+    public function verSelfie($id){
 
-        return view('admin.eventos.extrair-listagem', compact("eventos"));
+        $inscricao = Filiado::find($id); 
+
+        $imageContent = base64_decode($inscricao->selfie);
+
+        $response = Response::make($imageContent, 200);
+        $response->header('Content-Type', 'image/jpeg'); // Certifique-se de ajustar conforme o tipo da sua imagem
+
+        return $response;
     }
 
-    public function extrairListagem(Request $request)
+    public function downloadSelfie($id)
     {
-        $eventoId = $request->input('evento');
-
-        $nomeEvento = Evento::find($eventoId);
-
-        $export = new ListagemExportEvento($eventoId);
-
-        return Excel::download(new ListagemExportEvento($eventoId), $nomeEvento->nome . '.xlsx');
+        $filiado = Filiado::find($id);
+    
+        if (!$filiado) 
+            abort(404); 
+    
+        $imageContent = base64_decode($filiado->selfie);    
+        $fileName = 'selfie_' . $filiado->id . '.jpg';     
+        $response = Response::download(
+            $this->base64ToFile($imageContent, $fileName),
+            $fileName,
+            ['Content-Type' => 'image/jpeg'] 
+        );    
+        return $response;
+    }
+    
+    private function base64ToFile($base64Content, $fileName)
+    {
+        $tempFilePath = tempnam(sys_get_temp_dir(), $fileName);    
+        file_put_contents($tempFilePath, $base64Content);    
+        return $tempFilePath;
     }
 }
