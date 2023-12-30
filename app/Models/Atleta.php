@@ -30,6 +30,7 @@ class Atleta extends Model
         'numero',
         'academia_coach',
         'autorizacao_uso_imagem',
+        'termos_atleta'
     ];
 
 

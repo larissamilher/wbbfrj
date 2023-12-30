@@ -21,7 +21,17 @@
                         <form id="inscricao-form" class="inscricao-form" action="{{ route('filiacao.inscricao.store.ficha') }}" method="POST"style=" padding-top: 0;">
                             @csrf
 
-                            <div class="row">                                                               
+                            <div class="row">      
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-box email-icon mb-30">
+                                        <label for="filiacao_id">Filiação <span>*</span> </label>
+                                        <select id="filiacao_id" name="filiacao_id" class="form-control required-select">
+                                            @foreach($filiacoes as $filiacao)
+                                                <option value="{{$filiacao->id}}">{{$filiacao->nome}} -  R$ {{  number_format( $filiacao->valor, 2, ',', '.')}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>                                                            
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-box email-icon mb-30">
                                         <label for="cpf">CPF <span>*</span> </label>
@@ -42,9 +52,7 @@
                                         <input type="text" name="nome" id="nome" placeholder="" class="form-control required">
                                     </div>
                                 </div>   
-                            </div>
-
-                            <div class="row">
+                           
                                 
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box user-icon mb-30">
@@ -89,14 +97,14 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-3 col-md-3">
+                                <div class="col-lg-6 col-md-6">
                                     <div class="form-box email-icon mb-30">
                                         <label for="cidade">Cidade <span>*</span> </label>
                                         <input type="text" name="cidade" id="cidade" placeholder="" class="form-control required">
                                     </div>
                                 </div>
 
-                                <div class="col-lg-3 col-md-3">
+                                <div class="col-lg-6 col-md-6">
                                     <div class="form-box email-icon mb-30">
                                         <label for="bairro">Bairro <span>*</span> </label>
                                         <input type="text" name="bairro" id="bairro" placeholder="" class="form-control required">
@@ -144,7 +152,7 @@
                                 <div class="col-lg-12">                                   
                                     <div class="form-box email-icon mb-30" style="margin-right: 15px; display: flex; align-items: center;">
                                         <input type="checkbox" name="termos_atleta" id="termos_atleta" class="form-control required" style="height: 20px;margin-right: 5px;width: 20px;">
-                                        <label for="autorizacao_uso_imagem">Aceito os termos de atleta após ler atentamente. Para ler,  
+                                        <label for="termos_atleta">Aceito os termos de atleta após ler atentamente. Para ler,  
                                             <a href="https://wbbfrj.com/termo/termo.pdf" target="_blank" style=" color: #ff1313;">clique aqui</a>.<span>*</span> </label>
                                     </div>
                                 </div>
@@ -260,14 +268,9 @@
             var error = false;
             var camposVazios = [];
 
-            if ($("#campeonato").val() == '') {
+            if ($("#filiacao").val() == '') {
                 error = true;
-                camposVazios.push('Campeonato');
-            }
-
-            if ($("#categorias").val() == '') {
-                error = true;
-                camposVazios.push('Categoria');
+                camposVazios.push('Filiação');
             }
 
             $(".required").each(function () {
@@ -285,6 +288,13 @@
             if (!checkbox.checked){
                 error = true;
                 camposVazios.push('Autorizo o uso da minha imagem');
+            }
+
+            var checkbox = document.getElementById("termos_atleta");
+
+            if (!checkbox.checked){
+                error = true;
+                camposVazios.push('Aceito os termos de atleta');
             }
 
             if (error) {

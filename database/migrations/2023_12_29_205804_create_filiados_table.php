@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('filiados', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('atleta_id')->unsigned();
+            $table->integer('filiacao_id')->unsigned();
             $table->string('codigo')->nullable();           
 
             $table->string('status')->nullable();
@@ -38,6 +39,8 @@ return new class extends Migration
             $table->softDeletes();  
 
             $table->foreign('atleta_id')->references('id')->on('atletas')->onDelete('no action')->onUpdate('no action');
+            $table->foreign('filiacao_id')->references('id')->on('filiacao')->onDelete('no action')->onUpdate('no action');
+
         });
     }
 

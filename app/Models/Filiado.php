@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Atleta;
+use App\Models\Filiacao;
 
 class Filiado extends Model
 {
@@ -14,6 +16,7 @@ class Filiado extends Model
     protected $fillable = [
         'codigo',
         'atleta_id',
+        'filiacao_id',
         'status',
         'validade_filiacao',
         'selfie',
@@ -35,5 +38,10 @@ class Filiado extends Model
     public function atleta()
     {
         return $this->belongsTo(Atleta::class);
+    }
+
+    public function filiacao()
+    {
+        return $this->belongsTo(Filiacao::class);
     }
 }

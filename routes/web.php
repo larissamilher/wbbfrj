@@ -164,13 +164,12 @@ Route::prefix('filiacao')->group(function () {
         return view('site.filiacao.index');
     })->name('filiacao');
 
-    Route::get('/cadastro', function () {
-        return view('site.filiacao.cadastro');
-    })->name('filiacao.cadastro');
+    Route::get('/cadastro', [FiliadosController::class, 'cadastro'])->name('filiacao.cadastro');
 
     Route::match(['get', 'post'],'/ficha', [FiliadosController::class, 'primeiraEtapaInscricao'])->name('filiacao.inscricao.store.ficha');
     Route::get('/get-dados-cpf/{cpf}', [FiliadosController::class, 'getrDadosCpf'])->name('get-dados-cpf');
 
+    Route::post('/pagamento', [FiliadosController::class, 'etapaPagamento'])->name('filiacao.pagamento');
 
 });
 

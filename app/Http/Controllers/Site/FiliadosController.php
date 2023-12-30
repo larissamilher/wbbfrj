@@ -8,7 +8,7 @@ use App\Models\Campeonato;
 use App\Models\CategoriaCampeonato;
 use App\Services\PagamentoService;
 use App\Models\Atleta;
-use App\Models\AtletaXCampeonato;
+use App\Models\Filiado;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Contato;
@@ -16,34 +16,73 @@ use Illuminate\Support\Facades\Log;
 use PDF;
 use Illuminate\Support\Facades\View;
 use PhpOffice\PhpSpreadsheet\Exception;
-use App\Models\Evento;
+use App\Models\Filiacao;
 use App\Models\InscricaoEvento;
-use App\Mail\ConfirmacaoInscricaoEvento;
+use App\Mail\ConfirmacaoInscricaoFiliacao;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Services\GeradorCodigoService;
 
 class FiliadosController extends Controller
 {
+    public function cadastro(){
+        
+        $filiacoes = Filiacao::where('data_inicio_inscricao', '<=', now())
+            ->where('data_final_inscricao', '>=', now())
+            ->get();
+
+        return view('site.filiacao.cadastro', compact([ 'filiacoes']));        
+    }
+
     public function primeiraEtapaInscricao(Request $request)
     {
         try {
 
             $filiado = $request->input();
 
-            dd($filiado );
+           
             $filiado['cpf'] = str_replace(['.', '-'], '', $filiado['cpf'] );
             $filiado['rg'] = str_replace(['.', '-'], '', $filiado['rg'] );
             $filiado['celular'] = str_replace(['(',')', '-', ' '], '', $filiado['celular'] );
             $filiado['cep'] = str_replace(['(',')', '-', ' '], '', $filiado['cep'] );
 
-            unset($filiado['_token']);   
+            if($filiado['termos_atleta'] == 'on')
+                $filiado['termos_atleta'] = 1;
+            else
+                $filiado['termos_atleta'] = 0;
 
             if($filiado['autorizacao_uso_imagem'] == 'on')
                 $filiado['autorizacao_uso_imagem'] = 1;
-            else    
+            else
                 $filiado['autorizacao_uso_imagem'] = 0;
-            
-            $filiadoSave = InscricaoEvento::Create($filiado);
+
+            $atleta = Atleta::updateOrCreate(['cpf'=>$filiado['cpf']],
+            [
+                'nome'=> $request->get('nome'),
+                'rg'=> $filiado['rg'],
+                'data_nascimento'=> $request->get("data_nascimento"),
+                'celular'=> $filiado['celular'] ,
+                'email'=> $request->get('email'),
+                'cep'=> $filiado['cep'],
+                'estado'=> $request->get('estado'),
+                'cidade'=> $request->get('cidade'),
+                'logradouro'=> $request->get('logradouro'),
+                'bairro'=> $request->get('bairro'),
+                'numero'=> $request->get('numero'),
+                'academia_coach'=> $request->get('academia_coach'),
+                'autorizacao_uso_imagem'=> $filiado['autorizacao_uso_imagem'],
+                'termos_atleta'=>  $filiado['termos_atleta'],
+            ]);
+
+            unset($filiado['_token']);   
+
+            $filiacao = Filiacao::find($filiado['filiacao_id']);
+
+            $filiadoSave = Filiado::updateOrCreate(['cpf'=>$filiado['cpf']],[
+                'atleta_id'=> $atleta->id,
+                'filiacao_id'=> $filiado['filiacao_id'],
+                'status'=> 'PENDENTE'
+            ]);
 
             session()->put('filiado',$filiadoSave );
 
@@ -51,11 +90,16 @@ class FiliadosController extends Controller
                 throw new \Exception(('Ocorreu um erro para salvar os dados do filiado!'));
             
         } catch (\Exception $e) {
+
+            $filiacoes = Filiacao::where('data_inicio_inscricao', '<=', now())
+            ->where('data_final_inscricao', '>=', now())
+            ->get();
+
             $errorMessage = $e->getMessage();
-            return view('site.filiacao.cadastro', compact('errorMessage'));    
+            return view('site.filiacao.cadastro', compact('errorMessage','filiacoes'));    
         }
 
-        return view('site.eventos.pagamento', compact([ 'evento' ]));
+        return view('site.filiacao.pagamento', compact([ 'filiacao' ]));
     }
 
     public function etapaPagamento(Request $request)
@@ -68,8 +112,8 @@ class FiliadosController extends Controller
         try {
             $validade = explode('/', $request->get('validade_cartao'));
 
-            $participante = session()->get('participante');
-            $evento = Evento::find($participante->evento_id);
+            $participante = session()->get('filiado');
+            $filiacao = Filiacao::find($participante->filiacao_id);
 
             $cpf = str_replace(['.', '-'], '', $participante->cpf );
 
@@ -83,7 +127,7 @@ class FiliadosController extends Controller
                     throw new \Exception( 'Código de segurança inválido');
             }
 
-            $valor =  number_format(  $evento->valor , 2, '.', '.') ;
+            $valor =  number_format(  $filiacao->valor , 2, '.', '.') ;
 
             if($request->get('parcelamento') > 1)
                 $valor = number_format(  $valor + ($valor * 0.0349 + 0.49) , 2, '.', '.');
@@ -121,7 +165,7 @@ class FiliadosController extends Controller
                 'value' => number_format( $valor, 2, '.', '.'),
                 'dueDate' => date('Y-m-d'),
                 'remoteIp' =>$request->ip(),
-                'description' =>$evento->nome
+                'description' =>$filiacao->nome
             ];
 
             if( $request->get('forma_pagamento') ==  'CREDIT_CARD'){
@@ -162,20 +206,21 @@ class FiliadosController extends Controller
                 case 'PENDING': 
                     $codigo = GeradorCodigoService::geraCodigo();
 
-                    $participanteEvento = InscricaoEvento::find($participante->id);
+                    $participanteEvento = Filiado::find($participante->id);
 
                     if ($participanteEvento) {
 
                         $participanteEvento->update([
                             'codigo' => $codigo,
+                            'status' =>$pagamentoRetorno->status,
                             'status_pagamento' =>$pagamentoRetorno->status,
                             'payment_id' => $pagamentoRetorno->id,
                             'customer' => $pagamentoRetorno->customer,
                             'billingType' => $pagamentoRetorno->billingType,
-                            'value' => number_format( $evento->valor, 2, '.', '.'),
+                            'value' => number_format( $filiacao->valor, 2, '.', '.'),
                             'dueDate' => $pagamentoRetorno->dueDate,
                             'installmentCount' => null,
-                            'totalValue' => number_format( $evento->valor, 2, '.', '.'),
+                            'totalValue' => number_format( $filiacao->valor, 2, '.', '.'),
                             'remoteIp' =>$request->ip(),
                             'holderName' =>$request->get('nome_cartao'),
                             'creditCardNumber' => isset($pagamentoRetorno->creditCard->creditCardNumber) ? $pagamentoRetorno->creditCard->creditCardNumber : '',
@@ -189,46 +234,27 @@ class FiliadosController extends Controller
                     
                     if($pagamentoRetorno->status == 'CONFIRMED'){
 
-                        $participanteEvento = InscricaoEvento::with([
-                            'evento' => function ($query) {
+                        $participanteEvento = Filiado::with([
+                            'filiacao' => function ($query) {
                                 $query->withTrashed();
                             },
-                        ])->find($participanteEvento->id);
+                        ])->find($participanteEvento->id);                        
+                       
+                        Mail::to($participante['email'])->send(new ConfirmacaoInscricaoFiliacao($participanteEvento));
                         
-                        $nome = str_replace('/', '-', $participanteEvento->codigo);
-
-                        $conteudo = 'https://wbbfrj.com/eventos/validar/'. $nome;
-                        $qrCode = QrCode::size(300)->generate($conteudo);
-
-                        $qrCodePath = storage_path("app/temp/{$nome}.png");
-                        file_put_contents($qrCodePath, $qrCode);
-        
-                        $pdfView = view('ingresso.ingresso', ['inscricao' => $participanteEvento, 'qrCodePath' => $qrCodePath])->render();
-        
-                        $pdf = PDF::loadHTML($pdfView);
-                        
-                        $nome = str_replace('/', '-', $participanteEvento->codigo);
-                        $pdfPath = storage_path("app/temp/{$nome}.pdf");
-                        $pdf->save($pdfPath);              
-
-                        Mail::to($participante['email'])->send(new ConfirmacaoInscricaoEvento($participanteEvento, $pdfPath, $nome));
-                        
-                        Storage::delete("temp/{$nome}.pdf");
-                        Storage::delete("temp/{$nome}.png");
-
-                        return view('site.inscricao-sucesso-evento');
+                        return view('site.filiacao.inscricao-sucesso');
                     }
 
                     if($request->get('forma_pagamento') ==  'PIX'){ // capturar QR CODE
                         $pagamentoRetorno = PagamentoService::obetrQrCodePix($pagamentoRetorno->id);
-                        return view('site.inscricao-pendente-pix' , compact('pagamentoRetorno'));
+                        return view('site.filiacao.inscricao-pendente-pix' , compact('pagamentoRetorno'));
                     }
                     elseif($request->get('forma_pagamento') ==  'BOLETO'){ // capturar LINHA DIGITAL
                         $pagamentoId =$pagamentoRetorno->id;
                         $pagamentoRetorno = PagamentoService::obetrLinhaDigitalBoleto($pagamentoRetorno->id);
                         $pagamentoId =  explode('_', $pagamentoId);
                         $pagamentoId = $pagamentoId[1];
-                        return view('site.inscricao-pendente-boleto' , compact('pagamentoRetorno', 'pagamentoId'));
+                        return view('site.filiacao.inscricao-pendente-boleto' , compact('pagamentoRetorno', 'pagamentoId'));
                     }
 
                     break;
@@ -241,7 +267,7 @@ class FiliadosController extends Controller
         } catch (\Exception $e) {    
             Log::error($e);
 
-            $evento = Evento::find($request->input('evento_id'));
+            $filiacao = Filiacao::find($request->input('filiacao_id'));
 
             $retorno = [
                 'success' => false,
@@ -253,7 +279,7 @@ class FiliadosController extends Controller
                     "ccv" => $request->get('cvv'),
                 ],
             ];
-            return view('site.eventos.pagamento', compact([ 'evento','retorno' ]));
+            return view('site.filiacao.pagamento', compact([ 'filiacao','retorno' ]));
         }
     }
 
