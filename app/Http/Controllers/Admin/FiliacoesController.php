@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Filiacao;
-use App\Models\Filiados;
+use App\Models\Filiado;
 use Carbon\Carbon;
 use PhpOffice\PhpSpreadsheet\Exception;
 use DateTime;
@@ -78,7 +78,6 @@ class FiliacoesController extends Controller
 
             $dados['valor'] = str_replace(',', '.', $dados['valor']);
 
-
             if (!empty($dados['id'])) {
 
                 $evento = Filiacao::find($dados['id']);
@@ -108,30 +107,30 @@ class FiliacoesController extends Controller
             ];
         }
     
-        return view('admin.filiacoes.novo', compact('response'));
-        
+        return view('admin.filiacoes.novo', compact('response'));        
     }
 
-    public function cadastros($filiacaoId = null, $codigo = null){
+    public function cadastros($filiacaoId = null, $codigo = null)
+    {
+        $filiacoes = Filiacao::orderBy('nome')->get();
 
-        $filiacaos = Filiacao::orderBy('nome')->get();
-
-        $inscricoes = Filiados::with([
+        $inscricoes = Filiado::with([
             'filiacao' => function ($query) {
                 $query->withTrashed(); // Inclui registros "soft-deleted" no relacionamento 'categoria'
             },
-        ]);
+        ])->join('atletas', 'atletas.id', '=', 'filiados.atleta_id')
+        ->orderBy('atletas.nome') 
+        ->select("filiados.*");
         
         if($filiacaoId)
-            $inscricoes = $inscricoes->where('filiacao_id', $filiacaoId);        
-
+            $inscricoes = $inscricoes->where('filiacao_id', $filiacaoId);    
 
         if($codigo)
             $inscricoes = $inscricoes->where('codigo', str_replace('-', '/', $codigo));
 
-        $inscricoes = $inscricoes->orderBy('nome')->get();
+        $inscricoes = $inscricoes->get();
         
-        return view('admin.eventos.inscricoes', compact('eventos','inscricoes'));
+        return view('admin.filiacoes.cadastros', compact('filiacoes','inscricoes'));
     }
 
     public function gerarPdf($id){
