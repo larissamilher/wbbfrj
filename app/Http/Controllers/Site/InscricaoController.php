@@ -140,10 +140,6 @@ class InscricaoController extends Controller
                     $campeonato->valor = 0;
             }
 
-            $filiado = Filiado::where('atleta_id', $atletaSave->id)
-                ->whereDate('validade_filiacao', '>=', Carbon::now()->toDateString())
-                ->first();
-
         } catch (\Exception $e) {
 
             $errorMessage = $e->getMessage();
