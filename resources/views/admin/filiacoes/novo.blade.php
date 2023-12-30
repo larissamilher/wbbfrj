@@ -54,7 +54,7 @@
 
                             <div class="col-lg-3">
                               <div class="form-group">
-                                <label for="validade">Data do Evento</label>
+                                <label for="validade">Data de Validade</label>
                                 <input type="text" class="form-control" id="validade" name="validade"
                                     placeholder=""
                                     value="{{ isset($filiacao->validade) ? date('d/m/Y', strtotime($filiacao->validade)) : '' }}"
