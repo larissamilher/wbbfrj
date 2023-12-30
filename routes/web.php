@@ -116,7 +116,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     });
 
     Route::prefix('filiacao')->group(function () {
-        Route::get('/', [FiliacoesController::class, 'index'])->name('admin.filiacao');
+        Route::get('/todas', [FiliacoesController::class, 'index'])->name('admin.filiacao');
         Route::get('/nova', [FiliacoesController::class, 'create'])->name('admin.filiacao.novo');
         Route::get('/edit/{id}', [FiliacoesController::class, 'edit'])->name('admin.filiacao.edit');
         Route::get('/delete/{id}', [FiliacoesController::class, 'delete'])->name('admin.filiacao.delete');
