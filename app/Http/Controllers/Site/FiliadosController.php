@@ -22,6 +22,7 @@ use App\Mail\ConfirmacaoInscricaoFiliacao;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Services\GeradorCodigoService;
+use DateTime;
 
 class FiliadosController extends Controller
 {
@@ -39,7 +40,6 @@ class FiliadosController extends Controller
         try {
 
             $filiado = $request->input();
-
            
             $filiado['cpf'] = str_replace(['.', '-'], '', $filiado['cpf'] );
             $filiado['rg'] = str_replace(['.', '-'], '', $filiado['rg'] );
@@ -78,12 +78,11 @@ class FiliadosController extends Controller
 
             $filiacao = Filiacao::find($filiado['filiacao_id']);
 
-            $filiadoSave = Filiado::updateOrCreate(['cpf'=>$filiado['cpf']],[
+            $filiadoSave = Filiado::updateOrCreate(['atleta_id'=> $atleta->id],[
                 'atleta_id'=> $atleta->id,
                 'filiacao_id'=> $filiado['filiacao_id'],
                 'status'=> 'PENDENTE'
             ]);
-
             session()->put('filiado',$filiadoSave );
 
             if(!$filiadoSave)
@@ -115,7 +114,9 @@ class FiliadosController extends Controller
             $participante = session()->get('filiado');
             $filiacao = Filiacao::find($participante->filiacao_id);
 
-            $cpf = str_replace(['.', '-'], '', $participante->cpf );
+            $atleta = Atleta::find( $participante->atleta_id);
+
+            $cpf = str_replace(['.', '-'], '', $atleta->cpf );
 
             if( $request->get('forma_pagamento') ==  'CREDIT_CARD'){
                 $dateTime = DateTime::createFromFormat('m/Y', $request->get('validade_cartao'));
@@ -182,11 +183,11 @@ class FiliadosController extends Controller
                 ];
 
                 $dados['creditCardHolderInfo'] = [
-                    "name" => $participante->nome,
-                    "email" => $participante->email,
-                    "postalCode" =>$participante->cep,
-                    "addressNumber" => $participante->cidade . '/'.  $participante->estado. ', '.  $participante->bairro .' '.  $participante->numero .' '.  $participante->logradouro ,
-                    "phone" => $participante->celular,
+                    "name" => $atleta->nome,
+                    "email" => $atleta->email,
+                    "postalCode" =>$atleta->cep,
+                    "addressNumber" => $atleta->cidade . '/'.  $atleta->estado. ', '.  $atleta->bairro .' '.  $atleta->numero .' '.  $atleta->logradouro ,
+                    "phone" => $atleta->celular,
                     "cpfCnpj" => $cpf,
                 ];
             }
@@ -211,6 +212,7 @@ class FiliadosController extends Controller
                     if ($participanteEvento) {
 
                         $participanteEvento->update([
+                            'validade' =>$filiacao->validade,
                             'codigo' => $codigo,
                             'status' =>$pagamentoRetorno->status,
                             'status_pagamento' =>$pagamentoRetorno->status,
@@ -234,13 +236,10 @@ class FiliadosController extends Controller
                     
                     if($pagamentoRetorno->status == 'CONFIRMED'){
 
-                        $participanteEvento = Filiado::with([
-                            'filiacao' => function ($query) {
-                                $query->withTrashed();
-                            },
-                        ])->find($participanteEvento->id);                        
-                       
-                        Mail::to($participante['email'])->send(new ConfirmacaoInscricaoFiliacao($participanteEvento));
+                        Mail::to($atleta->email)->send(new ConfirmacaoInscricaoFiliacao([
+                            'nome' =>$atleta->nome,
+                            'codigo' => $codigo
+                        ]));
                         
                         return view('site.filiacao.inscricao-sucesso');
                     }

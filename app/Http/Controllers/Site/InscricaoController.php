@@ -8,6 +8,7 @@ use App\Models\Campeonato;
 use App\Models\SubCategoriaCampeonato;
 use App\Models\SubCategoria;
 use App\Models\Categoria;
+use App\Models\Filiado;
 use App\Services\PagamentoService;
 use App\Services\GeradorCodigoService;
 use App\Models\Atleta;
@@ -18,6 +19,7 @@ use App\Mail\ConfirmacaoInscricao;
 use Illuminate\Support\Facades\Log;
 use PhpOffice\PhpSpreadsheet\Exception;
 use DateTime;
+use Illuminate\Support\Carbon;
 
 class InscricaoController extends Controller
 {
@@ -93,6 +95,7 @@ class InscricaoController extends Controller
             $campeonato = Campeonato::find($request->input('campeonato'));
 
             $atleta = $request->input();
+            $filiado = null;
 
             $atleta['cpf'] = str_replace(['.', '-'], '', $atleta['cpf'] );
             $atleta['rg'] = str_replace(['.', '-'], '', $atleta['rg'] );
@@ -113,11 +116,10 @@ class InscricaoController extends Controller
 
             if($atletaCampeonato)
                 $campeonato->valor = $campeonato->valor_dobra;
-            
+                       
             session()->put('atleta', $request->input());
         
             unset($atleta['_token']);   
-
 
             if($atleta['autorizacao_uso_imagem'] == 'on')
                 $atleta['autorizacao_uso_imagem'] = 1;
@@ -128,7 +130,20 @@ class InscricaoController extends Controller
 
             if(!$atletaSave)
                 throw new \Exception(('Ocorreu um erro para salvar os dados do atleta!'));
-            
+          
+            if(!$atletaCampeonato){
+                $filiado = Filiado::where('atleta_id', $atletaSave->id)
+                ->whereDate('validade_filiacao', '>=', Carbon::now()->toDateString())
+                ->first();
+
+                if($filiado)
+                    $campeonato->valor = 0;
+            }
+
+            $filiado = Filiado::where('atleta_id', $atletaSave->id)
+                ->whereDate('validade_filiacao', '>=', Carbon::now()->toDateString())
+                ->first();
+
         } catch (\Exception $e) {
 
             $errorMessage = $e->getMessage();
@@ -141,7 +156,7 @@ class InscricaoController extends Controller
         
         }
 
-        return view('site.pagamento', compact([ 'campeonato' ]));
+        return view('site.pagamento', compact([ 'campeonato', 'filiado' ]));
     }
 
     public function etapaPagamento(Request $request)
@@ -154,6 +169,11 @@ class InscricaoController extends Controller
         try {
             $atleta = session()->get('atleta');
             $campeonato = Campeonato::find($atleta['campeonato']);
+            $forma_pagamento = $request->get('forma_pagamento');
+            $cpf = str_replace(['.', '-'], '', $atleta['cpf'] );
+            $atletaId = Atleta::where('cpf', $cpf )->pluck('id')->first();
+
+            $filiado = null;
 
             if( $request->get('forma_pagamento') ==  'CREDIT_CARD'){
                 $dateTime = DateTime::createFromFormat('m/Y', $request->get('validade_cartao'));
@@ -166,8 +186,7 @@ class InscricaoController extends Controller
             }
           
             $validade = explode('/', $request->get('validade_cartao'));
-            $cpf = str_replace(['.', '-'], '', $atleta['cpf'] );
-
+           
             $valor =  number_format(  $campeonato->valor , 2, '.', '.') ;
 
             $atletaCampeonato = AtletaXcampeonato::join('atletas', 'atletas.id', 'atleta_x_campeonato.atleta_id')
@@ -176,6 +195,17 @@ class InscricaoController extends Controller
 
             if($atletaCampeonato)
                 $valor = number_format(  $campeonato->valor_dobra , 2, '.', '.');
+            else{
+                $filiado = Filiado::where('atleta_id', $atletaId)
+                ->whereDate('validade_filiacao', '>=', Carbon::now()->toDateString())
+                ->first();
+
+                if($filiado){
+                    $campeonato->valor = 0.00; 
+                    $forma_pagamento = 'FILIACAO';
+                    $valor = 0.00;
+                }                    
+            }
 
             if($request->get('parcelamento') > 1)
                 $valor = number_format(  $valor + ($valor * 0.0349 + 0.49) , 2, '.', '.');
@@ -209,14 +239,14 @@ class InscricaoController extends Controller
             
             $dados = [
                 'customer' => $clienteAsaasId,
-                'billingType' => $request->get('forma_pagamento'),
+                'billingType' => $forma_pagamento,
                 'value' => number_format( $valor, 2, '.', '.'),
                 'dueDate' => date('Y-m-d'),
                 'remoteIp' =>$request->ip(),
                 'description' =>$campeonato->nome
             ];
 
-            if( $request->get('forma_pagamento') ==  'CREDIT_CARD'){
+            if($forma_pagamento ==  'CREDIT_CARD'){
 
                 $dados['installmentCount'] =$request->get('parcelamento');
                 $dados['totalValue'] =number_format( $valor, 2, '.', '.');
@@ -239,34 +269,39 @@ class InscricaoController extends Controller
                 ];
             }
 
-            $pagamentoRetorno = PagamentoService::sendPaymentRequest($dados);
+            if($filiado)
+                $status = 'CONFIRMED';                
+            else{
+                $pagamentoRetorno = PagamentoService::sendPaymentRequest($dados);
 
-            if(isset($pagamentoRetorno->errorMessage))
-                throw new \Exception( $pagamentoRetorno->errorMessage);
+                if(isset($pagamentoRetorno->errorMessage))
+                    throw new \Exception( $pagamentoRetorno->errorMessage);
             
-            if(!isset($pagamentoRetorno->status) || !isset($pagamentoRetorno->id)){
-                Log::error($pagamentoRetorno->errorMessage);
-                throw new \Exception('Ops! Houve um erro interno. Por favor, tente novamente mais tarde. Se o problema persistir, entre em contato conosco para obter assistência. Lamentamos qualquer inconveniente.');
-            }
+                if(!isset($pagamentoRetorno->status) || !isset($pagamentoRetorno->id)){
+                    Log::error($pagamentoRetorno->errorMessage);
+                    throw new \Exception('Ops! Houve um erro interno. Por favor, tente novamente mais tarde. Se o problema persistir, entre em contato conosco para obter assistência. Lamentamos qualquer inconveniente.');
+                }
 
-            switch($pagamentoRetorno->status){
+                $status = $pagamentoRetorno->status;
+            }
+           
+            switch($status){
                 case 'CONFIRMED': 
                 case 'PENDING': 
-                    $atletaId = Atleta::where('cpf', $cpf )->pluck('id')->first();
                     $codigo = GeradorCodigoService::geraCodigo();
-
+                    
                     $atletaXCampeonato = AtletaXCampeonato::create([
                         'codigo' => $codigo,
                         'campeonato_id' => $atleta['campeonato'],
                         'sub_categoria_id' => $atleta['sub_categoria_id'],
                         'atleta_id' => $atletaId,
                         'cupom_id' =>null,
-                        'status_pagamento' =>$pagamentoRetorno->status,
-                        'payment_id' => $pagamentoRetorno->id,
-                        'customer' => $pagamentoRetorno->customer,
-                        'billingType' => $pagamentoRetorno->billingType,
+                        'status_pagamento' =>$status,
+                        'payment_id' => isset($pagamentoRetorno->id) ? $pagamentoRetorno->id : '',
+                        'customer' => isset($pagamentoRetorno->customer) ? $pagamentoRetorno->customer : '', 
+                        'billingType' => isset($pagamentoRetorno->billingType) ? $pagamentoRetorno->billingType : 'FILIACAO',
                         'value' => number_format( $valor, 2, '.', '.'),
-                        'dueDate' => $pagamentoRetorno->dueDate,
+                        'dueDate' => isset($pagamentoRetorno->dueDate) ? $pagamentoRetorno->dueDate : date('Y-m-d'),
                         'installmentCount' => null,
                         'totalValue' => number_format( $valor, 2, '.', '.'),
                         'remoteIp' =>$request->ip(),
@@ -287,17 +322,17 @@ class InscricaoController extends Controller
                     $atleta['subcategoria'] = $subCategoria->nome;
 
                     
-                    if($pagamentoRetorno->status == 'CONFIRMED'){
+                    if($status == 'CONFIRMED'){
 
                         Mail::to($atleta['email'])->send(new ConfirmacaoInscricao($atleta));
                         return view('site.inscricao-sucesso');
                     }
 
-                    if($request->get('forma_pagamento') ==  'PIX'){ // capturar QR CODE
+                    if($forma_pagamento ==  'PIX'){ // capturar QR CODE
                         $pagamentoRetorno = PagamentoService::obetrQrCodePix($pagamentoRetorno->id);
                         return view('site.inscricao-pendente-pix' , compact('pagamentoRetorno'));
                     }
-                    elseif($request->get('forma_pagamento') ==  'BOLETO'){ // capturar LINHA DIGITAL
+                    elseif($forma_pagamento ==  'BOLETO'){ // capturar LINHA DIGITAL
                         $pagamentoId =$pagamentoRetorno->id;
                         $pagamentoRetorno = PagamentoService::obetrLinhaDigitalBoleto($pagamentoRetorno->id);
                         $pagamentoId =  explode('_', $pagamentoId);
@@ -315,6 +350,10 @@ class InscricaoController extends Controller
         } catch (\Exception $e) {    
             Log::error($e);
 
+            $filiado = Filiado::where('atleta_id', $atletaId)
+                ->whereDate('validade_filiacao', '>=', Carbon::now()->toDateString())
+                ->first();
+
             $retorno = [
                 'success' => false,
                 'message' =>  $e->getMessage(),
@@ -325,7 +364,7 @@ class InscricaoController extends Controller
                     "ccv" => $request->get('cvv'),
                 ],
             ];
-            return view('site.pagamento', compact([ 'campeonato','retorno' ]));
+            return view('site.pagamento', compact([ 'campeonato','retorno','filiado' ]));
         }
     }
 

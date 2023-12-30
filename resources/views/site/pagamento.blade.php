@@ -31,6 +31,9 @@
                                             <h1>{{$campeonato->nome}}</h1>
                                             <h2> Valor Total da Compra </h2>
                                             <h1 id="label-valor-compra">R$ {{  number_format( $campeonato->valor, 2, ',', '.')}}</h1>
+                                            @if($filiado)
+                                                <h2>  (Gratuito devido à filiação) </h2>
+                                            @endif
                                         </div>      
                                     </div>
                                 </div>   
@@ -41,10 +44,15 @@
                                             <div class="form-box email-icon mb-30">
                                                 <label for="parcelamento">Forma de pagamento  <span>*</span> </label>
                                                 <select name="forma_pagamento" id="forma_pagamento">
-                                                    <option value="" selected> Selecione </option>
-                                                    <option value="BOLETO"> Boleto </option>
-                                                    <option value="CREDIT_CARD"> Cartão de Crédito </option>
-                                                    <option value="PIX"> PIX </option>
+                                                    @if($filiado)
+                                                        <option value="filiacao" selected> Filiação </option>
+                                                    @else
+                                                        <option value="" selected> Selecione </option>
+                                                        <option value="BOLETO"> Boleto </option>
+                                                        <option value="CREDIT_CARD"> Cartão de Crédito </option>
+                                                        <option value="PIX"> PIX </option>
+                                                    @endif
+                                                  
                                                 </select>                                                
                                             </div>
                                         </div>   
