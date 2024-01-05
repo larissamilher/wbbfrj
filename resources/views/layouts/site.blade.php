@@ -199,6 +199,21 @@
             </div>
         </div>
         <!-- Footer End-->
+
+        <div class="footer-area section-bg" style="background-color: #000; height: 50px;">
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" style="    text-align: center;                ">
+                  <p style="    line-height: 1.8;
+                  margin-bottom: 30px;
+                  padding-right: 0;
+                  color: #c4c4c4;
+                  font-size: 14px;">
+&copy; 2024 Desenvolvido por Larissa Milher. Todos os direitos reservados. | Contato: <a href="mailto:larissmilher@gmail.com">larissmilher@gmail.com</a></p>
+                </div>
+          
+                
+            </div>
+        </div>
     </footer>
     <!-- Scroll Up -->
     <div id="back-top" >
